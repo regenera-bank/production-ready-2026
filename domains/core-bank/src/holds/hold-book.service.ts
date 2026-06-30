@@ -69,6 +69,16 @@ export class HoldBookService {
     return this.holds.save(hold);
   }
 
+  async linkPayment(holdId: string, paymentId: string): Promise<HoldRecord> {
+    const hold = await this.holds.findById(holdId);
+    if (!hold) {
+      throw new NotFoundException('Hold não encontrado', 'HOLD_NOT_FOUND', {
+        holdId,
+      });
+    }
+    return this.holds.save({ ...hold, paymentId });
+  }
+
   async consume(holdId: string): Promise<HoldRecord> {
     return this.transition(holdId, HoldStatus.CONSUMED);
   }

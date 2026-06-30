@@ -3,7 +3,7 @@
  * @license
  * SPDX-License-Identifier: Apache-2.0
 */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { 
     ArrowUpRight, ArrowDownLeft, Copy, Trash2, Plus, 
     CheckCircle, Share2, Key, Zap, Smartphone, ArrowRight, 
@@ -14,9 +14,15 @@ import {
   fetchPixKeys,
   lookupPixKey,
   registerPixKey,
-  reaisToCents,
   sendPixTransfer,
 } from '../../platform/bff-client';
+import {
+  compareCents,
+  createIdempotencyKey,
+  formatCentsCurrency,
+  MoneyParseError,
+  parseMoneyInput,
+} from '../../platform/money';
 
 interface PixAreaProps {
     initialAction?: {
@@ -25,23 +31,29 @@ interface PixAreaProps {
         to?: string;
     } | null;
     accessToken: string;
-    availableBalance: number;
+    availableBalanceCents: string;
     transactions: Transaction[];
     onOperationComplete: () => void;
 }
 
+type PixOperationStatus = 'form' | 'pending' | 'settled' | 'rejected';
+
 const PixArea: React.FC<PixAreaProps> = ({
   initialAction,
   accessToken,
-  availableBalance,
+  availableBalanceCents,
   transactions,
   onOperationComplete,
 }) => {
     const [activeTab, setActiveTab] = useState<'send' | 'receive' | 'keys' | 'history'>(initialAction?.type === 'receive' ? 'receive' : 'send');
     
     // --- SEND PIX STATE ---
-    const [sendStep, setSendStep] = useState<'form' | 'processing' | 'success'>('form');
-    const [showConfirmModal, setShowConfirmModal] = useState(false); // New explicit modal state
+    const [operationStatus, setOperationStatus] = useState<PixOperationStatus>('form');
+    const [operationId, setOperationId] = useState<string | null>(null);
+    const [amountCents, setAmountCents] = useState<string | null>(null);
+    const [showConfirmModal, setShowConfirmModal] = useState(false);
+    const idempotencyKeyRef = useRef<string | null>(null);
+    const isSubmittingRef = useRef(false);
     
     const [pixKey, setPixKey] = useState(initialAction?.to || '');
     const [amount, setAmount] = useState(initialAction?.value ? initialAction.value.toString() : '');
@@ -143,33 +155,62 @@ const PixArea: React.FC<PixAreaProps> = ({
 
     // --- HANDLERS ---
 
+    const openConfirmModal = () => {
+        if (!amount || !pixKey) return;
+        try {
+            const cents = parseMoneyInput(amount);
+            if (compareCents(cents, availableBalanceCents) > 0) {
+                setPixError('Saldo insuficiente');
+                return;
+            }
+            setAmountCents(cents);
+            idempotencyKeyRef.current = createIdempotencyKey('pix');
+            setPixError(null);
+            setShowConfirmModal(true);
+        } catch (error) {
+            setPixError(error instanceof MoneyParseError ? error.message : 'Valor inválido');
+        }
+    };
+
     const handleConfirmSend = async () => {
-        setShowConfirmModal(false);
-        setSendStep('processing');
-        setPixError(null);
-        const numericAmount = Number(amount.replace(',', '.'));
-        if (!pixKey || !numericAmount || numericAmount <= 0) {
-            setPixError('Informe chave e valor válidos');
-            setSendStep('form');
+        if (isSubmittingRef.current) return;
+        if (!idempotencyKeyRef.current || !amountCents) {
+            setPixError('Operação inválida — reabra a confirmação');
+            setOperationStatus('form');
             return;
         }
-        if (numericAmount > availableBalance) {
+        isSubmittingRef.current = true;
+        setShowConfirmModal(false);
+        setOperationStatus('pending');
+        setPixError(null);
+        setOperationId(null);
+        if (!pixKey) {
+            setPixError('Informe chave e valor válidos');
+            setOperationStatus('rejected');
+            isSubmittingRef.current = false;
+            return;
+        }
+        if (compareCents(amountCents, availableBalanceCents) > 0) {
             setPixError('Saldo insuficiente');
-            setSendStep('form');
+            setOperationStatus('rejected');
+            isSubmittingRef.current = false;
             return;
         }
         try {
-            await sendPixTransfer(
+            const result = await sendPixTransfer(
               accessToken,
               pixKey.trim(),
-              reaisToCents(numericAmount),
-              `pix-ui-${Date.now()}`,
+              amountCents,
+              idempotencyKeyRef.current,
             );
+            setOperationId(result.paymentId);
             await onOperationComplete();
-            setSendStep('success');
+            setOperationStatus('settled');
         } catch (error) {
             setPixError(error instanceof Error ? error.message : 'Falha no Pix');
-            setSendStep('form');
+            setOperationStatus('rejected');
+        } finally {
+            isSubmittingRef.current = false;
         }
     };
 
@@ -266,7 +307,7 @@ const PixArea: React.FC<PixAreaProps> = ({
                         <div className="bg-white/5 rounded-2xl p-6 space-y-4 mb-8 border border-white/5">
                             <div className="flex justify-between items-end border-b border-white/5 pb-4">
                                 <span className="text-gray-400 text-xs uppercase font-bold">Valor</span>
-                                <span className="text-3xl font-bold text-white tracking-tight">R$ {parseFloat(amount).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</span>
+                                <span className="text-3xl font-bold text-white tracking-tight">{amountCents ? formatCentsCurrency(amountCents) : '—'}</span>
                             </div>
                             <div className="space-y-2 pt-2">
                                 <div className="flex justify-between text-sm">
@@ -296,8 +337,9 @@ const PixArea: React.FC<PixAreaProps> = ({
                                 Cancelar
                             </button>
                             <button 
-                                onClick={handleConfirmSend}
-                                className="flex-[2] py-4 bg-emerald-600 hover:bg-emerald-500 rounded-xl font-bold text-white uppercase tracking-widest shadow-[0_0_30px_rgba(16,185,129,0.3)] flex items-center justify-center gap-2 transition-all hover:scale-[1.02]"
+                                onClick={() => void handleConfirmSend()}
+                                disabled={isSubmittingRef.current}
+                                className="flex-[2] py-4 bg-emerald-600 hover:bg-emerald-500 rounded-xl font-bold text-white uppercase tracking-widest shadow-[0_0_30px_rgba(16,185,129,0.3)] flex items-center justify-center gap-2 transition-all hover:scale-[1.02] disabled:opacity-50"
                             >
                                 <CheckCircle className="w-5 h-5" />
                                 Enviar
@@ -310,7 +352,7 @@ const PixArea: React.FC<PixAreaProps> = ({
             {/* ===== SEND TAB ===== */}
             {activeTab === 'send' && (
                 <div className="animate-in fade-in">
-                    {sendStep === 'form' && (
+                    {(operationStatus === 'form' || operationStatus === 'rejected') && (
                         <div className="space-y-6">
                             {/* Unified Card for Inputs */}
                             <div className="bg-white/5 border border-white/10 rounded-[2rem] p-6 shadow-xl relative overflow-hidden group hover:border-cyan-500/20 transition-all">
@@ -386,8 +428,8 @@ const PixArea: React.FC<PixAreaProps> = ({
                             </div>
 
                             <button 
-                                onClick={() => setShowConfirmModal(true)}
-                                disabled={!amount || !pixKey}
+                                onClick={openConfirmModal}
+                                disabled={!amount || !pixKey || isSubmittingRef.current}
                                 className={`w-full py-4 rounded-xl font-bold uppercase tracking-widest text-sm transition-all flex items-center justify-center gap-2 shadow-lg ${amount && pixKey ? 'bg-cyan-600 hover:bg-cyan-500 text-white shadow-cyan-500/30 hover:shadow-cyan-500/50' : 'bg-white/5 text-gray-600 cursor-not-allowed'}`}
                             >
                                 Continuar <ArrowRight className="w-4 h-4" />
@@ -395,35 +437,47 @@ const PixArea: React.FC<PixAreaProps> = ({
                         </div>
                     )}
 
-                    {sendStep === 'processing' && (
+                    {operationStatus === 'pending' && (
                         <div className="flex flex-col items-center justify-center h-[50vh] text-center animate-in fade-in">
                             <div className="relative w-24 h-24 mb-8">
                                 <div className="absolute inset-0 border-4 border-cyan-500/30 rounded-full"></div>
                                 <div className="absolute inset-0 border-4 border-transparent border-t-cyan-400 rounded-full animate-spin"></div>
                                 <Loader2 className="absolute inset-0 m-auto w-10 h-10 text-cyan-400 animate-pulse" />
                             </div>
-                            <h3 className="text-xl font-bold text-white mb-2">Processando Transação</h3>
-                            <p className="text-sm text-gray-400">Liquidando Pix no core-bank...</p>
+                            <h3 className="text-xl font-bold text-white mb-2">Pendente</h3>
+                            <p className="text-sm text-gray-400">Liquidando Pix no core-bank via BFF...</p>
+                            {idempotencyKeyRef.current && (
+                              <p className="text-[10px] text-gray-600 font-mono mt-4 break-all px-6">
+                                idempotency: {idempotencyKeyRef.current}
+                              </p>
+                            )}
                         </div>
                     )}
 
-                    {sendStep === 'success' && (
+                    {operationStatus === 'settled' && (
                         <div className="flex flex-col items-center justify-center h-[50vh] text-center p-6 animate-in zoom-in duration-500">
                             <div className="w-24 h-24 bg-emerald-500/20 rounded-full flex items-center justify-center mb-6 shadow-[0_0_40px_rgba(16,185,129,0.3)] relative">
                                 <div className="absolute inset-0 rounded-full border border-emerald-500/50 animate-ping"></div>
                                 <CheckCircle className="w-12 h-12 text-emerald-400" />
                             </div>
-                            <h2 className="text-2xl font-bold text-white mb-2">Pix Enviado!</h2>
-                            <p className="text-gray-400 mb-8">R$ {parseFloat(amount).toLocaleString('pt-BR', { minimumFractionDigits: 2 })} para {contactName}</p>
+                            <h2 className="text-2xl font-bold text-white mb-2">Liquidado</h2>
+                            <p className="text-gray-400 mb-2">
+                              {amountCents ? formatCentsCurrency(amountCents) : '—'} para {contactName}
+                            </p>
+                            {operationId && (
+                              <p className="text-[10px] text-cyan-400/80 font-mono mb-8 break-all px-4">
+                                operação: {operationId}
+                              </p>
+                            )}
                             
                             <div className="flex gap-4 w-full">
                                 <button 
-                                    onClick={() => handleShare('Comprovante Pix', `Pix de R$ ${amount} enviado para ${contactName} via Regenera Bank.`)}
+                                    onClick={() => handleShare('Comprovante Pix', `Pix ${amountCents ? formatCentsCurrency(amountCents) : ''} enviado para ${contactName} via Regenera Bank. ID: ${operationId ?? '—'}`)}
                                     className="flex-1 py-3 bg-white/10 rounded-xl font-bold hover:bg-white/20 transition-colors flex items-center justify-center gap-2"
                                 >
                                     <Share2 className="w-4 h-4" /> Comprovante
                                 </button>
-                                <button onClick={() => { setSendStep('form'); setPixKey(''); setAmount(''); }} className="flex-1 py-3 bg-cyan-600 rounded-xl font-bold hover:bg-cyan-500 transition-colors">
+                                <button onClick={() => { setOperationStatus('form'); setOperationId(null); setAmountCents(null); idempotencyKeyRef.current = null; setPixKey(''); setAmount(''); }} className="flex-1 py-3 bg-cyan-600 rounded-xl font-bold hover:bg-cyan-500 transition-colors">
                                     Novo Pix
                                 </button>
                             </div>

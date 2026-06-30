@@ -26,6 +26,7 @@
     "start:dev": "nest start --watch",
     "lint": "tsc --noEmit",
     "test": "jest --passWithNoTests",
+    "test:postgres": "node -e \"if(!process.env.DATABASE_URL){console.error('DATABASE_URL required for test:postgres');process.exit(1)}\" && CORE_BANK_STORAGE=postgres jest --runInBand src/integration/postgres.integration.spec.ts",
     "test:cov": "jest --coverage",
     "test:load": "jest --runInBand src/load",
     "load:50k": "node scripts/run-load-50k.mjs",
@@ -37,9 +38,11 @@
     "@nestjs/core": "^10.4.15",
     "@nestjs/platform-express": "^10.4.15",
     "reflect-metadata": "^0.2.2",
+    "pg": "^8.13.1",
     "rxjs": "^7.8.1"
   },
   "devDependencies": {
+    "@types/pg": "^8.11.10",
     "@nestjs/cli": "^10.4.9",
     "@nestjs/schematics": "^10.2.3",
     "@nestjs/testing": "^10.4.15",

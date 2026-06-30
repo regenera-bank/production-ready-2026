@@ -4,6 +4,7 @@ import type {
   PublicKeyCredentialRequestOptionsJSON,
   RegistrationResponseJSON,
 } from '@simplewebauthn/types';
+import { parseMoneyInput } from './money';
 
 const API_BASE = import.meta.env.VITE_API_URL ?? '/api';
 
@@ -528,11 +529,21 @@ export const sendTelegramViaBff = (token: string, message: string) =>
     token,
   );
 
+/** Display-only — never use for ledger operations. */
 export const centsToReais = (cents: string | number): number =>
   Number(cents) / 100;
 
-export const reaisToCents = (value: number): string =>
-  Math.round(value * 100).toString();
+/**
+ * Converts decimal input or cent string to BFF amountCents.
+ * Accepts only strings to avoid float hazards in financial paths.
+ */
+export const reaisToCents = (value: string): string => {
+  const trimmed = value.trim();
+  if (/^\d{1,19}$/.test(trimmed)) {
+    return trimmed;
+  }
+  return parseMoneyInput(trimmed);
+};
 
 export const mapTransactionDto = (dto: TransactionDto) => ({
   id: dto.id,

@@ -32,6 +32,8 @@ export interface UserProfile {
   name: string;
   balance: number;
   availableBalance: number;
+  /** Ledger-safe available balance from BFF (cent string). */
+  availableBalanceCents?: string;
   document?: string;
   agency?: string;
   accountNumber?: string;

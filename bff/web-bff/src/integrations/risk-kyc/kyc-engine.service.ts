@@ -6,6 +6,7 @@ import {
   Logger,
 } from '@nestjs/common';
 import { randomUUID } from 'crypto';
+import { redactSensitiveLogPayload } from '../../common/pii-redaction';
 import { DataValidClient } from './datavalid.client';
 import type { PepProvider } from './pep.provider';
 import { HomologKycValidator } from './homolog-kyc.validator';
@@ -166,7 +167,9 @@ export class KycEngineService {
         throw error;
       }
       this.logger.error(
-        `[KYC] Falha OCR: ${error instanceof Error ? error.message : error}`,
+        redactSensitiveLogPayload(
+          `[KYC] Falha OCR: ${error instanceof Error ? error.message : error}`,
+        ),
       );
       throw new InternalServerErrorException(
         'Motor de OCR inoperante. Esteira pausada preventivamente.',
@@ -202,7 +205,9 @@ export class KycEngineService {
       return { status: 'APPROVED', confidence: result.score };
     } catch (error) {
       this.logger.error(
-        `[KYC] Falha biométrica: ${error instanceof Error ? error.message : error}`,
+        redactSensitiveLogPayload(
+          `[KYC] Falha biométrica: ${error instanceof Error ? error.message : error}`,
+        ),
       );
       throw new InternalServerErrorException(
         'Validação biométrica indisponível no momento.',

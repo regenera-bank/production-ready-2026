@@ -11,7 +11,7 @@ describe('Daily load 50k/dia (PR-15)', () => {
 
   beforeAll(async () => {
     moduleRef = await Test.createTestingModule({
-      imports: [CoreBankModule],
+      imports: [CoreBankModule.forRoot('memory')],
     }).compile();
     core = moduleRef.get(CoreBankService);
   });

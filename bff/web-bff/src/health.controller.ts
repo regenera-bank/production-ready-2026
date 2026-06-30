@@ -1,5 +1,6 @@
 import { Controller, Get } from '@nestjs/common';
 import { AiService } from './ai/ai.service';
+import { isHomologKycProvider, normalizeKycProvider } from './config/kyc-provider';
 
 const configured = (value: string | undefined): boolean =>
   Boolean(value?.trim());
@@ -16,6 +17,8 @@ export class HealthController {
     readonly status: 'ok';
     readonly integrations: Record<string, boolean>;
     readonly ready: boolean;
+    readonly productionReady: boolean;
+    readonly kycProvider: string;
     readonly prometeoIdentityUrl: string;
     readonly prometeoBankingUrl: string;
     readonly paymentWebhookPath: string;
@@ -23,6 +26,9 @@ export class HealthController {
     readonly paymentsApiUrl: string;
     readonly widgetSdkVersion: string;
   } {
+    const kycProvider = normalizeKycProvider();
+    const homologKyc = isHomologKycProvider(kycProvider);
+
     const prometeo = configured(process.env.PROMETEO_API_KEY);
     const datavalidDedicated =
       configured(process.env.DATAVALID_API_URL) &&
@@ -31,9 +37,6 @@ export class HealthController {
       configured(process.env.PEP_API_URL) && configured(process.env.PEP_API_KEY);
 
     const firebase = configured(process.env.FIREBASE_PROJECT_ID);
-    const homologKyc =
-      process.env.KYC_PROVIDER?.trim().toLowerCase() === 'firebase' ||
-      process.env.KYC_PROVIDER?.trim().toLowerCase() === 'homolog';
 
     const gemini = AiService.isGeminiConfigured();
 
@@ -50,9 +53,9 @@ export class HealthController {
       firebase,
       gemini,
       prometeo,
-      datavalid: datavalidDedicated || prometeo || homologKyc,
+      datavalid: datavalidDedicated || prometeo,
       vision,
-      pep: pepDedicated || prometeo || homologKyc,
+      pep: pepDedicated || prometeo,
       webauthn:
         configured(process.env.WEBAUTHN_RP_ID) &&
         configured(process.env.WEB_ORIGIN),
@@ -60,18 +63,33 @@ export class HealthController {
       prometeoWidget: configured(process.env.PROMETEO_WIDGET_ID),
       kycHomolog: homologKyc,
     };
-    const requiredForReady = homologKyc
-      ? ['firebase', 'gemini', 'vision', 'webauthn']
-      : Object.keys(integrations).filter(
-          (key) => !['prometeoWebhook', 'prometeoWidget', 'kycHomolog'].includes(key),
-        );
-    const ready = requiredForReady.every(
-      (key) => integrations[key as keyof typeof integrations] === true,
+
+    const homologOperationalKeys = [
+      'firebase',
+      'gemini',
+      'vision',
+      'webauthn',
+    ] as const;
+    const productionKeys = Object.keys(integrations).filter(
+      (key) => !['prometeoWebhook', 'prometeoWidget', 'kycHomolog'].includes(key),
+    ) as Array<keyof typeof integrations>;
+
+    const homologOperational = homologOperationalKeys.every(
+      (key) => integrations[key] === true,
     );
+    const productionIntegrationsReady = productionKeys.every(
+      (key) => integrations[key] === true,
+    );
+
+    const ready = homologKyc ? homologOperational : productionIntegrationsReady;
+    const productionReady = !homologKyc && productionIntegrationsReady;
+
     return {
       status: 'ok',
       integrations,
       ready,
+      productionReady,
+      kycProvider,
       prometeoIdentityUrl:
         process.env.PROMETEO_IDENTITY_BASE_URL?.trim() ||
         'https://identity.sandbox.prometeoapi.com',

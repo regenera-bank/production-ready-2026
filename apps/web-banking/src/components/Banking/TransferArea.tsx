@@ -3,11 +3,18 @@
  * @license
  * SPDX-License-Identifier: Apache-2.0
 */
-import React, { useState, useEffect } from 'react';
-import { ArrowRight, CheckCircle, FileText } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { ArrowRight, CheckCircle, FileText, Loader2, XCircle } from 'lucide-react';
 import { Transaction } from '../../types';
-import { reaisToCents, sendTransfer } from '../../platform/bff-client';
-
+import { sendTransfer } from '../../platform/bff-client';
+import {
+  compareCents,
+  createIdempotencyKey,
+  formatCentsBrl,
+  formatCentsCurrency,
+  MoneyParseError,
+  parseMaskedCentsInput,
+} from '../../platform/money';
 
 interface TransferAreaProps {
     initialAction?: {
@@ -16,23 +23,30 @@ interface TransferAreaProps {
         to?: string;
     } | null;
     accessToken: string;
+    availableBalanceCents: string;
     transactions: Transaction[];
     onOperationComplete: () => void;
 }
 
+type TransferOperationStatus = 'form' | 'pending' | 'settled' | 'rejected';
+
 const TransferArea: React.FC<TransferAreaProps> = ({
   initialAction,
   accessToken,
+  availableBalanceCents,
   transactions,
   onOperationComplete,
 }) => {
     const [cpf, setCpf] = useState(initialAction?.to ?? '');
     const [displayAmount, setDisplayAmount] = useState('');
-    const [amount, setAmount] = useState('');
-    const [processing, setProcessing] = useState(false);
-    const [success, setSuccess] = useState(false);
+    const [amountCents, setAmountCents] = useState<string | null>(null);
+    const [operationStatus, setOperationStatus] = useState<TransferOperationStatus>('form');
+    const [operationId, setOperationId] = useState<string | null>(null);
     const [error, setError] = useState<string | null>(null);
     const [view, setView] = useState<'new' | 'receipts'>('new');
+    const idempotencyKeyRef = useRef<string | null>(null);
+    const transferIntentRef = useRef<string | null>(null);
+    const isSubmittingRef = useRef(false);
 
     const receipts = transactions.filter(
       (tx) => tx.channel === 'transfer' && tx.type === 'outflow',
@@ -41,68 +55,107 @@ const TransferArea: React.FC<TransferAreaProps> = ({
     useEffect(() => {
       if (initialAction?.to) setCpf(initialAction.to);
       if (initialAction?.value) {
-        const v = initialAction.value.toString();
-        setAmount(v);
-        setDisplayAmount(
-          Number(v).toLocaleString('pt-BR', { minimumFractionDigits: 2 }),
-        );
+        const cents = Math.round(initialAction.value * 100).toString();
+        setAmountCents(cents);
+        setDisplayAmount(formatCentsBrl(cents));
       }
     }, [initialAction]);
 
     const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       const raw = e.target.value.replace(/\D/g, '');
       if (!raw) {
-        setAmount('');
+        setAmountCents(null);
         setDisplayAmount('');
         return;
       }
-      const val = Number(raw) / 100;
-      setAmount(val.toString());
-      setDisplayAmount(val.toLocaleString('pt-BR', { minimumFractionDigits: 2 }));
+      setAmountCents(raw);
+      setDisplayAmount(formatCentsBrl(raw));
     };
 
     const handleTransfer = async () => {
-      setProcessing(true);
+      if (isSubmittingRef.current) return;
       setError(null);
-      const numericValue = Number(amount);
       const doc = cpf.trim();
-      if (!doc || !numericValue || numericValue <= 0) {
+      if (!doc || !amountCents) {
         setError('Informe CPF do destinatário e valor válido');
-        setProcessing(false);
         return;
       }
       try {
-        await sendTransfer(
+        const cents = parseMaskedCentsInput(amountCents);
+        if (compareCents(cents, availableBalanceCents) > 0) {
+          setError('Saldo insuficiente');
+          return;
+        }
+        const intent = `${doc}:${cents}`;
+        if (transferIntentRef.current !== intent || !idempotencyKeyRef.current) {
+          idempotencyKeyRef.current = createIdempotencyKey('transfer');
+          transferIntentRef.current = intent;
+        }
+        const idempotencyKey = idempotencyKeyRef.current;
+        isSubmittingRef.current = true;
+        setOperationStatus('pending');
+        setOperationId(null);
+        const result = await sendTransfer(
           accessToken,
           doc,
-          reaisToCents(numericValue),
-          `transfer-ui-${Date.now()}`,
+          cents,
+          idempotencyKey,
         );
+        setOperationId(result.paymentId);
         await onOperationComplete();
-        setSuccess(true);
+        setOperationStatus('settled');
       } catch (err) {
-        setError(err instanceof Error ? err.message : 'Falha na transferência');
+        setError(err instanceof MoneyParseError || err instanceof Error
+          ? err.message
+          : 'Falha na transferência');
+        setOperationStatus('rejected');
       } finally {
-        setProcessing(false);
+        isSubmittingRef.current = false;
       }
     };
 
-    if (success) {
+    const resetForm = () => {
+      setOperationStatus('form');
+      setOperationId(null);
+      setAmountCents(null);
+      idempotencyKeyRef.current = null;
+      transferIntentRef.current = null;
+      setCpf('');
+      setDisplayAmount('');
+      setError(null);
+    };
+
+    if (operationStatus === 'pending') {
+      return (
+        <div className="p-6 flex flex-col items-center justify-center min-h-[50vh] text-center animate-in fade-in">
+          <Loader2 className="w-16 h-16 text-primary mb-4 animate-spin" />
+          <h2 className="text-xl font-bold text-white mb-2">Pendente</h2>
+          <p className="text-gray-400 text-sm">Transferência em processamento no BFF...</p>
+          {idempotencyKeyRef.current && (
+            <p className="text-[10px] text-gray-600 font-mono mt-4 break-all px-6">
+              idempotency: {idempotencyKeyRef.current}
+            </p>
+          )}
+        </div>
+      );
+    }
+
+    if (operationStatus === 'settled') {
       return (
         <div className="p-6 flex flex-col items-center justify-center min-h-[50vh] text-center animate-in zoom-in">
           <CheckCircle className="w-16 h-16 text-emerald-400 mb-4" />
-          <h2 className="text-xl font-bold text-white mb-2">Transferência enviada</h2>
-          <p className="text-gray-400 text-sm mb-6">
-            R$ {displayAmount} para conta Regenera (CPF informado)
+          <h2 className="text-xl font-bold text-white mb-2">Liquidado</h2>
+          <p className="text-gray-400 text-sm mb-2">
+            {amountCents ? formatCentsCurrency(amountCents) : '—'} para conta Regenera (CPF informado)
           </p>
+          {operationId && (
+            <p className="text-[10px] text-cyan-400/80 font-mono mb-6 break-all px-4">
+              operação: {operationId}
+            </p>
+          )}
           <button
             type="button"
-            onClick={() => {
-              setSuccess(false);
-              setCpf('');
-              setAmount('');
-              setDisplayAmount('');
-            }}
+            onClick={resetForm}
             className="px-6 py-3 rounded-xl bg-primary text-white text-xs font-bold uppercase tracking-widest"
           >
             Nova transferência
@@ -162,6 +215,7 @@ const TransferArea: React.FC<TransferAreaProps> = ({
                 </span>
                 <input
                   type="text"
+                  inputMode="numeric"
                   value={displayAmount}
                   onChange={handleAmountChange}
                   placeholder="0,00"
@@ -170,15 +224,20 @@ const TransferArea: React.FC<TransferAreaProps> = ({
               </div>
             </div>
 
-            {error && <p className="text-sm text-red-400">{error}</p>}
+            {error && (
+              <p className="text-sm text-red-400 flex items-center gap-2">
+                {operationStatus === 'rejected' && <XCircle className="w-4 h-4 shrink-0" />}
+                {error}
+              </p>
+            )}
 
             <button
               type="button"
               onClick={() => void handleTransfer()}
-              disabled={processing}
+              disabled={isSubmittingRef.current || !amountCents || !cpf.trim()}
               className="w-full py-4 rounded-xl bg-primary text-white font-bold uppercase tracking-widest text-sm flex items-center justify-center gap-2 disabled:opacity-50"
             >
-              {processing ? 'Enviando...' : (
+              {isSubmittingRef.current ? 'Enviando...' : (
                 <>
                   Transferir <ArrowRight className="w-4 h-4" />
                 </>

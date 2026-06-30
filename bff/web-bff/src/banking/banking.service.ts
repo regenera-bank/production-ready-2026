@@ -20,6 +20,7 @@ import {
   PixKeyType,
   PostingSide,
 } from '../integrations/core-bank';
+import { maskUserId } from '../common/pii-redaction';
 import { HomologStoreService } from '../persistence/homolog-store.service';
 import type { PixDirectoryRecord } from '../persistence/homolog-store.types';
 import {
@@ -493,11 +494,13 @@ export class BankingService implements OnModuleInit {
     for (const userId of activeIds) {
       try {
         await this.openCustomerAccount(userId);
-        this.logger.log(`Conta reaberta no ledger para ${userId}`);
+        this.logger.log(`Conta reaberta no ledger para ${maskUserId(userId)}`);
       } catch (error) {
         const message =
           error instanceof Error ? error.message : 'erro desconhecido';
-        this.logger.warn(`Falha ao reabrir conta ${userId}: ${message}`);
+        this.logger.warn(
+          `Falha ao reabrir conta ${maskUserId(userId)}: ${message}`,
+        );
       }
     }
   }
@@ -648,7 +651,7 @@ export class BankingService implements OnModuleInit {
       category: 'lifestyle',
     });
     this.logger.log(
-      `Crédito homolog R$1,00 para ${userId} (conta ${slot}/${BankingService.HOMOLOG_WELCOME_CREDIT_MAX})`,
+      `Crédito homolog R$1,00 para ${maskUserId(userId)} (conta ${slot}/${BankingService.HOMOLOG_WELCOME_CREDIT_MAX})`,
     );
     return cents;
   }
@@ -696,7 +699,7 @@ export class BankingService implements OnModuleInit {
       ],
     });
     this.logger.log(
-      `Saldo restaurado no ledger para ${userId}: ${delta.toString()} centavos`,
+      `Saldo restaurado no ledger para ${maskUserId(userId)}: ${delta.toString()} centavos`,
     );
   }
 

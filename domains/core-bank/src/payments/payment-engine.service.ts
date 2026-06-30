@@ -127,9 +127,7 @@ export class PaymentEngineService {
 
       const paymentId = randomUUID();
       const now = new Date().toISOString();
-      const hold = await this.holds.place(command.debtorAccountId, command.amount, {
-        paymentId,
-      });
+      const hold = await this.holds.place(command.debtorAccountId, command.amount);
       holdId = hold.id;
 
       const payment: PaymentRecord = {
@@ -167,6 +165,7 @@ export class PaymentEngineService {
       });
 
       await this.payments.save(payment);
+      await this.holds.linkPayment(holdId, paymentId);
       await this.idempotency.complete(command.idempotencyKey, payment.id);
       return payment;
     } catch (error) {

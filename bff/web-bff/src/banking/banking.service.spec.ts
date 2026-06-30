@@ -1,24 +1,16 @@
 import { ForbiddenException } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
-import { AuthModule } from '../auth/auth.module';
 import { AuthService } from '../auth/auth.service';
 import { CoreBankModule } from '../integrations/core-bank';
 import { AddressService } from '../address/address.service';
 import { DataValidClient } from '../integrations/risk-kyc/datavalid.client';
 import { PrometeoIdentityClient } from '../integrations/risk-kyc/prometeo-identity.client';
 import type { PepProvider } from '../integrations/risk-kyc/pep.provider';
-import {
-  createTestVisionAdapter,
-  largeTestImageBase64,
-} from '../integrations/risk-kyc/test-vision.mock';
-import { OnboardingModule } from '../onboarding/onboarding.module';
+import { RiskKycModule } from '../integrations/risk-kyc/risk-kyc.module';
+import { createTestVisionAdapter } from '../integrations/risk-kyc/test-vision.mock';
 import { OnboardingService } from '../onboarding/onboarding.service';
-import { PersistenceModule } from '../persistence/persistence.module';
 import { HomologStoreService } from '../persistence/homolog-store.service';
 import { BankingService } from './banking.service';
-
-const documentImageBase64 = largeTestImageBase64(0xab);
-const selfieImageBase64 = largeTestImageBase64(0xcd);
 
 const sampleAddress = {
   street: 'Rua A',
@@ -29,6 +21,55 @@ const sampleAddress = {
   postalCode: '01000-000',
 };
 
+const seedKycApproved = (store: HomologStoreService, userId: string): void => {
+  store.mutate((draft) => {
+    draft.onboarding[userId] = {
+      userId,
+      kycStatus: 'APPROVED',
+      accountStatus: 'NONE',
+      kycStep: 'done',
+      documentPhotoBase64: 'test-doc',
+      kycApprovedAt: new Date().toISOString(),
+    };
+  });
+};
+
+const onboardingStubFactory = (store: HomologStoreService): OnboardingService =>
+  ({
+    requireKycApproved(userId: string): void {
+      const record = store.get().onboarding[userId];
+      if (!record || record.kycStatus !== 'APPROVED') {
+        throw new ForbiddenException(
+          'Conclua a verificação cadastral (KYC) primeiro',
+        );
+      }
+    },
+    requireActiveAccount(userId: string): void {
+      const record = store.get().onboarding[userId];
+      if (!record || record.accountStatus !== 'ACTIVE') {
+        throw new ForbiddenException('Abra sua conta antes de operar');
+      }
+    },
+    markAccountActive(userId: string): void {
+      store.mutate((draft) => {
+        const record = draft.onboarding[userId];
+        if (!record || record.kycStatus !== 'APPROVED') {
+          throw new ForbiddenException(
+            'KYC deve estar aprovado antes da abertura',
+          );
+        }
+        record.accountStatus = 'ACTIVE';
+        record.accountOpenedAt = new Date().toISOString();
+        record.kycStep = 'done';
+      });
+    },
+    listActiveUserIds(): string[] {
+      return Object.entries(store.get().onboarding)
+        .filter(([, record]) => record.accountStatus === 'ACTIVE')
+        .map(([userId]) => userId);
+    },
+  }) as OnboardingService;
+
 describe('BankingService (WEB-001)', () => {
   let service: BankingService;
   let onboarding: OnboardingService;
@@ -38,9 +79,20 @@ describe('BankingService (WEB-001)', () => {
   beforeEach(async () => {
     process.env.HOMOLOG_STORE_MEMORY = 'true';
     process.env.KYC_PROVIDER = 'homolog';
+    process.env.CORE_BANK_STORAGE = 'memory';
+    delete process.env.DATABASE_URL;
     const moduleRef: TestingModule = await Test.createTestingModule({
-      imports: [PersistenceModule, CoreBankModule, AuthModule, OnboardingModule],
-      providers: [BankingService],
+      imports: [RiskKycModule, CoreBankModule],
+      providers: [
+        HomologStoreService,
+        AuthService,
+        BankingService,
+        {
+          provide: OnboardingService,
+          useFactory: onboardingStubFactory,
+          inject: [HomologStoreService],
+        },
+      ],
     })
       .overrideProvider(AddressService)
       .useValue({
@@ -96,9 +148,7 @@ describe('BankingService (WEB-001)', () => {
       birthDate: '1990-01-15',
       address: sampleAddress,
     });
-    await onboarding.submitKyc(userId);
-    await onboarding.submitDocument(userId, documentImageBase64, 'RG');
-    await onboarding.submitSelfie(userId, selfieImageBase64);
+    seedKycApproved(store, userId);
     const opened = await service.openCustomerAccount(userId);
     onboarding.markAccountActive(userId);
     return opened.accountId;

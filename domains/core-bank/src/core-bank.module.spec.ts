@@ -12,7 +12,7 @@ describe('CoreBankModule (PR-13)', () => {
 
   beforeEach(async () => {
     moduleRef = await Test.createTestingModule({
-      imports: [CoreBankModule],
+      imports: [CoreBankModule.forRoot('memory')],
     }).compile();
   });
 

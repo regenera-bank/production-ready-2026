@@ -3,7 +3,7 @@ import { CoreBankHealthController } from './core-bank-health.controller';
 import { CoreBankModule } from './core-bank.module';
 
 @Module({
-  imports: [CoreBankModule],
+  imports: [CoreBankModule.forRoot()],
   controllers: [CoreBankHealthController],
 })
 export class AppModule {}

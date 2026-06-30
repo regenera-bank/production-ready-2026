@@ -137,6 +137,7 @@ const App: React.FC = () => {
       ...prev,
       balance: centsToReais(dashboard.balanceCents),
       availableBalance: centsToReais(dashboard.availableCents),
+      availableBalanceCents: dashboard.availableCents,
       agency: dashboard.agency,
       document: dashboard.document,
       accountNumber: dashboard.maskedAccount || prev.accountNumber,
@@ -992,13 +993,13 @@ const App: React.FC = () => {
       {activeModule === 'pix' && (
           <div className="screen-transition module-view">
               {renderHeader('Área Pix', true)}
-              <PixArea initialAction={moduleProps.initialAction} accessToken={accessToken ?? ''} availableBalance={userProfile.balance} transactions={transactions} onOperationComplete={handleBankingMutation} />
+              <PixArea initialAction={moduleProps.initialAction} accessToken={accessToken ?? ''} availableBalanceCents={userProfile.availableBalanceCents ?? '0'} transactions={transactions} onOperationComplete={handleBankingMutation} />
           </div>
       )}
       {activeModule === 'transfer' && (
           <div className="screen-transition module-view">
               {renderHeader('Transferências', true)}
-              <TransferArea initialAction={moduleProps.initialAction} accessToken={accessToken ?? ''} transactions={transactions} onOperationComplete={handleBankingMutation} />
+              <TransferArea initialAction={moduleProps.initialAction} accessToken={accessToken ?? ''} availableBalanceCents={userProfile.availableBalanceCents ?? '0'} transactions={transactions} onOperationComplete={handleBankingMutation} />
           </div>
       )}
       {activeModule === 'cards' && (

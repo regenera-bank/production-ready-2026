@@ -1,7 +1,20 @@
 import { execSync } from 'node:child_process';
+import {
+  assertProductionKycSafe,
+  ProductionKycGuardError,
+} from './config/production-kyc-guard';
 import { loadLocalEnv } from './load-env';
 
 loadLocalEnv();
+try {
+  assertProductionKycSafe();
+} catch (error) {
+  if (error instanceof ProductionKycGuardError) {
+    console.error(`FATAL [${error.code}]: ${error.message}`);
+    process.exit(1);
+  }
+  throw error;
+}
 
 async function releasePort(port: number): Promise<void> {
   if (process.env.NODE_ENV === 'production') {

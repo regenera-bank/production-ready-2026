@@ -66,7 +66,7 @@ describe(`Core Banking — ${CORE_BANKING_INVARIANT_COUNT} invariantes (PR-14)`,
 
   beforeAll(async () => {
     moduleRef = await Test.createTestingModule({
-      imports: [CoreBankModule],
+      imports: [CoreBankModule.forRoot('memory')],
     }).compile();
     core = moduleRef.get(CoreBankService);
   });

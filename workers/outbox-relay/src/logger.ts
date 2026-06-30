@@ -4,6 +4,8 @@ export interface LogContext {
   outboxEventId?: string;
   jobId?: string;
   attempt?: number;
+  outboxStore?: 'postgres' | 'memory';
+  nodeEnv?: string;
 }
 
 export function logInfo(message: string, context: LogContext): void {

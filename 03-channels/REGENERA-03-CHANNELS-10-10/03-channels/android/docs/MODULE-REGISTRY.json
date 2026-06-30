@@ -1,0 +1,163 @@
+[
+  {
+    "id": "home",
+    "label": "Home",
+    "domain": "Aggregation/BFF",
+    "priority": "P0",
+    "status": "implemented-vertical-slice"
+  },
+  {
+    "id": "transactions",
+    "label": "Transações",
+    "domain": "Statements/Transactions",
+    "priority": "P0",
+    "status": "implemented-vertical-slice"
+  },
+  {
+    "id": "pix",
+    "label": "Pix",
+    "domain": "Payments/Pix/DICT/SPI",
+    "priority": "P0",
+    "status": "implemented-vertical-slice"
+  },
+  {
+    "id": "transfers",
+    "label": "Transferências",
+    "domain": "Payment Orchestrator",
+    "priority": "P0",
+    "status": "implemented-vertical-slice"
+  },
+  {
+    "id": "cards",
+    "label": "Cartões",
+    "domain": "Cards/Authorization/Invoice",
+    "priority": "P0",
+    "status": "implemented-vertical-slice"
+  },
+  {
+    "id": "investments",
+    "label": "Investimentos",
+    "domain": "Orders/Custody/Suitability",
+    "priority": "P1",
+    "status": "contracted"
+  },
+  {
+    "id": "crypto",
+    "label": "Cripto",
+    "domain": "Virtual Assets Program",
+    "priority": "SEPARATE",
+    "status": "separate-program"
+  },
+  {
+    "id": "credit",
+    "label": "Crédito",
+    "domain": "Origination/Decision/Servicing",
+    "priority": "P1",
+    "status": "contracted"
+  },
+  {
+    "id": "protection",
+    "label": "Proteção",
+    "domain": "Insurance Integration",
+    "priority": "P2",
+    "status": "catalogued"
+  },
+  {
+    "id": "cloud",
+    "label": "Cloud",
+    "domain": "Enterprise platform",
+    "priority": "OUT",
+    "status": "excluded"
+  },
+  {
+    "id": "kids",
+    "label": "Kids",
+    "domain": "Dependent Accounts",
+    "priority": "P2",
+    "status": "catalogued"
+  },
+  {
+    "id": "senior",
+    "label": "Senior",
+    "domain": "Assisted Banking",
+    "priority": "P2",
+    "status": "catalogued"
+  },
+  {
+    "id": "pets",
+    "label": "Pets",
+    "domain": "Partner Ecosystem",
+    "priority": "P3",
+    "status": "catalogued"
+  },
+  {
+    "id": "dreams",
+    "label": "Dreams",
+    "domain": "Goals/Scheduled Payments",
+    "priority": "P2",
+    "status": "catalogued"
+  },
+  {
+    "id": "marketplace",
+    "label": "Marketplace",
+    "domain": "Commerce Partner Platform",
+    "priority": "P3",
+    "status": "catalogued"
+  },
+  {
+    "id": "rewards",
+    "label": "Rewards",
+    "domain": "Loyalty",
+    "priority": "P2",
+    "status": "catalogued"
+  },
+  {
+    "id": "discounts",
+    "label": "Discounts",
+    "domain": "Benefits",
+    "priority": "P3",
+    "status": "catalogued"
+  },
+  {
+    "id": "events",
+    "label": "Events",
+    "domain": "Experiences",
+    "priority": "P3",
+    "status": "catalogued"
+  },
+  {
+    "id": "travel",
+    "label": "Travel",
+    "domain": "Concierge/Partners",
+    "priority": "P3",
+    "status": "catalogued"
+  },
+  {
+    "id": "sustainability",
+    "label": "Sustainability",
+    "domain": "Analytics/Partners",
+    "priority": "P3",
+    "status": "catalogued"
+  },
+  {
+    "id": "academy",
+    "label": "Academy",
+    "domain": "Content Platform",
+    "priority": "P3",
+    "status": "catalogued"
+  },
+  {
+    "id": "analytics",
+    "label": "Analytics",
+    "domain": "Data/Personal Finance",
+    "priority": "P2",
+    "status": "catalogued"
+  },
+  {
+    "id": "profile",
+    "label": "Profile",
+    "domain": "Identity/Devices/Security",
+    "priority": "P0",
+    "status": "implemented-vertical-slice"
+  }
+]

@@ -1,0 +1,4 @@
+id,severidade,descricao
+FINDING-01,CRITICAL,"Implementação puramente stub, nenhuma regra de negócio real materializada."
+FINDING-02,HIGH,Testes sem assertivas (falsos positivos).
+FINDING-03,HIGH,"Persistência e transações ignoradas devido a bloqueios declarados, reduzindo o código a interfaces."

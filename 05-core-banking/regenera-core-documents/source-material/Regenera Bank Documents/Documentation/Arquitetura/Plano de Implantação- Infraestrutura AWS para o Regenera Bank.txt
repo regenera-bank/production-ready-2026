@@ -1,0 +1,152 @@
+Plano de Implantação: Infraestrutura AWS para o Regenera Bank
+
+1.0 Introdução e Visão Estratégica
+
+Este documento serve como um guia estratégico e técnico para a equipe de DevOps implantar a infraestrutura do Regenera Bank na Amazon Web Services (AWS). O plano detalha a arquitetura de microsserviços, a automação via Infraestrutura como Código (IaC) com Terraform, a orquestração de contêineres com Kubernetes e o pipeline de integração e entrega contínua (CI/CD) que sustenta o ecossistema. O objetivo é fornecer um roteiro claro e executável para a criação de um ambiente de produção robusto, seguro e escalável.
+
+Os esforços de implantação serão guiados pelos seguintes objetivos principais:
+
+* Consistência e Confiabilidade: Garantir operações ininterruptas, replicáveis e previsíveis em todos os ambientes, desde o desenvolvimento até a produção.
+* Segurança: Implementar uma infraestrutura resiliente, seguindo o princípio de privilégio mínimo e protegendo os dados dos clientes contra ameaças.
+* Escalabilidade Dinâmica: Projetar uma arquitetura com elasticidade para escalar horizontalmente em resposta à demanda, otimizando custos e mantendo a performance.
+* Agilidade e Inovação: Facilitar a integração rápida de novas funcionalidades, reduzindo o tempo de lançamento no mercado e promovendo um ciclo de desenvolvimento ágil.
+
+Para alcançar esses objetivos, é fundamental primeiramente compreender a arquitetura de software que a infraestrutura irá suportar.
+
+2.0 Visão Geral da Arquitetura do Ecossistema
+
+Uma implantação bem-sucedida começa com a compreensão da arquitetura de software. O Regenera Bank é projetado como um ecossistema harmonioso de microsserviços, onde cada componente tem uma responsabilidade clara e opera de forma autônoma. Toda essa estrutura reside em uma 'Nuvem Privada' na AWS, garantindo isolamento e controle. A organização do código-fonte em um monorepo gerenciado por pnpm workspaces reflete essa filosofia, promovendo coesão e compartilhamento de código de forma eficiente. A estrutura de monorepo, gerenciada via pnpm workspaces, foi adotada para centralizar a governança do código, simplificar o gerenciamento de dependências e facilitar a refatoração entre pacotes e serviços, aumentando a velocidade do desenvolvimento.
+
+A estrutura do monorepo é a seguinte:
+
+Diretório	Propósito e Conteúdo
+apps/	Contém todas as aplicações executáveis do ecossistema.
+apps/services/	Diretório específico para os microsserviços de backend, desenvolvidos em NestJS.
+packages/	Abriga pacotes de código compartilhado (lógica de domínio, componentes de UI, definições gRPC) utilizados pelas apps.
+infrastructure/	Contém as definições de Infraestrutura como Código, com subdiretórios para Terraform (aws/) e manifestos Kubernetes (kubernetes/).
+.github/	Contém os workflows de CI/CD definidos para o GitHub Actions, automatizando o ciclo de vida da aplicação.
+
+O núcleo do backend é composto pelos seguintes microsserviços:
+
+* api-gateway: Ponto de entrada público que roteia requisições para os serviços internos e aplica políticas como rate limiting.
+* auth-service: Responsável pela autenticação (registro, login, JWT) e autorização, comunicando-se com o user-service via gRPC.
+* user-service: Gerencia os dados cadastrais dos usuários, persistindo as informações em PostgreSQL e expondo uma interface gRPC para comunicação interna.
+* account-service: Gerencia contas bancárias, saldos e transações de débito/crédito, utilizando PostgreSQL como banco de dados.
+* pix-service: Orquestra o fluxo de transferências PIX, interagindo com o account-service e publicando eventos em um message broker (RabbitMQ).
+* analytics-service: Consome eventos do RabbitMQ e persiste logs e dados de eventos em um banco de dados compatível com MongoDB (DocumentDB), para fins de análise.
+* Outros Serviços: O ecossistema inclui também card-service, investment-service, notification-service, compliance-service, e transaction-service, cada um com sua responsabilidade de negócio específica.
+
+A comunicação entre estes serviços emprega padrões distintos, adequados a cada contexto. O auth-service utiliza gRPC síncrono para consultas de alta performance ao user-service. O pix-service utiliza chamadas HTTP para interações com o account-service e, crucialmente, desacopla o fluxo publicando eventos em um message broker (RabbitMQ) para consumo assíncrono por serviços como notification-service e analytics-service. Esta arquitetura híbrida otimiza a performance para requisições críticas e garante a resiliência e o desacoplamento para fluxos de trabalho transacionais.
+
+A fundação para hospedar este ecossistema é definida através da Infraestrutura como Código, garantindo que cada peça seja provisionada de forma correta e automatizada.
+
+3.0 Infraestrutura como Código (IaC) com Terraform
+
+O Terraform é a nossa escolha estratégica para a governança da infraestrutura na AWS. Ao definir os recursos em código declarativo, eliminamos o configuration drift, garantimos a reprodutibilidade exata entre os ambientes de Staging e Produção e viabilizamos uma estratégia robusta de disaster recovery. Todos os arquivos de configuração residem no diretório infrastructure/aws/, descrevendo desde a rede virtual até os clusters de computação e bancos de dados gerenciados.
+
+3.1 Rede e Segurança
+
+A topologia de rede implementa um padrão de segurança de três camadas clássico (Web > Aplicação > Dados), imposto via Security Groups. O tráfego externo é permitido apenas no ALB (alb_sg). A camada de aplicação (app_sg) só pode receber tráfego do ALB ou de outros serviços na mesma camada, e por fim, as camadas de persistência (db_sg, documentdb_sg) só aceitam conexões originadas da camada de aplicação. Este projeto de defesa em profundidade minimiza a superfície de ataque e garante o isolamento estrito dos componentes. As regras permitem que o ALB se comunique com os microsserviços na faixa de portas 3000-3012 e que os próprios serviços se comuniquem internamente via gRPC na porta 50051.
+
+As regras principais são sintetizadas na tabela abaixo:
+
+Security Group	Origem do Tráfego	Portas Permitidas	Propósito
+alb_sg	Internet (0.0.0.0/0)	80 (HTTP), 443 (HTTPS)	Permitir tráfego de entrada da web para o Application Load Balancer (ALB).
+app_sg	alb_sg	3000-3012 (TCP)	Permitir que o ALB encaminhe tráfego para os microsserviços.
+app_sg	app_sg	50051 (TCP)	Permitir comunicação interna inter-serviços via gRPC, como do auth-service para o user-service.
+db_sg	app_sg	5432 (TCP)	Permitir que os microsserviços acessem o banco de dados PostgreSQL (RDS).
+documentdb_sg	app_sg	27017 (TCP)	Permitir que os microsserviços acessem o banco de dados DocumentDB (MongoDB).
+
+3.2 Bancos de Dados e Persistência
+
+A estratégia de persistência de dados do Regenera Bank utiliza serviços gerenciados pela AWS para maximizar a confiabilidade e reduzir a carga operacional. A escolha da tecnologia de banco de dados é feita com base na natureza dos dados de cada serviço:
+
+* Amazon RDS (PostgreSQL Multi-AZ): Utilizado para dados relacionais e transacionais. Serviços como user-service, account-service e pix-service persistem seus dados em uma instância PostgreSQL configurada em modo Multi-AZ para alta disponibilidade.
+* Amazon DocumentDB (compatível com MongoDB): Utilizado para dados semiestruturados, como logs de eventos. O analytics-service armazena seus dados no DocumentDB, aproveitando a flexibilidade do modelo de documentos.
+
+3.3 Orquestração e Entrega de Conteúdo
+
+A camada de computação e entrega de conteúdo é projetada para ser escalável e resiliente, orquestrando os contêineres dos microsserviços e distribuindo o conteúdo do frontend de forma eficiente.
+
+* Amazon EKS (Elastic Kubernetes Service): O coração da orquestração. Um cluster EKS é provisionado para implantar, gerenciar e escalar os contêineres dos microsserviços de forma automatizada.
+* Application Load Balancer (ALB): Atua como o ponto de entrada único para todo o tráfego da API. Ele distribui as requisições recebidas para os serviços apropriados em execução no cluster EKS.
+* Amazon CloudFront: Utilizado como a Rede de Distribuição de Conteúdo (CDN) para a aplicação frontend. A origem do CloudFront aponta para o ALB, e ele é configurado para redirecionar todo o tráfego para HTTPS, garantindo a segurança e acelerando a entrega de ativos estáticos para os usuários.
+
+Com a infraestrutura provisionada pelo Terraform, o próximo passo é orquestrar a implantação das aplicações sobre essa base.
+
+4.0 Orquestração de Contêineres com Kubernetes
+
+O Kubernetes serve como a plataforma de execução para os nossos microsserviços, abstraindo a infraestrutura subjacente e fornecendo capacidades nativas para automação, saúde do sistema e escalabilidade. Os manifestos YAML, versionados junto ao código-fonte, representam o contrato de implantação para cada serviço, garantindo que as equipes de desenvolvimento e operações compartilhem uma única fonte da verdade sobre o estado desejado das aplicações. O arquivo infrastructure/kubernetes/user-service.yaml serve como um excelente modelo da nossa abordagem padrão.
+
+4.1 Estrutura dos Manifestos de Implantação
+
+Os manifestos de implantação de cada microsserviço são compostos por um conjunto de objetos Kubernetes padrão, cada um com uma finalidade específica:
+
+* Deployment: Define o estado desejado para um microsserviço. Especifica qual imagem Docker (armazenada no Amazon ECR) deve ser utilizada, o número inicial de réplicas, as variáveis de ambiente (incluindo a referência a Secrets para dados sensíveis) e os recursos de CPU/memória necessários.
+* Service: Expõe o Deployment como um serviço de rede interno ao cluster (type: ClusterIP). Isso permite que os microsserviços se comuniquem entre si de forma segura e confiável, utilizando nomes de serviço DNS internos. Para o user-service, por exemplo, ele expõe a porta HTTP 3002 e a porta gRPC 50051.
+* HorizontalPodAutoscaler (HPA): Configura o escalonamento automático para o Deployment. Ele monitora métricas, como o uso de CPU, e ajusta automaticamente o número de réplicas do serviço para lidar com flutuações na carga. Para o user-service, o HPA está configurado para manter a utilização de CPU em 70%, escalando entre 2 e 10 réplicas conforme necessário.
+
+4.2 Saúde e Resiliência dos Serviços
+
+Nossa estratégia de resiliência opera em múltiplas camadas para garantir a máxima disponibilidade do sistema:
+
+* Resiliência de Infraestrutura: A utilização de RDS em modo Multi-AZ garante a alta disponibilidade no nível do banco de dados relacional.
+* Resiliência de Orquestração: O Kubernetes gerencia a saúde dos contêineres através de:
+  * readinessProbe: Impede que o tráfego seja roteado para pods que ainda não estão prontos para servi-lo, consultando o endpoint /health.
+  * livenessProbe: Reinicia automaticamente contêineres que entraram em estado de falha (e.g., deadlock), garantindo a auto-recuperação.
+* Resiliência de Aplicação: No nível do código, implementamos o padrão Circuit Breaker através do pacote @repo/resilience. Este mecanismo previne falhas em cascata ao isolar temporariamente um serviço dependente que esteja apresentando instabilidade, permitindo que o sistema degrade de forma graciosa em vez de falhar completamente.
+
+O processo que aplica esses manifestos e gerencia o ciclo de vida da aplicação é totalmente automatizado pelo pipeline de CI/CD.
+
+5.0 Pipeline de CI/CD com GitHub Actions
+
+O pipeline de CI/CD é o mecanismo central que traduz o código em valor para o negócio. Ele impõe um fluxo de trabalho rigoroso de qualidade e segurança, automatizando a validação em múltiplos estágios e culminando em um portão de aprovação manual para produção. Este processo minimiza o risco de implantações defeituosas e acelera nosso time-to-market para novas funcionalidades.
+
+As principais etapas do pipeline são detalhadas abaixo:
+
+Etapa (Job)	Gatilho	Ações Principais
+build-and-test	push e pull_request na branch main	Executa checkout, instala dependências, valida a qualidade do código (Lint, Type Check), executa testes com cobertura e compila todos os pacotes e aplicações.
+build-and-push-docker	Sucesso de build-and-test	Realiza a autenticação no Amazon ECR, constrói as imagens Docker para cada microsserviço e as publica no registro.
+deploy-staging	Sucesso de build-and-push-docker	Implanta a nova versão das aplicações no cluster Kubernetes de Staging para validação funcional e testes de integração.
+deploy-production	Sucesso de deploy-staging	Aguarda aprovação manual. Após a confirmação, implanta a versão validada em Staging no ambiente de Produção.
+
+Este fluxo garante que nenhuma alteração chegue à produção sem antes ser testada e validada, com um portão de qualidade final que exige intervenção humana para a implantação final.
+
+6.0 Procedimento de Implantação
+
+Esta seção descreve o guia sequencial para a execução da implantação completa da infraestrutura e das aplicações do Regenera Bank, desde um ambiente vazio até um sistema totalmente funcional.
+
+6.1 Pré-requisitos
+
+O engenheiro de DevOps responsável pela implantação deve ter as seguintes ferramentas de linha de comando (CLI) instaladas e configuradas em sua máquina local:
+
+* terraform CLI: Para provisionar a infraestrutura na AWS.
+* aws CLI: Configurada com credenciais de acesso à conta AWS alvo.
+* kubectl: Configurado para interagir com clusters Kubernetes.
+* docker: Para a construção de imagens de contêiner.
+* node.js (v18 ou superior) e pnpm: Para o gerenciamento de dependências do projeto.
+
+6.2 Sequência de Implantação
+
+O processo de implantação deve seguir a seguinte ordem:
+
+1. Provisionamento da Infraestrutura AWS:
+  * Navegue até o diretório infrastructure/aws/.
+  * Execute terraform init para inicializar o provedor e os módulos.
+  * Execute terraform plan para revisar as alterações que serão aplicadas.
+  * Execute terraform apply para criar todos os recursos definidos (VPC, EKS, RDS, ALB, etc.).
+2. Configuração do kubectl:
+  * Após a criação do cluster EKS pelo Terraform, configure o contexto do kubectl para que ele aponte para o novo cluster. Isso geralmente é feito com um comando da AWS CLI (aws eks update-kubeconfig ...).
+3. Criação de Segredos Kubernetes:
+  * Utilize kubectl create secret generic para criar os segredos que armazenarão as variáveis de ambiente sensíveis, como JWT_SECRET, DATABASE_PASSWORD, etc. Esses segredos devem corresponder aos valueFrom.secretKeyRef definidos nos manifestos de Deployment.
+4. Execução do Pipeline de CI/CD:
+  * Realize um push de código para a branch main do repositório no GitHub.
+  * Isso acionará automaticamente o workflow do GitHub Actions, que irá construir, testar, empacotar as aplicações em imagens Docker, enviá-las para o ECR e implantá-las no ambiente de Staging.
+5. Aprovação para Produção:
+  * Após a validação bem-sucedida da implantação no ambiente de Staging, acesse a interface do GitHub Actions.
+  * Aprove manualmente a etapa deploy-production para promover a mesma versão da aplicação para o ambiente de produção.
+6. Validação Pós-Implantação:
+  * Utilize kubectl para verificar o status dos pods, serviços e outros recursos no cluster de produção, garantindo que todos os componentes estejam em execução (Running).
+  * Obtenha o DNS do ALB (disponível no output do Terraform como alb_dns_name) e realize testes de ponta a ponta para confirmar que o api-gateway está roteando o tráfego corretamente para os microsserviços.
+
+Este plano estabelece uma fundação de nuvem imutável, segura e automatizada, capacitando o Regenera Bank a operar com excelência técnica e a inovar com agilidade e confiança na AWS.

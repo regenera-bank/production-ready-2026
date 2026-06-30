@@ -1,0 +1,12 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: regenera-data-ingestion
+  description: Componente Regenera do domínio ingestion.
+  annotations:
+    regenera.io/criticality: high
+spec:
+  type: service
+  lifecycle: experimental
+  owner: team-data-ingestion
+  system: regenera-bank

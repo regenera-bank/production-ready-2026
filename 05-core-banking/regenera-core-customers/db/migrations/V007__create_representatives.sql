@@ -1,0 +1,1 @@
+CREATE TABLE party_representative (represented_party_id UUID NOT NULL REFERENCES party(party_id), representative_party_id UUID NOT NULL REFERENCES party(party_id), role VARCHAR(32) NOT NULL, valid_from TIMESTAMPTZ NOT NULL, valid_until TIMESTAMPTZ, PRIMARY KEY (represented_party_id, representative_party_id, role, valid_from));

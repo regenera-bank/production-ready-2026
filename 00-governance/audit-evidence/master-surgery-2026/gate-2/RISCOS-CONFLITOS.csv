@@ -1,0 +1,83 @@
+conflict_id,risco,descricao
+3,ALTO,Código fonte concorrente. Requer análise humana para combinar implementações ou escolher vencedora.
+12,ALTO,Código fonte concorrente. Requer análise humana para combinar implementações ou escolher vencedora.
+19,ALTO,Código fonte concorrente. Requer análise humana para combinar implementações ou escolher vencedora.
+33,ALTO,Código fonte concorrente. Requer análise humana para combinar implementações ou escolher vencedora.
+45,ALTO,Código fonte concorrente. Requer análise humana para combinar implementações ou escolher vencedora.
+47,ALTO,Código fonte concorrente. Requer análise humana para combinar implementações ou escolher vencedora.
+72,ALTO,Código fonte concorrente. Requer análise humana para combinar implementações ou escolher vencedora.
+91,ALTO,Código fonte concorrente. Requer análise humana para combinar implementações ou escolher vencedora.
+106,ALTO,Código fonte concorrente. Requer análise humana para combinar implementações ou escolher vencedora.
+117,ALTO,Código fonte concorrente. Requer análise humana para combinar implementações ou escolher vencedora.
+550,ALTO,Código fonte concorrente. Requer análise humana para combinar implementações ou escolher vencedora.
+593,ALTO,Código fonte concorrente. Requer análise humana para combinar implementações ou escolher vencedora.
+607,ALTO,Código fonte concorrente. Requer análise humana para combinar implementações ou escolher vencedora.
+611,ALTO,Código fonte concorrente. Requer análise humana para combinar implementações ou escolher vencedora.
+667,ALTO,Código fonte concorrente. Requer análise humana para combinar implementações ou escolher vencedora.
+668,ALTO,Código fonte concorrente. Requer análise humana para combinar implementações ou escolher vencedora.
+677,ALTO,Código fonte concorrente. Requer análise humana para combinar implementações ou escolher vencedora.
+687,ALTO,Código fonte concorrente. Requer análise humana para combinar implementações ou escolher vencedora.
+691,ALTO,Código fonte concorrente. Requer análise humana para combinar implementações ou escolher vencedora.
+701,ALTO,Código fonte concorrente. Requer análise humana para combinar implementações ou escolher vencedora.
+708,ALTO,Código fonte concorrente. Requer análise humana para combinar implementações ou escolher vencedora.
+765,ALTO,Código fonte concorrente. Requer análise humana para combinar implementações ou escolher vencedora.
+768,ALTO,O artefato é gerado por build/dependências. Deve ser regerado no destino.
+769,ALTO,Arquivos de configuração com divergências requerem merge manual cauteloso.
+890,ALTO,Código fonte concorrente. Requer análise humana para combinar implementações ou escolher vencedora.
+893,ALTO,Código fonte concorrente. Requer análise humana para combinar implementações ou escolher vencedora.
+897,ALTO,Código fonte concorrente. Requer análise humana para combinar implementações ou escolher vencedora.
+1130,ALTO,Arquivos de configuração com divergências requerem merge manual cauteloso.
+1132,ALTO,Arquivos de configuração com divergências requerem merge manual cauteloso.
+1164,ALTO,Código fonte concorrente. Requer análise humana para combinar implementações ou escolher vencedora.
+1310,ALTO,Código fonte concorrente. Requer análise humana para combinar implementações ou escolher vencedora.
+1314,ALTO,Código fonte concorrente. Requer análise humana para combinar implementações ou escolher vencedora.
+1333,ALTO,Arquivos de configuração com divergências requerem merge manual cauteloso.
+1406,ALTO,Código fonte concorrente. Requer análise humana para combinar implementações ou escolher vencedora.
+1410,ALTO,Código fonte concorrente. Requer análise humana para combinar implementações ou escolher vencedora.
+1429,ALTO,Arquivos de configuração com divergências requerem merge manual cauteloso.
+1470,ALTO,Código fonte concorrente. Requer análise humana para combinar implementações ou escolher vencedora.
+1474,ALTO,Código fonte concorrente. Requer análise humana para combinar implementações ou escolher vencedora.
+1505,ALTO,Arquivos de configuração com divergências requerem merge manual cauteloso.
+1559,ALTO,Código fonte concorrente. Requer análise humana para combinar implementações ou escolher vencedora.
+1563,ALTO,Código fonte concorrente. Requer análise humana para combinar implementações ou escolher vencedora.
+1582,ALTO,Arquivos de configuração com divergências requerem merge manual cauteloso.
+2386,ALTO,Código fonte concorrente. Requer análise humana para combinar implementações ou escolher vencedora.
+2390,ALTO,Código fonte concorrente. Requer análise humana para combinar implementações ou escolher vencedora.
+2445,ALTO,Arquivos de configuração com divergências requerem merge manual cauteloso.
+2474,ALTO,Código fonte concorrente. Requer análise humana para combinar implementações ou escolher vencedora.
+2478,ALTO,Código fonte concorrente. Requer análise humana para combinar implementações ou escolher vencedora.
+2503,ALTO,Arquivos de configuração com divergências requerem merge manual cauteloso.
+2757,ALTO,Código fonte concorrente. Requer análise humana para combinar implementações ou escolher vencedora.
+2761,ALTO,Código fonte concorrente. Requer análise humana para combinar implementações ou escolher vencedora.
+2779,ALTO,Arquivos de configuração com divergências requerem merge manual cauteloso.
+3100,ALTO,Código fonte concorrente. Requer análise humana para combinar implementações ou escolher vencedora.
+3104,ALTO,Código fonte concorrente. Requer análise humana para combinar implementações ou escolher vencedora.
+3133,ALTO,Arquivos de configuração com divergências requerem merge manual cauteloso.
+3287,ALTO,Código fonte concorrente. Requer análise humana para combinar implementações ou escolher vencedora.
+3291,ALTO,Código fonte concorrente. Requer análise humana para combinar implementações ou escolher vencedora.
+3309,ALTO,Arquivos de configuração com divergências requerem merge manual cauteloso.
+3429,ALTO,Código fonte concorrente. Requer análise humana para combinar implementações ou escolher vencedora.
+3433,ALTO,Código fonte concorrente. Requer análise humana para combinar implementações ou escolher vencedora.
+3506,ALTO,Arquivos de configuração com divergências requerem merge manual cauteloso.
+3512,ALTO,Código fonte concorrente. Requer análise humana para combinar implementações ou escolher vencedora.
+3654,ALTO,Código fonte concorrente. Requer análise humana para combinar implementações ou escolher vencedora.
+3658,ALTO,Código fonte concorrente. Requer análise humana para combinar implementações ou escolher vencedora.
+3691,ALTO,Arquivos de configuração com divergências requerem merge manual cauteloso.
+3693,ALTO,Código fonte concorrente. Requer análise humana para combinar implementações ou escolher vencedora.
+3694,ALTO,Código fonte concorrente. Requer análise humana para combinar implementações ou escolher vencedora.
+3765,ALTO,Código fonte concorrente. Requer análise humana para combinar implementações ou escolher vencedora.
+3769,ALTO,Código fonte concorrente. Requer análise humana para combinar implementações ou escolher vencedora.
+3787,ALTO,Arquivos de configuração com divergências requerem merge manual cauteloso.
+3852,ALTO,Código fonte concorrente. Requer análise humana para combinar implementações ou escolher vencedora.
+3856,ALTO,Código fonte concorrente. Requer análise humana para combinar implementações ou escolher vencedora.
+3874,ALTO,Arquivos de configuração com divergências requerem merge manual cauteloso.
+3983,ALTO,Código fonte concorrente. Requer análise humana para combinar implementações ou escolher vencedora.
+4016,ALTO,Código fonte concorrente. Requer análise humana para combinar implementações ou escolher vencedora.
+4020,ALTO,Código fonte concorrente. Requer análise humana para combinar implementações ou escolher vencedora.
+4038,ALTO,Arquivos de configuração com divergências requerem merge manual cauteloso.
+4129,ALTO,Código fonte concorrente. Requer análise humana para combinar implementações ou escolher vencedora.
+4133,ALTO,Código fonte concorrente. Requer análise humana para combinar implementações ou escolher vencedora.
+4153,ALTO,Arquivos de configuração com divergências requerem merge manual cauteloso.
+4336,ALTO,Código fonte concorrente. Requer análise humana para combinar implementações ou escolher vencedora.
+4340,ALTO,Código fonte concorrente. Requer análise humana para combinar implementações ou escolher vencedora.
+4358,ALTO,Arquivos de configuração com divergências requerem merge manual cauteloso.

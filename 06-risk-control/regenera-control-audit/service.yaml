@@ -1,0 +1,12 @@
+name: regenera-control-audit
+domain: audit
+owner: team-audit
+criticality: critical
+data_classification: banking-secret
+runtime: jvm
+tier: 0
+rto: 15m
+rpo: 0
+on_call: audit-primary
+dependencies:
+  []

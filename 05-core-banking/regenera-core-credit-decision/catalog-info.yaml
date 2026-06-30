@@ -1,0 +1,12 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: regenera-core-credit-decision
+  description: Componente Regenera do domínio credit-decision.
+  annotations:
+    regenera.io/criticality: high
+spec:
+  type: service
+  lifecycle: experimental
+  owner: team-credit-decision
+  system: regenera-bank

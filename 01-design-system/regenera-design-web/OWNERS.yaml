@@ -1,0 +1,6 @@
+owners:
+  primary: team-design-system
+  approvers:
+    - team-architecture
+    - team-security
+  on_call: design-web-primary

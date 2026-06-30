@@ -1,0 +1,12 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: regenera-integration-card-networks
+  description: Componente Regenera do domínio card-networks.
+  annotations:
+    regenera.io/criticality: critical
+spec:
+  type: service
+  lifecycle: experimental
+  owner: team-integration-card-networks
+  system: regenera-bank

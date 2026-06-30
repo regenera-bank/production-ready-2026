@@ -1,0 +1,19 @@
+capacidade,depende_de,ordem_teorica
+Audit Trail,NENHUM,1
+Idempotency,NENHUM,1
+Identity,Audit Trail,2
+Authorization,Identity,2
+Customer/Party,Identity,2
+Customer/Party,Authorization,2
+Accounts,Customer/Party,2
+Accounts,Audit Trail,2
+Ledger,Audit Trail,2
+Transactions,Accounts,2
+Transactions,Ledger,2
+Transactions,Idempotency,2
+Payments,Transactions,2
+Pix,Transactions,2
+Reconciliation,Ledger,2
+Reconciliation,Transactions,2
+Reconciliation,Payments,2
+Reconciliation,Pix,2

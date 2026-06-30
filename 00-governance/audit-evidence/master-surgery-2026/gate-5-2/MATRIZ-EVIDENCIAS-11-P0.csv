@@ -1,0 +1,12 @@
+capability_id,capacidade,arquivos_encontrados,contratos,migrations,services,eventos,testes,maturidade,bloqueios
+CAP-IDENTITY,Identity,136,9,2,2,4,15,BLOCKED_BY_CONFLICT,Conflito Gate 2
+CAP-CUSTOMER_PARTY,Customer/Party,184,23,11,3,0,13,BLOCKED_BY_CONFLICT,Conflito Gate 2
+CAP-ACCOUNTS,Accounts,219,17,13,5,1,19,BLOCKED_BY_CONFLICT,Conflito Gate 2
+CAP-LEDGER,Ledger,118,5,13,1,4,13,BLOCKED_BY_CONFLICT,Conflito Gate 2
+CAP-TRANSACTIONS,Transactions,131,11,0,3,4,9,BLOCKED_BY_CONFLICT,Conflito Gate 2
+CAP-IDEMPOTENCY,Idempotency,6,1,1,0,0,1,SKELETON_ONLY,Nenhum
+CAP-RECONCILIATION,Reconciliation,81,2,0,1,1,6,BLOCKED_BY_CONFLICT,Conflito Gate 2
+CAP-PAYMENTS,Payments,1334,105,1,5,30,23,BLOCKED_BY_CONFLICT,Conflito Gate 2
+CAP-PIX,Pix,242,18,0,5,6,23,BLOCKED_BY_CONFLICT,Conflito Gate 2
+CAP-AUDIT_TRAIL,Audit Trail,436,69,2,4,7,25,BLOCKED_BY_CONFLICT,Conflito Gate 2
+CAP-AUTHORIZATION,Authorization,7,0,0,1,0,0,BLOCKED_BY_CONTRACT,Sem contrato

@@ -1,0 +1,12 @@
+name: regenera-integration-correspondents
+domain: correspondents
+owner: team-integration-correspondents
+criticality: high
+data_classification: banking-secret
+runtime: jvm
+tier: 1
+rto: 4h
+rpo: 1h
+on_call: correspondents-primary
+dependencies:
+  []

@@ -1,0 +1,180 @@
+Análise Arquitetural Completa: O Ecossistema Regenera Bank
+
+1.0 Introdução: Mapeando o Ecossistema Regenera Bank
+
+Este documento tem como propósito estabelecer o cânone arquitetural do Regenera Bank. Ele serve como o mapa definitivo do nosso ecossistema, apresentando o "Gold Master" como a personificação de nossa estratégia de engenharia. Navegaremos desde os princípios filosóficos que guiaram as decisões técnicas até a implementação prática de cada componente, com o objetivo de criar uma visão coesa de como os diversos sistemas interagem para entregar uma plataforma financeira robusta, segura e escalável.
+
+O sistema foi concebido como uma plataforma financeira moderna, construída sobre os pilares de microserviços, automação de infraestrutura e resiliência sistêmica. A arquitetura foi projetada para garantir não apenas a funcionalidade atual, mas também para suportar o crescimento exponencial e a inovação acelerada. Cada decisão, da organização do código à orquestração de serviços, foi tomada com o intuito de maximizar a agilidade, a performance e a segurança, superando as expectativas do mercado.
+
+A seguir, exploraremos os pilares estratégicos que sustentam esta filosofia arquitetural e como eles se manifestam na estrutura e operação do ecossistema Regenera Bank.
+
+2.0 Filosofia Arquitetural: Os Pilares Estratégicos
+
+As decisões arquiteturais fundamentais são a espinha dorsal de qualquer sistema de software complexo. No Regenera Bank, essas escolhas não são meramente técnicas, mas sim habilitadores estratégicos projetados para alcançar objetivos de negócio críticos como agilidade, escalabilidade e segurança. A seguir, detalhamos os pilares que definem a nossa abordagem.
+
+Monorepo com pnpm Workspaces
+
+A decisão de adotar um monorepo gerenciado por pnpm workspaces é central para a coesão e manutenibilidade do ecossistema. Esta abordagem estratégica consolida todas as aplicações (apps) e pacotes compartilhados (packages) em um único repositório "Gold Master". Isso vai além do simples compartilhamento de código; ele cria um único grafo de dependências, atômico e consistente, gerenciado eficientemente pelo arquivo pnpm-lock.yaml. A sintaxe workspace:*, visível em arquivos como apps/frontend/package.json, garante que as aplicações consumam sempre a versão exata do código compartilhado no mesmo commit, eliminando a complexidade de gerenciar múltiplos repositórios e pacotes versionados. Esta é uma vantagem estratégica que acelera o desenvolvimento, a refatoração e garante a consistência em toda a plataforma.
+
+Arquitetura de Microserviços
+
+Utilizando a analogia de uma "federação de pequenas nações independentes", a arquitetura de microserviços é o pilar que garante agilidade e resiliência. Cada serviço (contas, PIX, cartões) é uma unidade autônoma e especializada, com responsabilidades bem definidas. Esta separação permite que equipes independentes desenvolvam, implantem e escalem seus serviços sem impactar o restante do ecossistema. O isolamento de falhas é uma consequência direta: se um serviço enfrentar instabilidade, os demais continuam operando, garantindo a continuidade do negócio. Esta não é uma escolha de conveniência, mas um imperativo estratégico que troca a simplicidade aparente de um monolito pela complexidade gerenciada que nos compra agilidade e resiliência em escala.
+
+Comunicação Orientada a Eventos
+
+Para a comunicação entre serviços, adotamos um modelo assíncrono e orientado a eventos, com o RabbitMQ atuando como o sistema de mensageria central. Esta abordagem desacopla os microserviços, aumentando a resiliência e a escalabilidade. Um exemplo claro é o fluxo de uma transação PIX: o pix-service orquestra a transferência e, ao final, publica um evento de transaction_completed. Serviços como o notification-service, analytics-service e, crucialmente, o transaction-service os consomem para executar suas lógicas (enviar uma notificação, registrar a análise e atualizar o ledger financeiro), sem que o pix-service precise conhecê-los. Isso cria um sistema flexível, onde novos serviços podem ser adicionados para reagir a eventos existentes sem modificar os produtores.
+
+A seguir, detalharemos como essa filosofia se materializa na organização prática dos diretórios e arquivos dentro do nosso monorepo.
+
+3.0 Anatomia do Monorepo "Gold Master"
+
+Esta seção funciona como um guia detalhado da estrutura de diretórios do projeto. Compreender a localização e o propósito de cada componente principal é fundamental para que qualquer desenvolvedor possa navegar, contribuir e manter o ecossistema Regenera Bank de forma eficiente e segura.
+
+Diretório apps/
+
+Este diretório é o contêiner para todas as aplicações executáveis do ecossistema, desde as interfaces com o usuário até os serviços de backend.
+
+* frontend: A aplicação principal do cliente, um Dashboard construído como uma Single Page Application (SPA) em React.
+* next-frontend: O cliente web em desenvolvimento, utilizando a framework Next.js.
+* mobile-app: O cliente mobile em desenvolvimento, construído com React Native para fornecer uma experiência nativa.
+* services/: O diretório que agrupa todos os microsserviços de backend, cada um implementado com NestJS e encapsulando uma lógica de negócio específica.
+
+Diretório packages/
+
+Aqui reside o código compartilhado e reutilizável, um elemento crucial para a consistência e a filosofia DRY (Don't Repeat Yourself) do projeto. A gestão via pnpm workspaces garante que estes pacotes sejam facilmente integrados pelas aplicações.
+
+* core: O pacote fundamental, agnóstico de framework, que contém tipos, interfaces e o value object Money, compartilhado entre frontend e backend para garantir a integridade de dados financeiros.
+* ui: Contém componentes de UI reutilizáveis em React, como o GlassCard, formando a base do nosso Design System e garantindo uma experiência de usuário consistente.
+* grpc-definitions: Centraliza os arquivos de definição de protocolo (.proto) que especificam os contratos para a comunicação gRPC entre microsserviços.
+* resilience: Contém a implementação de padrões de resiliência, como o Circuit Breaker, para isolar falhas e aumentar a robustez do sistema.
+* config, logging, tracing: Pacotes que centralizam configurações transversais, como gestão de variáveis de ambiente, logging estruturado e tracing distribuído, garantindo que estas funcionalidades sejam aplicadas de forma padronizada em todos os serviços.
+
+Diretório infrastructure/
+
+Este diretório é o repositório para toda a Infraestrutura como Código (IaC), garantindo que nosso ambiente seja replicável, versionado e automatizado.
+
+* aws/: Contém os arquivos Terraform (.tf) que definem todos os recursos na nuvem da AWS, desde clusters Kubernetes até bancos de dados e redes.
+* kubernetes/: Abriga os manifestos Kubernetes (.yaml) que descrevem como cada microsserviço deve ser implantado e gerenciado dentro do cluster.
+
+Diretório .github/
+
+Este diretório contém as definições dos nossos fluxos de trabalho de Integração Contínua e Entrega Contínua (CI/CD), automatizando o processo de build, teste e deploy.
+
+* .github/workflows/main.yml: Define o pipeline principal do GitHub Actions, orquestrando desde a instalação de dependências até o deploy em produção.
+
+Com a estrutura de diretórios estabelecida, podemos agora aprofundar nos microsserviços que residem nela e entender suas responsabilidades individuais.
+
+4.0 O Ecossistema de Microsserviços
+
+Esta seção aprofunda o conhecimento sobre cada microsserviço, detalhando sua responsabilidade única dentro da "federação" que compõe o ecossistema Regenera Bank. Cada serviço foi projetado para ser um especialista em seu domínio, interagindo com os demais por meio de interfaces bem definidas.
+
+Microsserviço	Responsabilidade Principal	Tecnologias/Padrões Chave
+`api-gateway`	Atua como proxy reverso e ponto de ingresso único (Single Point of Entry). Roteia requisições, aplica rate limiting e abstrai a topologia da rede interna dos clientes externos.	NestJS, Proxy, Redis (Rate Limiting), Swagger/OpenAPI
+`auth-service`	Autenticação de usuários (registro, login) e emissão de tokens de acesso.	NestJS, JSON Web Token (JWT), gRPC (Cliente)
+`user-service`	Gerenciamento central dos dados de usuários, como perfil e informações pessoais.	NestJS, PostgreSQL, gRPC (Servidor)
+`account-service`	Gerenciamento de contas bancárias, saldos e operações de débito/crédito.	NestJS, PostgreSQL, Value Object Money com TypeORM Transformer
+`pix-service`	Orquestração de transferências PIX. Comunica-se com outros serviços e publica eventos de transação.	NestJS, PostgreSQL, Padrão Saga, RabbitMQ (Produtor), HTTP (Cliente)
+`card-service`	Gerenciamento do ciclo de vida de cartões de pagamento (virtuais e físicos).	NestJS, PostgreSQL
+`investment-service`	Gerenciamento de portfólios de investimento e transações de compra/venda de ativos.	NestJS, PostgreSQL
+`notification-service`	Consome eventos para simular o envio de notificações (e-mail, SMS, push) aos usuários.	NestJS, RabbitMQ (Consumidor), Preparado para Twilio/AWS SES
+`analytics-service`	Consome eventos de transação e os persiste para análises futuras.	NestJS, RabbitMQ (Consumidor), MongoDB
+`compliance-service`	Simula verificações de compliance, como AML (Anti-Money Laundering) e KYC (Know Your Customer).	NestJS
+`transaction-service`	Atua como o ledger financeiro canônico e imutável. Consome eventos de transação para criar o registro definitivo, orquestrando processos de liquidação e reconciliação, garantindo a consistência contábil.	NestJS, RabbitMQ (Consumidor), PostgreSQL
+`ai-service`	Fornece uma interface para consultas de IA, com integração (mockada) à API Gemini para análises e insights.	NestJS, Integração com API Externa
+`blockchain-service`	Registra e indexa transações em um formato otimizado para auditoria e análise de dados em larga escala, potencialmente para fins de prova de existência ou relatórios regulatórios.	NestJS, Elasticsearch, Apache Arrow
+
+Esta visão detalhada das responsabilidades individuais dos serviços nos permite, na próxima seção, conectar os pontos e rastrear como eles colaboram para entregar uma experiência de usuário coesa, do clique no frontend à resposta do backend.
+
+5.0 Rastreando a Jornada do Usuário: Do Clique à Resposta do Microsserviço
+
+Para cumprir a diretiva principal deste documento, esta seção oferece uma análise prática, traçando o fluxo de uma requisição de ponta a ponta. Analisaremos dois fluxos críticos para a operação do Regenera Bank: a autenticação de um usuário e a orquestração de uma transferência PIX. Estes exemplos ilustram a colaboração síncrona e assíncrona entre os componentes do sistema.
+
+Fluxo de Autenticação de Usuário
+
+A seguir, a sequência de eventos que ocorre quando um usuário realiza o login na plataforma web:
+
+1. Frontend (Cliente): O usuário preenche o formulário de login no componente AuthForm.tsx e aciona a função login no contexto de autenticação (AuthContext.tsx).
+2. Cliente API: A função authApi.login, localizada em apps/frontend/src/lib/api.ts, envia uma requisição POST para o endpoint /api/auth/login.
+3. API Gateway: A requisição é interceptada pelo api-gateway, que atua como um proxy reverso e a encaminha para a instância apropriada do auth-service.
+4. Auth Service: O auth.service.ts recebe a requisição. Ele então inicia uma chamada gRPC para o user-service através do método findOneByEmail, cujo contrato está definido no arquivo user.proto.
+5. User Service: O user-service recebe a chamada gRPC, consulta seu banco de dados PostgreSQL para localizar o usuário correspondente ao e-mail fornecido.
+6. Resposta gRPC: O user-service retorna os dados do usuário (ou uma indicação de ausência) de volta para o auth-service via gRPC.
+7. Validação e Geração de JWT: O auth-service compara o hash da senha recebida com o hash armazenado. Se a validação for bem-sucedida, ele utiliza o JwtService e a chave secreta JWT_SECRET para gerar um JSON Web Token (JWT).
+8. Resposta Final: O auth-service retorna o access_token para o frontend. O AuthContext armazena este token, atualiza o estado da aplicação para isAuthenticated, e renderiza a página do dashboard (DashboardPage.tsx).
+
+Fluxo de Transferência PIX (Padrão Saga)
+
+O fluxo de uma transferência PIX é um exemplo de transação distribuída orquestrada pelo padrão Saga para garantir consistência entre múltiplos serviços.
+
+1. Frontend (Cliente): O usuário preenche e submete o formulário de transferência PIX no componente PixTransferForm.tsx.
+2. Cliente API: A função pixApi.createTransfer em apps/frontend/src/lib/api.ts envia uma requisição POST para o endpoint /api/pix/transfers.
+3. API Gateway: A requisição é recebida e roteada para o pix-service.
+4. PIX Service (Início da Saga): O PixSagaService é acionado para iniciar a orquestração da transação.
+5. Passo 1 (Saga): Invoca o CentralBankService para registrar a intenção de transferência junto ao Sistema de Pagamentos Instantâneos (SPI), obtendo um ID de transação externa que será usado para rastreamento e reconciliação.
+6. Passo 2 (Saga): Uma requisição HTTP PATCH é enviada para o account-service para debitar o valor da conta de origem.
+7. Passo 3 (Saga): Uma requisição HTTP PATCH é enviada para o account-service para creditar o valor na conta de destino. Se este passo falhar, a lógica da saga iniciaria a transação de compensação, devolvendo o valor para a conta de origem.
+8. Passo 4 (Saga): O pix-service persiste o registro da transação PIX bem-sucedida em seu próprio banco de dados PostgreSQL.
+9. Passo 5 (Saga): Um evento transaction_completed é publicado na fila do RabbitMQ.
+10. Consumidores de Evento: Diversos serviços reagem a este evento de forma assíncrona:
+  * O analytics-service o consome para registrar o evento em seu banco MongoDB.
+  * O notification-service o consome para enviar uma notificação de sucesso ao usuário.
+  * O transaction-service o consome para atualizar seu ledger central, garantindo um registro consolidado da transação.
+
+Esses fluxos demonstram a colaboração intrincada entre os componentes do ecossistema. A seguir, analisaremos a infraestrutura robusta e os processos operacionais que sustentam essa colaboração.
+
+6.0 Infraestrutura, Operações e Qualidade
+
+Uma arquitetura de software de ponta é sustentada por uma infraestrutura igualmente robusta e por processos de DevOps que garantem a entrega contínua, a escalabilidade e a confiabilidade do sistema. No Regenera Bank, a infraestrutura não é um detalhe, mas um componente integral do design arquitetural, projetado para automação e resiliência.
+
+Infraestrutura como Código (IaC) na AWS
+
+A infraestrutura do Regenera Bank na nuvem é totalmente gerenciada como código usando Terraform, cujas definições residem no diretório infrastructure/aws/. Esta abordagem garante que a infraestrutura seja versionada, auditável e facilmente replicável entre ambientes. Os principais recursos da AWS definidos são:
+
+* EKS Cluster: Um cluster Kubernetes gerenciado para orquestrar nossos contêineres de microsserviços.
+* RDS (PostgreSQL Multi-AZ): Banco de dados relacional gerenciado, configurado em múltiplas zonas de disponibilidade para alta resiliência.
+* DocumentDB: Banco de dados compatível com MongoDB, utilizado pelo analytics-service para armazenar dados de eventos não estruturados.
+* Elasticsearch: Utilizado para capacidades de busca avançada e indexação de logs ou dados de transações, como no blockchain-service.
+* ALB (Application Load Balancer): Distribui o tráfego de entrada entre os serviços no cluster Kubernetes.
+* CloudFront: Rede de distribuição de conteúdo (CDN) para acelerar a entrega do frontend aos usuários.
+* WAF (Web Application Firewall): Camada de segurança para proteger a aplicação contra ameaças comuns da web.
+* KMS (Key Management Service): Gerencia chaves de criptografia para garantir a segurança dos dados.
+* Security Groups: Atuam como firewalls virtuais, controlando o tráfego entre os diferentes componentes da infraestrutura.
+
+Orquestração com Kubernetes
+
+O arquivo infrastructure/kubernetes/user-service.yaml serve como um exemplo representativo da nossa estratégia de deploy. Ele define os recursos essenciais para a operação de um microsserviço no cluster:
+
+* Deployment: Gerencia o ciclo de vida dos pods do serviço, garantindo que o número desejado de réplicas esteja sempre em execução e orquestrando atualizações sem downtime.
+* Service (do tipo ClusterIP): Expõe o serviço dentro da rede interna do cluster, fornecendo um ponto de acesso estável para que outros microsserviços possam se comunicar com ele.
+* HorizontalPodAutoscaler (HPA): Garante a escalabilidade dinâmica, ajustando automaticamente o número de pods em execução com base na utilização de CPU, permitindo que o sistema responda de forma elástica a variações na demanda.
+
+Pipeline de CI/CD com GitHub Actions
+
+O processo de build, teste e deploy é totalmente automatizado pelo pipeline definido em .github/workflows/main.yml. Este fluxo de trabalho é dividido em jobs interdependentes:
+
+* build-and-test: Este job é acionado em cada push ou pull request. Seus passos incluem a instalação de dependências com pnpm, execução de linters para garantir a qualidade do código, verificação de tipos com TypeScript e a execução de testes automatizados.
+* build-and-push-docker: Após a validação do código, este job constrói as imagens Docker para cada microsserviço e as envia para o nosso registro privado, o Amazon ECR (Elastic Container Registry).
+* deploy-staging e deploy-production: Estes jobs orquestram o deploy das novas imagens para os ambientes de Staging e Produção, respectivamente. Uma etapa de aprovação manual, implementada com trstringer/manual-approval, é exigida antes do deploy em produção, adicionando uma camada crítica de governança.
+
+Este pipeline é a manifestação da nossa cultura DevOps. A automação rigorosa e a etapa de aprovação manual em produção não são meros passos técnicos, mas sim os mecanismos de controle que nos permitem mover com velocidade e segurança, balanceando agilidade com governança.
+
+Garantia de Qualidade e Resiliência
+
+Além da infraestrutura e automação, a qualidade e a resiliência são incorporadas diretamente no código e nos processos:
+
+* Testes Automatizados: Testes de ponta a ponta (E2E), como os definidos em cypress/e2e/auth.cy.ts, simulam a jornada do usuário real, garantindo que os fluxos críticos, como a autenticação, funcionem corretamente de ponta a ponta.
+* Circuit Breaker: A implementação no pacote packages/resilience/ permite que as chamadas entre serviços sejam envolvidas por um disjuntor de circuito. Se um serviço chamado começa a falhar repetidamente, o circuito "abre", impedindo novas chamadas e evitando falhas em cascata que poderiam derrubar o sistema.
+* Observabilidade: Nossa estratégia de observabilidade é multifacetada. Primeiro, o tracing distribuído via OpenTelemetry e Jaeger, configurado em packages/tracing/src/tracing.service.ts, nos dá visibilidade em nível de requisição, permitindo rastrear uma única operação através de múltiplos microsserviços. Segundo, o logging estruturado com Winston, configurado em packages/logging/src/logger.service.ts, emite logs em formato JSON, permitindo a agregação e análise de eventos de forma automatizada e em larga escala. Juntos, eles fornecem uma visão completa da saúde e performance do sistema.
+
+Esses elementos técnicos, trabalhando em conjunto, se traduzem em qualidades e benefícios tangíveis que posicionam o Regenera Bank para o sucesso.
+
+7.0 Síntese das Qualidades e Benefícios do Ecossistema
+
+As escolhas de arquitetura e tecnologia detalhadas neste documento não são decisões técnicas isoladas; são habilitadores estratégicos que, em conjunto, fornecem ao Regenera Bank vantagens competitivas claras. Cada benefício de negócio é uma consequência direta e intencional do design do nosso ecossistema.
+
+* Segurança Inexpugnável Nossa postura de segurança é o resultado direto de uma defesa em profundidade. A autenticação robusta via JWTs, aplicada no auth-service, garante que cada requisição seja verificada. A arquitetura de microserviços impõe um isolamento natural, limitando o raio de impacto de qualquer potencial comprometimento. Por fim, a infraestrutura na AWS, definida como código, implementa uma proteção perimetral com WAF e uma segmentação de rede rigorosa com Security Groups, garantindo que cada componente só possa se comunicar com o estritamente necessário.
+* Performance Superior e Escalabilidade Dinâmica A capacidade de responder instantaneamente à demanda do mercado não é um acaso, mas uma característica inerente ao nosso design. A orquestração com Kubernetes e o uso de Horizontal Pod Autoscalers (HPA) permitem que o sistema escale horizontalmente apenas os serviços sob alta demanda, otimizando custos e recursos. O caching de dados com Redis e a natureza distribuída dos microserviços garantem tempos de resposta baixos, proporcionando uma experiência de usuário fluida mesmo sob picos de carga.
+* Alta Resiliência e Confiabilidade A confiabilidade do sistema é construída sobre o princípio de "esperar pela falha". O padrão Circuit Breaker, implementado no pacote packages/resilience/, é nosso mecanismo de defesa proativo contra falhas em cascata, isolando instabilidades localmente. A comunicação assíncrona via RabbitMQ desacopla os serviços, criando uma arquitetura onde a indisponibilidade temporária de um componente, como o serviço de notificação, não impede a conclusão de uma transação crítica no pix-service.
+* Inovação Acelerada e Manutenibilidade A inovação acelerada não é um objetivo, mas o resultado inevitável da nossa aposta em um Monorepo coeso e microsserviços autônomos. A estrutura do monorepo, gerenciada pelo pnpm workspaces, descomplica a refatoração e o compartilhamento de código, permitindo que melhorias em pacotes como @repo/core ou @repo/ui sejam propagadas instantaneamente. A autonomia dos microserviços desonera as equipes para focar na entrega de valor, permitindo que desenvolvam e implantem novas funcionalidades de forma independente e rápida.
+
+Em conclusão, o ecossistema do Regenera Bank representa uma base de engenharia robusta, segura e escalável, projetada não apenas para as necessidades de hoje, mas para superar as expectativas e os desafios do mercado financeiro do futuro.

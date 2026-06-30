@@ -1,0 +1,6 @@
+owners:
+  primary: team-payment-orchestrator
+  approvers:
+    - team-architecture
+    - team-security
+  on_call: payment-orchestrator-primary

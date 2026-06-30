@@ -1,0 +1,12 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: regenera-contracts-error-catalog
+  description: Componente Regenera do domínio error-catalog.
+  annotations:
+    regenera.io/criticality: high
+spec:
+  type: service
+  lifecycle: experimental
+  owner: team-architecture
+  system: regenera-bank

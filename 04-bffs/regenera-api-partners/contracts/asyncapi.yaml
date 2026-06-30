@@ -1,0 +1,21 @@
+asyncapi: 3.0.0
+info: { title: Regenera Partner Webhooks, version: 1.0.0 }
+channels:
+  pixPaymentStatus:
+    address: partners/{partnerId}/pix-payment-status
+    messages:
+      pixPaymentStatus:
+        payload:
+          type: object
+          required: [eventId, eventType, eventVersion, occurredAt, paymentId, status]
+          properties:
+            eventId: { type: string, format: uuid }
+            eventType: { const: PIX_PAYMENT_STATUS_CHANGED }
+            eventVersion: { type: integer, const: 1 }
+            occurredAt: { type: string, format: date-time }
+            paymentId: { type: string, format: uuid }
+            status: { type: string }
+operations:
+  receivePixPaymentStatus:
+    action: receive
+    channel: { $ref: '#/channels/pixPaymentStatus' }

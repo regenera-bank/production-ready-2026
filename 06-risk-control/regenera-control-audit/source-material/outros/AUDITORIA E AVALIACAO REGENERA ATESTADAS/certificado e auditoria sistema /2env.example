@@ -1,0 +1,171 @@
+# ═══════════════════════════════════════════════════════════════
+# REGENERA BANK - BLOCKCHAIN CERTIFICATE
+# Environment Variables Configuration
+# ═══════════════════════════════════════════════════════════════
+#
+# INSTRUÇÕES:
+# 1. Copie este arquivo: cp .env.example .env
+# 2. Preencha os valores abaixo
+# 3. NUNCA commite o arquivo .env (já está no .gitignore)
+#
+# ═══════════════════════════════════════════════════════════════
+
+# ───────────────────────────────────────────────────────────────
+# BLOCKCHAIN - POLYGON NETWORK
+# ───────────────────────────────────────────────────────────────
+
+# RPC URL para Polygon Mainnet
+# Obter em: https://infura.io ou https://alchemy.com
+# 1. Criar conta gratuita
+# 2. Criar novo projeto
+# 3. Copiar endpoint Polygon Mainnet
+POLYGON_RPC_URL=https://polygon-mainnet.infura.io/v3/YOUR_INFURA_PROJECT_ID
+
+# RPC URL para Mumbai Testnet (para testes)
+# Usar o mesmo projeto Infura
+MUMBAI_RPC_URL=https://polygon-mumbai.infura.io/v3/YOUR_INFURA_PROJECT_ID
+
+# Private Key da sua wallet (MetaMask, etc)
+# ⚠️  CRÍTICO: NUNCA compartilhe esta chave!
+# ⚠️  Use wallet dedicada para deploy (não sua wallet principal)
+# 
+# Como obter:
+# MetaMask > Account Details > Export Private Key
+# 
+# Formato: 0x seguido de 64 caracteres hexadecimais
+# Exemplo: 0xabcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890
+PRIVATE_KEY=0x0000000000000000000000000000000000000000000000000000000000000000
+
+# Polygonscan API Key (para verificação automática de contratos)
+# Obter em: https://polygonscan.com/myapikey
+# 1. Criar conta no Polygonscan
+# 2. Ir para "API Keys"
+# 3. Gerar novo API Key
+POLYGONSCAN_API_KEY=YOUR_POLYGONSCAN_API_KEY_HERE
+
+# ───────────────────────────────────────────────────────────────
+# IPFS - DISTRIBUTED FILE STORAGE
+# ───────────────────────────────────────────────────────────────
+
+# Infura IPFS (Opção 1 - Recomendado)
+# Obter em: https://infura.io
+# Mesmo projeto da blockchain pode ter IPFS
+INFURA_PROJECT_ID=YOUR_INFURA_PROJECT_ID
+INFURA_PROJECT_SECRET=YOUR_INFURA_PROJECT_SECRET
+
+# Pinata (Opção 2 - Backup)
+# Obter em: https://pinata.cloud
+# 1. Criar conta gratuita
+# 2. Ir para "API Keys"
+# 3. Gerar novo API Key
+PINATA_API_KEY=YOUR_PINATA_API_KEY
+PINATA_SECRET_KEY=YOUR_PINATA_SECRET_KEY
+
+# ───────────────────────────────────────────────────────────────
+# AWS (OPCIONAL - Para hosting de badge)
+# ───────────────────────────────────────────────────────────────
+
+# AWS credentials para S3/CloudFront
+# Obter em: https://console.aws.amazon.com/iam/
+# Necessário apenas se for hospedar badge em S3
+AWS_ACCESS_KEY_ID=YOUR_AWS_ACCESS_KEY
+AWS_SECRET_ACCESS_KEY=YOUR_AWS_SECRET_KEY
+AWS_REGION=us-east-1
+
+# S3 Bucket para badge HTML
+AWS_S3_BUCKET=regenera-blockchain-certificate
+
+# ───────────────────────────────────────────────────────────────
+# GAS REPORTING (OPCIONAL)
+# ───────────────────────────────────────────────────────────────
+
+# CoinMarketCap API (para relatório de gas em USD)
+# Obter em: https://coinmarketcap.com/api/
+# Gratuito até 10,000 requests/mês
+COINMARKETCAP_API_KEY=YOUR_CMC_API_KEY
+
+# Enable gas reporting (true/false)
+REPORT_GAS=false
+
+# ───────────────────────────────────────────────────────────────
+# DEPLOYMENT OPTIONS
+# ───────────────────────────────────────────────────────────────
+
+# Network padrão (polygon, mumbai, localhost)
+NETWORK=polygon
+
+# Número de confirmações a aguardar após deploy
+CONFIRMATIONS=5
+
+# Auto-verify no Polygonscan (true/false)
+AUTO_VERIFY=true
+
+# ───────────────────────────────────────────────────────────────
+# CERTIFICATE OPTIONS
+# ───────────────────────────────────────────────────────────────
+
+# NFT expiration timestamp (0 = never expires)
+NFT_EXPIRES_AT=0
+
+# Owner address (deixe vazio para usar deployer)
+CERTIFICATE_OWNER=
+
+# ───────────────────────────────────────────────────────────────
+# MONITORING (OPCIONAL)
+# ───────────────────────────────────────────────────────────────
+
+# Slack webhook para notificações
+SLACK_WEBHOOK_URL=
+
+# Discord webhook para notificações
+DISCORD_WEBHOOK_URL=
+
+# Email para alertas (usar com SendGrid/SES)
+ALERT_EMAIL=
+
+# ───────────────────────────────────────────────────────────────
+# DEBUG OPTIONS
+# ───────────────────────────────────────────────────────────────
+
+# Enable debug logging
+DEBUG=false
+
+# Verbose output
+VERBOSE=false
+
+# Dry run (não executar transações reais)
+DRY_RUN=false
+
+# ═══════════════════════════════════════════════════════════════
+# CHECKLIST DE SETUP
+# ═══════════════════════════════════════════════════════════════
+#
+# ✅ Obter RPC URL (Infura/Alchemy)
+# ✅ Criar wallet dedicada e exportar private key
+# ✅ Adicionar MATIC na wallet (~0.1 MATIC)
+# ✅ Obter Polygonscan API Key
+# ✅ Obter Pinata API Keys
+# ✅ Verificar se todas as variáveis estão preenchidas
+# ✅ Executar: npm run deploy:immortality
+#
+# ═══════════════════════════════════════════════════════════════
+
+# ═══════════════════════════════════════════════════════════════
+# RECURSOS ÚTEIS
+# ═══════════════════════════════════════════════════════════════
+#
+# 📚 Documentação:
+#    - Infura: https://docs.infura.io/
+#    - Pinata: https://docs.pinata.cloud/
+#    - Polygonscan: https://docs.polygonscan.com/
+#
+# 🔗 Links Úteis:
+#    - Polygon Faucet (testnet): https://faucet.polygon.technology/
+#    - QuickSwap (comprar MATIC): https://quickswap.exchange
+#    - Metamask: https://metamask.io/
+#
+# 💡 Suporte:
+#    - Email: don.paulo@regenerabank.com
+#    - Docs: README_BLOCKCHAIN_CERTIFICATE.md
+#
+# ═══════════════════════════════════════════════════════════════

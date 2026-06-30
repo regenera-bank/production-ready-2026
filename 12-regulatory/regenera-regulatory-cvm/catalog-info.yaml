@@ -1,0 +1,12 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: regenera-regulatory-cvm
+  description: Componente Regenera do domínio cvm.
+  annotations:
+    regenera.io/criticality: critical
+spec:
+  type: service
+  lifecycle: experimental
+  owner: team-regulatory-cvm
+  system: regenera-bank

@@ -1,0 +1,15 @@
+schema_version: 1
+technical_accountable:
+  name: Don Paulo Ricardo
+  role: Principal Engineer
+  approval_state: declared_pending_signature
+operational_owners:
+  web-banking: channel-web
+  android: channel-android
+  ios: channel-ios
+  windows-operations: operations-platform
+  partner-portal: partner-platform
+independent_review:
+  required: true
+  reviewer: pending
+  signature: pending

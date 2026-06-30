@@ -1,0 +1,148 @@
+capacidade,teste
+Identity,03-channels/regenera-channel-android/core-security/src/test/kotlin/com/regenera/security/SecureSessionManagerTest.kt
+Identity,03-channels/regenera-channel-android/core-testing/src/main/kotlin/com/regenera/testing/FakeSessionManager.kt
+Identity,03-channels/regenera-channel-ios/CoreSecurity/Tests/CoreSecurityTests/SecureSessionManagerTests.swift
+Identity,05-core-banking/regenera-core-session/tests/unit/.gitkeep
+Identity,05-core-banking/regenera-core-session/tests/contract/.gitkeep
+Identity,05-core-banking/regenera-core-session/tests/security/.gitkeep
+Identity,05-core-banking/regenera-core-session/tests/integration/.gitkeep
+Identity,05-core-banking/regenera-core-session/tests/performance/.gitkeep
+Identity,05-core-banking/regenera-core-session/scripts/test.sh
+Identity,05-core-banking/regenera-core-identity/tests/unit/.gitkeep
+Identity,05-core-banking/regenera-core-identity/tests/contract/.gitkeep
+Identity,05-core-banking/regenera-core-identity/tests/security/.gitkeep
+Identity,05-core-banking/regenera-core-identity/tests/integration/.gitkeep
+Identity,05-core-banking/regenera-core-identity/tests/performance/.gitkeep
+Identity,05-core-banking/regenera-core-identity/scripts/test.sh
+Customer/Party,03-channels/regenera-channel-ios/CoreNetworking/Tests/CoreNetworkingTests/APIClientTests.swift
+Customer/Party,05-core-banking/regenera-core-customers/tests/unit/.gitkeep
+Customer/Party,05-core-banking/regenera-core-customers/tests/contract/.gitkeep
+Customer/Party,05-core-banking/regenera-core-customers/tests/security/.gitkeep
+Customer/Party,05-core-banking/regenera-core-customers/tests/integration/.gitkeep
+Customer/Party,05-core-banking/regenera-core-customers/tests/performance/.gitkeep
+Customer/Party,05-core-banking/regenera-core-customers/scripts/test.sh
+Customer/Party,05-core-banking/regenera-core-customer-support/tests/unit/.gitkeep
+Customer/Party,05-core-banking/regenera-core-customer-support/tests/contract/.gitkeep
+Customer/Party,05-core-banking/regenera-core-customer-support/tests/security/.gitkeep
+Customer/Party,05-core-banking/regenera-core-customer-support/tests/integration/.gitkeep
+Customer/Party,05-core-banking/regenera-core-customer-support/tests/performance/.gitkeep
+Customer/Party,05-core-banking/regenera-core-customer-support/scripts/test.sh
+Accounts,03-channels/regenera-channel-web-banking/tests/e2e/accounts.spec.ts
+Accounts,05-core-banking/regenera-core-balance/tests/unit/.gitkeep
+Accounts,05-core-banking/regenera-core-balance/tests/contract/.gitkeep
+Accounts,05-core-banking/regenera-core-balance/tests/security/.gitkeep
+Accounts,05-core-banking/regenera-core-balance/tests/integration/.gitkeep
+Accounts,05-core-banking/regenera-core-balance/tests/performance/.gitkeep
+Accounts,05-core-banking/regenera-core-balance/scripts/test.sh
+Accounts,05-core-banking/regenera-core-accounts/tests/unit/.gitkeep
+Accounts,05-core-banking/regenera-core-accounts/tests/contract/.gitkeep
+Accounts,05-core-banking/regenera-core-accounts/tests/security/.gitkeep
+Accounts,05-core-banking/regenera-core-accounts/tests/integration/.gitkeep
+Accounts,05-core-banking/regenera-core-accounts/tests/performance/.gitkeep
+Accounts,05-core-banking/regenera-core-accounts/scripts/test.sh
+Accounts,06-risk-control/regenera-control-accounting/tests/unit/.gitkeep
+Accounts,06-risk-control/regenera-control-accounting/tests/contract/.gitkeep
+Accounts,06-risk-control/regenera-control-accounting/tests/security/.gitkeep
+Accounts,06-risk-control/regenera-control-accounting/tests/integration/.gitkeep
+Accounts,06-risk-control/regenera-control-accounting/tests/performance/.gitkeep
+Accounts,06-risk-control/regenera-control-accounting/scripts/test.sh
+Ledger,05-core-banking/regenera-core-ledger/tests/unit/.gitkeep
+Ledger,05-core-banking/regenera-core-ledger/tests/contract/.gitkeep
+Ledger,05-core-banking/regenera-core-ledger/tests/security/.gitkeep
+Ledger,05-core-banking/regenera-core-ledger/tests/integration/.gitkeep
+Ledger,05-core-banking/regenera-core-ledger/tests/invariants/NoMutationInvariantTest.kt
+Ledger,05-core-banking/regenera-core-ledger/tests/invariants/CurrencyInvariantTest.kt
+Ledger,05-core-banking/regenera-core-ledger/tests/invariants/DoubleEntryInvariantTest.kt
+Ledger,05-core-banking/regenera-core-ledger/tests/invariants/IdempotencyInvariantTest.kt
+Ledger,05-core-banking/regenera-core-ledger/tests/invariants/HoldReleaseInvariantTest.kt
+Ledger,05-core-banking/regenera-core-ledger/tests/invariants/ReversalInvariantTest.kt
+Ledger,05-core-banking/regenera-core-ledger/tests/performance/.gitkeep
+Ledger,05-core-banking/regenera-core-ledger/scripts/test.sh
+Ledger,05-core-banking/regenera-core-pix/tests/contract/pix-500-ledger.json
+Transactions,05-core-banking/regenera-core-transactions/tests/UnknownStateTest.kt
+Transactions,05-core-banking/regenera-core-transactions/tests/StateMachineTest.kt
+Transactions,05-core-banking/regenera-core-transactions/tests/unit/.gitkeep
+Transactions,05-core-banking/regenera-core-transactions/tests/contract/.gitkeep
+Transactions,05-core-banking/regenera-core-transactions/tests/security/.gitkeep
+Transactions,05-core-banking/regenera-core-transactions/tests/integration/.gitkeep
+Transactions,05-core-banking/regenera-core-transactions/tests/performance/.gitkeep
+Transactions,05-core-banking/regenera-core-transactions/scripts/test.sh
+Transactions,05-core-banking/regenera-core-cards/src/main/kotlin/com/regenera/cards/application/command/ContestTransactionCommand.kt
+Idempotency,05-core-banking/regenera-core-ledger/tests/invariants/IdempotencyInvariantTest.kt
+Reconciliation,06-risk-control/regenera-control-reconciliation/tests/unit/.gitkeep
+Reconciliation,06-risk-control/regenera-control-reconciliation/tests/contract/.gitkeep
+Reconciliation,06-risk-control/regenera-control-reconciliation/tests/security/.gitkeep
+Reconciliation,06-risk-control/regenera-control-reconciliation/tests/integration/.gitkeep
+Reconciliation,06-risk-control/regenera-control-reconciliation/tests/performance/.gitkeep
+Reconciliation,06-risk-control/regenera-control-reconciliation/scripts/test.sh
+Payments,03-channels/regenera-channel-web-banking/tests/integration/payments.integration.spec.ts
+Payments,05-core-banking/regenera-core-documents/tests/unit/.gitkeep
+Payments,05-core-banking/regenera-core-documents/tests/contract/.gitkeep
+Payments,05-core-banking/regenera-core-documents/tests/security/.gitkeep
+Payments,05-core-banking/regenera-core-documents/tests/integration/.gitkeep
+Payments,05-core-banking/regenera-core-documents/tests/performance/.gitkeep
+Payments,05-core-banking/regenera-core-documents/scripts/test.sh
+Payments,05-core-banking/regenera-core-payment-orchestrator/tests/unit/.gitkeep
+Payments,05-core-banking/regenera-core-payment-orchestrator/tests/contract/.gitkeep
+Payments,05-core-banking/regenera-core-payment-orchestrator/tests/security/.gitkeep
+Payments,05-core-banking/regenera-core-payment-orchestrator/tests/integration/.gitkeep
+Payments,05-core-banking/regenera-core-payment-orchestrator/tests/performance/.gitkeep
+Payments,05-core-banking/regenera-core-payment-orchestrator/scripts/test.sh
+Payments,08-iso20022/regenera-iso20022-tests/docker-compose.local.yml
+Payments,08-iso20022/regenera-iso20022-tests/Dockerfile
+Payments,08-iso20022/regenera-iso20022-tests/docs/ARCHITECTURE.md
+Payments,08-iso20022/regenera-iso20022-tests/docs/THREAT-MODEL.md
+Payments,08-iso20022/regenera-iso20022-tests/docs/SLO.md
+Payments,08-iso20022/regenera-iso20022-tests/docs/DEPENDENCIES.md
+Payments,08-iso20022/regenera-iso20022-tests/docs/RUNBOOK.md
+Payments,08-iso20022/regenera-iso20022-tests/docs/DATA-FLOW.md
+Payments,08-iso20022/regenera-iso20022-tests/docs/ROLLBACK.md
+Payments,08-iso20022/regenera-iso20022-tests/docs/ADR/0001-boundary.md
+Pix,03-channels/regenera-channel-web-banking/tests/e2e/pix.spec.ts
+Pix,03-channels/regenera-channel-web-banking/src/__tests__/Pix.test.tsx
+Pix,05-core-banking/regenera-core-pix/tests/unit/.gitkeep
+Pix,05-core-banking/regenera-core-pix/tests/contract/.gitkeep
+Pix,05-core-banking/regenera-core-pix/tests/contract/pix-500-ledger.json
+Pix,05-core-banking/regenera-core-pix/tests/security/.gitkeep
+Pix,05-core-banking/regenera-core-pix/tests/integration/.gitkeep
+Pix,05-core-banking/regenera-core-pix/tests/performance/.gitkeep
+Pix,05-core-banking/regenera-core-pix/scripts/test.sh
+Pix,07-integrations/regenera-integration-dict/test-vectors/.gitkeep
+Pix,07-integrations/regenera-integration-dict/tests/unit/.gitkeep
+Pix,07-integrations/regenera-integration-dict/tests/contract/.gitkeep
+Pix,07-integrations/regenera-integration-dict/tests/security/.gitkeep
+Pix,07-integrations/regenera-integration-dict/tests/integration/.gitkeep
+Pix,07-integrations/regenera-integration-dict/tests/performance/.gitkeep
+Pix,07-integrations/regenera-integration-dict/scripts/test.sh
+Pix,07-integrations/regenera-integration-spi/test-vectors/.gitkeep
+Pix,07-integrations/regenera-integration-spi/tests/unit/.gitkeep
+Pix,07-integrations/regenera-integration-spi/tests/contract/.gitkeep
+Pix,07-integrations/regenera-integration-spi/tests/security/.gitkeep
+Pix,07-integrations/regenera-integration-spi/tests/integration/.gitkeep
+Pix,07-integrations/regenera-integration-spi/tests/performance/.gitkeep
+Pix,07-integrations/regenera-integration-spi/scripts/test.sh
+Audit Trail,02-contracts/regenera-contracts-error-catalog/tests/unit/.gitkeep
+Audit Trail,02-contracts/regenera-contracts-error-catalog/tests/contract/.gitkeep
+Audit Trail,02-contracts/regenera-contracts-error-catalog/tests/security/.gitkeep
+Audit Trail,02-contracts/regenera-contracts-error-catalog/tests/integration/.gitkeep
+Audit Trail,02-contracts/regenera-contracts-error-catalog/tests/performance/.gitkeep
+Audit Trail,02-contracts/regenera-contracts-error-catalog/scripts/test.sh
+Audit Trail,03-channels/regenera-channel-android/feature-auth/src/test/kotlin/com/regenera/auth/LoginViewModelTest.kt
+Audit Trail,03-channels/regenera-channel-web-banking/tests/e2e/login.spec.ts
+Audit Trail,03-channels/regenera-channel-web-banking/src/__tests__/Login.test.tsx
+Audit Trail,03-channels/regenera-channel-ios/FeatureAuthentication/Tests/FeatureAuthenticationTests/LoginViewModelTests.swift
+Audit Trail,05-core-banking/regenera-core-product-catalog/tests/unit/.gitkeep
+Audit Trail,05-core-banking/regenera-core-product-catalog/tests/contract/.gitkeep
+Audit Trail,05-core-banking/regenera-core-product-catalog/tests/security/.gitkeep
+Audit Trail,05-core-banking/regenera-core-product-catalog/tests/integration/.gitkeep
+Audit Trail,05-core-banking/regenera-core-product-catalog/tests/performance/.gitkeep
+Audit Trail,05-core-banking/regenera-core-product-catalog/scripts/test.sh
+Audit Trail,06-risk-control/regenera-control-audit/tests/unit/.gitkeep
+Audit Trail,06-risk-control/regenera-control-audit/tests/contract/.gitkeep
+Audit Trail,06-risk-control/regenera-control-audit/tests/security/.gitkeep
+Audit Trail,06-risk-control/regenera-control-audit/tests/integration/.gitkeep
+Audit Trail,06-risk-control/regenera-control-audit/tests/performance/.gitkeep
+Audit Trail,06-risk-control/regenera-control-audit/scripts/test.sh
+Audit Trail,08-iso20022/regenera-iso20022-tests/CHANGELOG.md
+Audit Trail,08-iso20022/regenera-iso20022-tests/catalog-info.yaml
+Audit Trail,08-iso20022/regenera-iso20022-tests/homologation/.gitkeep

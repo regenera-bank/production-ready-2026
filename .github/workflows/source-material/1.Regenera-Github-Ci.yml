@@ -1,0 +1,199 @@
+name: Bank Grade CI — dinheiro não aceita suposição
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: bank-grade-ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+env:
+  NODE_VERSION: "20"
+  POSTGRES_DB: regenera_test
+  POSTGRES_USER: postgres
+  POSTGRES_PASSWORD: postgres
+  DATABASE_URL: postgres://postgres:postgres@localhost:5432/regenera_test
+  NODE_ENV: test
+  CI: true
+
+jobs:
+  backend_validation:
+    name: Backend — ledger, concorrência, replay, prova real
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_DB: regenera_test
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres -d regenera_test"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 30
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+
+      - run: npm ci
+
+      # --------------------------------------------------
+      # REPO GATE
+      # --------------------------------------------------
+      - name: Repo gate
+        run: |
+          set -euo pipefail
+          ./scripts/repo-gates.sh
+
+      # --------------------------------------------------
+      # BANCO PRONTO
+      # --------------------------------------------------
+      - name: Wait Postgres
+        env:
+          PGPASSWORD: ${{ env.POSTGRES_PASSWORD }}
+        run: |
+          set -euo pipefail
+          for i in {1..40}; do
+            pg_isready -h localhost -U postgres -d regenera_test && exit 0
+            sleep 1
+          done
+          echo "sem banco, sem sistema"
+          exit 1
+
+      # --------------------------------------------------
+      # MIGRATIONS (IDEMPOTENTES)
+      # --------------------------------------------------
+      - name: Apply migrations
+        env:
+          PGPASSWORD: ${{ env.POSTGRES_PASSWORD }}
+        run: |
+          set -euo pipefail
+          for f in migrations/*.sql; do
+            psql -v ON_ERROR_STOP=1 -h localhost -U postgres -d regenera_test -f "$f"
+          done
+
+      - name: Reapply migrations
+        env:
+          PGPASSWORD: ${{ env.POSTGRES_PASSWORD }}
+        run: |
+          set -euo pipefail
+          for f in migrations/*.sql; do
+            psql -v ON_ERROR_STOP=1 -h localhost -U postgres -d regenera_test -f "$f"
+          done
+
+      # --------------------------------------------------
+      # TESTES BASE
+      # --------------------------------------------------
+      - run: npm run typecheck --if-present
+      - run: npm run lint --if-present
+      - run: npm test -- --runInBand
+
+      # --------------------------------------------------
+      # TESTE DE CONCORRÊNCIA (OBRIGATÓRIO)
+      # --------------------------------------------------
+      - name: Concurrency test
+        run: |
+          set -euo pipefail
+
+          # duas execuções simultâneas da mesma operação
+          node scripts/test-concurrency.js
+
+      # --------------------------------------------------
+      # TESTE DE IDEMPOTÊNCIA
+      # --------------------------------------------------
+      - name: Idempotency test
+        run: |
+          set -euo pipefail
+          node scripts/test-idempotency.js
+
+      # --------------------------------------------------
+      # TESTE DE REPLAY (WEBHOOK / EVENTO)
+      # --------------------------------------------------
+      - name: Replay test
+        run: |
+          set -euo pipefail
+          node scripts/test-replay.js
+
+      # --------------------------------------------------
+      # TESTE DE CRASH (RECOVERY)
+      # --------------------------------------------------
+      - name: Crash recovery test
+        run: |
+          set -euo pipefail
+          node scripts/test-crash.js
+
+      # --------------------------------------------------
+      # AUDITORIA LEDGER
+      # --------------------------------------------------
+      - name: Ledger integrity
+        env:
+          PGPASSWORD: ${{ env.POSTGRES_PASSWORD }}
+        run: |
+          set -euo pipefail
+
+          psql -v ON_ERROR_STOP=1 -h localhost -U postgres -d regenera_test <<'SQL'
+          DO $$
+          DECLARE broken bigint;
+          BEGIN
+
+            -- entries sem linhas
+            SELECT COUNT(*) INTO broken
+            FROM ledger_entries e
+            WHERE NOT EXISTS (
+              SELECT 1 FROM ledger_lines l WHERE l.entry_id = e.id
+            );
+
+            IF broken > 0 THEN
+              RAISE EXCEPTION 'entries órfãs: %', broken;
+            END IF;
+
+            -- desbalanceamento
+            SELECT COUNT(*) INTO broken
+            FROM (
+              SELECT entry_id,
+                SUM(CASE WHEN direction='DEBIT' THEN amount ELSE -amount END) s
+              FROM ledger_lines
+              GROUP BY entry_id
+              HAVING SUM(CASE WHEN direction='DEBIT' THEN amount ELSE -amount END) <> 0
+            ) x;
+
+            IF broken > 0 THEN
+              RAISE EXCEPTION 'ledger desbalanceado: %', broken;
+            END IF;
+
+          END $$;
+          SQL
+
+      # --------------------------------------------------
+      # REBUILD TEST (PROVA FINAL)
+      # --------------------------------------------------
+      - name: Rebuild ledger
+        run: |
+          set -euo pipefail
+          node scripts/rebuild-ledger.js
+          
+      - name: Generate SBOM (CycloneDX & SPDX)
+        uses: anchore/sbom-action@v0
+        with:
+          format: cyclonedx-json
+          file: sbom.cyclonedx.json
+
+      - name: Sign Release with Cosign
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: sigstore/cosign-installer@v3

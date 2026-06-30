@@ -1,0 +1,78 @@
+{
+  "_comment": "@regenera/bank-core WAF Security Policy - Enterprise Grade",
+  "name": "regenera-waf-policy",
+  "description": "Comprehensive Cloud Armor WAF policy including OWASP top 10 rules, anomalous traffic mitigation, and bot management.",
+  "rules": [
+    {
+      "action": "deny(403)",
+      "priority": 1000,
+      "match": {
+        "expr": {
+          "expression": "evaluatePreconfiguredExpr('sqli-v33-stable')"
+        }
+      },
+      "description": "Block SQL Injection attacks (advanced rule set)"
+    },
+    {
+      "action": "deny(403)",
+      "priority": 1001,
+      "match": {
+        "expr": {
+          "expression": "evaluatePreconfiguredExpr('xss-v33-stable')"
+        }
+      },
+      "description": "Block Cross-Site Scripting attacks (advanced rule set)"
+    },
+    {
+      "action": "deny(403)",
+      "priority": 1002,
+      "match": {
+        "expr": {
+          "expression": "evaluatePreconfiguredExpr('rfi-v33-stable')"
+        }
+      },
+      "description": "Block Remote File Inclusion attacks"
+    },
+    {
+      "action": "deny(403)",
+      "priority": 1003,
+      "match": {
+        "expr": {
+          "expression": "evaluatePreconfiguredExpr('lfi-v33-stable')"
+        }
+      },
+      "description": "Block Local File Inclusion attacks"
+    },
+    {
+      "action": "deny(403)",
+      "priority": 1004,
+      "match": {
+        "expr": {
+          "expression": "evaluatePreconfiguredExpr('rce-v33-stable')"
+        }
+      },
+      "description": "Block Remote Code Execution attacks"
+    },
+    {
+      "action": "deny(403)",
+      "priority": 1005,
+      "match": {
+        "expr": {
+          "expression": "evaluatePreconfiguredExpr('nodejs-v33-stable')"
+        }
+      },
+      "description": "Block NodeJS specific vulnerabilities (e.g. prototype pollution)"
+    },
+    {
+      "action": "allow",
+      "priority": 2147483647,
+      "match": {
+        "versionedExpr": "SRC_IPS_V1",
+        "config": {
+          "srcIpRanges": ["*"]
+        }
+      },
+      "description": "Default allow (traffic that survives WAF analysis)"
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+owners:
+  primary: team-integration-card-processor
+  approvers:
+    - team-architecture
+    - team-security
+  on_call: card-processor-primary

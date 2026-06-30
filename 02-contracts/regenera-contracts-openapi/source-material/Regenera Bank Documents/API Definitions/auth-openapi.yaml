@@ -1,0 +1,192 @@
+# [FILE] /Users/admin/Desktop/Regenera Bank Documents/API Definitions/auth-openapi.yaml
+# OpenAPI (Swagger) Specification for Regenera Bank Auth Service
+# Desenvolvedor: Don Paulo Ricardo
+# Target: Parceiros Externos
+
+openapi: 3.0.0
+info:
+  title: Regenera Bank - Auth Service API
+  description: API para autenticação e registro de usuários no ecossistema Regenera Bank.
+  version: 1.0.0
+  contact:
+    name: Don Paulo Ricardo
+    email: cto@regenerabank.com.br
+  license:
+    name: Proprietária do Regenera Bank
+servers:
+  - url: http://api.regenerabank.com/api # URL base do API Gateway para parceiros externos
+    description: Servidor de Produção do Regenera Bank
+  - url: http://api-staging.regenerabank.com/api
+    description: Servidor de Staging do Regenera Bank
+
+tags:
+  - name: Autenticação
+    description: Operações relacionadas a login e gerenciamento de sessão
+  - name: Usuários
+    description: Operações relacionadas ao registro de novos usuários
+
+security:
+  - bearerAuth: [] # Garante que todos os endpoints de Security Schemas precisam de bearerAuth por padrão
+
+paths:
+  /auth/login:
+    post:
+      summary: Autenticar usuário
+      operationId: loginUser
+      tags:
+        - Autenticação
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+      responses:
+        '200':
+          description: Autenticação bem-sucedida, retorna token JWT
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponse'
+        '401':
+          description: Credenciais inválidas
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '400':
+          description: Requisição inválida
+        '500':
+          description: Erro interno do servidor
+
+  /auth/register:
+    post:
+      summary: Registrar um novo usuário
+      operationId: registerUser
+      tags:
+        - Usuários
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterRequest'
+      responses:
+        '201':
+          description: Usuário registrado com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+        '409':
+          description: Usuário já existe
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '400':
+          description: Requisição inválida
+        '500':
+          description: Erro interno do servidor
+
+  /auth/profile:
+    get:
+      summary: Obter perfil do usuário autenticado
+      operationId: getUserProfile
+      tags:
+        - Autenticação
+      security:
+        - bearerAuth: [] # Este endpoint especificamente requer autenticação
+      responses:
+        '200':
+          description: Perfil do usuário recuperado com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+        '401':
+          description: Não autorizado (Token inválido ou ausente)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Erro interno do servidor
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    LoginRequest:
+      type: object
+      required:
+        - email
+        - password
+      properties:
+        email:
+          type: string
+          format: email
+          example: usuario@regenerabank.com
+        password:
+          type: string
+          format: password
+          minLength: 8
+          example: MinhaSenhaSuperSegura123!
+    LoginResponse:
+      type: object
+      required:
+        - access_token
+      properties:
+        access_token:
+          type: string
+          description: Token JWT para autenticação subsequente
+          example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6Ikpv...
+    RegisterRequest:
+      type: object
+      required:
+        - fullName
+        - email
+        - password
+      properties:
+        fullName:
+          type: string
+          example: Cliente Regenera
+        email:
+          type: string
+          format: email
+          example: novo.cliente@regenerabank.com
+        password:
+          type: string
+          format: password
+          minLength: 8
+          example: MinhaSenhaSuperSegura123!
+    UserResponse:
+      type: object
+      required:
+        - id
+        - email
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: 123e4567-e89b-12d3-a456-426614174000
+        email:
+          type: string
+          format: email
+          example: usuario@regenerabank.com
+        fullName:
+          type: string
+          example: Cliente Regenera
+        # Outros campos do usuário, se relevantes para a resposta pública
+    ErrorResponse:
+      type: object
+      required:
+        - message
+      properties:
+        message:
+          type: string
+          example: "Credenciais inválidas."

@@ -1,0 +1,36 @@
+control_id,area,control_name,control_type,owner,frequency,blocking,expected_evidence,status
+CH-WEB-001,Web,Sessão protegida,preventive,channel-web,per release,true,"Cookie seguro, CSRF e CSP definidos",PARTIAL_REFERENCE
+CH-WEB-002,Web,Estado financeiro não autoritativo,preventive,channel-web,continuous,true,Saldo exibido vem do BFF,VERIFIED_IN_REFERENCE
+CH-WEB-003,Web,Retry bloqueado em UNKNOWN,preventive,channel-web,per command,true,Comando exige reconciliação,VERIFIED_IN_REFERENCE
+CH-WEB-004,Web,Idempotency-Key obrigatória,preventive,channel-web,per command,true,UUID de idempotência,VERIFIED_IN_REFERENCE
+CH-WEB-005,Web,Sem acesso direto a banco,preventive,channel-web,continuous,true,Scanner de dependências e código,VERIFIED_STATIC
+CH-AND-001,Android,Device binding obrigatório,preventive,channel-android,per session,true,Identificador de vínculo presente,VERIFIED_IN_REFERENCE
+CH-AND-002,Android,Integridade de dispositivo,preventive,channel-android,per session,true,Attestation exigida,PARTIAL_REFERENCE
+CH-AND-003,Android,Token em armazenamento seguro,preventive,channel-android,continuous,true,Contrato de vault,SPECIFIED_PENDING_PLATFORM
+CH-AND-004,Android,UNKNOWN bloqueia repetição,preventive,channel-android,per command,true,Estado reconciliável,VERIFIED_IN_REFERENCE
+CH-AND-005,Android,Sem segredo no APK,preventive,channel-android,per release,true,Secret scan,VERIFIED_STATIC
+CH-IOS-001,iOS,Keychain obrigatório,preventive,channel-ios,continuous,true,Contrato de vault,SPECIFIED_PENDING_PLATFORM
+CH-IOS-002,iOS,App Attest obrigatório,preventive,channel-ios,per session,true,Attestation exigida,PARTIAL_REFERENCE
+CH-IOS-003,iOS,Proteção de snapshot,preventive,channel-ios,per screen,true,Tela sensível protegida,SPECIFIED_PENDING_PLATFORM
+CH-IOS-004,iOS,UNKNOWN bloqueia repetição,preventive,channel-ios,per command,true,Estado reconciliável,VERIFIED_IN_REFERENCE
+CH-IOS-005,iOS,ATS restritiva,preventive,channel-ios,per release,true,Configuração validada,SPECIFIED_PENDING_PLATFORM
+CH-OPS-001,Windows Operations,Maker-checker,preventive,operations-platform,per critical action,true,Autor diferente do aprovador,VERIFIED_IN_REFERENCE
+CH-OPS-002,Windows Operations,Break-glass limitado,preventive,operations-platform,per activation,true,"Motivo, prazo e auditoria",SPECIFIED_PENDING_PLATFORM
+CH-OPS-003,Windows Operations,PII mascarada por padrão,preventive,operations-platform,per view,true,Acesso explícito para revelar,VERIFIED_IN_REFERENCE
+CH-OPS-004,Windows Operations,Ação crítica auditada,detective,operations-platform,per action,true,Evento append-only,VERIFIED_IN_REFERENCE
+CH-OPS-005,Windows Operations,Sessão privilegiada expira,preventive,operations-platform,continuous,true,TTL obrigatório,SPECIFIED_PENDING_PLATFORM
+CH-PAR-001,Partner Portal,mTLS obrigatório,preventive,partner-platform,per session,true,Fingerprint verificado,PARTIAL_REFERENCE
+CH-PAR-002,Partner Portal,Segredo não retornado,preventive,partner-platform,per credential,true,Exibição única,VERIFIED_IN_REFERENCE
+CH-PAR-003,Partner Portal,Webhook assinado,preventive,partner-platform,per delivery,true,HMAC e timestamp,VERIFIED_IN_REFERENCE
+CH-PAR-004,Partner Portal,Replay de webhook bloqueado,preventive,partner-platform,per delivery,true,Nonce e janela,VERIFIED_IN_REFERENCE
+CH-PAR-005,Partner Portal,Rate limit explícito,preventive,partner-platform,continuous,true,Contrato de quota,SPECIFIED_PENDING_PLATFORM
+CH-COM-001,Comum,Correlation ID obrigatório,detective,channel-engineering,per request,true,UUID rastreável,VERIFIED_IN_REFERENCE
+CH-COM-002,Comum,Telemetria sem dado sensível,preventive,channel-engineering,continuous,true,Campos permitidos,VERIFIED_IN_REFERENCE
+CH-COM-003,Comum,Contrato versionado,preventive,channel-engineering,per release,true,Pin de contratos,VERIFIED_STATIC
+CH-COM-004,Comum,Dependência externa declarada,preventive,channel-engineering,per release,true,Inventário,VERIFIED_STATIC
+CH-COM-005,Comum,Owner verificável,governance,channel-engineering,quarterly,true,Registro de owner,DECLARED_PENDING_INSTITUTIONAL
+CH-COM-006,Comum,Release segregada,governance,channel-engineering,per release,true,Autor diferente do aprovador,SPECIFIED_PENDING_INSTITUTIONAL
+CH-COM-007,Comum,Assinatura externa,governance,channel-engineering,per release,true,Assinatura destacada,PENDING_EXTERNAL_SIGNATURE
+CH-COM-008,Comum,Rollback testado,corrective,channel-engineering,quarterly,true,Evidência de rollback,SPECIFIED_PENDING_EXERCISE
+CH-COM-009,Comum,Runbook de indisponibilidade,corrective,channel-engineering,quarterly,true,Exercício registrado,SPECIFIED_PENDING_EXERCISE
+CH-COM-010,Comum,Zero metadado de sistema,preventive,channel-engineering,per release,true,Validator limpo,VERIFIED_STATIC

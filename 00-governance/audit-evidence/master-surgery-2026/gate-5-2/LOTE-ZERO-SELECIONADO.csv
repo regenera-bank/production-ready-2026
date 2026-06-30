@@ -1,0 +1,2 @@
+capability_id,capacidade,justificativa,ordem,escopo,contratos,dependencias,testes_necessarios,riscos,bloqueios,status,aprovado_para_implementacao
+N/A,N/A,Todas as capacidades P0 fundacionais possuem bloqueios severos de contrato ou dependência. Nenhuma atinge os critérios estritos de Lote Zero.,0,N/A,N/A,N/A,N/A,N/A,BLOCKED_NO_READY_P0_CAPABILITY,BLOCKED_NO_READY_P0_CAPABILITY,FALSE

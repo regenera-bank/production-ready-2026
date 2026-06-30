@@ -1,0 +1,14 @@
+{
+  "timestamp": "2026-06-26T08:03:45.350999",
+  "p0_avaliadas": 11,
+  "totais_maturidade": {
+    "BLOCKED_BY_CONFLICT": 9,
+    "SKELETON_ONLY": 1,
+    "BLOCKED_BY_CONTRACT": 1
+  },
+  "bloqueadas_contratos": 1,
+  "bloqueadas_conflitos": 9,
+  "bloqueadas_dependencias": 0,
+  "sem_testes": 1,
+  "lote_zero": "BLOCKED_NO_READY_P0_CAPABILITY"
+}

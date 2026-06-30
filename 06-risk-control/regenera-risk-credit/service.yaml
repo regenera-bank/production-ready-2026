@@ -1,0 +1,12 @@
+name: regenera-risk-credit
+domain: credit-risk
+owner: team-credit-risk
+criticality: critical
+data_classification: banking-secret
+runtime: jvm
+tier: 0
+rto: 15m
+rpo: 0
+on_call: credit-risk-primary
+dependencies:
+  []

@@ -1,0 +1,94 @@
+Guia de Configuração do Ambiente Local do Regenera Bank
+
+Olá! Seja muito bem-vindo(a) à equipe do Regenera Bank. Este guia foi criado para ser seu companheiro nesta jornada inicial, ajudando você a configurar o ambiente de desenvolvimento local do nosso monorepo "Gold Master" de forma rápida e descomplicada. Nosso objetivo é que você tenha tudo funcionando em poucos minutos. Para isso, utilizamos o poder do Docker para orquestrar todos os nossos serviços de backend e o pnpm para gerenciar nosso monorepo de maneira eficiente. Essa abordagem garante que todos na equipe, do júnior ao sênior, trabalhem em um ambiente idêntico e previsível, eliminando as clássicas dores de cabeça de "funciona na minha máquina". Vamos começar!
+
+
+--------------------------------------------------------------------------------
+
+
+1. O Que Você Terá Rodando? Uma Visão Geral do Ecossistema Local
+
+Ao final deste guia, com um único comando (docker-compose up), você terá um ecossistema completo de microsserviços e tecnologias de infraestrutura rodando em sua máquina. Isso permite um desenvolvimento isolado, consistente e muito produtivo. A tabela abaixo detalha cada serviço que será iniciado e seu propósito em nosso ambiente.
+
+Serviço	Propósito no Ambiente de Desenvolvimento
+PostgreSQL	É o nosso principal banco de dados relacional. Ele armazena os dados críticos de microsserviços essenciais como o user-service e o account-service. Como desenvolvedor, este é o banco de dados que você irá consultar diretamente para verificar o estado dos usuários e contas durante o desenvolvimento.
+RabbitMQ	Atua como nosso sistema de mensageria (message broker). É fundamental para a comunicação assíncrona entre os serviços, como quando o pix-service publica eventos de transação. Ao trabalhar em um serviço que reage a eventos, como o notification-service, a interface de gerenciamento do RabbitMQ (disponível em http://localhost:15672) será sua principal ferramenta para observar as mensagens na fila.
+Redis	Um banco de dados em memória de alta velocidade. No nosso ecossistema, o api-gateway o utiliza para tarefas de cache e para implementar rate limiting (controle de taxa de requisições). Se você estiver implementando um novo endpoint no api-gateway, é aqui que você configuraria novas regras de cache para otimizar a performance.
+MongoDB	Nosso banco de dados NoSQL, utilizado pelo analytics-service para persistir logs de eventos de forma flexível e escalável. Quando estiver depurando um fluxo complexo que envolve múltiplos eventos, os logs armazenados aqui no MongoDB serão essenciais para rastrear a jornada completa dos dados.
+Elasticsearch	Um poderoso motor de busca e análise. Embora sua aplicação específica possa variar, ele está configurado para fornecer capacidades de busca avançada para os serviços que necessitarem.
+
+Com essa visão do que está por vir, vamos preparar o seu computador para hospedar esse ecossistema.
+
+
+--------------------------------------------------------------------------------
+
+
+2. Pré-requisitos: Preparando seu Computador
+
+Antes de iniciarmos, é crucial garantir que você tenha as ferramentas certas instaladas. Por favor, verifique se os seguintes softwares estão disponíveis em sua máquina:
+
+1. Docker Desktop
+  * Pense no Docker como o alicerce do nosso ambiente local. Ele nos permite executar toda a infraestrutura (bancos de dados, RabbitMQ, etc.) em contêineres isolados. Para verificar se está instalado, abra seu terminal e execute docker --version.
+2. Node.js (v18 ou superior)
+  * É o ambiente de execução para nossos microsserviços em NestJS e aplicações frontend. A versão mínima necessária é a 18. Verifique sua versão com o comando node -v.
+3. pnpm
+  * No universo de um monorepo, pnpm é nosso herói da eficiência. Ele gerencia as dependências de todos os projetos de forma inteligente e incrivelmente rápida, economizando espaço em disco e tempo de instalação. Verifique se o pnpm está instalado com pnpm --version.
+
+Com os pré-requisitos confirmados, você está pronto para mergulhar na configuração!
+
+
+--------------------------------------------------------------------------------
+
+
+3. Configuração Passo a Passo
+
+Siga estes três passos simples para deixar tudo pronto para rodar.
+
+Passo 1: Configurando as Variáveis de Ambiente
+
+O primeiro passo é criar um arquivo de configuração local, que guardará as "senhas" e endereços para os serviços se comunicarem na sua máquina. Faremos isso copiando o arquivo de exemplo fornecido no projeto. Abra seu terminal na pasta raiz do monorepo e execute o seguinte comando:
+
+cp .env.example .env
+
+
+Nota Importante: O arquivo .env que você acabou de criar contém segredos e URLs para os serviços locais. Os valores padrão no .env.example são suficientes para que o ambiente funcione na sua máquina. Contudo, é uma boa prática de segurança gerar seu próprio valor para a JWT_SECRET, mesmo em ambiente local. Para este primeiro setup, o valor de demonstração é aceitável.
+
+Passo 2: Iniciando o Ecossistema com Docker
+
+Agora, vamos dar vida à nossa infraestrutura. Este comando irá baixar as imagens de software necessárias (se ainda não as tiver) e iniciar todos os serviços — PostgreSQL, Redis, etc. — em contêineres. A flag -d significa "detached mode", fazendo com que rodem em segundo plano e liberando seu terminal.
+
+docker-compose up -d
+
+
+Passo 3: Instalando as Dependências do Projeto
+
+Com toda a infraestrutura de backend rodando, o último passo é instalar as dependências de todos os pacotes e aplicações do nosso monorepo. O pnpm cuidará disso de forma inteligente, conectando os pacotes locais através de workspaces.
+
+pnpm install
+
+
+Parabéns! Se você chegou até aqui, seu ambiente de desenvolvimento do Regenera Bank está totalmente configurado. Vamos apenas fazer uma verificação final.
+
+
+--------------------------------------------------------------------------------
+
+
+4. Verificação e Próximos Passos
+
+Para garantir que tudo correu bem, abra a interface do Docker Desktop. Você deverá ver uma lista de contêineres, incluindo regenera_postgres_db, regenera_rabbitmq, regenera_redis, regenera_mongodb e regenera_elasticsearch, todos com o status "running" (em execução).
+
+E agora?
+
+Seu ambiente está pronto para a ação! Aqui estão algumas sugestões para seus próximos passos:
+
+* Inicie o API Gateway: Este é o ponto de entrada para todas as nossas APIs. Para iniciá-lo, execute os seguintes comandos a partir da raiz do monorepo:
+* Você verá o log do serviço no seu terminal, indicando que ele está rodando e pronto para receber requisições.
+* Explore a documentação da API: Após iniciar o api-gateway, abra seu navegador e acesse http://localhost:3000/api/docs. Você encontrará uma documentação interativa da nossa API gerada pelo Swagger/OpenAPI, que é uma excelente forma de entender os endpoints disponíveis.
+
+
+--------------------------------------------------------------------------------
+
+
+Conclusão
+
+Excelente trabalho! Você configurou com sucesso o ambiente de desenvolvimento local do Regenera Bank. Este é o primeiro passo de uma jornada incrível na construção de soluções financeiras inovadoras. Estamos muito felizes em ter você a bordo. Bem-vindo(a) à equipe!

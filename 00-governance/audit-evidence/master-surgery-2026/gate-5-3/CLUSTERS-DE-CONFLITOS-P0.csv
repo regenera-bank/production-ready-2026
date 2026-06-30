@@ -1,0 +1,52 @@
+cluster_id,capacidades_afetadas,conflict_ids,candidatos,contratos_afetados,migrations_afetadas,eventos_afetados,consumidores,dependencias,classificacao,poder_de_desbloqueio,riscos,decisao_humana_necessaria,ordem_recomendada,confianca,status
+CLUS-1,Identity,3429,2,A Mapear,A Mapear,A Mapear,A Mapear,A Mapear,CANONICAL_SELECTION_REQUIRED,ALTO,Sobrescrita de codigo ativo,Escolher versão canônica,1,ALTA,READY_FOR_HUMAN_DECISION
+CLUS-2,Identity,3433,2,A Mapear,A Mapear,A Mapear,A Mapear,A Mapear,CANONICAL_SELECTION_REQUIRED,ALTO,Sobrescrita de codigo ativo,Escolher versão canônica,2,ALTA,READY_FOR_HUMAN_DECISION
+CLUS-3,Identity,3506,2,A Mapear,A Mapear,A Mapear,A Mapear,A Mapear,CANONICAL_SELECTION_REQUIRED,ALTO,Sobrescrita de codigo ativo,Escolher versão canônica,3,ALTA,READY_FOR_HUMAN_DECISION
+CLUS-4,Identity,3512,2,A Mapear,A Mapear,A Mapear,A Mapear,A Mapear,CANONICAL_SELECTION_REQUIRED,ALTO,Sobrescrita de codigo ativo,Escolher versão canônica,4,ALTA,READY_FOR_HUMAN_DECISION
+CLUS-5,Customer/Party,3100,2,A Mapear,A Mapear,A Mapear,A Mapear,A Mapear,CANONICAL_SELECTION_REQUIRED,ALTO,Sobrescrita de codigo ativo,Escolher versão canônica,5,ALTA,READY_FOR_HUMAN_DECISION
+CLUS-6,Customer/Party,3104,2,A Mapear,A Mapear,A Mapear,A Mapear,A Mapear,CANONICAL_SELECTION_REQUIRED,ALTO,Sobrescrita de codigo ativo,Escolher versão canônica,6,ALTA,READY_FOR_HUMAN_DECISION
+CLUS-7,Customer/Party,3133,2,A Mapear,A Mapear,A Mapear,A Mapear,A Mapear,CANONICAL_SELECTION_REQUIRED,ALTO,Sobrescrita de codigo ativo,Escolher versão canônica,7,ALTA,READY_FOR_HUMAN_DECISION
+CLUS-8,Accounts,2386,2,A Mapear,A Mapear,A Mapear,A Mapear,A Mapear,CANONICAL_SELECTION_REQUIRED,ALTO,Sobrescrita de codigo ativo,Escolher versão canônica,8,ALTA,READY_FOR_HUMAN_DECISION
+CLUS-9,Accounts,2390,2,A Mapear,A Mapear,A Mapear,A Mapear,A Mapear,CANONICAL_SELECTION_REQUIRED,ALTO,Sobrescrita de codigo ativo,Escolher versão canônica,9,ALTA,READY_FOR_HUMAN_DECISION
+CLUS-10,Accounts,2445,2,A Mapear,A Mapear,A Mapear,A Mapear,A Mapear,CANONICAL_SELECTION_REQUIRED,ALTO,Sobrescrita de codigo ativo,Escolher versão canônica,10,ALTA,READY_FOR_HUMAN_DECISION
+CLUS-11,Accounts,2474,2,A Mapear,A Mapear,A Mapear,A Mapear,A Mapear,CANONICAL_SELECTION_REQUIRED,ALTO,Sobrescrita de codigo ativo,Escolher versão canônica,11,ALTA,READY_FOR_HUMAN_DECISION
+CLUS-12,Accounts,2478,2,A Mapear,A Mapear,A Mapear,A Mapear,A Mapear,CANONICAL_SELECTION_REQUIRED,ALTO,Sobrescrita de codigo ativo,Escolher versão canônica,12,ALTA,READY_FOR_HUMAN_DECISION
+CLUS-13,Accounts,2503,2,A Mapear,A Mapear,A Mapear,A Mapear,A Mapear,CANONICAL_SELECTION_REQUIRED,ALTO,Sobrescrita de codigo ativo,Escolher versão canônica,13,ALTA,READY_FOR_HUMAN_DECISION
+CLUS-14,Ledger,3654,2,A Mapear,A Mapear,A Mapear,A Mapear,A Mapear,CANONICAL_SELECTION_REQUIRED,ALTO,Sobrescrita de codigo ativo,Escolher versão canônica,14,ALTA,READY_FOR_HUMAN_DECISION
+CLUS-15,Ledger,3658,2,A Mapear,A Mapear,A Mapear,A Mapear,A Mapear,CANONICAL_SELECTION_REQUIRED,ALTO,Sobrescrita de codigo ativo,Escolher versão canônica,15,ALTA,READY_FOR_HUMAN_DECISION
+CLUS-16,Ledger,3691,2,A Mapear,A Mapear,A Mapear,A Mapear,A Mapear,CANONICAL_SELECTION_REQUIRED,ALTO,Sobrescrita de codigo ativo,Escolher versão canônica,16,ALTA,READY_FOR_HUMAN_DECISION
+CLUS-17,Ledger,3693,2,A Mapear,A Mapear,A Mapear,A Mapear,A Mapear,CANONICAL_SELECTION_REQUIRED,ALTO,Sobrescrita de codigo ativo,Escolher versão canônica,17,ALTA,READY_FOR_HUMAN_DECISION
+CLUS-18,Ledger,3694,2,A Mapear,A Mapear,A Mapear,A Mapear,A Mapear,CANONICAL_SELECTION_REQUIRED,ALTO,Sobrescrita de codigo ativo,Escolher versão canônica,18,ALTA,READY_FOR_HUMAN_DECISION
+CLUS-19,Transactions,4336,2,A Mapear,A Mapear,A Mapear,A Mapear,A Mapear,CANONICAL_SELECTION_REQUIRED,ALTO,Sobrescrita de codigo ativo,Escolher versão canônica,19,ALTA,READY_FOR_HUMAN_DECISION
+CLUS-20,Transactions,4340,2,A Mapear,A Mapear,A Mapear,A Mapear,A Mapear,CANONICAL_SELECTION_REQUIRED,ALTO,Sobrescrita de codigo ativo,Escolher versão canônica,20,ALTA,READY_FOR_HUMAN_DECISION
+CLUS-21,Transactions,4358,2,A Mapear,A Mapear,A Mapear,A Mapear,A Mapear,CANONICAL_SELECTION_REQUIRED,ALTO,Sobrescrita de codigo ativo,Escolher versão canônica,21,ALTA,READY_FOR_HUMAN_DECISION
+CLUS-22,Reconciliation,4129,2,A Mapear,A Mapear,A Mapear,A Mapear,A Mapear,CANONICAL_SELECTION_REQUIRED,ALTO,Sobrescrita de codigo ativo,Escolher versão canônica,22,ALTA,READY_FOR_HUMAN_DECISION
+CLUS-23,Reconciliation,4133,2,A Mapear,A Mapear,A Mapear,A Mapear,A Mapear,CANONICAL_SELECTION_REQUIRED,ALTO,Sobrescrita de codigo ativo,Escolher versão canônica,23,ALTA,READY_FOR_HUMAN_DECISION
+CLUS-24,Reconciliation,4153,2,A Mapear,A Mapear,A Mapear,A Mapear,A Mapear,CANONICAL_SELECTION_REQUIRED,ALTO,Sobrescrita de codigo ativo,Escolher versão canônica,24,ALTA,READY_FOR_HUMAN_DECISION
+CLUS-25,Payments,607,2,A Mapear,A Mapear,A Mapear,A Mapear,A Mapear,CANONICAL_SELECTION_REQUIRED,ALTO,Sobrescrita de codigo ativo,Escolher versão canônica,25,ALTA,READY_FOR_HUMAN_DECISION
+CLUS-26,Payments,687,2,A Mapear,A Mapear,A Mapear,A Mapear,A Mapear,CANONICAL_SELECTION_REQUIRED,ALTO,Sobrescrita de codigo ativo,Escolher versão canônica,26,ALTA,READY_FOR_HUMAN_DECISION
+CLUS-27,Payments,701,2,A Mapear,A Mapear,A Mapear,A Mapear,A Mapear,CANONICAL_SELECTION_REQUIRED,ALTO,Sobrescrita de codigo ativo,Escolher versão canônica,27,ALTA,READY_FOR_HUMAN_DECISION
+CLUS-28,Payments,708,2,A Mapear,A Mapear,A Mapear,A Mapear,A Mapear,CANONICAL_SELECTION_REQUIRED,ALTO,Sobrescrita de codigo ativo,Escolher versão canônica,28,ALTA,READY_FOR_HUMAN_DECISION
+CLUS-29,Payments,1310,2,A Mapear,A Mapear,A Mapear,A Mapear,A Mapear,CANONICAL_SELECTION_REQUIRED,ALTO,Sobrescrita de codigo ativo,Escolher versão canônica,29,ALTA,READY_FOR_HUMAN_DECISION
+CLUS-30,Payments,1406,2,A Mapear,A Mapear,A Mapear,A Mapear,A Mapear,CANONICAL_SELECTION_REQUIRED,ALTO,Sobrescrita de codigo ativo,Escolher versão canônica,30,ALTA,READY_FOR_HUMAN_DECISION
+CLUS-31,Payments,1470,2,A Mapear,A Mapear,A Mapear,A Mapear,A Mapear,CANONICAL_SELECTION_REQUIRED,ALTO,Sobrescrita de codigo ativo,Escolher versão canônica,31,ALTA,READY_FOR_HUMAN_DECISION
+CLUS-32,Payments,1559,2,A Mapear,A Mapear,A Mapear,A Mapear,A Mapear,CANONICAL_SELECTION_REQUIRED,ALTO,Sobrescrita de codigo ativo,Escolher versão canônica,32,ALTA,READY_FOR_HUMAN_DECISION
+CLUS-33,Payments,2386,2,A Mapear,A Mapear,A Mapear,A Mapear,A Mapear,CANONICAL_SELECTION_REQUIRED,ALTO,Sobrescrita de codigo ativo,Escolher versão canônica,33,ALTA,READY_FOR_HUMAN_DECISION
+CLUS-34,Payments,2474,2,A Mapear,A Mapear,A Mapear,A Mapear,A Mapear,CANONICAL_SELECTION_REQUIRED,ALTO,Sobrescrita de codigo ativo,Escolher versão canônica,34,ALTA,READY_FOR_HUMAN_DECISION
+CLUS-35,Payments,2757,2,A Mapear,A Mapear,A Mapear,A Mapear,A Mapear,CANONICAL_SELECTION_REQUIRED,ALTO,Sobrescrita de codigo ativo,Escolher versão canônica,35,ALTA,READY_FOR_HUMAN_DECISION
+CLUS-36,Payments,3100,2,A Mapear,A Mapear,A Mapear,A Mapear,A Mapear,CANONICAL_SELECTION_REQUIRED,ALTO,Sobrescrita de codigo ativo,Escolher versão canônica,36,ALTA,READY_FOR_HUMAN_DECISION
+CLUS-37,Payments,3287,2,A Mapear,A Mapear,A Mapear,A Mapear,A Mapear,CANONICAL_SELECTION_REQUIRED,ALTO,Sobrescrita de codigo ativo,Escolher versão canônica,37,ALTA,READY_FOR_HUMAN_DECISION
+CLUS-38,Payments,3429,2,A Mapear,A Mapear,A Mapear,A Mapear,A Mapear,CANONICAL_SELECTION_REQUIRED,ALTO,Sobrescrita de codigo ativo,Escolher versão canônica,38,ALTA,READY_FOR_HUMAN_DECISION
+CLUS-39,Payments,3654,2,A Mapear,A Mapear,A Mapear,A Mapear,A Mapear,CANONICAL_SELECTION_REQUIRED,ALTO,Sobrescrita de codigo ativo,Escolher versão canônica,39,ALTA,READY_FOR_HUMAN_DECISION
+CLUS-40,Payments,3765,2,A Mapear,A Mapear,A Mapear,A Mapear,A Mapear,CANONICAL_SELECTION_REQUIRED,ALTO,Sobrescrita de codigo ativo,Escolher versão canônica,40,ALTA,READY_FOR_HUMAN_DECISION
+CLUS-41,Payments,3852,2,A Mapear,A Mapear,A Mapear,A Mapear,A Mapear,CANONICAL_SELECTION_REQUIRED,ALTO,Sobrescrita de codigo ativo,Escolher versão canônica,41,ALTA,READY_FOR_HUMAN_DECISION
+CLUS-42,Payments,3983,2,A Mapear,A Mapear,A Mapear,A Mapear,A Mapear,CANONICAL_SELECTION_REQUIRED,ALTO,Sobrescrita de codigo ativo,Escolher versão canônica,42,ALTA,READY_FOR_HUMAN_DECISION
+CLUS-43,Payments,4016,2,A Mapear,A Mapear,A Mapear,A Mapear,A Mapear,CANONICAL_SELECTION_REQUIRED,ALTO,Sobrescrita de codigo ativo,Escolher versão canônica,43,ALTA,READY_FOR_HUMAN_DECISION
+CLUS-44,Payments,4129,2,A Mapear,A Mapear,A Mapear,A Mapear,A Mapear,CANONICAL_SELECTION_REQUIRED,ALTO,Sobrescrita de codigo ativo,Escolher versão canônica,44,ALTA,READY_FOR_HUMAN_DECISION
+CLUS-45,Payments,4336,2,A Mapear,A Mapear,A Mapear,A Mapear,A Mapear,CANONICAL_SELECTION_REQUIRED,ALTO,Sobrescrita de codigo ativo,Escolher versão canônica,45,ALTA,READY_FOR_HUMAN_DECISION
+CLUS-46,Pix,4016,2,A Mapear,A Mapear,A Mapear,A Mapear,A Mapear,CANONICAL_SELECTION_REQUIRED,ALTO,Sobrescrita de codigo ativo,Escolher versão canônica,46,ALTA,READY_FOR_HUMAN_DECISION
+CLUS-47,Pix,4020,2,A Mapear,A Mapear,A Mapear,A Mapear,A Mapear,CANONICAL_SELECTION_REQUIRED,ALTO,Sobrescrita de codigo ativo,Escolher versão canônica,47,ALTA,READY_FOR_HUMAN_DECISION
+CLUS-48,Pix,4038,2,A Mapear,A Mapear,A Mapear,A Mapear,A Mapear,CANONICAL_SELECTION_REQUIRED,ALTO,Sobrescrita de codigo ativo,Escolher versão canônica,48,ALTA,READY_FOR_HUMAN_DECISION
+CLUS-49,Audit Trail,3,2,A Mapear,A Mapear,A Mapear,A Mapear,A Mapear,CANONICAL_SELECTION_REQUIRED,ALTO,Sobrescrita de codigo ativo,Escolher versão canônica,49,ALTA,READY_FOR_HUMAN_DECISION
+CLUS-50,Audit Trail,12,2,A Mapear,A Mapear,A Mapear,A Mapear,A Mapear,CANONICAL_SELECTION_REQUIRED,ALTO,Sobrescrita de codigo ativo,Escolher versão canônica,50,ALTA,READY_FOR_HUMAN_DECISION
+CLUS-51,Audit Trail,19,2,A Mapear,A Mapear,A Mapear,A Mapear,A Mapear,CANONICAL_SELECTION_REQUIRED,ALTO,Sobrescrita de codigo ativo,Escolher versão canônica,51,ALTA,READY_FOR_HUMAN_DECISION

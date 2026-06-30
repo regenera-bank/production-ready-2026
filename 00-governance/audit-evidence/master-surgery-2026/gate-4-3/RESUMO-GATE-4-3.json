@@ -1,0 +1,20 @@
+{
+  "timestamp": "2026-06-26T07:57:31.894869",
+  "itens_repriorizados": 316,
+  "p0_anteriores_mantidos": 0,
+  "p0_anteriores_rebaixados": 56,
+  "novos_p0_encontrados": 0,
+  "totais_por_prioridade": {
+    "P0": 0,
+    "P1": 1,
+    "P2": 251,
+    "P3": 64
+  },
+  "capacidades_fundacionais": [
+    "security"
+  ],
+  "implementacao_equivalente": 0,
+  "nao_consumidos": 0,
+  "relacoes_conflitos": 0,
+  "relacoes_source": 0
+}

@@ -1,0 +1,81 @@
+# .gcloudignore - Essential for Cloud Build to not upload gigabytes of junk
+# Matches and expands .dockerignore. Cloud Build sends source tarball based on this.
+# Directly solves the "326MB node_modules sent, breaking builds" root cause.
+
+# Dependencies
+node_modules
+**/node_modules
+
+# Artifacts
+dist
+**/dist
+build
+**/build
+*.log
+
+# VCS and ignores
+.git
+.gitignore
+.gcloudignore
+.dockerignore
+
+# Secrets
+.env
+.env.*
+*.pem
+*.key
+secrets/
+
+# Junk
+.DS_Store
+.idea
+.vscode
+*.swp
+
+# Test/dev
+coverage
+test
+**/*spec.ts
+**/*test.ts
+e2e
+
+# Heavy non-backend for backend builds
+frontend/node_modules
+frontend/dist
+frontend/build
+mobile/node_modules
+mobile/dist
+
+# Docs
+*.md
+docs
+*.pdf
+*.rtfd
+
+# Large lock if desired (uncomment to exclude)
+# package-lock.json
+
+# Large junk from user workspace
+Arquivo.zip
+seu local
+regenera deploy 1
+Utilize o que for necessario
+*.zip
+**/*.zip
+backup*
+**/*backup*
+
+# More to keep tar small for Cloud Build
+package-lock.json
+frontend/package-lock.json
+mobile/package-lock.json
+
+# Additional user workspace archives
+_archive/
+REGENERA GEMINI CLI ARQUIVOS/
+REGENERA GEMINI CLI ARQUIVOS - cópia/
+Regenera - Desenvolvimento /
+Regenera Desenvolvimento/
+auditoria leaia/
+CONVERSA*.txt
+HISTORICO*.md

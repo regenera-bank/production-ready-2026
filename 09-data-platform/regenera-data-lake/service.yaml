@@ -1,0 +1,12 @@
+name: regenera-data-lake
+domain: lake
+owner: team-data-lake
+criticality: high
+data_classification: banking-secret
+runtime: python
+tier: 1
+rto: 4h
+rpo: 1h
+on_call: lake-primary
+dependencies:
+  []

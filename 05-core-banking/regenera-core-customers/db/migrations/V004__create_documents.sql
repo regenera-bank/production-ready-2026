@@ -1,0 +1,1 @@
+CREATE TABLE party_document (document_id UUID PRIMARY KEY, party_id UUID NOT NULL REFERENCES party(party_id), document_type VARCHAR(64) NOT NULL, number_hash TEXT NOT NULL, issuer_country CHAR(2) NOT NULL, expires_on DATE, created_at TIMESTAMPTZ NOT NULL DEFAULT now());

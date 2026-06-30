@@ -1,0 +1,6 @@
+owners:
+  primary: team-transactions
+  approvers:
+    - team-architecture
+    - team-security
+  on_call: transactions-primary

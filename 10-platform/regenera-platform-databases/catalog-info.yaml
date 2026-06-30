@@ -1,0 +1,12 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: regenera-platform-databases
+  description: Componente Regenera do domínio databases.
+  annotations:
+    regenera.io/criticality: critical
+spec:
+  type: service
+  lifecycle: experimental
+  owner: team-platform-databases
+  system: regenera-bank

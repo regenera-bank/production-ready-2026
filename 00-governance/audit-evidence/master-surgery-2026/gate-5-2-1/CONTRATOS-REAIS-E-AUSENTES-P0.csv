@@ -1,0 +1,4 @@
+capacidade,contratos_encontrados,contratos_ausentes,produtores,consumidores,versionamento,compatibilidade,schemas,erros,idempotency_key,correlation_id,audit_id
+Identity,Nenhum,openapi/identity.yaml,Identity,BFFs,v1,A Definir,Ausentes,"400, 401, 500",NAO,SIM,SIM
+Authorization,Nenhum,openapi/authorization.yaml,Authorization,BFFs,v1,A Definir,Ausentes,"400, 401, 500",NAO,SIM,SIM
+Accounts,Nenhum,openapi/accounts.yaml,Accounts,BFFs,v1,A Definir,Ausentes,"400, 401, 500",NAO,SIM,SIM

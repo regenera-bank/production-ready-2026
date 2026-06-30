@@ -1,0 +1,170 @@
+{
+  "gerado_em": "2026-06-25T16:13:14.080Z",
+  "dir": "/mnt/data/regenera_channels_release/05-Regenera-Partner-APIs-Production",
+  "motor": "heuristic",
+  "aplicado": true,
+  "resumo": {
+    "reescrito": 1,
+    "ja_limpo": 12,
+    "rejeitado": 0
+  },
+  "arquivos": [
+    {
+      "caminho": "contracts/asyncapi.yaml",
+      "ext": ".yaml",
+      "motor": "heuristic",
+      "status": "já limpo",
+      "sinal_encontrado": [],
+      "hash_antes": "9557eb50da491892bd6da427796c91c3213f6853e4f87852c74387189bde3ea5",
+      "hash_depois": "9557eb50da491892bd6da427796c91c3213f6853e4f87852c74387189bde3ea5",
+      "tentativas": 0,
+      "comportamento": "inalterado (provado pelo portão: código idêntico byte a byte)",
+      "portao": "código preservado byte a byte; só comentário mudou"
+    },
+    {
+      "caminho": "contracts/openapi.yaml",
+      "ext": ".yaml",
+      "motor": "heuristic",
+      "status": "já limpo",
+      "sinal_encontrado": [],
+      "hash_antes": "cf56d26d0a7a73c32b66fdca2e24825eabe26dd2966fa38fc4003487347cf94c",
+      "hash_depois": "cf56d26d0a7a73c32b66fdca2e24825eabe26dd2966fa38fc4003487347cf94c",
+      "tentativas": 0,
+      "comportamento": "inalterado (provado pelo portão: código idêntico byte a byte)",
+      "portao": "código preservado byte a byte; só comentário mudou"
+    },
+    {
+      "caminho": "deploy/kubernetes/deployment.yaml",
+      "ext": ".yaml",
+      "motor": "heuristic",
+      "status": "já limpo",
+      "sinal_encontrado": [],
+      "hash_antes": "e1a16c5e8113465e734d618160236922127f7af3901069af730ca5f381a55ab4",
+      "hash_depois": "e1a16c5e8113465e734d618160236922127f7af3901069af730ca5f381a55ab4",
+      "tentativas": 0,
+      "comportamento": "inalterado (provado pelo portão: código idêntico byte a byte)",
+      "portao": "código preservado byte a byte; só comentário mudou"
+    },
+    {
+      "caminho": "src/auth.ts",
+      "ext": ".ts",
+      "motor": "heuristic",
+      "status": "já limpo",
+      "sinal_encontrado": [],
+      "hash_antes": "06a728ea8486c66a4be2c4f4625f35a5442a1aa0ac3e898cb16a7bc9eab18b31",
+      "hash_depois": "06a728ea8486c66a4be2c4f4625f35a5442a1aa0ac3e898cb16a7bc9eab18b31",
+      "tentativas": 0,
+      "comportamento": "inalterado (provado pelo portão: código idêntico byte a byte)",
+      "portao": "código preservado byte a byte; só comentário mudou"
+    },
+    {
+      "caminho": "src/canonical-json.ts",
+      "ext": ".ts",
+      "motor": "heuristic",
+      "status": "já limpo",
+      "sinal_encontrado": [],
+      "hash_antes": "8040114fab6bffb550cd549e1ab0a8889a3c084e2ad5867915857c5a00e7ddb9",
+      "hash_depois": "8040114fab6bffb550cd549e1ab0a8889a3c084e2ad5867915857c5a00e7ddb9",
+      "tentativas": 0,
+      "comportamento": "inalterado (provado pelo portão: código idêntico byte a byte)",
+      "portao": "código preservado byte a byte; só comentário mudou"
+    },
+    {
+      "caminho": "src/config.ts",
+      "ext": ".ts",
+      "motor": "heuristic",
+      "status": "já limpo",
+      "sinal_encontrado": [],
+      "hash_antes": "13e570484082145d1b8079c0bb69131dfcd264ba0430297359c59f9aaef3a50c",
+      "hash_depois": "13e570484082145d1b8079c0bb69131dfcd264ba0430297359c59f9aaef3a50c",
+      "tentativas": 0,
+      "comportamento": "inalterado (provado pelo portão: código idêntico byte a byte)",
+      "portao": "código preservado byte a byte; só comentário mudou"
+    },
+    {
+      "caminho": "src/core-client.ts",
+      "ext": ".ts",
+      "motor": "heuristic",
+      "status": "já limpo",
+      "sinal_encontrado": [],
+      "hash_antes": "bd11f2c14b980f416158c026c4be9097b91a81118d53b2009957b0f1aa2d592f",
+      "hash_depois": "bd11f2c14b980f416158c026c4be9097b91a81118d53b2009957b0f1aa2d592f",
+      "tentativas": 0,
+      "comportamento": "inalterado (provado pelo portão: código idêntico byte a byte)",
+      "portao": "código preservado byte a byte; só comentário mudou"
+    },
+    {
+      "caminho": "src/idempotency.ts",
+      "ext": ".ts",
+      "motor": "heuristic",
+      "status": "reescrito",
+      "sinal_encontrado": [],
+      "hash_antes": "ec5ee64126987eb721b5af22cddba698023fb2b3d13e0fa9b9bf26fb1668a163",
+      "hash_depois": "9cb82178f4e3db662c429c0133c348fe48f9afd61662e6248123cb7830be1af8",
+      "tentativas": 0,
+      "comportamento": "inalterado (provado pelo portão: código idêntico byte a byte)",
+      "portao": "código preservado byte a byte; só comentário mudou"
+    },
+    {
+      "caminho": "src/routes.ts",
+      "ext": ".ts",
+      "motor": "heuristic",
+      "status": "já limpo",
+      "sinal_encontrado": [],
+      "hash_antes": "a8e600f354021b51fed7a8fee752bec97990390741184e8b9465c052ad26e6fc",
+      "hash_depois": "a8e600f354021b51fed7a8fee752bec97990390741184e8b9465c052ad26e6fc",
+      "tentativas": 0,
+      "comportamento": "inalterado (provado pelo portão: código idêntico byte a byte)",
+      "portao": "código preservado byte a byte; só comentário mudou"
+    },
+    {
+      "caminho": "src/schemas.ts",
+      "ext": ".ts",
+      "motor": "heuristic",
+      "status": "já limpo",
+      "sinal_encontrado": [],
+      "hash_antes": "c7a3d8c0fec287411311535bf339f4f85cc183254fb22f5e2583f67e151de096",
+      "hash_depois": "c7a3d8c0fec287411311535bf339f4f85cc183254fb22f5e2583f67e151de096",
+      "tentativas": 0,
+      "comportamento": "inalterado (provado pelo portão: código idêntico byte a byte)",
+      "portao": "código preservado byte a byte; só comentário mudou"
+    },
+    {
+      "caminho": "src/server.ts",
+      "ext": ".ts",
+      "motor": "heuristic",
+      "status": "já limpo",
+      "sinal_encontrado": [],
+      "hash_antes": "5ef3cf1f1391da70b12d6e8e6edb9ac31f66c345f631cba3466ed7dc744e4e99",
+      "hash_depois": "5ef3cf1f1391da70b12d6e8e6edb9ac31f66c345f631cba3466ed7dc744e4e99",
+      "tentativas": 0,
+      "comportamento": "inalterado (provado pelo portão: código idêntico byte a byte)",
+      "portao": "código preservado byte a byte; só comentário mudou"
+    },
+    {
+      "caminho": "src/webhook-signature.ts",
+      "ext": ".ts",
+      "motor": "heuristic",
+      "status": "já limpo",
+      "sinal_encontrado": [],
+      "hash_antes": "63cd4b99e0f5609479a6f337464b79e233eba2510f0ce3e69e5895a353c7234d",
+      "hash_depois": "63cd4b99e0f5609479a6f337464b79e233eba2510f0ce3e69e5895a353c7234d",
+      "tentativas": 0,
+      "comportamento": "inalterado (provado pelo portão: código idêntico byte a byte)",
+      "portao": "código preservado byte a byte; só comentário mudou"
+    },
+    {
+      "caminho": "tests/contracts.test.ts",
+      "ext": ".ts",
+      "motor": "heuristic",
+      "status": "já limpo",
+      "sinal_encontrado": [],
+      "hash_antes": "8310fc404a3dc5b0641d980add751812cb3eb06f34c55249d94d6cb4f09d416c",
+      "hash_depois": "8310fc404a3dc5b0641d980add751812cb3eb06f34c55249d94d6cb4f09d416c",
+      "tentativas": 0,
+      "comportamento": "inalterado (provado pelo portão: código idêntico byte a byte)",
+      "portao": "código preservado byte a byte; só comentário mudou"
+    }
+  ],
+  "prontidao_producao": []
+}

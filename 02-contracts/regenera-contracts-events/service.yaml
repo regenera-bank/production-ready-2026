@@ -1,0 +1,12 @@
+name: regenera-contracts-events
+domain: events
+owner: team-architecture
+criticality: high
+data_classification: banking-secret
+runtime: node
+tier: 1
+rto: 4h
+rpo: 1h
+on_call: events-primary
+dependencies:
+  []

@@ -1,0 +1,23 @@
+<svg width="128" height="128" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+<!--
+================================================================================
+  REGENERA BANK - VERIFICATION BADGE (PLACEHOLDER)
+  Developer: Don Paulo Ricardo
+  
+  Nota: Este é um placeholder para o selo de verificação. Ele deve ser usado na UI
+  para indicar transações, documentos ou usuários verificados. O design final
+  deve vir da equipe de design.
+================================================================================
+-->
+<defs>
+    <linearGradient id="shieldGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1E9600;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0F4D00;stop-opacity:1" />
+    </linearGradient>
+    <style>
+      .shield-text { font: bold 80px 'Helvetica', 'Arial', sans-serif; fill: white; }
+    </style>
+</defs>
+<path d="M64 6.85714C64 6.85714 113.143 20.5714 113.143 51.4286V96C113.143 96 83.4286 121.143 64 121.143C44.5714 121.143 14.8571 96 14.8571 96V51.4286C14.8571 20.5714 64 6.85714 64 6.85714Z" fill="url(#shieldGradient)" stroke="#0A2E00" stroke-width="4"/>
+<text x="40" y="90" class="shield-text">R</text>
+</svg>

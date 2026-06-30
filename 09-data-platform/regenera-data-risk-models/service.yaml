@@ -1,0 +1,12 @@
+name: regenera-data-risk-models
+domain: risk-models
+owner: team-data-risk-models
+criticality: high
+data_classification: banking-secret
+runtime: python
+tier: 1
+rto: 4h
+rpo: 1h
+on_call: risk-models-primary
+dependencies:
+  []

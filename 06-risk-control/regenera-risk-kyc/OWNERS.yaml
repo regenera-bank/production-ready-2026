@@ -1,0 +1,6 @@
+owners:
+  primary: team-kyc
+  approvers:
+    - team-architecture
+    - team-security
+  on_call: kyc-primary

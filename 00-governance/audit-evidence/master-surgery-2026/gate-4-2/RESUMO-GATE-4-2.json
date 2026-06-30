@@ -1,0 +1,15 @@
+{
+  "timestamp": "2026-06-26T07:53:15.773430",
+  "p0_avaliados": 56,
+  "selecionados_lote_1": 1,
+  "caminhos_selecionados": [
+    "N/A"
+  ],
+  "com_especificacao_completa": 0,
+  "bloqueados": 1,
+  "contratos_ausentes": 0,
+  "decisoes_ausentes": 0,
+  "relacoes_conflitos": 0,
+  "relacoes_source": 0,
+  "correcoes_tipo_b": 55
+}

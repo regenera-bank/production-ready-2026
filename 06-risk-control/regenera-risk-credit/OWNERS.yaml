@@ -1,0 +1,6 @@
+owners:
+  primary: team-credit-risk
+  approvers:
+    - team-architecture
+    - team-security
+  on_call: credit-risk-primary

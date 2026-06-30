@@ -1,0 +1,12 @@
+capacidade,motivo,elegivel
+Audit Trail,Maturidade BLOCKED_BY_CONFLICT,NAO
+Idempotency,Maturidade SKELETON_ONLY,TALVEZ
+Identity,Maturidade BLOCKED_BY_CONFLICT,NAO
+Authorization,Maturidade BLOCKED_BY_CONTRACT,NAO
+Customer/Party,Maturidade BLOCKED_BY_CONFLICT,NAO
+Accounts,Maturidade BLOCKED_BY_CONFLICT,NAO
+Ledger,Maturidade BLOCKED_BY_CONFLICT,NAO
+Transactions,Maturidade BLOCKED_BY_CONFLICT,NAO
+Payments,Maturidade BLOCKED_BY_CONFLICT,NAO
+Pix,Maturidade BLOCKED_BY_CONFLICT,NAO
+Reconciliation,Maturidade BLOCKED_BY_CONFLICT,NAO

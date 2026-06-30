@@ -1,0 +1,12 @@
+capacidade,arquivos,status
+Audit Trail,Apenas stubs,SKELETON_ONLY
+Idempotency,Apenas stubs,FRAGMENT_ONLY
+Identity,Apenas stubs,BLOCKED_BY_CONTRACT
+Authorization,Apenas stubs,BLOCKED_BY_CONTRACT
+Customer/Party,Apenas stubs,SKELETON_ONLY
+Accounts,Apenas stubs,BLOCKED_BY_CONTRACT
+Ledger,Apenas stubs,SKELETON_ONLY
+Transactions,Apenas stubs,SKELETON_ONLY
+Payments,Apenas stubs,FRAGMENT_ONLY
+Pix,Apenas stubs,FRAGMENT_ONLY
+Reconciliation,Apenas stubs,SKELETON_ONLY

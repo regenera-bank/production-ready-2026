@@ -1,0 +1,59 @@
+name: Channels Web CI
+
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - '03-channels/regenera-channel-web-banking/**'
+      - '03-channels/regenera-channel-partner-portal/**'
+  pull_request:
+    branches: [ "main" ]
+
+
+permissions:
+  contents: read
+  id-token: write
+  packages: write
+  attestations: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Use Node.js 18.x
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18.x'
+        cache: 'npm'
+        cache-dependency-path: '03-channels/regenera-channel-web-banking/package-lock.json'
+
+    - name: Install dependencies and Build
+      run: |
+        cd 03-channels/regenera-channel-web-banking
+        if [ -f "package.json" ]; then
+          npm ci
+          npm run build
+        else
+          echo "No package.json found."
+        fi
+
+    - name: Run Linting and Tests
+      run: |
+        cd 03-channels/regenera-channel-web-banking
+        if [ -f "package.json" ]; then
+          npm run lint
+          npm test
+        fi
+
+      - name: Generate SBOM (CycloneDX & SPDX)
+        uses: anchore/sbom-action@v0
+        with:
+          format: cyclonedx-json
+          file: sbom.cyclonedx.json
+
+      - name: Sign Release with Cosign
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: sigstore/cosign-installer@v3

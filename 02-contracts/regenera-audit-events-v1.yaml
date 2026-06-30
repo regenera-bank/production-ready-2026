@@ -1,0 +1,12 @@
+openapi: 3.0.0
+info:
+  title: Audit Event Envelope
+  version: 1.0.0
+components:
+  schemas:
+    AuditEvent:
+      type: object
+      properties:
+        event_id: {type: string, format: uuid}
+        event_type: {type: string}
+        occurred_at: {type: string, format: date-time}

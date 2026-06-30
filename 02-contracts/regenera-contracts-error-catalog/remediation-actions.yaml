@@ -1,0 +1,2 @@
+actions:
+  reconcile: Consultar o provedor e a conciliação antes de qualquer retry.

@@ -1,0 +1,6 @@
+owners:
+  primary: team-audit
+  approvers:
+    - team-architecture
+    - team-security
+  on_call: audit-primary

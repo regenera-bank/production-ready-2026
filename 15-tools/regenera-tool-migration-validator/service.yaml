@@ -1,0 +1,12 @@
+name: regenera-tool-migration-validator
+domain: migration-validator
+owner: team-developer-experience
+criticality: medium
+data_classification: banking-secret
+runtime: python
+tier: 2
+rto: 4h
+rpo: 1h
+on_call: migration-validator-primary
+dependencies:
+  []

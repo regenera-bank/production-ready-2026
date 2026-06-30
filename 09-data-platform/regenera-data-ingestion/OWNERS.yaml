@@ -1,0 +1,6 @@
+owners:
+  primary: team-data-ingestion
+  approvers:
+    - team-architecture
+    - team-security
+  on_call: ingestion-primary

@@ -1,0 +1,23 @@
+capacidade,lacunas
+Identity,Sem Observabilidade explícita
+Customer/Party,Sem Observabilidade explícita
+Accounts,Sem Observabilidade explícita
+Ledger,Sem Observabilidade explícita
+Payments,Sem Observabilidade explícita
+Pix,Sem Observabilidade explícita
+Cards,Sem Observabilidade explícita
+Credit,Sem Observabilidade explícita
+Investments,Sem Observabilidade explícita
+Idempotency,Sem Observabilidade explícita
+Reconciliation,Sem Observabilidade explícita
+Accounting,Sem Observabilidade explícita
+Fraud,Sem Observabilidade explícita
+AML/KYC,Sem Observabilidade explícita
+Regulatory Reporting,Sem Observabilidade explícita
+Notifications,Sem Observabilidade explícita
+Open Finance,Sem Observabilidade explícita
+ISO 20022,Sem Observabilidade explícita
+Authorization,Sem Contratos | Sem Testes | Sem Observabilidade explícita
+Limits,Sem Observabilidade explícita
+Fees,Sem Observabilidade explícita
+Settlement,Sem Observabilidade explícita

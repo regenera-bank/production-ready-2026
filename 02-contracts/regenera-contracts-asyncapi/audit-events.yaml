@@ -1,0 +1,21 @@
+asyncapi: 3.0.0
+info:
+  title: Regenera audit events
+  version: 1.0.0
+channels:
+  auditEvents:
+    address: regenera.audit.events.v1
+    messages:
+      changed:
+        $ref: '#/components/messages/Changed'
+components:
+  messages:
+    Changed:
+      name: regenera.audit.entity.changed.v1
+      payload:
+        type: object
+        required: [eventId, occurredAt, correlationId]
+        properties:
+          eventId: { type: string, format: uuid }
+          occurredAt: { type: string, format: date-time }
+          correlationId: { type: string, format: uuid }

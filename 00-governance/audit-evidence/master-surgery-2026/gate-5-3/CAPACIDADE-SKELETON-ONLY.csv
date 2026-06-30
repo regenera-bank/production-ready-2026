@@ -1,0 +1,2 @@
+capacidade,fragmentos_existentes,componentes_ausentes,dependencias,especificacao_necessaria
+Idempotency,Controllers sem usecase e repository vazio,"Business Logic, Repositories, Events",Nenhuma,SIM

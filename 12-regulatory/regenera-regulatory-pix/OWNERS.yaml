@@ -1,0 +1,6 @@
+owners:
+  primary: team-regulatory-pix
+  approvers:
+    - team-architecture
+    - team-security
+  on_call: pix-primary

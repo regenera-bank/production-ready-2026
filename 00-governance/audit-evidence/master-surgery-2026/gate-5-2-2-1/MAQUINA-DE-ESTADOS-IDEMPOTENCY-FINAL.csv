@@ -1,0 +1,8 @@
+estado,definicao,como_entra,transicoes_permitidas,transicoes_proibidas,resposta_consumidor,retry_permitido,recuperacao,efeito_financeiro
+RECEIVED,Iniciou interceptacao,Chamada na rota protegida,PROCESSING,"COMPLETED, FAILED_FINAL",Nenhuma (Bloqueante),NAO,NAO,NENHUM
+PROCESSING,Em andamento,Lock adquirido no banco,"COMPLETED, FAILED_RETRYABLE, FAILED_FINAL, EXPIRED",RECEIVED,409 Conflict se concorrência,NAO,Timeout reverte para EXPIRED,PENDENTE
+COMPLETED,Processado com sucesso,Transacao db commitada,Nenhuma,Todas,Replay da resposta HTTP guardada,SIM (Retorna replay),NAO,COMMITADO
+FAILED_RETRYABLE,Falha transiente,"Timeout de rede, Deadlock de banco",PROCESSING,COMPLETED,503 ou 504 Original,SIM (Reprocessa),Reprocessamento,ROLLBACK
+FAILED_FINAL,Falha de regra de negocio,"Saldo insuficiente, bloqueio fraude",Nenhuma,Todas,Replay do erro 400/422,SIM (Retorna erro),NAO,ROLLBACK
+UNKNOWN,Estado indefindo,Timeout apos chamada a integracao externa s/ reposta,"COMPLETED, FAILED_FINAL (Apenas Manual)",PROCESSING,504 Gateway Timeout,NAO (Ate conciliacao),Conciliacao Manual/Batch,DESCONHECIDO
+EXPIRED,Chave expirada,TTL superado,Nenhuma,Todas,400 Bad Request,NAO (Exige nova chave),NAO,NENHUM

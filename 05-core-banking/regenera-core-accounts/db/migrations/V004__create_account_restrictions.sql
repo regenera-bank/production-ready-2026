@@ -1,0 +1,1 @@
+CREATE TABLE account_restriction (restriction_id UUID PRIMARY KEY, account_id UUID NOT NULL REFERENCES account(account_id), restriction_type VARCHAR(32) NOT NULL, reason_code TEXT NOT NULL, effective_at TIMESTAMPTZ NOT NULL, expires_at TIMESTAMPTZ);

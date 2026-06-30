@@ -1,0 +1,8 @@
+services:
+  regenera-channel-android:
+    build: .
+    environment:
+      APP_ENV: local
+    read_only: true
+    security_opt:
+      - no-new-privileges:true

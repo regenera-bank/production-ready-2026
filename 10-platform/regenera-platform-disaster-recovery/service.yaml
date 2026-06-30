@@ -1,0 +1,12 @@
+name: regenera-platform-disaster-recovery
+domain: disaster-recovery
+owner: team-platform-disaster-recovery
+criticality: critical
+data_classification: banking-secret
+runtime: docs
+tier: 1
+rto: 4h
+rpo: 1h
+on_call: disaster-recovery-primary
+dependencies:
+  []

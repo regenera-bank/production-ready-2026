@@ -1,0 +1,97 @@
+# |---------------------------------------------------------------------------------------|
+# |  --> REGENERA ENTERPRISE SYSTEM v4.0                                                  |
+# |---------------------------------------------------------------------------------------|
+#
+# PROJECT:       Regenera Bank
+# CEO:           Raphaela Cerveski
+# DEVELOPER:     Don Paulo Ricardo
+# ID:            2098233287
+# COPYRIGHT:     Copyright (c) 2026 Regenera Corporate
+#
+# LICENSE:       EULA (End-User License Agreement)
+# PROTECTION:    PROPRIEDADE INTELECTUAL RESTRITA
+#
+# WARNING:       TODOS OS DIREITOS RESERVADOS. Proibida a cópia, distribuição,
+#                engenharia reversa ou modificação não autorizada.
+#
+# |---------------------------------------------------------------------------------------|
+# |  --> CLASSIFICATION: PROPRIETARY // DEVELOPER MAINTAINED // REQUIRES SENIOR REVIEW          |
+# |---------------------------------------------------------------------------------------|
+
+# REGENERA BANK · ENTERPRISE v4.0
+# CI/CD Pipeline (Google Cloud Build)
+# Automates testing, building, scanning, and deployment to GKE.
+#
+# IMPLEMENTING .dockerignore / .gcloudignore FOR STABLE DEPLOYS:
+# - The .gcloudignore (at project root) and backend/.dockerignore are MANDATORY.
+# - They exclude node_modules (the 326MB culprit that broke previous deploys by sending junk to Cloud Build and corrupting npm installs like @nestjs/cli).
+# - Cloud Build uses .gcloudignore to filter what gets uploaded as source context.
+# - Docker build (in the yaml) uses .dockerignore to filter image context.
+# - Always update both when adding large dirs/deps. Test locally with `docker build --no-cache .` from backend after changes.
+#
+# To run: gcloud builds submit --config=infra/cloudbuild.yaml .   (from project root)
+steps:
+  # 01-banking-core-engine: Install Dependencies & Run Unit Tests
+  - id: backend-tests
+    name: 'node:20'
+    dir: '01-banking-core-engine'
+    entrypoint: 'bash'
+    args: 
+      - '-c'
+      - |
+        npm ci --silent
+        npm run test:ci
+
+  # 2. Build Containerized Application (NestJS Core)
+  - id: build-image
+    name: 'gcr.io/cloud-builders/docker'
+    args: 
+      - 'build'
+      - '-t'
+      - 'southamerica-east1-docker.pkg.dev/$PROJECT_ID/regenera-repo/core-api:$BUILD_ID'
+      - '-f'
+      - '01-banking-core-engine/Dockerfile'
+      - '.'
+
+  # 3. Security Audit: Scan Container for Vulnerabilities
+  - id: security-scan
+    name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        gcloud artifacts docker images scan southamerica-east1-docker.pkg.dev/$PROJECT_ID/regenera-repo/core-api:$BUILD_ID \
+        --format='value(response.scan)' > /workspace/scan_id.txt
+
+  # 4. Push to Artifact Registry (Secure Repository)
+  - id: push-image
+    name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'southamerica-east1-docker.pkg.dev/$PROJECT_ID/regenera-repo/core-api:$BUILD_ID']
+
+  # 5. Production Deploy: Kubernetes Rolling Update
+  - id: deploy-to-gke
+    name: 'gcr.io/cloud-builders/kubectl'
+    args:
+      - 'set'
+      - 'image'
+      - 'deployment/regenera-core-deployment'
+      - 'core-api=southamerica-east1-docker.pkg.dev/$PROJECT_ID/regenera-repo/core-api:$BUILD_ID'
+      - '--namespace=regenera-production'
+    env:
+      - 'CLOUDSDK_COMPUTE_ZONE=southamerica-east1-a'
+      - 'CLOUDSDK_CONTAINER_CLUSTER=regenera-core-cluster'
+
+  # 6. Database Migration
+  # - id: db-migration
+  #   name: 'gcr.io/cloud-builders/gcloud'
+  #   args: ['run', 'jobs', 'execute', 'regenera-db-migrate']
+
+images:
+  - 'southamerica-east1-docker.pkg.dev/$PROJECT_ID/regenera-repo/core-api:$BUILD_ID'
+
+options:
+  machineType: 'E2_HIGHCPU_8'
+  logging: CLOUD_LOGGING_ONLY
+  dynamic_substitutions: true
+
+timeout: '900s'

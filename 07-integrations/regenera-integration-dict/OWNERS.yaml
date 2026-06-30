@@ -1,0 +1,6 @@
+owners:
+  primary: team-integration-dict
+  approvers:
+    - team-architecture
+    - team-security
+  on_call: dict-primary

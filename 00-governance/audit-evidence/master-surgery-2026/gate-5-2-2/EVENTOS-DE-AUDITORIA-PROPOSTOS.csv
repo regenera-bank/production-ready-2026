@@ -1,0 +1,5 @@
+categoria,exemplo,severidade
+autenticação,LOGIN_SUCCESS,BAIXA
+autorização,PERMISSION_DENIED,MEDIA
+tentativa_transacao,TRANSFER_INITIATED,ALTA
+decisão_risco,FRAUD_BLOCK_APPLIED,CRITICA

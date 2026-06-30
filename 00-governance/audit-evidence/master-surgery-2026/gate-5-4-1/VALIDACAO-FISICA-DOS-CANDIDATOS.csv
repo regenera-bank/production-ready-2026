@@ -1,0 +1,221 @@
+caminho,linguagem,sha256_recalculado,imports,consumidores,secrets_redigidos
+Auditoria 2/ARQUIVOS USAR E LISTA/03-Regenera-Core-Risk-Control(1)/05-core-banking/regenera-core-identity/Dockerfile,desconhecida,f92afc003b9cee2d4c8775a1bf40b8d4ceec0e2173f37308436535e7cdde45ce,A Extrair,A Mapear,SIM
+03-channels/regenera-channel-partner-portal/Dockerfile,desconhecida,8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,A Extrair,A Mapear,SIM
+03-channels/regenera-channel-web-banking/Dockerfile,desconhecida,8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,A Extrair,A Mapear,SIM
+05-core-banking/regenera-core-ledger/Dockerfile,desconhecida,8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,A Extrair,A Mapear,SIM
+05-core-banking/regenera-core-credit/Dockerfile,desconhecida,8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,A Extrair,A Mapear,SIM
+05-core-banking/regenera-core-fees/Dockerfile,desconhecida,8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,A Extrair,A Mapear,SIM
+05-core-banking/regenera-core-pix/Dockerfile,desconhecida,8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,A Extrair,A Mapear,SIM
+05-core-banking/regenera-core-transactions/Dockerfile,desconhecida,8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,A Extrair,A Mapear,SIM
+05-core-banking/regenera-core-notifications/Dockerfile,desconhecida,8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,A Extrair,A Mapear,SIM
+05-core-banking/regenera-core-identity/Dockerfile,desconhecida,8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,A Extrair,A Mapear,SIM
+05-core-banking/regenera-core-payments/Dockerfile,desconhecida,8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,A Extrair,A Mapear,SIM
+05-core-banking/regenera-core-limits/Dockerfile,desconhecida,8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,A Extrair,A Mapear,SIM
+05-core-banking/regenera-core-customers/Dockerfile,desconhecida,8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,A Extrair,A Mapear,SIM
+05-core-banking/regenera-core-investments/Dockerfile,desconhecida,8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,A Extrair,A Mapear,SIM
+05-core-banking/regenera-core-cards/Dockerfile,desconhecida,8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,A Extrair,A Mapear,SIM
+05-core-banking/regenera-core-accounts/Dockerfile,desconhecida,8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,A Extrair,A Mapear,SIM
+06-risk-control/regenera-control-fraud/Dockerfile,desconhecida,8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,A Extrair,A Mapear,SIM
+06-risk-control/regenera-control-accounting/Dockerfile,desconhecida,8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,A Extrair,A Mapear,SIM
+06-risk-control/regenera-control-reconciliation/Dockerfile,desconhecida,8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,A Extrair,A Mapear,SIM
+06-risk-control/regenera-control-aml/Dockerfile,desconhecida,8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,A Extrair,A Mapear,SIM
+Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/03-channels/regenera-channel-partner-portal/Dockerfile,desconhecida,8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,A Extrair,A Mapear,SIM
+Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/03-channels/regenera-channel-web-banking/Dockerfile,desconhecida,8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,A Extrair,A Mapear,SIM
+Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/05-core-banking/regenera-core-ledger/Dockerfile,desconhecida,8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,A Extrair,A Mapear,SIM
+Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/05-core-banking/regenera-core-credit/Dockerfile,desconhecida,8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,A Extrair,A Mapear,SIM
+Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/05-core-banking/regenera-core-fees/Dockerfile,desconhecida,8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,A Extrair,A Mapear,SIM
+Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/05-core-banking/regenera-core-pix/Dockerfile,desconhecida,8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,A Extrair,A Mapear,SIM
+Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/05-core-banking/regenera-core-transactions/Dockerfile,desconhecida,8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,A Extrair,A Mapear,SIM
+Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/05-core-banking/regenera-core-notifications/Dockerfile,desconhecida,8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,A Extrair,A Mapear,SIM
+Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/05-core-banking/regenera-core-identity/Dockerfile,desconhecida,8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,A Extrair,A Mapear,SIM
+Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/05-core-banking/regenera-core-payments/Dockerfile,desconhecida,8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,A Extrair,A Mapear,SIM
+Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/05-core-banking/regenera-core-limits/Dockerfile,desconhecida,8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,A Extrair,A Mapear,SIM
+Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/05-core-banking/regenera-core-customers/Dockerfile,desconhecida,8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,A Extrair,A Mapear,SIM
+Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/05-core-banking/regenera-core-investments/Dockerfile,desconhecida,8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,A Extrair,A Mapear,SIM
+Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/05-core-banking/regenera-core-cards/Dockerfile,desconhecida,8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,A Extrair,A Mapear,SIM
+Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/05-core-banking/regenera-core-accounts/Dockerfile,desconhecida,8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,A Extrair,A Mapear,SIM
+Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/06-risk-control/regenera-control-fraud/Dockerfile,desconhecida,8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,A Extrair,A Mapear,SIM
+Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/06-risk-control/regenera-control-accounting/Dockerfile,desconhecida,8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,A Extrair,A Mapear,SIM
+Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/06-risk-control/regenera-control-reconciliation/Dockerfile,desconhecida,8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,A Extrair,A Mapear,SIM
+Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/06-risk-control/regenera-control-aml/Dockerfile,desconhecida,8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,A Extrair,A Mapear,SIM
+Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/04-bffs/regenera-bff-operations/Dockerfile,desconhecida,8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,A Extrair,A Mapear,SIM
+Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/04-bffs/regenera-bff-web/Dockerfile,desconhecida,8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,A Extrair,A Mapear,SIM
+Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/04-bffs/regenera-api-partners/Dockerfile,desconhecida,8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,A Extrair,A Mapear,SIM
+Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/04-bffs/regenera-bff-mobile/Dockerfile,desconhecida,8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,A Extrair,A Mapear,SIM
+Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/01-design-system/regenera-design-windows/Dockerfile,desconhecida,8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,A Extrair,A Mapear,SIM
+04-bffs/regenera-bff-operations/Dockerfile,desconhecida,8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,A Extrair,A Mapear,SIM
+04-bffs/regenera-bff-web/Dockerfile,desconhecida,8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,A Extrair,A Mapear,SIM
+04-bffs/regenera-bff-mobile/Dockerfile,desconhecida,8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,A Extrair,A Mapear,SIM
+17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/03-channels/regenera-channel-partner-portal/Dockerfile,desconhecida,8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,A Extrair,A Mapear,SIM
+17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/03-channels/regenera-channel-web-banking/Dockerfile,desconhecida,8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,A Extrair,A Mapear,SIM
+17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/05-core-banking/regenera-core-ledger/Dockerfile,desconhecida,8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,A Extrair,A Mapear,SIM
+17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/05-core-banking/regenera-core-credit/Dockerfile,desconhecida,8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,A Extrair,A Mapear,SIM
+17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/05-core-banking/regenera-core-fees/Dockerfile,desconhecida,8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,A Extrair,A Mapear,SIM
+17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/05-core-banking/regenera-core-pix/Dockerfile,desconhecida,8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,A Extrair,A Mapear,SIM
+17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/05-core-banking/regenera-core-transactions/Dockerfile,desconhecida,8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,A Extrair,A Mapear,SIM
+17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/05-core-banking/regenera-core-notifications/Dockerfile,desconhecida,8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,A Extrair,A Mapear,SIM
+17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/05-core-banking/regenera-core-identity/Dockerfile,desconhecida,8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,A Extrair,A Mapear,SIM
+17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/05-core-banking/regenera-core-payments/Dockerfile,desconhecida,8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,A Extrair,A Mapear,SIM
+17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/05-core-banking/regenera-core-limits/Dockerfile,desconhecida,8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,A Extrair,A Mapear,SIM
+17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/05-core-banking/regenera-core-customers/Dockerfile,desconhecida,8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,A Extrair,A Mapear,SIM
+17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/05-core-banking/regenera-core-investments/Dockerfile,desconhecida,8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,A Extrair,A Mapear,SIM
+17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/05-core-banking/regenera-core-cards/Dockerfile,desconhecida,8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,A Extrair,A Mapear,SIM
+17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/05-core-banking/regenera-core-accounts/Dockerfile,desconhecida,8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,A Extrair,A Mapear,SIM
+17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/06-risk-control/regenera-control-fraud/Dockerfile,desconhecida,8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,A Extrair,A Mapear,SIM
+17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/06-risk-control/regenera-control-accounting/Dockerfile,desconhecida,8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,A Extrair,A Mapear,SIM
+17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/06-risk-control/regenera-control-reconciliation/Dockerfile,desconhecida,8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,A Extrair,A Mapear,SIM
+17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/06-risk-control/regenera-control-aml/Dockerfile,desconhecida,8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,A Extrair,A Mapear,SIM
+17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/04-bffs/regenera-bff-operations/Dockerfile,desconhecida,8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,A Extrair,A Mapear,SIM
+17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/04-bffs/regenera-bff-web/Dockerfile,desconhecida,8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,A Extrair,A Mapear,SIM
+17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/04-bffs/regenera-bff-mobile/Dockerfile,desconhecida,8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,A Extrair,A Mapear,SIM
+17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/01-design-system/regenera-design-windows/Dockerfile,desconhecida,8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,A Extrair,A Mapear,SIM
+01-design-system/regenera-design-windows/Dockerfile,desconhecida,8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,A Extrair,A Mapear,SIM
+Auditoria 2/ARQUIVOS USAR E LISTA/03-Regenera-Core-Risk-Control(1)/05-core-banking/regenera-core-identity/README.md,desconhecida,df969dec916b02c308e8dee37f06e52ff4ced9365dc72333db0351409d307862,A Extrair,A Mapear,SIM
+03-channels/regenera-channel-android/README.md,desconhecida,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,A Extrair,A Mapear,SIM
+03-channels/regenera-channel-partner-portal/README.md,desconhecida,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,A Extrair,A Mapear,SIM
+03-channels/regenera-channel-web-banking/README.md,desconhecida,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,A Extrair,A Mapear,SIM
+03-channels/regenera-channel-ios/README.md,desconhecida,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,A Extrair,A Mapear,SIM
+03-channels/regenera-channel-windows-operations/README.md,desconhecida,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,A Extrair,A Mapear,SIM
+05-core-banking/regenera-core-ledger/README.md,desconhecida,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,A Extrair,A Mapear,SIM
+05-core-banking/regenera-core-credit/README.md,desconhecida,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,A Extrair,A Mapear,SIM
+05-core-banking/regenera-core-fees/README.md,desconhecida,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,A Extrair,A Mapear,SIM
+05-core-banking/regenera-core-pix/README.md,desconhecida,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,A Extrair,A Mapear,SIM
+05-core-banking/regenera-core-transactions/README.md,desconhecida,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,A Extrair,A Mapear,SIM
+05-core-banking/regenera-core-notifications/README.md,desconhecida,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,A Extrair,A Mapear,SIM
+05-core-banking/regenera-core-identity/README.md,desconhecida,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,A Extrair,A Mapear,SIM
+05-core-banking/regenera-core-payments/README.md,desconhecida,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,A Extrair,A Mapear,SIM
+05-core-banking/regenera-core-limits/README.md,desconhecida,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,A Extrair,A Mapear,SIM
+05-core-banking/regenera-core-customers/README.md,desconhecida,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,A Extrair,A Mapear,SIM
+05-core-banking/regenera-core-investments/README.md,desconhecida,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,A Extrair,A Mapear,SIM
+05-core-banking/regenera-core-cards/README.md,desconhecida,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,A Extrair,A Mapear,SIM
+05-core-banking/regenera-core-accounts/README.md,desconhecida,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,A Extrair,A Mapear,SIM
+06-risk-control/regenera-control-fraud/README.md,desconhecida,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,A Extrair,A Mapear,SIM
+06-risk-control/regenera-control-accounting/README.md,desconhecida,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,A Extrair,A Mapear,SIM
+06-risk-control/regenera-control-reconciliation/README.md,desconhecida,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,A Extrair,A Mapear,SIM
+06-risk-control/regenera-control-aml/README.md,desconhecida,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,A Extrair,A Mapear,SIM
+Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/03-channels/regenera-channel-android/README.md,desconhecida,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,A Extrair,A Mapear,SIM
+Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/03-channels/regenera-channel-partner-portal/README.md,desconhecida,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,A Extrair,A Mapear,SIM
+Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/03-channels/regenera-channel-web-banking/README.md,desconhecida,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,A Extrair,A Mapear,SIM
+Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/03-channels/regenera-channel-ios/README.md,desconhecida,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,A Extrair,A Mapear,SIM
+Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/03-channels/regenera-channel-windows-operations/README.md,desconhecida,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,A Extrair,A Mapear,SIM
+Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/05-core-banking/regenera-core-ledger/README.md,desconhecida,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,A Extrair,A Mapear,SIM
+Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/05-core-banking/regenera-core-credit/README.md,desconhecida,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,A Extrair,A Mapear,SIM
+Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/05-core-banking/regenera-core-fees/README.md,desconhecida,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,A Extrair,A Mapear,SIM
+Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/05-core-banking/regenera-core-pix/README.md,desconhecida,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,A Extrair,A Mapear,SIM
+Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/05-core-banking/regenera-core-transactions/README.md,desconhecida,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,A Extrair,A Mapear,SIM
+Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/05-core-banking/regenera-core-notifications/README.md,desconhecida,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,A Extrair,A Mapear,SIM
+Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/05-core-banking/regenera-core-identity/README.md,desconhecida,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,A Extrair,A Mapear,SIM
+Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/05-core-banking/regenera-core-payments/README.md,desconhecida,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,A Extrair,A Mapear,SIM
+Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/05-core-banking/regenera-core-limits/README.md,desconhecida,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,A Extrair,A Mapear,SIM
+Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/05-core-banking/regenera-core-customers/README.md,desconhecida,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,A Extrair,A Mapear,SIM
+Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/05-core-banking/regenera-core-investments/README.md,desconhecida,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,A Extrair,A Mapear,SIM
+Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/05-core-banking/regenera-core-cards/README.md,desconhecida,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,A Extrair,A Mapear,SIM
+Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/05-core-banking/regenera-core-accounts/README.md,desconhecida,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,A Extrair,A Mapear,SIM
+Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/06-risk-control/regenera-control-fraud/README.md,desconhecida,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,A Extrair,A Mapear,SIM
+Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/06-risk-control/regenera-control-accounting/README.md,desconhecida,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,A Extrair,A Mapear,SIM
+Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/06-risk-control/regenera-control-reconciliation/README.md,desconhecida,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,A Extrair,A Mapear,SIM
+Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/06-risk-control/regenera-control-aml/README.md,desconhecida,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,A Extrair,A Mapear,SIM
+Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/04-bffs/regenera-bff-operations/README.md,desconhecida,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,A Extrair,A Mapear,SIM
+Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/04-bffs/regenera-bff-web/README.md,desconhecida,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,A Extrair,A Mapear,SIM
+Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/04-bffs/regenera-api-partners/README.md,desconhecida,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,A Extrair,A Mapear,SIM
+Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/04-bffs/regenera-bff-mobile/README.md,desconhecida,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,A Extrair,A Mapear,SIM
+Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/01-design-system/regenera-design-windows/README.md,desconhecida,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,A Extrair,A Mapear,SIM
+04-bffs/regenera-bff-operations/README.md,desconhecida,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,A Extrair,A Mapear,SIM
+04-bffs/regenera-bff-web/README.md,desconhecida,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,A Extrair,A Mapear,SIM
+04-bffs/regenera-api-partners/README.md,desconhecida,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,A Extrair,A Mapear,SIM
+04-bffs/regenera-bff-mobile/README.md,desconhecida,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,A Extrair,A Mapear,SIM
+17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/03-channels/regenera-channel-android/README.md,desconhecida,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,A Extrair,A Mapear,SIM
+17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/03-channels/regenera-channel-partner-portal/README.md,desconhecida,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,A Extrair,A Mapear,SIM
+17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/03-channels/regenera-channel-web-banking/README.md,desconhecida,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,A Extrair,A Mapear,SIM
+17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/03-channels/regenera-channel-ios/README.md,desconhecida,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,A Extrair,A Mapear,SIM
+17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/03-channels/regenera-channel-windows-operations/README.md,desconhecida,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,A Extrair,A Mapear,SIM
+17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/05-core-banking/regenera-core-ledger/README.md,desconhecida,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,A Extrair,A Mapear,SIM
+17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/05-core-banking/regenera-core-credit/README.md,desconhecida,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,A Extrair,A Mapear,SIM
+17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/05-core-banking/regenera-core-fees/README.md,desconhecida,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,A Extrair,A Mapear,SIM
+17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/05-core-banking/regenera-core-pix/README.md,desconhecida,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,A Extrair,A Mapear,SIM
+17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/05-core-banking/regenera-core-transactions/README.md,desconhecida,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,A Extrair,A Mapear,SIM
+17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/05-core-banking/regenera-core-notifications/README.md,desconhecida,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,A Extrair,A Mapear,SIM
+17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/05-core-banking/regenera-core-identity/README.md,desconhecida,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,A Extrair,A Mapear,SIM
+17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/05-core-banking/regenera-core-payments/README.md,desconhecida,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,A Extrair,A Mapear,SIM
+17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/05-core-banking/regenera-core-limits/README.md,desconhecida,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,A Extrair,A Mapear,SIM
+17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/05-core-banking/regenera-core-customers/README.md,desconhecida,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,A Extrair,A Mapear,SIM
+17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/05-core-banking/regenera-core-investments/README.md,desconhecida,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,A Extrair,A Mapear,SIM
+17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/05-core-banking/regenera-core-cards/README.md,desconhecida,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,A Extrair,A Mapear,SIM
+17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/05-core-banking/regenera-core-accounts/README.md,desconhecida,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,A Extrair,A Mapear,SIM
+17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/06-risk-control/regenera-control-fraud/README.md,desconhecida,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,A Extrair,A Mapear,SIM
+17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/06-risk-control/regenera-control-accounting/README.md,desconhecida,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,A Extrair,A Mapear,SIM
+17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/06-risk-control/regenera-control-reconciliation/README.md,desconhecida,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,A Extrair,A Mapear,SIM
+17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/06-risk-control/regenera-control-aml/README.md,desconhecida,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,A Extrair,A Mapear,SIM
+17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/04-bffs/regenera-bff-operations/README.md,desconhecida,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,A Extrair,A Mapear,SIM
+17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/04-bffs/regenera-bff-web/README.md,desconhecida,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,A Extrair,A Mapear,SIM
+17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/04-bffs/regenera-api-partners/README.md,desconhecida,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,A Extrair,A Mapear,SIM
+17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/04-bffs/regenera-bff-mobile/README.md,desconhecida,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,A Extrair,A Mapear,SIM
+17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/01-design-system/regenera-design-windows/README.md,desconhecida,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,A Extrair,A Mapear,SIM
+01-design-system/regenera-design-windows/README.md,desconhecida,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,A Extrair,A Mapear,SIM
+Auditoria 2/ARQUIVOS USAR E LISTA/03-Regenera-Core-Risk-Control(1)/05-core-banking/regenera-core-identity/service.yaml,desconhecida,88a4d2b9c9a7035b5ce467702efabbd6bce687e4f451f46f11cb8bec646d52ba,A Extrair,A Mapear,SIM
+05-core-banking/regenera-core-ledger/service.yaml,desconhecida,98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,A Extrair,A Mapear,SIM
+05-core-banking/regenera-core-credit/service.yaml,desconhecida,98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,A Extrair,A Mapear,SIM
+05-core-banking/regenera-core-fees/service.yaml,desconhecida,98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,A Extrair,A Mapear,SIM
+05-core-banking/regenera-core-pix/service.yaml,desconhecida,98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,A Extrair,A Mapear,SIM
+05-core-banking/regenera-core-transactions/service.yaml,desconhecida,98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,A Extrair,A Mapear,SIM
+05-core-banking/regenera-core-notifications/service.yaml,desconhecida,98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,A Extrair,A Mapear,SIM
+05-core-banking/regenera-core-identity/service.yaml,desconhecida,98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,A Extrair,A Mapear,SIM
+05-core-banking/regenera-core-payments/service.yaml,desconhecida,98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,A Extrair,A Mapear,SIM
+05-core-banking/regenera-core-limits/service.yaml,desconhecida,98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,A Extrair,A Mapear,SIM
+05-core-banking/regenera-core-customers/service.yaml,desconhecida,98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,A Extrair,A Mapear,SIM
+05-core-banking/regenera-core-investments/service.yaml,desconhecida,98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,A Extrair,A Mapear,SIM
+05-core-banking/regenera-core-cards/service.yaml,desconhecida,98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,A Extrair,A Mapear,SIM
+05-core-banking/regenera-core-accounts/service.yaml,desconhecida,98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,A Extrair,A Mapear,SIM
+06-risk-control/regenera-control-fraud/service.yaml,desconhecida,98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,A Extrair,A Mapear,SIM
+06-risk-control/regenera-control-accounting/service.yaml,desconhecida,98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,A Extrair,A Mapear,SIM
+06-risk-control/regenera-control-reconciliation/service.yaml,desconhecida,98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,A Extrair,A Mapear,SIM
+06-risk-control/regenera-control-aml/service.yaml,desconhecida,98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,A Extrair,A Mapear,SIM
+Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/05-core-banking/regenera-core-ledger/service.yaml,desconhecida,98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,A Extrair,A Mapear,SIM
+Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/05-core-banking/regenera-core-credit/service.yaml,desconhecida,98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,A Extrair,A Mapear,SIM
+Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/05-core-banking/regenera-core-fees/service.yaml,desconhecida,98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,A Extrair,A Mapear,SIM
+Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/05-core-banking/regenera-core-pix/service.yaml,desconhecida,98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,A Extrair,A Mapear,SIM
+Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/05-core-banking/regenera-core-transactions/service.yaml,desconhecida,98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,A Extrair,A Mapear,SIM
+Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/05-core-banking/regenera-core-notifications/service.yaml,desconhecida,98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,A Extrair,A Mapear,SIM
+Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/05-core-banking/regenera-core-identity/service.yaml,desconhecida,98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,A Extrair,A Mapear,SIM
+Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/05-core-banking/regenera-core-payments/service.yaml,desconhecida,98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,A Extrair,A Mapear,SIM
+Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/05-core-banking/regenera-core-limits/service.yaml,desconhecida,98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,A Extrair,A Mapear,SIM
+Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/05-core-banking/regenera-core-customers/service.yaml,desconhecida,98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,A Extrair,A Mapear,SIM
+Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/05-core-banking/regenera-core-investments/service.yaml,desconhecida,98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,A Extrair,A Mapear,SIM
+Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/05-core-banking/regenera-core-cards/service.yaml,desconhecida,98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,A Extrair,A Mapear,SIM
+Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/05-core-banking/regenera-core-accounts/service.yaml,desconhecida,98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,A Extrair,A Mapear,SIM
+Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/06-risk-control/regenera-control-fraud/service.yaml,desconhecida,98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,A Extrair,A Mapear,SIM
+Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/06-risk-control/regenera-control-accounting/service.yaml,desconhecida,98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,A Extrair,A Mapear,SIM
+Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/06-risk-control/regenera-control-reconciliation/service.yaml,desconhecida,98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,A Extrair,A Mapear,SIM
+Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/06-risk-control/regenera-control-aml/service.yaml,desconhecida,98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,A Extrair,A Mapear,SIM
+Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/04-bffs/regenera-bff-operations/service.yaml,desconhecida,98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,A Extrair,A Mapear,SIM
+Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/04-bffs/regenera-bff-web/service.yaml,desconhecida,98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,A Extrair,A Mapear,SIM
+Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/04-bffs/regenera-api-partners/service.yaml,desconhecida,98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,A Extrair,A Mapear,SIM
+Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/04-bffs/regenera-bff-mobile/service.yaml,desconhecida,98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,A Extrair,A Mapear,SIM
+Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/01-design-system/regenera-design-windows/service.yaml,desconhecida,98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,A Extrair,A Mapear,SIM
+04-bffs/regenera-bff-operations/service.yaml,desconhecida,98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,A Extrair,A Mapear,SIM
+04-bffs/regenera-bff-web/service.yaml,desconhecida,98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,A Extrair,A Mapear,SIM
+04-bffs/regenera-api-partners/service.yaml,desconhecida,98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,A Extrair,A Mapear,SIM
+04-bffs/regenera-bff-mobile/service.yaml,desconhecida,98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,A Extrair,A Mapear,SIM
+17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/05-core-banking/regenera-core-ledger/service.yaml,desconhecida,98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,A Extrair,A Mapear,SIM
+17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/05-core-banking/regenera-core-credit/service.yaml,desconhecida,98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,A Extrair,A Mapear,SIM
+17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/05-core-banking/regenera-core-fees/service.yaml,desconhecida,98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,A Extrair,A Mapear,SIM
+17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/05-core-banking/regenera-core-pix/service.yaml,desconhecida,98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,A Extrair,A Mapear,SIM
+17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/05-core-banking/regenera-core-transactions/service.yaml,desconhecida,98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,A Extrair,A Mapear,SIM
+17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/05-core-banking/regenera-core-notifications/service.yaml,desconhecida,98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,A Extrair,A Mapear,SIM
+17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/05-core-banking/regenera-core-identity/service.yaml,desconhecida,98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,A Extrair,A Mapear,SIM
+17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/05-core-banking/regenera-core-payments/service.yaml,desconhecida,98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,A Extrair,A Mapear,SIM
+17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/05-core-banking/regenera-core-limits/service.yaml,desconhecida,98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,A Extrair,A Mapear,SIM
+17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/05-core-banking/regenera-core-customers/service.yaml,desconhecida,98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,A Extrair,A Mapear,SIM
+17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/05-core-banking/regenera-core-investments/service.yaml,desconhecida,98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,A Extrair,A Mapear,SIM
+17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/05-core-banking/regenera-core-cards/service.yaml,desconhecida,98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,A Extrair,A Mapear,SIM
+17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/05-core-banking/regenera-core-accounts/service.yaml,desconhecida,98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,A Extrair,A Mapear,SIM
+17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/06-risk-control/regenera-control-fraud/service.yaml,desconhecida,98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,A Extrair,A Mapear,SIM
+17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/06-risk-control/regenera-control-accounting/service.yaml,desconhecida,98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,A Extrair,A Mapear,SIM
+17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/06-risk-control/regenera-control-reconciliation/service.yaml,desconhecida,98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,A Extrair,A Mapear,SIM
+17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/06-risk-control/regenera-control-aml/service.yaml,desconhecida,98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,A Extrair,A Mapear,SIM
+17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/04-bffs/regenera-bff-operations/service.yaml,desconhecida,98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,A Extrair,A Mapear,SIM
+17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/04-bffs/regenera-bff-web/service.yaml,desconhecida,98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,A Extrair,A Mapear,SIM
+17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/04-bffs/regenera-api-partners/service.yaml,desconhecida,98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,A Extrair,A Mapear,SIM
+17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/04-bffs/regenera-bff-mobile/service.yaml,desconhecida,98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,A Extrair,A Mapear,SIM
+17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/01-design-system/regenera-design-windows/service.yaml,desconhecida,98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,A Extrair,A Mapear,SIM
+01-design-system/regenera-design-windows/service.yaml,desconhecida,98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,A Extrair,A Mapear,SIM

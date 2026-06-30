@@ -1,0 +1,41 @@
+schema_version: 1
+owner: channel-engineering
+channels:
+  - id: web-banking
+    platform: web
+    status: active
+    runtime: typescript
+    authoritative_financial_state: false
+    direct_database_access: false
+    blind_retry_on_unknown: false
+  - id: android
+    platform: android
+    status: active
+    runtime: kotlin
+    authoritative_financial_state: false
+    direct_database_access: false
+    blind_retry_on_unknown: false
+  - id: ios
+    platform: ios
+    status: active
+    runtime: swift
+    authoritative_financial_state: false
+    direct_database_access: false
+    blind_retry_on_unknown: false
+  - id: windows-operations
+    platform: windows
+    status: active
+    runtime: typescript
+    authoritative_financial_state: false
+    direct_database_access: false
+    blind_retry_on_unknown: false
+  - id: partner-portal
+    platform: web
+    status: active
+    runtime: typescript
+    authoritative_financial_state: false
+    direct_database_access: false
+    blind_retry_on_unknown: false
+forbidden_active_channels:
+  - react-native-legacy
+  - generic-webview-wrapper

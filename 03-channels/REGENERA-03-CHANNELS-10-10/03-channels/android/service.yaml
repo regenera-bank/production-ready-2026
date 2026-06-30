@@ -1,0 +1,12 @@
+name: regenera-channel-android
+domain: android
+owner: team-android
+criticality: high
+data_classification: banking-secret
+runtime: android
+tier: 1
+rto: 4h
+rpo: 1h
+on_call: android-primary
+dependencies:
+  []

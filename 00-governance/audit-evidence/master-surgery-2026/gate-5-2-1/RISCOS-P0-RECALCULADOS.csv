@@ -1,0 +1,12 @@
+capacidade,risco,impacto
+Audit Trail,Alta dívida técnica e fragmentação,Atraso no build real
+Idempotency,Alta dívida técnica e fragmentação,Atraso no build real
+Identity,Alta dívida técnica e fragmentação,Atraso no build real
+Authorization,Alta dívida técnica e fragmentação,Atraso no build real
+Customer/Party,Alta dívida técnica e fragmentação,Atraso no build real
+Accounts,Alta dívida técnica e fragmentação,Atraso no build real
+Ledger,Alta dívida técnica e fragmentação,Atraso no build real
+Transactions,Alta dívida técnica e fragmentação,Atraso no build real
+Payments,Alta dívida técnica e fragmentação,Atraso no build real
+Pix,Alta dívida técnica e fragmentação,Atraso no build real
+Reconciliation,Alta dívida técnica e fragmentação,Atraso no build real

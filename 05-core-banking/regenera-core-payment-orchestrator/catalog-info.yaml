@@ -1,0 +1,12 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: regenera-core-payment-orchestrator
+  description: Componente Regenera do domínio payment-orchestrator.
+  annotations:
+    regenera.io/criticality: critical
+spec:
+  type: service
+  lifecycle: experimental
+  owner: team-payment-orchestrator
+  system: regenera-bank

@@ -1,0 +1,6 @@
+owners:
+  primary: team-operations-cards
+  approvers:
+    - team-architecture
+    - team-security
+  on_call: cards-primary

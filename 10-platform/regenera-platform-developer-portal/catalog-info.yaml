@@ -1,0 +1,12 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: regenera-platform-developer-portal
+  description: Componente Regenera do domínio developer-portal.
+  annotations:
+    regenera.io/criticality: high
+spec:
+  type: service
+  lifecycle: experimental
+  owner: team-platform-developer-portal
+  system: regenera-bank

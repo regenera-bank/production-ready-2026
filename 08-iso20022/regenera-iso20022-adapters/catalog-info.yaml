@@ -1,0 +1,12 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: regenera-iso20022-adapters
+  description: Componente Regenera do domínio iso20022-adapters.
+  annotations:
+    regenera.io/criticality: critical
+spec:
+  type: service
+  lifecycle: experimental
+  owner: team-payments
+  system: regenera-bank

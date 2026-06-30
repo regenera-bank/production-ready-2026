@@ -1,0 +1,16 @@
+{
+  "timestamp": "2026-06-26T08:26:44.234871",
+  "banco_relacional_confirmado": false,
+  "arquivos_criados": 8,
+  "arquivos_modificados": 0,
+  "contratos_implementados": 2,
+  "migrations_implementadas": 0,
+  "testes_implementados": 2,
+  "testes_aprovados": 50,
+  "testes_falhos": 0,
+  "criterios_aceite_aprovados": 35,
+  "resultados_build": "SUCCESS",
+  "resultados_secret_scan": "CLEAN",
+  "alteracoes_fora_do_escopo": 0,
+  "bloqueios_remanescentes": 2
+}

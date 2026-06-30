@@ -1,0 +1,12 @@
+name: regenera-core-payment-orchestrator
+domain: payment-orchestrator
+owner: team-payment-orchestrator
+criticality: critical
+data_classification: banking-secret
+runtime: jvm
+tier: 0
+rto: 15m
+rpo: 0
+on_call: payment-orchestrator-primary
+dependencies:
+  []

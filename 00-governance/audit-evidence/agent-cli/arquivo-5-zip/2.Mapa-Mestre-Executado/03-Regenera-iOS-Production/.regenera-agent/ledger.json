@@ -1,0 +1,50 @@
+{
+  "gerado_em": "2026-06-25T16:13:13.851Z",
+  "dir": "/mnt/data/regenera_channels_release/03-Regenera-iOS-Production",
+  "motor": "heuristic",
+  "aplicado": true,
+  "resumo": {
+    "reescrito": 0,
+    "ja_limpo": 3,
+    "rejeitado": 0
+  },
+  "arquivos": [
+    {
+      "caminho": "contracts/openapi.yaml",
+      "ext": ".yaml",
+      "motor": "heuristic",
+      "status": "já limpo",
+      "sinal_encontrado": [],
+      "hash_antes": "cf56d26d0a7a73c32b66fdca2e24825eabe26dd2966fa38fc4003487347cf94c",
+      "hash_depois": "cf56d26d0a7a73c32b66fdca2e24825eabe26dd2966fa38fc4003487347cf94c",
+      "tentativas": 0,
+      "comportamento": "inalterado (provado pelo portão: código idêntico byte a byte)",
+      "portao": "código preservado byte a byte; só comentário mudou"
+    },
+    {
+      "caminho": "project.yml",
+      "ext": ".yml",
+      "motor": "heuristic",
+      "status": "já limpo",
+      "sinal_encontrado": [],
+      "hash_antes": "1554563179cdb019db127e031e99f36f9809c2bb104c89698d246f1bebc3b32a",
+      "hash_depois": "1554563179cdb019db127e031e99f36f9809c2bb104c89698d246f1bebc3b32a",
+      "tentativas": 0,
+      "comportamento": "inalterado (provado pelo portão: código idêntico byte a byte)",
+      "portao": "código preservado byte a byte; só comentário mudou"
+    },
+    {
+      "caminho": "scripts/verify-release.sh",
+      "ext": ".sh",
+      "motor": "heuristic",
+      "status": "já limpo",
+      "sinal_encontrado": [],
+      "hash_antes": "aa1ac631705a6a4f6a0e3568140099281375e70148ba15771494c29b32eec21b",
+      "hash_depois": "aa1ac631705a6a4f6a0e3568140099281375e70148ba15771494c29b32eec21b",
+      "tentativas": 0,
+      "comportamento": "inalterado (provado pelo portão: código idêntico byte a byte)",
+      "portao": "código preservado byte a byte; só comentário mudou"
+    }
+  ],
+  "prontidao_producao": []
+}

@@ -1,0 +1,17 @@
+capacidade,depende_de
+Identity,Audit Trail
+Authorization,Identity
+Customer/Party,Identity
+Customer/Party,Authorization
+Accounts,Customer/Party
+Accounts,Audit Trail
+Ledger,Audit Trail
+Transactions,Accounts
+Transactions,Ledger
+Transactions,Idempotency
+Payments,Transactions
+Pix,Transactions
+Reconciliation,Ledger
+Reconciliation,Transactions
+Reconciliation,Payments
+Reconciliation,Pix

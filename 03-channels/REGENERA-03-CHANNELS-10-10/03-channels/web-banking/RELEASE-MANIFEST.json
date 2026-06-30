@@ -1,0 +1,80 @@
+{
+  "schemaVersion": 1,
+  "package": "Vercel",
+  "generatedAt": "2026-06-24T23:59:00-03:00",
+  "classification": "Bloqueado por lockfile/build e rotação de segredo",
+  "summary": "Segredos distribuídos removidos; exemplo de ambiente e procedimento de migração adicionados; lockfile inconsistente retirado sem fabricar resolução de dependências.",
+  "originalFileCount": 120,
+  "currentFileCountBeforeChecksum": 125,
+  "changes": [
+    {
+      "acao": "ADICIONADO",
+      "caminho": ".env.example",
+      "motivo": "Documentar variáveis sem material secreto.",
+      "sha256_final": "074e40ef216f274258f02216da2f7686efbef9cd206f90092bf16934440f7997"
+    },
+    {
+      "acao": "ADICIONADO",
+      "caminho": "README.md",
+      "motivo": "Adicionar documentação operacional específica da revisão.",
+      "sha256_final": "d32386f74ca930c42d3cf48e7b478cdb84d3c49f42381881627f33cca2ff2a59"
+    },
+    {
+      "acao": "ADICIONADO",
+      "caminho": "SECRETS-INVENTORY.md",
+      "motivo": "Adicionar documentação operacional específica da revisão.",
+      "sha256_final": "34951febb09823d94ca1011dc0cc72cfd788daae83274c5a9d8bd43d5acd8558"
+    },
+    {
+      "acao": "ADICIONADO",
+      "caminho": "VALIDATION-EVIDENCE.md",
+      "motivo": "Adicionar documentação operacional específica da revisão.",
+      "sha256_final": "123011bf4a9a79c9ef89615593a2226ac9bfdd7ff05148c7cb81a279e5070f40"
+    },
+    {
+      "acao": "ADICIONADO",
+      "caminho": "docs/LOCKFILE-INCIDENT.md",
+      "motivo": "Registrar causa, evidência e critério de desbloqueio do lockfile.",
+      "sha256_final": "8277930dda81f381c784c81e296710ccd8f36fbc52a10de4e7424cee3b696a03"
+    },
+    {
+      "acao": "ADICIONADO",
+      "caminho": "docs/SECRET-MIGRATION.md",
+      "motivo": "Documentar rotação e injeção segura de segredo.",
+      "sha256_final": "3854e7b128bc745d906533fc8e49932808daec811cf2796e9ac0e063a50d3323"
+    },
+    {
+      "acao": "ADICIONADO",
+      "caminho": "scripts/regenerate-lock.sh",
+      "motivo": "Fornecer regeneração determinística no ambiente correto.",
+      "sha256_final": "98ad1713ffe67c6ff9116cf711deb471ea939015ee5c15c65b3df0f067ad187d"
+    },
+    {
+      "acao": "MODIFICADO",
+      "caminho": "vercel.json",
+      "motivo": "Corrigir contrato técnico identificado na auditoria.",
+      "sha256_original": "08f7ba171c5a1ef2ef5006e60befa437f648aaccdaaab18caa6ee737af59cadb",
+      "sha256_final": "a4ad51585803aa9bc747f2a8e35e612fb2ec225a67e1285444d61dd08ea228ef"
+    },
+    {
+      "acao": "REMOVIDO",
+      "caminho": ".env",
+      "motivo": "Retirar valor secreto do artefato distribuível.",
+      "sha256_original": "bb055de546793a583367fb5065e6437333d1246921c1bf285c8ed1098ee06421"
+    },
+    {
+      "acao": "REMOVIDO",
+      "caminho": "credentials/received/.env.original",
+      "motivo": "Retirar valor secreto do artefato distribuível.",
+      "sha256_original": "bb055de546793a583367fb5065e6437333d1246921c1bf285c8ed1098ee06421"
+    },
+    {
+      "acao": "REMOVIDO",
+      "caminho": "package-lock.json",
+      "motivo": "Remover lockfile incompatível com o manifesto; regeneração exige registro npm disponível.",
+      "sha256_original": "032c934ed79db9731efadcd52d0add755034ac9090a7c97dc5bb2254e4806f9f"
+    }
+  ],
+  "validationEvidence": "VALIDATION-EVIDENCE.md",
+  "checksums": "CHECKSUMS.sha256"
+}

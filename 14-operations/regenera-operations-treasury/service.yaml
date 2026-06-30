@@ -1,0 +1,12 @@
+name: regenera-operations-treasury
+domain: treasury
+owner: team-operations-treasury
+criticality: critical
+data_classification: banking-secret
+runtime: docs
+tier: 0
+rto: 15m
+rpo: 0
+on_call: treasury-primary
+dependencies:
+  []

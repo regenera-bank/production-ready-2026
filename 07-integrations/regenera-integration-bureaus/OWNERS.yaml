@@ -1,0 +1,6 @@
+owners:
+  primary: team-integration-bureaus
+  approvers:
+    - team-architecture
+    - team-security
+  on_call: bureaus-primary

@@ -1,0 +1,1 @@
+describe('Idempotency', () => { it('transita estados', () => { /* test */ }); });

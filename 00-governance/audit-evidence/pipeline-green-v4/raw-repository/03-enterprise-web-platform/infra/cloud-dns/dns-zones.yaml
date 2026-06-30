@@ -1,0 +1,51 @@
+# |---------------------------------------------------------------------------------------|
+# |  --> REGENERA ENTERPRISE SYSTEM v4.0                                                  |
+# |---------------------------------------------------------------------------------------|
+#
+# PROJECT:       Regenera Bank
+# CEO:           Raphaela Cerveski
+# DEVELOPER:     Don Paulo Ricardo
+# ID:            2098233287
+# COPYRIGHT:     Copyright (c) 2026 Regenera Corporate
+#
+# LICENSE:       EULA (End-User License Agreement)
+# PROTECTION:    PROPRIEDADE INTELECTUAL RESTRITA
+#
+# WARNING:       TODOS OS DIREITOS RESERVADOS. Proibida a cópia, distribuição,
+#                engenharia reversa ou modificação não autorizada.
+#
+# |---------------------------------------------------------------------------------------|
+# |  --> CLASSIFICATION: PROPRIETARY // DEVELOPER MAINTAINED // REQUIRES SENIOR REVIEW          |
+# |---------------------------------------------------------------------------------------|
+
+# @regenera/bank-core
+# Enterprise Cloud DNS Managed Zones
+# Implements split-horizon DNS, strictly separating internal microservice traffic from public-facing endpoints.
+
+zones:
+  - name: "regenera-public-zone"
+    dnsName: "regenerabank.app."
+    description: "Public DNS zone for external clients and integrations"
+    visibility: "public"
+    dnssecConfig:
+      state: "on"
+      nonExistence: "nsec3"
+      # Strict DNSSEC parameters for public zone
+      defaultKeySpecs:
+        - algorithm: "rsasha256"
+          keyLength: 2048
+          keyType: "keySigning"
+          kind: "dns#dnsKeySpec"
+        - algorithm: "rsasha256"
+          keyLength: 1024
+          keyType: "zoneSigning"
+          kind: "dns#dnsKeySpec"
+  
+  - name: "regenera-private-zone"
+    dnsName: "internal.regenerabank.app."
+    description: "Private DNS zone for internal microservices and DBs"
+    visibility: "private"
+    privateVisibilityConfig:
+      networks:
+        - "projects/MY_PROJECT/global/networks/bank-vpc"
+    # No DNSSEC required internally, but restricted strictly to VPC

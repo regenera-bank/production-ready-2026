@@ -1,0 +1,98 @@
+# [FILE] /Users/admin/Desktop/Regenera Bank Documents/FinOps & Monitoring/Alerting/production-dr-alerts.yaml
+# Configuração do Prometheus Alertmanager para Alertas de DR em Produção
+# Desenvolvedor: Don Paulo Ricardo
+# Descrição: Regras de alerta agressivas para cenários críticos de Disaster Recovery em ambiente de Produção.
+
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: regenera-bank-dr-alerts-production
+  namespace: monitoring # Assumindo que o Prometheus está implantado neste namespace
+  labels:
+    app: prometheus
+    release: prometheus-stack # Ou o label do seu helm chart/operador Prometheus
+spec:
+  groups:
+    - name: DisasterRecoveryAlerts
+      rules:
+        # ALERTA CRÍTICO: Falha no Health Check Primário do API Gateway
+        # Dispara quando o health check do Route 53 para o API Gateway primário falha,
+        # indicando uma potencial interrupção do serviço principal.
+        - alert: APIGatewayPrimaryUnhealthy
+          expr: aws_route53_healthcheck_healthy{health_check_id="primary_api_gateway_hc_id", environment="production", region="us-east-1"} == 0
+          for: 1m # Confirma por 1 minuto antes de disparar (evita falsos positivos por falhas momentâneas)
+          labels:
+            severity: critical
+            tier: infrastructure
+            service: api-gateway
+            dr_impact: "high"
+            rto_target_impact: "true"
+          annotations:
+            summary: "API Gateway Primário Inacessível em Produção (us-east-1)"
+            description: |
+              O Health Check do Route 53 para o API Gateway primário (us-east-1) reportou estar INACESSÍVEL.
+              Isso indica uma interrupção crítica do ponto de entrada principal do Regenera Bank.
+              **AÇÃO IMEDIATA:** Verificar estado do cluster EKS primário, API Gateway, Route 53 failover.
+              **PLAYBOOK:** [Link para o Runbook de Falha de API Gateway Primário]
+
+        # ALERTA CRÍTICO: Lag de Replicação de DB (PostgreSQL) excedendo RPO
+        # Dispara quando o lag de replicação do RDS PostgreSQL excede o RPO tolerável,
+        # indicando risco de perda de dados significativa em caso de failover.
+        - alert: RDSReplicationLagExceedsRPO
+          expr: aws_rds_replica_lag_maximum{db_instance_identifier=~"regenera-bank-prod-db-primary.*", environment="production"} > 300 # 300 segundos = 5 minutos RPO
+          for: 5m # Confirma por 5 minutos
+          labels:
+            severity: critical
+            tier: database
+            service: rds-postgresql
+            dr_impact: "high"
+            rpo_target_impact: "true"
+          annotations:
+            summary: "Lag de Replicação do RDS Primário excedeu RPO em Produção"
+            description: |
+              O atraso de replicação do banco de dados PostgreSQL primário excedeu o RPO configurado de 5 minutos.
+              Isso pode resultar em perda de dados inaceitável em caso de falha do primário.
+              **AÇÃO IMEDIATA:** Verificar status de replicação, I/O da instância primária.
+              **PLAYBOOK:** [Link para o Runbook de Problemas de Replicação de RDS]
+
+        # ALERTA ALTO: Standby EKS Cluster em us-east-2 não saudável
+        # Dispara se o cluster EKS de standby reporta problemas em seus nodes ou control plane.
+        - alert: EKSStandbyClusterUnhealthy
+          expr: (sum(aws_eks_node_healthy_status{cluster_name="regenera-standby-eks-cluster", environment="production", region="us-east-2"}) by (cluster_name) < (count(aws_eks_node_healthy_status{cluster_name="regenera-standby-eks-cluster", environment="production", region="us-east-2"}) by (cluster_name) * 0.5))
+          for: 10m # Permite alguma flutuação, mas alerta se mais de 50% dos nós ficarem unhealthy
+          labels:
+            severity: high
+            tier: infrastructure
+            service: eks-standby
+            dr_impact: "high"
+          annotations:
+            summary: "Cluster EKS de Standby Inacessível ou Degradado em Produção (us-east-2)"
+            description: |
+              Mais de 50% dos nodes do cluster EKS de standby em us-east-2 não estão saudáveis.
+              Isso impacta a capacidade de failover automático e o RTO.
+              **AÇÃO:** Verificar logs dos nodes, status do control plane do EKS de standby.
+              **PLAYBOOK:** [Link para o Runbook de Problemas no Cluster EKS de Standby]
+
+        # ALERTA MÉDIO: RTO/RPO de Teste de DR Aumentou (Staging)
+        # Este é um alerta mais preventivo, baseado em testes de staging, mas importante para a produção.
+        - alert: DRTestRTOSLAExceeded
+          expr: dr_test_rto_seconds{environment="staging"} > 300 # RTO > 5 minutos em staging (simulado)
+          for: 30m
+          labels:
+            severity: warning
+            tier: operations
+            service: dr-testing
+            dr_impact: "low" # Baixo impacto direto na produção, mas alto para o processo
+          annotations:
+            summary: "RTO excedido em Teste de DR em Staging"
+            description: |
+              O último teste de DR em staging excedeu o target RTO de 5 minutos.
+              Isso indica que o processo de recuperação pode não ser rápido o suficiente.
+              **AÇÃO:** Revisar o relatório do teste de DR em staging e identificar gargalos.
+              **PLAYBOOK:** [Link para o Runbook de Análise de Falha de Teste de DR]
+
+# NOTA: Este arquivo deve ser gerenciado por um GitOps (ex: Argo CD, Flux CD) e aplicado ao cluster Kubernetes.
+# As métricas (ex: aws_route53_healthcheck_healthy) são exportadas para o Prometheus via
+# um exportador de métricas da AWS (ex: cloudwatch_exporter, aws-prometheus-exporter).
+# Os `health_check_id`s devem ser os IDs reais dos recursos AWS Route 53 Health Check.
+# O `db_instance_identifier` deve ser o identificador real da instância RDS.

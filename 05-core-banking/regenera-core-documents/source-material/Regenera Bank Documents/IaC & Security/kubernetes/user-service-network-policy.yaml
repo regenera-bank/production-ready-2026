@@ -1,0 +1,60 @@
+# [FILE] /Users/admin/Desktop/Regenera Bank Documents/IaC & Security/kubernetes/user-service-network-policy.yaml
+# Kubernetes NetworkPolicy for user-service
+# Desenvolvedor: Don Paulo Ricardo
+# Demonstração de restrição de tráfego interno para o user-service
+
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: user-service-network-policy
+  namespace: default # Ajustar o namespace conforme a implantação
+spec:
+  podSelector:
+    matchLabels:
+      app: user-service # Aplica a política aos pods do user-service
+  policyTypes:
+    - Ingress
+    - Egress
+  ingress: # Regras de tráfego de entrada
+    # Permite tráfego de entrada do auth-service
+    - from:
+        - podSelector:
+            matchLabels:
+              app: auth-service # Permite tráfego de pods com a label 'app: auth-service'
+      ports:
+        - protocol: TCP
+          port: 3002 # A porta que o user-service escuta
+    # Permite tráfego de entrada do kube-system para probes
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: kube-system
+        - podSelector:
+            matchLabels:
+              k8s-app: kube-dns
+      ports:
+        - protocol: TCP
+          port: 3002 # A porta que o user-service escuta
+
+  egress: # Regras de tráfego de saída
+    # Permite tráfego de saída para DNS (necessário para resolução de nomes de serviços)
+    - ports:
+        - port: 53
+          protocol: UDP
+        - port: 53
+          protocol: TCP
+    # Permite tráfego de saída para o banco de dados (PostgreSQL)
+    - to:
+        - podSelector:
+            matchLabels:
+              app: postgres-db # Assumindo que o banco de dados tem esta label
+      ports:
+        - protocol: TCP
+          port: 5432 # Porta padrão do PostgreSQL
+    # Permite tráfego de saída para o AWS Secrets Manager (via endpoints VPC, se configurado)
+    # ou para a API pública da AWS, caso contrário (requer outbound para 443)
+    - ports:
+        - protocol: TCP
+          port: 443
+    # Bloquear todo o restante do tráfego de saída por padrão
+    # Qualquer regra não explicitamente permitida é bloqueada

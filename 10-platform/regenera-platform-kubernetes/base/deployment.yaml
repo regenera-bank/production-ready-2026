@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: replace-at-release
+spec:
+  replicas: 3
+  selector:
+    matchLabels: { app: replace-at-release }
+  template:
+    metadata:
+      labels: { app: replace-at-release }
+    spec:
+      securityContext:
+        runAsNonRoot: true
+        seccompProfile: { type: RuntimeDefault }
+      containers:
+        - name: app
+          image: registry.example/replace@sha256:REQUIRED
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities: { drop: ["ALL"] }

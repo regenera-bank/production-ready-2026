@@ -1,0 +1,12 @@
+name: regenera-integration-susep
+domain: susep
+owner: team-integration-susep
+criticality: high
+data_classification: banking-secret
+runtime: jvm
+tier: 1
+rto: 4h
+rpo: 1h
+on_call: susep-primary
+dependencies:
+  []

@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "transactionId",
+    "state"
+  ],
+  "properties": {
+    "transactionId": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "state": {
+      "enum": [
+        "CREATED",
+        "VALIDATING",
+        "RISK_ANALYSIS",
+        "AUTHORIZED",
+        "FUNDS_RESERVED",
+        "SENT",
+        "ACCEPTED",
+        "SETTLED",
+        "RECONCILED",
+        "REJECTED",
+        "CANCELLED",
+        "EXPIRED",
+        "REVERSED",
+        "UNKNOWN",
+        "MANUAL_REVIEW"
+      ]
+    }
+  }
+}

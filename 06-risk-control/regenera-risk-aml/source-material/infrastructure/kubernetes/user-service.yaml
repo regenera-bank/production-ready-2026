@@ -1,0 +1,138 @@
+# [FILE] infrastructure/kubernetes/user-service.yaml
+# Kubernetes Deployment and Service for the user-service microservice
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-service-deployment
+  labels:
+    app: user-service
+spec:
+  replicas: 2 # Scale as needed for production
+  selector:
+    matchLabels:
+      app: user-service
+  template:
+    metadata:
+      labels:
+        app: user-service
+    spec:
+      containers:
+        - name: user-service
+          image: your-ecr-registry-url/regenera-bank/user-service:latest # Replace with your actual ECR image
+          ports:
+            - containerPort: 3002 # HTTP port
+            - containerPort: 50051 # gRPC port
+          env:
+            - name: DATABASE_HOST
+              value: postgres_db.your-namespace.svc.cluster.local # Internal Kubernetes service name
+            - name: DATABASE_PORT
+              value: "5432"
+            - name: DATABASE_USER
+              valueFrom:
+                secretKeyRef:
+                  name: db-credentials # Kubernetes Secret
+                  key: username
+            - name: DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-credentials
+                  key: password
+            - name: DATABASE_NAME
+              value: regenera_bank
+            - name: JWT_SECRET # Used by user-service to validate incoming JWTs
+              valueFrom:
+                secretKeyRef:
+                  name: jwt-secret # Kubernetes Secret
+                  key: jwt-secret-key
+          # Resource requests and limits for production
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "256Mi"
+              cpu: "200m"
+          # Health checks for Kubernetes
+          readinessProbe:
+            httpGet:
+              path: /health # Assuming a /health endpoint for readiness
+              port: 3002
+            initialDelaySeconds: 10
+            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 3002
+            initialDelaySeconds: 30
+            periodSeconds: 10
+      # ImagePullSecrets for private ECR registry
+      # imagePullSecrets:
+      #   - name: ecr-credentials-secret
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: user-service-internal # Internal Kubernetes Service
+  labels:
+    app: user-service
+spec:
+  selector:
+    app: user-service
+  ports:
+    - name: http
+      protocol: TCP
+      port: 3002
+      targetPort: 3002
+    - name: grpc
+      protocol: TCP
+      port: 50051
+      targetPort: 50051
+  type: ClusterIP # Internal service
+
+---
+
+# Conceptual Ingress for external access (e.g., via AWS ALB/CloudFront for its REST endpoints)
+# This would typically be managed by an Ingress Controller (e.g., AWS ALB Ingress Controller)
+# apiVersion: networking.k8s.io/v1
+# kind: Ingress
+# metadata:
+#   name: user-service-ingress
+#   annotations:
+#     kubernetes.io/ingress.class: alb
+#     alb.ingress.kubernetes.io/scheme: internal # Or internet-facing
+#     alb.ingress.kubernetes.io/target-type: ip
+# spec:
+#   rules:
+#     - host: api.yourdomain.com
+#       http:
+#         paths:
+#           - path: /api/users
+#             pathType: Prefix
+#             backend:
+#               service:
+#                 name: user-service-internal
+#                 port:
+#                   number: 3002
+
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: user-service-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: user-service-deployment
+  minReplicas: 2
+  maxReplicas: 10 # Adjust max replicas as needed
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 70 # Scale up when CPU utilization exceeds 70%

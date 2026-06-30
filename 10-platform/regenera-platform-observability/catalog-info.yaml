@@ -1,0 +1,12 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: regenera-platform-observability
+  description: Componente Regenera do domínio observability.
+  annotations:
+    regenera.io/criticality: high
+spec:
+  type: service
+  lifecycle: experimental
+  owner: team-platform-observability
+  system: regenera-bank

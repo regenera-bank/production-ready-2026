@@ -1,0 +1,17 @@
+{
+  "created_at_utc": "2026-06-12T13:35:44.425399+00:00",
+  "source": "RegeneraBank-main(2).zip pipeline verde aprovado pelo usuario",
+  "version": "V3 uniao sem perfume",
+  "secrets_policy": "valores reais removidos/redigidos; rotacionar tudo que apareceu em chat/log/zip",
+  "gate": "bash 09-devops-automation-scripts/regenera-v3-surgery-gate.sh passou localmente com avisos de mock em runtime",
+  "zips": [
+    "RegeneraBank_V3_00_master_uniao_sem_perfume.zip",
+    "RegeneraBank_V3_01_backend_core.zip",
+    "RegeneraBank_V3_02_frontend_vercel.zip",
+    "RegeneraBank_V3_03_mobile_borda.zip",
+    "RegeneraBank_V3_04_infra_pipeline.zip",
+    "RegeneraBank_V3_05_docs_biblia.zip",
+    "RegeneraBank_V3_06_evidence_sast.zip",
+    "RegeneraBank_V3_07_devops_scripts.zip"
+  ]
+}

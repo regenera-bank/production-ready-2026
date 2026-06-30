@@ -1,0 +1,3 @@
+capacidade,risco,impacto
+Geral,Acoplamento excessivo à infraestrutura local,Alto
+Idempotency,Tamanho da tabela de respostas cache explodir DB primário,Crítico

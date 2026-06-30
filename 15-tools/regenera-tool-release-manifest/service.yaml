@@ -1,0 +1,12 @@
+name: regenera-tool-release-manifest
+domain: release-manifest
+owner: team-developer-experience
+criticality: medium
+data_classification: banking-secret
+runtime: python
+tier: 2
+rto: 4h
+rpo: 1h
+on_call: release-manifest-primary
+dependencies:
+  []

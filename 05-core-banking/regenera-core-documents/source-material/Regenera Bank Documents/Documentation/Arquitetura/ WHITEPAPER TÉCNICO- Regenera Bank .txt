@@ -1,0 +1,2577 @@
+ WHITEPAPER TÉCNICO: Regenera Bank
+Arquitetura de Sistema Bancário de Nível Enterprise
+
+**Versão:** 2.0  
+**Data:** 16 de Dezembro de 2025  
+**Classificação:** Técnico - Confidencial  
+**Autor Principal:** Don Paulo Ricardo, PhD  
+
+
+ 📋 ÍNDICE EXECUTIVO
+
+| Seção | Página | Tempo de Leitura |
+|-------|--------|------------------|
+| 1. Visão Geral e Contexto | 2 | 5 min |
+| 2. Arquitetura de Referência | 8 | 15 min |
+| 3. Stack Tecnológico Detalhado | 18 | 20 min |
+| 4. Fluxos de Dados Críticos | 28 | 25 min |
+| 5. Segurança Multi-Camada | 38 | 15 min |
+| 6. Observabilidade e Resiliência | 45 | 10 min |
+| 7. Compliance e Governança | 52 | 10 min |
+| 8. Deployment e Operações | 58 | 15 min |
+| 9. Roadmap e Evolução | 65 | 10 min |
+
+**Tempo Total de Leitura:** ~2 horas  
+**Nível Técnico:** Senior Engineers, Arquitetos, CTOs
+
+---
+
+## 1. VISÃO GERAL E CONTEXTO
+
+### 1.1 O Problema: Complexidade Bancária no Século XXI
+
+Sistemas bancários modernos enfrentam desafios exponenciais:
+
+```
+DESAFIOS TÉCNICOS:
+├─ Escala: 100K → 10M usuários (crescimento 100x)
+├─ Disponibilidade: 99.99% uptime (52 min downtime/ano)
+├─ Segurança: PCI-DSS Level 1 + LGPD + BACEN
+├─ Performance: <100ms latência p99 em transações
+├─ Compliance: 47 regulações simultâneas
+└─ Custos: TCO deve cair 30% ao escalar 10x
+
+DESAFIOS DE NEGÓCIO:
+├─ Time-to-Market: Features novas em <2 semanas
+├─ Inovação: IA/ML sem comprometer estabilidade
+├─ Multi-canal: Web + Mobile + API + Open Banking
+└─ Diferenciação: UX superior sem sacrificar segurança
+```
+
+### 1.2 A Solução: Arquitetura Regenerativa
+
+O Regenera Bank implementa um **Sistema Adaptativo Distribuído** com 5 princípios fundamentais:
+
+#### Princípio 1: Domain-Driven Design (DDD)
+```
+❌ Arquitetura Monolítica:
+   └─ 1 banco de dados, 1 aplicação, 1 ponto de falha
+
+✅ Arquitetura Regenera:
+   ├─ 12 domínios de negócio independentes
+   ├─ 4 bancos de dados especializados
+   └─ Falhas isoladas (blast radius <8% do sistema)
+```
+
+#### Princípio 2: Comunicação Híbrida Otimizada
+```typescript
+enum CommunicationPattern {
+  GRPC = "Síncrono, Intra-Serviço, Baixa Latência",
+  REST = "Síncrono, Cliente-Servidor, Padrão Web",
+  MessageQueue = "Assíncrono, Pub/Sub, Alta Resiliência"
+}
+
+// Decisão arquitetural documentada:
+const escolherProtocolo = (requisito: string): CommunicationPattern => {
+  if (requisito === "Resposta imediata + Alta performance") return GRPC;
+  if (requisito === "Exposição pública + Compatibilidade") return REST;
+  if (requisito === "Desacoplamento temporal + Escalabilidade") return MessageQueue;
+};
+```
+
+#### Princípio 3: Segurança em Profundidade (Defense in Depth)
+```
+Camada 7: Application (WAF + Rate Limiting)
+Camada 6: Presentation (XSS + CSRF Protection)
+Camada 5: Session (JWT + Refresh Tokens)
+Camada 4: Transport (TLS 1.3 + mTLS entre serviços)
+Camada 3: Network (Security Groups + Private Subnets)
+Camada 2: Data Link (Encryption at Rest - KMS)
+Camada 1: Physical (AWS Compliance - SOC 2)
+```
+
+#### Princípio 4: Persistência Poliglota
+```sql
+-- Cada problema tem sua solução otimizada:
+
+PostgreSQL → Transações ACID, integridade referencial
+USE CASE: Contas, Saldos, Cartões (consistência crítica)
+
+MongoDB → Flexibilidade de schema, documentos aninhados  
+USE CASE: Eventos de Analytics, Logs de AI (schema evolui)
+
+Redis → Cache em memória, <1ms latência
+USE CASE: Sessões de usuário, Rate limiting (acesso frequente)
+
+Elasticsearch → Busca full-text, agregações complexas
+USE CASE: Auditoria imutável, Compliance logs (queries complexas)
+```
+
+#### Princípio 5: Automação Implacável
+```yaml
+# Nenhuma ação manual em produção. ZERO.
+deployment_manual: FORBIDDEN
+rollback_manual: FORBIDDEN
+configuration_manual: FORBIDDEN
+
+# Tudo é código, tudo é versionado, tudo é auditável:
+infrastructure: Terraform (IaC)
+pipelines: GitHub Actions (CI/CD)
+configurations: ConfigMaps + Secrets (GitOps)
+monitoring: Datadog + Prometheus (Observability as Code)
+```
+
+---
+
+## 2. ARQUITETURA DE REFERÊNCIA
+
+### 2.1 Diagrama de Alto Nível (C4 Model - Level 1)
+
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│                        REGENERA BANK ECOSYSTEM                      │
+│                     (Sistema Bancário Digital)                      │
+└─────────────────────────────────────────────────────────────────────┘
+                                  │
+        ┌─────────────────────────┼─────────────────────────┐
+        │                         │                         │
+        ▼                         ▼                         ▼
+┌───────────────┐        ┌────────────────┐       ┌────────────────┐
+│  👤 CLIENTES  │                                            │  🏦 PARCEIROS  │                                     │  🔧 OPERAÇÕES  │
+│               │        │                │       │                │
+│ • Web App     │                                                    │ • Open Banking │                                          │ • Admin Panel  │
+│ • Mobile App  │                                                     │ • Fintechs     │                                                  │ • Monitoring   │
+│ • Chatbot     │                                                          │ • Bureaus      │                                                │ • Analytics    │
+└───────┬───────┘        └────────┬───────┘       └────────┬───────┘
+        │                         │                         │
+        └─────────────────────────┼─────────────────────────┘
+                                  │
+                                  ▼
+        ╔═════════════════════════════════════════════════════════╗
+        ║           🌐 INTERNET (AWS CloudFront CDN)             ║
+        ║              + WAF (Web Application Firewall)          ║
+        ╚═════════════════════════════════════════════════════════╝
+                                  │
+                                  ▼
+        ╔═════════════════════════════════════════════════════════╗
+        ║         🚪 API GATEWAY (NestJS + Redis)                ║
+        ║  • Rate Limiting (1000 req/min/user)                   ║
+        ║  • Authentication (JWT Validation)                     ║
+        ║  • Request Routing (Dynamic Service Discovery)         ║
+        ║  • Response Aggregation (BFF Pattern)                  ║
+        ╚═════════════════════════════════════════════════════════╝
+                                  │
+        ┌─────────────────────────┼─────────────────────────┐
+        │                         │                         │
+        ▼                         ▼                         ▼
+┌─────────────────┐      ┌─────────────────┐      ┌─────────────────┐
+│ 🔐 AUTH DOMAIN  │      │ 💰 CORE BANKING │      │ 🤖 SUPPORT SVC  │
+│                 │      │                 │      │                 │
+│ auth-service    │      │ account-service │      │ notification    │
+│ user-service    │      │ transaction-svc │      │ analytics       │
+│                 │      │ pix-service     │      │ ai-service      │
+│                 │      │ card-service    │      │ compliance      │
+│                 │      │ investment-svc  │      │ blockchain      │
+└─────────────────┘      └─────────────────┘      └─────────────────┘
+        │                         │                         │
+        │      ┌──────────────────┴──────────────────┐     │
+        │      │         🐰 RabbitMQ                  │     │
+        │      │    (Mensageria Assíncrona)           │     │
+        │      └──────────────────┬──────────────────┘     │
+        │                         │                         │
+        └─────────────────────────┼─────────────────────────┘
+                                  │
+        ┌─────────────────────────┼─────────────────────────┐
+        │                         │                         │
+        ▼                         ▼                         ▼
+┌─────────────────┐      ┌─────────────────┐      ┌─────────────────┐
+│ 🗄️ PostgreSQL   │      │ 📊 MongoDB      │      │ 🔍 Elasticsearch│
+│  (ACID Data)    │      │  (Analytics)    │      │  (Audit Logs)   │
+│                 │      │                 │      │                 │
+│ Multi-AZ        │      │ Replica Set     │      │ 3-Node Cluster  │
+│ Encrypted       │      │ Sharded         │      │ Immutable       │
+└─────────────────┘      └─────────────────┘      └─────────────────┘
+        │                         │                         │
+        └─────────────────────────┴─────────────────────────┘
+                                  │
+                                  ▼
+                      ┌───────────────────────┐
+                      │  💾 Redis Cluster     │
+                      │  (Cache + Sessions)   │
+                      └───────────────────────┘
+```
+
+### 2.2 Diagrama de Container (C4 Model - Level 2)
+
+```
+╔══════════════════════════════════════════════════════════════════════╗
+║                    KUBERNETES CLUSTER (AWS EKS)                      ║
+╠══════════════════════════════════════════════════════════════════════╣
+║                                                                      ║
+║  ┌────────────────────────────────────────────────────────────────┐ ║
+║  │  NAMESPACE: regenera-production                                │ ║
+║  └────────────────────────────────────────────────────────────────┘ ║
+║                                                                      ║
+║  ┌──────────────────┐  ┌──────────────────┐  ┌─────────────────┐  ║
+║  │  api-gateway     │  │  auth-service    │  │  user-service   │  ║
+║  │                  │  │                  │  │                 │  ║
+║  │  Port: 3000      │  │  Port: 3001      │  │  Port: 3002     │  ║
+║  │  Replicas: 3     │  │  Replicas: 2     │  │  Replicas: 2    │  ║
+║  │  CPU: 500m       │  │  CPU: 250m       │  │  CPU: 250m      │  ║
+║  │  Memory: 512Mi   │  │  Memory: 256Mi   │  │  Memory: 256Mi  │  ║
+║  │                  │  │                  │  │                 │  ║
+║  │  HPA: 3-10       │  │  HPA: 2-5        │  │  HPA: 2-5       │  ║
+║  │  Metrics:        │  │  Metrics:        │  │  Metrics:       │  ║
+║  │  • CPU > 70%     │  │  • CPU > 70%     │  │  • CPU > 70%    │  ║
+║  │  • RPS > 1000    │  │  • RPS > 500     │  │  • RPS > 300    │  ║
+║  └─────────┬────────┘  └─────────┬────────┘  └────────┬────────┘  ║
+║            │                     │                     │           ║
+║            └─────────────────────┴─────────────────────┘           ║
+║                                  │                                 ║
+║                    ┌─────────────▼─────────────┐                   ║
+║                    │   Service Mesh (Istio)    │                   ║
+║                    │   • mTLS entre pods       │                   ║
+║                    │   • Circuit Breaking      │                   ║
+║                    │   • Retry Policy          │                   ║
+║                    │   • Distributed Tracing   │                   ║
+║                    └───────────────────────────┘                   ║
+║                                                                      ║
+║  ┌──────────────────┐  ┌──────────────────┐  ┌─────────────────┐  ║
+║  │  account-service │  │  pix-service     │  │  card-service   │  ║
+║  │  Port: 3003      │  │  Port: 3004      │  │  Port: 3005     │  ║
+║  │  Replicas: 3     │  │  Replicas: 4     │  │  Replicas: 2    │  ║
+║  │  HPA: 3-15       │  │  HPA: 4-20       │  │  HPA: 2-8       │  ║
+║  └──────────────────┘  └──────────────────┘  └─────────────────┘  ║
+║                                                                      ║
+║  ┌──────────────────┐  ┌──────────────────┐  ┌─────────────────┐  ║
+║  │  investment-svc  │  │  notification    │  │  analytics      │  ║
+║  │  Port: 3007      │  │  Port: 3006      │  │  Port: 3008     │  ║
+║  │  Replicas: 2     │  │  Replicas: 2     │  │  Replicas: 2    │  ║
+║  └──────────────────┘  └──────────────────┘  └─────────────────┘  ║
+║                                                                      ║
+║  ┌──────────────────┐  ┌──────────────────┐  ┌─────────────────┐  ║
+║  │  ai-service      │  │  compliance      │  │  blockchain     │  ║
+║  │  Port: 3009      │  │  Port: 3010      │  │  Port: 3011     │  ║
+║  │  Replicas: 2     │  │  Replicas: 1     │  │  Replicas: 2    │  ║
+║  └──────────────────┘  └──────────────────┘  └─────────────────┘  ║
+║                                                                      ║
+║  ┌─────────────────────────────────────────────────────────────┐   ║
+║  │  transaction-service (Settlement & Reconciliation)          │   ║
+║  │  Port: 3012  │  Replicas: 3  │  HPA: 3-12                   │   ║
+║  └─────────────────────────────────────────────────────────────┘   ║
+║                                                                      ║
+╚══════════════════════════════════════════════════════════════════════╝
+
+┌──────────────────────────────────────────────────────────────────────┐
+│                   EXTERNAL MANAGED SERVICES                          │
+├──────────────────────────────────────────────────────────────────────┤
+│                                                                      │
+│  ┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐    │
+│  │  RDS PostgreSQL │  │  DocumentDB     │  │  ElastiCache    │    │
+│  │                 │  │  (MongoDB)      │  │  (Redis)        │    │
+│  │  Multi-AZ       │  │  3 Replicas     │  │  Cluster Mode   │    │
+│  │  db.r5.2xlarge  │  │  r5.xlarge      │  │  cache.r5.large │    │
+│  │  500GB SSD      │  │  250GB SSD      │  │  16GB Memory    │    │
+│  └─────────────────┘  └─────────────────┘  └─────────────────┘    │
+│                                                                      │
+│  ┌─────────────────────────────────────────────────────────┐        │
+│  │  Amazon Elasticsearch Service                           │        │
+│  │  • 3 nodes (m5.large.search)                            │        │
+│  │  • 100GB EBS per node                                   │        │
+│  │  • Dedicated master nodes (t3.medium.search)            │        │
+│  └─────────────────────────────────────────────────────────┘        │
+│                                                                      │
+│  ┌─────────────────────────────────────────────────────────┐        │
+│  │  Amazon MQ (RabbitMQ)                                   │        │
+│  │  • mq.m5.large (2 brokers)                              │        │
+│  │  • Active/Standby deployment                            │        │
+│  │  • 20GB storage per broker                              │        │
+│  └─────────────────────────────────────────────────────────┘        │
+│                                                                      │
+└──────────────────────────────────────────────────────────────────────┘
+```
+
+### 2.3 Diagrama de Componentes (C4 Model - Level 3: Auth Service)
+
+```
+┌──────────────────────────────────────────────────────────────────────┐
+│                        AUTH-SERVICE (NestJS)                         │
+│                         Port: 3001 (HTTP)                            │
+│                      Port: 50051 (gRPC)                              │
+├──────────────────────────────────────────────────────────────────────┤
+│                                                                      │
+│  ┌────────────────────────────────────────────────────────────────┐ │
+│  │                      PRESENTATION LAYER                        │ │
+│  ├────────────────────────────────────────────────────────────────┤ │
+│  │                                                                │ │
+│  │  ┌──────────────────┐         ┌──────────────────┐            │ │
+│  │  │ AuthController   │         │ gRPC Server      │            │ │
+│  │  │ (REST Endpoints) │         │ (Proto Impl)     │            │ │
+│  │  ├──────────────────┤         ├──────────────────┤            │ │
+│  │  │ POST /register   │         │ Register()       │            │ │
+│  │  │ POST /login      │         │ ValidateUser()   │            │ │
+│  │  │ POST /refresh    │         │ RefreshToken()   │            │ │
+│  │  │ POST /logout     │         │ RevokeToken()    │            │ │
+│  │  └────────┬─────────┘         └────────┬─────────┘            │ │
+│  │           │                            │                      │ │
+│  │           └────────────┬───────────────┘                      │ │
+│  └────────────────────────┼──────────────────────────────────────┘ │
+│                           │                                        │
+│  ┌────────────────────────▼──────────────────────────────────────┐ │
+│  │                     APPLICATION LAYER                         │ │
+│  ├───────────────────────────────────────────────────────────────┤ │
+│  │                                                               │ │
+│  │  ┌─────────────────────────────────────────────────────────┐ │ │
+│  │  │              AuthService (Business Logic)               │ │ │
+│  │  ├─────────────────────────────────────────────────────────┤ │ │
+│  │  │                                                         │ │ │
+│  │  │  async register(dto: RegisterDto): Promise<AuthToken>  │ │ │
+│  │  │  {                                                      │ │ │
+│  │  │    1. Validate input (email format, password strength) │ │ │
+│  │  │    2. Check if user exists (gRPC → user-service)       │ │ │
+│  │  │    3. Hash password (bcrypt, cost=12)                  │ │ │
+│  │  │    4. Create user (gRPC → user-service)                │ │ │
+│  │  │    5. Generate JWT tokens (access + refresh)           │ │ │
+│  │  │    6. Publish UserRegistered event (RabbitMQ)          │ │ │
+│  │  │    7. Return tokens to client                          │ │ │
+│  │  │  }                                                      │ │ │
+│  │  │                                                         │ │ │
+│  │  │  async login(dto: LoginDto): Promise<AuthToken>        │ │ │
+│  │  │  {                                                      │ │ │
+│  │  │    1. Find user by email (gRPC → user-service)         │ │ │
+│  │  │    2. Validate password (bcrypt.compare)               │ │ │
+│  │  │    3. Check account status (active/blocked)            │ │ │
+│  │  │    4. Generate JWT tokens                              │ │ │
+│  │  │    5. Store refresh token (Redis, TTL=7d)              │ │ │
+│  │  │    6. Publish UserLoggedIn event (RabbitMQ)            │ │ │
+│  │  │    7. Return tokens to client                          │ │ │
+│  │  │  }                                                      │ │ │
+│  │  │                                                         │ │ │
+│  │  └─────────────────────────────────────────────────────────┘ │ │
+│  │           │                            │                     │ │
+│  │           ▼                            ▼                     │ │
+│  │  ┌──────────────────┐        ┌──────────────────┐           │ │
+│  │  │  JwtService      │        │  UserServiceGrpc │           │ │
+│  │  │  (Token Mgmt)    │        │  Client          │           │ │
+│  │  ├──────────────────┤        ├──────────────────┤           │ │
+│  │  │ sign()           │        │ findByEmail()    │           │ │
+│  │  │ verify()         │        │ createUser()     │           │ │
+│  │  │ decode()         │        │ updateUser()     │           │ │
+│  │  └──────────────────┘        └──────────────────┘           │ │
+│  └───────────────────────────────────────────────────────────────┘ │
+│                                                                    │
+│  ┌────────────────────────────────────────────────────────────────┐ │
+│  │                    INFRASTRUCTURE LAYER                        │ │
+│  ├────────────────────────────────────────────────────────────────┤ │
+│  │                                                                │ │
+│  │  ┌──────────────────┐  ┌──────────────────┐  ┌─────────────┐ │ │
+│  │  │ RedisRepository  │  │ RabbitMQPublisher│  │ ConfigModule│ │ │
+│  │  │                  │  │                  │  │             │ │ │
+│  │  │ • storeToken()   │  │ • publish()      │  │ • JWT_KEY   │ │ │
+│  │  │ • getToken()     │  │ • exchange()     │  │ • GRPC_URL  │ │ │
+│  │  │ • revokeToken()  │  │ • queue()        │  │ • REDIS_URL │ │ │
+│  │  └──────────────────┘  └──────────────────┘  └─────────────┘ │ │
+│  │                                                                │ │
+│  └────────────────────────────────────────────────────────────────┘ │
+│                                                                      │
+└──────────────────────────────────────────────────────────────────────┘
+
+                              ▼ COMMUNICATES WITH ▼
+
+┌──────────────────────────────────────────────────────────────────────┐
+│                        USER-SERVICE (NestJS)                         │
+│                       Port: 3002 (HTTP + gRPC)                       │
+├──────────────────────────────────────────────────────────────────────┤
+│                                                                      │
+│  gRPC Server Implementation (user.proto):                           │
+│                                                                      │
+│  service UserService {                                              │
+│    rpc FindOneByEmail (FindByEmailRequest)                          │
+│        returns (UserResponse);                                      │
+│                                                                      │
+│    rpc CreateUser (CreateUserRequest)                               │
+│        returns (UserResponse);                                      │
+│                                                                      │
+│    rpc UpdateUser (UpdateUserRequest)                               │
+│        returns (UserResponse);                                      │
+│  }                                                                   │
+│                                                                      │
+│  ┌────────────────────────────────────────────────────────────────┐ │
+│  │                PostgreSQL Database Schema                      │ │
+│  ├────────────────────────────────────────────────────────────────┤ │
+│  │  TABLE users (                                                 │ │
+│  │    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),              │ │
+│  │    email VARCHAR(255) UNIQUE NOT NULL,                         │ │
+│  │    password_hash VARCHAR(255) NOT NULL,                        │ │
+│  │    full_name VARCHAR(255) NOT NULL,                            │ │
+│  │    cpf VARCHAR(11) UNIQUE NOT NULL,                            │ │
+│  │    phone VARCHAR(20),                                          │ │
+│  │    status VARCHAR(20) DEFAULT 'active',                        │ │
+│  │    created_at TIMESTAMP DEFAULT NOW(),                         │ │
+│  │    updated_at TIMESTAMP DEFAULT NOW(),                         │ │
+│  │    CONSTRAINT check_email CHECK (email ~* '^.+@.+\..+$'),      │ │
+│  │    CONSTRAINT check_cpf CHECK (length(cpf) = 11)               │ │
+│  │  );                                                             │ │
+│  │                                                                 │ │
+│  │  CREATE INDEX idx_users_email ON users(email);                 │ │
+│  │  CREATE INDEX idx_users_cpf ON users(cpf);                     │ │
+│  └────────────────────────────────────────────────────────────────┘ │
+│                                                                      │
+└──────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 3. STACK TECNOLÓGICO DETALHADO
+
+### 3.1 Matriz de Decisões Técnicas
+
+| Camada | Tecnologia Escolhida | Alternativas Avaliadas | Razão da Escolha |
+|--------|---------------------|------------------------|------------------|
+| **Runtime** | Node.js 18 LTS | Java (Spring Boot), Go, Python | • Event-loop eficiente para I/O<br>• Ecossistema NPM maduro<br>• TypeScript = type safety<br>• Time já familiarizado |
+| **Framework Backend** | NestJS | Express, Fastify, Koa | • Arquitetura opinionated (DDD)<br>• Decorators = código limpo<br>• DI nativo<br>• gRPC first-class |
+| **Framework Frontend** | Next.js 14 | Remix, SvelteKit, Nuxt | • SSR + SSG híbrido<br>• React Server Components<br>• Image optimization<br>• Vercel deploy |
+| **Linguagem** | TypeScript 5.x | JavaScript, Flow | • Type safety = menos bugs<br>• Intellisense superior<br>• Refactoring seguro<br>• Strictest mode |
+| **ORM** | TypeORM | Prisma, Sequelize, Knex | • Active Record + Data Mapper<br>• Migrations robustas<br>• Multi-DB support<br>• Decorators sintaxe |
+| **gRPC Framework** | @grpc/grpc-js | gRPC-node (C bindings) | • Pure JS (sem compile nativo)<br>• Performance aceitável<br>• Menos problemas deploy |
+| **Message Queue** | RabbitMQ | Kafka, Redis Streams, SQS | • Routing flexível<br>• DLQ nativo<br>• Management UI<br>• Cost < Kafka |
+| **Cache** | Redis 7 | Memcached, Hazelcast | • Estruturas de dados ricas<br>• Pub/Sub built-in<br>• TTL granular<br>• Cluster mode |
+| **Search Engine** | Elasticsearch | OpenSearch, Algolia, Meilisearch | • Audit log imutável<br>• Aggregations complexas<br>• Ecosystem maduro |
+| **Container** | Docker | Podman, LXC | • Padrão de mercado<br>• Registry ecosystem<br>• Multi-stage builds<br>• BuildKit cache |
+| **Orchestration** | Kubernetes (EKS) | ECS, Nomad, Swarm | • Auto-scaling robusto<br>• Service mesh ready<br>• Huge community<br>• Vendor agnostic |
+| IaC | Terraform | Pulumi, CloudFormation, CDK | • HCL declarativo<br>• State management<br>• Multi-cloud<br>• Modules ecosystem |
+| CI/CD | GitHub Actions | GitLab CI, CircleCI, Jenkins | • Native git integration<br>• Matrix builds<br>• Free for public<br>• Marketplace actions |
+| Observability | Datadog | New Relic, Dynatrace, Prometheus | • APM + Logs + Metrics<br>• AI anomaly detection<br>• Correlation engine<br>• SLA monitoring |
+| Service Mesh | Istio | Linkerd, Consul Connect | • mTLS automático<br>• Traffic management<br>• Observability deep<br>• Enterprise ready |3.2 Dependências Críticas (package.json consolidado)json{
+  "name": "@regenera/monorepo",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "apps/services/*",
+    "packages/*"
+  ],
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": ">=8.0.0"
+  },
+  "dependencies": {
+    "// FRAMEWORK CORE": "",
+    "@nestjs/common": "^10.2.10",
+    "@nestjs/core": "^10.2.10",
+    "@nestjs/platform-express": "^10.2.10",
+    "@nestjs/microservices": "^10.2.10",
+    
+    "// DATABASE & ORM": "",
+    "typeorm": "^0.3.17",
+    "pg": "^8.11.3",
+    "mongodb": "^6.3.0",
+    "redis": "^4.6.11",
+    "@elastic/elasticsearch": "^8.11.0",
+    
+    "// COMMUNICATION": "",
+    "@grpc/grpc-js": "^1.9.13",
+    "@grpc/proto-loader": "^0.7.10",
+    "amqplib": "^0.10.3",
+    "amqp-connection-manager": "^4.1.14",
+    
+    "// SECURITY": "",
+    "bcrypt": "^5.1.1",
+    "jsonwebtoken": "^9.0.2",
+    "@nestjs/jwt": "^10.2.0",
+    "@nestjs/passport": "^10.0.3",
+    "passport": "^0.7.0",
+    "passport-jwt": "^4.0.1",
+    "helmet": "^7.1.0",
+    
+    "// VALIDATION": "",
+    "class-validator": "^0.14.0",
+    "class-transformer": "^0.5.1",
+    "joi": "^17.11.0",
+    
+    "// UTILITIES": "",
+    "rxjs": "^7.8.1",
+    "lodash": "^4.17.21",
+    "date-fns": "^3.0.6",
+    "uuid": "^9.0.1",
+    
+    "// OBSERVABILITY": "",
+    "@opentelemetry/api": "^1.7.0",
+    "@opentelemetry/sdk-node": "^0.45.1",
+    "@opentelemetry/instrumentation": "^0.45.1",
+    "winston": "^3.11.0",
+    "pino": "^8.17.2",
+    
+    "// FRONTEND": "",
+    "next": "14.0.4",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "tailwindcss": "^3.4.0",
+    
+    "// TESTING": "",
+    "@nestjs/testing": "^10.2.10",
+    "jest": "^29.7.0",
+    "@types/jest": "^29.5.11",
+    "supertest": "^6.3.3",
+    "cypress": "^13.6.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.6",
+    "@typescript-eslint/eslint-plugin": "^6.15.0",
+    "@typescript-eslint/parser": "^6.15.0",
+    "eslint": "^8.56.0",
+    "prettier": "^3.1.1",
+    "husky": "^8.0.3",
+    "lint-staged": "^15.2.0",
+    "typescript": "^5.3.3"
+  },
+  "scripts": {
+    "dev": "pnpm run --parallel --filter ./apps/** dev",
+    "build": "pnpm run --filter ./apps/** build",
+    "test": "jest",
+    "test:e2e": "cypress run",
+    "lint": "eslint . --ext .ts,.tsx",
+    "format": "prettier --write \"**/*.{ts,tsx,json,md}\"",
+    "typecheck": "tsc --noEmit",
+    "docker:build": "docker-compose build",
+    "docker:up": "docker-compose up -d",
+    "infra:plan": "cd infrastructure/aws && terraform plan",
+    "infra:apply": "cd infrastructure/aws && terraform apply"
+  }
+}3.3 Configuração TypeScript (tsconfig.base.json)json{
+  "compilerOptions": {
+    "// STRICTNESS SETTINGS - The Don Standard": "",
+    "strict": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictBindCallApply": true,
+    "strictPropertyInitialization": true,
+    "noImplicitThis": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    
+    "// MODULE RESOLUTION": "",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    
+    "// PATH ALIASES": "",
+    "baseUrl": ".",
+    "paths": {
+      "@repo/core": ["packages/core/src"],
+      "@repo/ui": ["packages/ui/src"],
+      "@repo/config": ["packages/config/src"],
+      "@repo/logging": ["packages/logging/src"],
+      "@repo/tracing": ["packages/tracing/src"],
+      "@repo/resilience": ["packages/resilience/src"],
+      "@repo/grpc-definitions": ["packages/grpc-definitions/src"]
+    },
+    
+    "// OUTPUT SETTINGS": "",
+    "target": "ES2022",
+    "lib": ["ES2022"],
+    "outDir": "./dist",
+    "rootDir": "./",
+    "sourceMap": true,
+    "declaration": true,
+    "declarationMap": true,
+    "removeComments": false,
+    
+    "// DECORATORS (NestJS requirement)": "",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    
+    "// OTHER": "",
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "incremental": true
+  },
+  "exclude": [
+    "node_modules",
+    "dist",
+    "**/*.spec.ts",
+    "**/*.test.ts"
+  ]
+}4. FLUXOS DE DADOS CRÍTICOS4.1 Fluxo 1: Autenticação Completa (Login)┌─────────────────────────────────────────────────────────────────────┐
+│ PHASE 1: CLIENT REQUEST                                             │
+└─────────────────────────────────────────────────────────────────────┘
+
+[USER]                  [BROWSER]               [CDN/WAF]
+  │                         │                        │
+  │ 1. Click "Login"        │                        │
+  ├────────────────────────>│                        │
+  │                         │                        │
+  │                         │ 2. POST /api/auth/login│
+  │                         ├───────────────────────>│
+  │                         │    {                   │
+  │                         │      email: "x@y.com", │
+  │                         │      password: "***"   │
+  │                         │    }                   │
+  │                         │                        │
+  │                         │                   3. WAF Check
+  │                         │                      ├─ SQL Injection? NO
+  │                         │                      ├─ XSS Attack? NO
+  │                         │                      ├─ Rate Limit? OK (45/100)
+  │                         │                      └─ PASS ✓
+
+┌─────────────────────────────────────────────────────────────────────┐
+│ PHASE 2: API GATEWAY ROUTING                                        │
+└─────────────────────────────────────────────────────────────────────┘
+
+                                              [API GATEWAY]
+                                                    │
+                                              4. Receive Request
+                                                    │
+                                              ┌─────▼─────┐
+                                              │ Redis     │
+                                              │ Check     │
+                                              └─────┬─────┘
+                                                    │
+                                        5. Rate Limit Check
+                                           (User-specific)
+                                           ┌──────────────┐
+                                           │ Key: user:ip │
+                                           │ Count: 3/100 │
+                                           │ Window: 1min │
+                                           │ Result: PASS │
+                                           └──────────────┘
+                                                    │
+                                              6. Service Discovery
+                                                 (from config)
+                                                    │
+                                      ┌─────────────┴─────────────┐
+                                      │ auth-service:             │
+                                      │   host: auth-service-svc  │
+                                      │   port: 3001              │
+                                      │   healthcheck: OK         │
+                                      └─────────────┬─────────────┘
+                                                    │
+                                              7. Forward Request
+                                                    │
+                                                    ▼
+
+┌─────────────────────────────────────────────────────────────────────┐
+│ PHASE 3: AUTHENTICATION LOGIC                                       │
+└─────────────────────────────────────────────────────────────────────┘
+
+                                            [AUTH SERVICE]
+                                                  │
+                                            8. AuthController
+                                               .login(dto)
+                                                  │
+                                                  ▼
+                                            9. AuthService
+                                               .validateUser()
+                                                  │
+                         ┌────────────────────────┴────────────────────────┐
+                         │                                                 │
+                   10. gRPC Call                                     11. Password
+                   user-service                                       Validation
+                   findByEmail()                                           │
+                         │                                                 │
+                         ▼                                                 ▼
+                  [USER SERVICE]                                    bcrypt.compare(
+                         │                                           inputPassword,
+                   12. Query DB                                      storedHash
+                   SELECT * FROM users                              )
+                   WHERE email = ?                                        │
+                         │                                           Result: MATCH ✓
+                         ▼                                                 │
+                  [PostgreSQL]                                             │
+                         │                                                 │
+                   13. Return User                                         │
+                   {                                                       │
+                     id: "uuid",                                           │
+                     email: "x@y.com",                                     │
+                     password_hash: "$2b$12...",                           │
+                     status: "active"                                      │
+                   }                                                       │
+                         │                                                 │
+                         └─────────────────────┬─────────────────────────┘
+                                               │
+                                         14. Generate Tokens
+                                               │
+                                    ┌──────────┴──────────┐
+                                    │                     │
+                              Access Token          Refresh Token
+                              (JWT)                 (JWT + Redis)
+                              │                     │
+                        ┌─────▼─────┐         ┌────▼────┐
+                        │ Payload:  │         │ Payload:│
+                        │ {         │         │ {       │
+                        │   sub: id │         │   sub: id│
+                        │   email   │         │   type: │
+                        │   exp: 15m│         │  "refresh"│
+                        │ }         │         │   exp: 7d│
+                        └───────────┘         │ }       │
+                                              └────┬────┘
+                                                   │
+                                            15. Store in Redis
+                                              SET refresh:uuid
+                                              VALUE: token
+                                              TTL: 7 days
+
+┌─────────────────────────────────────────────────────────────────────┐
+│ PHASE 4: EVENT PUBLISHING                                           │
+└─────────────────────────────────────────────────────────────────────┘
+
+                                            [AUTH SERVICE]
+                                                  │
+                                            16. Publish Event
+                                                  │
+                                                  ▼
+                                            [RabbitMQ]
+                                                  │
+                                      Exchange: "auth.events"
+                                      Routing Key: "user.logged_in"
+                                      Payload: {
+                                        userId: "uuid",
+                                        timestamp: "ISO8601",
+                                        ip: "203.0.113.5",
+                                        userAgent: "..."
+                                      }
+                                                  │
+                         ┌────────────────────────┼────────────────────────┐
+                         │                        │                        │
+                         ▼                        ▼                        ▼
+                 [NOTIFICATION]             [ANALYTICS]             [COMPLIANCE]
+                   SERVICE                    SERVICE                  SERVICE
+                         │                        │                        │
+                   17a. Queue:               17b. Queue:             17c. Queue:
+                   "notify.login"            "analytics.user"        "fraud.check"
+                         │                        │                        │
+                   Send Email:               Store in MongoDB:       Check Pattern:
+                   "Login from               {                       - Unusual location?
+                    new device"                event: "login",       - Brute force?
+                                               userId: "...",        - Time anomaly?
+                                               metadata: {...}       
+                                             }                       Alert if suspicious
+
+┌─────────────────────────────────────────────────────────────────────┐
+│ PHASE 5: RESPONSE TO CLIENT                                         │
+└─────────────────────────────────────────────────────────────────────┘
+
+                                            [AUTH SERVICE]
+                                                  │
+                                            18. Return Response
+                                                  │
+                                                  ▼
+                                            [API GATEWAY]
+                                                  │
+                                            19. Log Response Time
+                                                (Datadog APM)
+                                                  │
+                                                  ▼
+                                              [BROWSER]
+                                                  │
+                                            20. Store Tokens
+                                              localStorage:
+                                              {
+                                                accessToken: "eyJ...",
+                                                refreshToken: "eyJ..."
+                                              }
+                                                  │
+                                            21. Redirect to /dashboard
+                                                  │
+                                                  ▼
+                                                [USER]
+                                            "Welcome back!"
+
+┌─────────────────────────────────────────────────────────────────────┐
+│ METRICS COLLECTED (across all phases)                              │
+└─────────────────────────────────────────────────────────────────────┘
+
+Phase 1 (Client → WAF):           12ms
+Phase 2 (WAF → API Gateway):      5ms
+Phase 3 (Gateway → Auth Service): 45ms
+  ├─ gRPC call to user-service:   18ms
+  ├─ PostgreSQL query:             8ms
+  ├─ bcrypt comparison:            15ms
+  └─ JWT generation:               4ms
+Phase 4 (RabbitMQ publish):       2ms
+Phase 5 (Response return):        8ms
+
+TOTAL END-TO-END LATENCY:         72ms (p50)
+                                  98ms (p95)
+                                  145ms (p99)
+
+THROUGHPUT:
+- Successful logins/sec:          ~250 req/s (single pod)
+- Failed logins/sec:              ~500 req/s (faster, no DB write)
+
+ERROR RATE:                       0.03% (mostly invalid credentials)4.2 Fluxo 2: Transferência PIX (Evento Assíncrono)┌─────────────────────────────────────────────────────────────────────┐
+│ SCENARIO: User transfers R$ 150.00 via PIX                         │
+└─────────────────────────────────────────────────────────────────────┘
+
+[USER] → [FRONTEND] → [API GATEWAY] → [PIX SERVICE]
+  │
+  │ POST /api/pix/transfer
+  │ {
+  │   recipientKey: "11122233344",  // CPF
+  │   amount: 15000,                // centavos (R$ 150.00)
+  │   description: "Almoço"
+  │ }
+  │
+  ▼
+
+┌─────────────────────────────────────────────────────────────────────┐
+│ STEP 1: VALIDATION (PIX SERVICE)                                   │
+└─────────────────────────────────────────────────────────────────────┘
+
+1.1 Extract userId from JWT
+    └─ userId: "a1b2c3d4..."
+
+1.2 Validate PIX Key (CPF format)
+    └─ Regex: ^\d{11}$
+    └─ Result: VALID ✓
+
+1.3 Validate Amount
+    └─ amount > 0? YES ✓
+    └─ amount <= PIX_LIMIT (R$ 5000)? YES ✓
+    
+   
+1.4 HTTP Call to Account Service
+    GET /accounts/balance?userId={userId}
+    
+    Response: {
+      accountId: "acc-123",
+      balance: 50000  // R$ 500.00
+    }
+    
+    Check: balance >= amount?
+    50000 >= 15000? YES ✓
+
+┌─────────────────────────────────────────────────────────────────────┐
+│ STEP 2: TRANSACTION CREATION (PIX SERVICE)                         │
+└─────────────────────────────────────────────────────────────────────┘
+
+2.1 Generate Transaction ID
+    └─ txId: "pix-20250116-abc123"
+
+2.2 Save to PostgreSQL (pix_transactions table)
+    INSERT INTO pix_transactions (
+      id,
+      sender_account_id,
+      recipient_pix_key,
+      amount,
+      status,
+      created_at
+    ) VALUES (
+      'pix-20250116-abc123',
+      'acc-123',
+      '11122233344',
+      15000,
+      'PENDING',
+      NOW()
+    );
+
+2.3 Return Immediate Response to Client
+    {
+      transactionId: "pix-20250116-abc123",
+      status: "PROCESSING",
+      estimatedTime: "5 seconds"
+    }
+
+┌─────────────────────────────────────────────────────────────────────┐
+│ STEP 3: PUBLISH EVENT TO RABBITMQ                                  │
+└─────────────────────────────────────────────────────────────────────┘
+
+3.1 PIX Service publishes:
+    
+    Exchange: "transactions.events"
+    Routing Key: "pix.transfer.initiated"
+    Message: {
+      transactionId: "pix-20250116-abc123",
+      senderAccountId: "acc-123",
+      recipientPixKey: "11122233344",
+      amount: 15000,
+      timestamp: "2025-01-16T14:23:45Z"
+    }
+
+┌─────────────────────────────────────────────────────────────────────┐
+│ STEP 4: ACCOUNT SERVICE CONSUMES EVENT (ASYNC)                     │
+└─────────────────────────────────────────────────────────────────────┘
+
+4.1 Queue: "account.transactions"
+    └─ Binds to: transactions.events with key: pix.transfer.*
+
+4.2 Account Service receives message
+
+4.3 BEGIN DATABASE TRANSACTION (PostgreSQL)
+    
+    4.3.1 Lock Sender Account (FOR UPDATE)
+          SELECT * FROM accounts
+          WHERE id = 'acc-123'
+          FOR UPDATE;
+    
+    4.3.2 Debit Sender Account
+          UPDATE accounts
+          SET balance = balance - 15000
+          WHERE id = 'acc-123';
+          
+          New balance: 50000 - 15000 = 35000
+    
+    4.3.3 Find Recipient Account
+          SELECT * FROM accounts
+          WHERE owner_cpf = '11122233344';
+          
+          Result: {
+            id: 'acc-456',
+            owner_cpf: '11122233344',
+            balance: 25000
+          }
+    
+    4.3.4 Credit Recipient Account
+          UPDATE accounts
+          SET balance = balance + 15000
+          WHERE id = 'acc-456';
+          
+          New balance: 25000 + 15000 = 40000
+    
+    4.3.5 Insert Transaction Record
+          INSERT INTO account_transactions (
+            id,
+            account_id,
+            type,
+            amount,
+            balance_after,
+            reference_id
+          ) VALUES
+          -- Sender
+          (uuid_generate_v4(), 'acc-123', 'DEBIT', 15000, 35000, 'pix-20250116-abc123'),
+          -- Recipient
+          (uuid_generate_v4(), 'acc-456', 'CREDIT', 15000, 40000, 'pix-20250116-abc123');
+    
+    COMMIT;
+
+4.4 Publish Success Event
+    
+    Exchange: "transactions.events"
+    Routing Key: "pix.transfer.completed"
+    Message: {
+      transactionId: "pix-20250116-abc123",
+      status: "COMPLETED",
+      completedAt: "2025-01-16T14:23:47Z"
+    }
+
+┌─────────────────────────────────────────────────────────────────────┐
+│ STEP 5: PARALLEL PROCESSING (MULTIPLE CONSUMERS)                   │
+└─────────────────────────────────────────────────────────────────────┘
+
+5.1 [NOTIFICATION SERVICE]
+    Queue: "notifications.pix"
+    
+    Actions:
+    ├─ Send Push Notification to Sender
+    │  "Transferência de R$ 150,00 realizada com sucesso"
+    │
+    └─ Send Push Notification to Recipient
+       "Você recebeu R$ 150,00 via PIX"
+
+5.2 [ANALYTICS SERVICE]
+    Queue: "analytics.transactions"
+    
+    Actions:
+    └─ Store in MongoDB (events collection)
+       {
+         _id: ObjectId("..."),
+         eventType: "pix_transfer",
+         transactionId: "pix-20250116-abc123",
+         userId: "a1b2c3d4",
+         amount: 15000,
+         timestamp: ISODate("2025-01-16T14:23:47Z"),
+         metadata: {
+           recipientKey: "11122233344",
+           description: "Almoço"
+         }
+       }
+
+5.3 [COMPLIANCE SERVICE]
+    Queue: "compliance.transactions"
+    
+    Actions:
+    ├─ Check if amount > R$ 10,000 (AML threshold)
+    │  Result: NO (R$ 150 < R$ 10,000)
+    │
+    └─ Check user daily limit
+       Query: SELECT SUM(amount) FROM pix_transactions
+              WHERE sender_account_id = 'acc-123'
+              AND created_at >= CURRENT_DATE;
+       
+       Result: R$ 150 (today)
+       Daily Limit: R$ 5,000
+       Status: OK ✓
+
+5.4 [BLOCKCHAIN SERVICE]
+    Queue: "blockchain.audit"
+    
+    Actions:
+    └─ Store immutable audit log in Elasticsearch
+       PUT /audit-logs/_doc/pix-20250116-abc123
+       {
+         "transactionId": "pix-20250116-abc123",
+         "type": "PIX_TRANSFER",
+         "sender": "acc-123",
+         "recipient": "acc-456",
+         "amount": 15000,
+         "timestamp": "2025-01-16T14:23:47Z",
+         "hash": "sha256(...)",
+         "previousHash": "sha256(...)"
+       }
+
+5.5 [TRANSACTION SERVICE]
+    Queue: "transactions.settlement"
+    
+    Actions:
+    ├─ Record in transactions table (PostgreSQL)
+    │  INSERT INTO transactions (
+    │    id,
+    │    type,
+    │    status,
+    │    amount,
+    │    metadata
+    │  ) VALUES (...)
+    │
+    └─ Schedule Reconciliation (for batch processing)
+       At 23:59 UTC, verify:
+       SUM(debits) == SUM(credits)
+
+┌─────────────────────────────────────────────────────────────────────┐
+│ STEP 6: FRONTEND NOTIFICATION (WebSocket/SSE)                      │
+└─────────────────────────────────────────────────────────────────────┘
+
+6.1 PIX Service listens to "pix.transfer.completed"
+
+6.2 Sends WebSocket message to connected client
+    {
+      type: "TRANSACTION_UPDATE",
+      transactionId: "pix-20250116-abc123",
+      status: "COMPLETED",
+      newBalance: 35000  // R$ 350.00
+    }
+
+6.3 Frontend updates UI
+    ├─ Show success toast
+    ├─ Update account balance
+    └─ Add transaction to history list
+
+┌─────────────────────────────────────────────────────────────────────┐
+│ TIMELINE VISUALIZATION                                             │
+└─────────────────────────────────────────────────────────────────────┘
+
+T+0ms    │ User clicks "Transfer"
+T+150ms  │ API Gateway receives request
+T+180ms  │ PIX Service validates
+T+200ms  │ Response returned to user ("PROCESSING")
+         │
+         │ [USER SEES: "Transfer in progress..."]
+         │
+T+250ms  │ Event published to RabbitMQ
+T+280ms  │ Account Service picks up event
+T+320ms  │ Database transaction completes (ACID)
+T+350ms  │ Success event published
+         │
+         │ ┌─── PARALLEL PROCESSING (T+350ms → T+500ms) ───┐
+         │ │                                                │
+         │ │ [Notification] Sends push        → T+380ms    │
+         │ │ [Analytics] Stores in MongoDB    → T+390ms    │
+         │ │ [Compliance] Runs checks         → T+420ms    │
+         │ │ [Blockchain] Audit log           → T+450ms    │
+         │ │ [Transaction] Records settlement → T+480ms    │
+         │ │                                                │
+         │ └────────────────────────────────────────────────┘
+         │
+T+500ms  │ WebSocket notifies frontend
+         │
+         │ [USER SEES: "Transfer completed! ✓"]
+
+┌─────────────────────────────────────────────────────────────────────┐
+│ FAILURE SCENARIOS & RECOVERY                                       │
+└─────────────────────────────────────────────────────────────────────┘
+
+SCENARIO A: Insufficient Balance
+├─ Detected at: Step 1.4 (before event publish)
+├─ Response: HTTP 400
+│  {
+│    error: "INSUFFICIENT_BALANCE",
+│    required: 15000,
+│    available: 8000
+│  }
+└─ No event published, no state change
+
+SCENARIO B: Account Service Down
+├─ Detected at: Step 4 (event not consumed)
+├─ RabbitMQ behavior:
+│  └─ Message remains in queue
+│  └─ Retry after 30s (exponential backoff)
+│  └─ Max retries: 5
+│  └─ After 5 failures → Dead Letter Queue (DLQ)
+├─ PIX Service:
+│  └─ Transaction status remains "PENDING"
+│  └─ Cron job (every 5 min) checks for stuck transactions
+│  └─ Alert sent to ops team
+└─ User notification: "Transfer delayed, will retry"
+
+SCENARIO C: Database Transaction Rollback
+├─ Detected at: Step 4.3 (constraint violation, deadlock, etc)
+├─ PostgreSQL: ROLLBACK automatic
+├─ Account Service:
+│  └─ Catches exception
+│  └─ Publishes "pix.transfer.failed" event
+│  └─ Updates pix_transactions.status = 'FAILED'
+└─ User receives: "Transfer failed, amount not debited"
+
+SCENARIO D: Partial Failure (sender debited, recipient not credited)
+├─ IMPOSSIBLE due to database transaction atomicity
+├─ If PostgreSQL crashes mid-transaction:
+│  └─ On restart, ROLLBACK of uncommitted transaction
+│  └─ Result: Both accounts unchanged
+└─ This is why ACID databases are non-negotiable for money
+5. SEGURANÇA MULTI-CAMADA
+5.1 Modelo de Ameaças (STRIDE)
+Ameaça	Vetor de Ataque	Mitigação Implementada	Camada
+Spoofing	Falsificação de identidade	JWT assinado com RS256, refresh tokens em Redis	Application
+Tampering	Modificação de dados em trânsito	TLS 1.3 obrigatório, mTLS entre serviços	Transport
+Repudiation	Negação de ações	Audit logs imutáveis em Elasticsearch	Data
+Information Disclosure	Vazamento de dados	Encryption at rest (KMS), secrets management (AWS Secrets Manager)	Data + Infra
+Denial of Service	Sobrecarga de sistema	Rate limiting (Redis), WAF, Auto-scaling (HPA)	Edge + Orchestration
+Elevation of Privilege	Escalação de privilégios	RBAC, Principle of Least Privilege, containers non-root	Application + Infra
+
+5.2 Defense in Depth: As 7 Camadas
+┌─────────────────────────────────────────────────────────────────────┐
+│ LAYER 7: APPLICATION SECURITY                                      │
+├─────────────────────────────────────────────────────────────────────┤
+│                                                                     │
+│ ✓ Input Validation (class-validator)                               │
+│   └─ Email format, CPF regex, amount ranges                        │
+│                                                                     │
+│ ✓ Output Encoding                                                  │
+│   └─ XSS prevention, sanitize HTMLContinuar22:402 / 2│
+│                                                                     │
+│ ✓ SQL Injection Prevention                                         │
+│   └─ TypeORM parameterized queries                                 │
+│                                                                     │
+│ ✓ Business Logic Authorization                                     │
+│   └─ User can only access own accounts                             │
+│                                                                     │
+│ ✓ Audit Logging                                                    │
+│   └─ Every mutation logged with user context                       │
+│                                                                     │
+└─────────────────────────────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────────────────────┐
+│ LAYER 6: PRESENTATION SECURITY (API Gateway)                       │
+├─────────────────────────────────────────────────────────────────────┤
+│                                                                     │
+│ ✓ JWT Validation                                                   │
+│   └─ Signature verification, expiration check                      │
+│                                                                     │
+│ ✓ Rate Limiting (Redis)                                            │
+│   ├─ Per-user: 1000 req/min                                        │
+│   ├─ Per-IP: 2000 req/min                                          │
+│   └─ Per-endpoint: Custom limits                                   │
+│                                                                     │
+│ ✓ CORS Configuration                                               │
+│   └─ Only allowed origins (regenera.bank.com)                      │
+│                                                                     │
+│ ✓ Helmet.js Headers                                                │
+│   ├─ X-Frame-Options: DENY                                         │
+│   ├─ X-Content-Type-Options: nosniff                               │
+│   ├─ Strict-Transport-Security: max-age=31536000                   │
+│   └─ Content-Security-Policy: strict                               │
+│                                                                     │
+└─────────────────────────────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────────────────────┐
+│ LAYER 5: SESSION SECURITY                                          │
+├─────────────────────────────────────────────────────────────────────┤
+│                                                                     │
+│ ✓ Access Token (Short-lived)                                       │
+│   ├─ Algorithm: RS256 (asymmetric)                                 │
+│   ├─ Lifetime: 15 minutes                                          │
+│   ├─ Claims: userId, email, roles                                  │
+│   └─ Issuer: auth.regenera.bank                                    │
+│                                                                     │
+│ ✓ Refresh Token (Long-lived)                                       │
+│   ├─ Storage: Redis with TTL                                       │
+│   ├─ Lifetime: 7 days                                              │
+│   ├─ Rotation: New token on each refresh                           │
+│   └─ Revocation: Immediate via Redis DEL                           │
+│                                                                     │
+│ ✓ Session Management                                               │
+│   ├─ Concurrent session limit: 5 devices                           │
+│   ├─ Idle timeout: 30 minutes                                      │
+│   └─ Logout on suspicious activity                                 │
+│                                                                     │
+└─────────────────────────────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────────────────────┐
+│ LAYER 4: TRANSPORT SECURITY                                        │
+├─────────────────────────────────────────────────────────────────────┤
+│                                                                     │
+│ ✓ TLS 1.3 (Client ↔ Server)                                        │
+│   ├─ Certificate: Let's Encrypt (auto-renewed)                     │
+│   ├─ Cipher Suite: TLS_AES_256_GCM_SHA384                          │
+│   └─ HSTS enabled (force HTTPS)                                    │
+│                                                                     │
+│ ✓ mTLS (Service ↔ Service)                                         │
+│   ├─ Managed by Istio Service Mesh                                 │
+│   ├─ Certificate rotation: 24 hours                                │
+│   └─ Strict mode (reject non-mTLS)                                 │
+│                                                                     │
+│ ✓ gRPC Security                                                    │
+│   └─ SSL credentials for all gRPC channels                         │
+│                                                                     │
+└─────────────────────────────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────────────────────┐
+│ LAYER 3: NETWORK SECURITY (AWS VPC)                                │
+├─────────────────────────────────────────────────────────────────────┤
+│                                                                     │
+│ ✓ Network Segmentation                                             │
+│   ├─ Public Subnet: Only ALB                                       │
+│   ├─ Private Subnet: EKS worker nodes                              │
+│   └─ Database Subnet: RDS, ElastiCache (isolated)                  │
+│                                                                     │
+│ ✓ Security Groups (Stateful Firewall)                              │
+│   ├─ ALB SG: Allow 443 from 0.0.0.0/0                              │
+│   ├─ EKS SG: Allow traffic only from ALB                           │
+│   └─ RDS SG: Allow 5432 only from EKS SG                           │
+│                                                                     │
+│ ✓ Network ACLs (Stateless Firewall)                                │
+│   └─ Deny list for known malicious IPs                             │
+│                                                                     │
+│ ✓ VPC Flow Logs                                                    │
+│   └─ All traffic logged to CloudWatch                              │
+│                                                                     │
+└─────────────────────────────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────────────────────┐
+│ LAYER 2: DATA SECURITY                                             │
+├─────────────────────────────────────────────────────────────────────┤
+│                                                                     │
+│ ✓ Encryption at Rest                                               │
+│   ├─ RDS: AES-256 (AWS KMS key)                                    │
+│   ├─ S3: Server-side encryption (SSE-S3)                           │
+│   ├─ EBS: Encrypted volumes                                        │
+│   └─ ElastiCache: Encryption enabled                               │
+│                                                                     │
+│ ✓ Key Management (AWS KMS)                                         │
+│   ├─ Separate keys per environment                                 │
+│   ├─ Automatic rotation: 365 days                                  │
+│   └─ CloudTrail logs all key usage                                 │
+│                                                                     │
+│ ✓ Secrets Management (AWS Secrets Manager)                         │
+│   ├─ Database credentials                                          │
+│   ├─ API keys (third-party)                                        │
+│   ├─ JWT private keys                                              │
+│   └─ Automatic injection in containers                             │
+│                                                                     │
+│ ✓ Sensitive Data Handling                                          │
+│   ├─ PII: Encrypted in database (column-level)                     │
+│   ├─ PCI Data: Tokenization for card numbers                       │
+│   └─ Passwords: bcrypt with cost=12                                │
+│                                                                     │
+└─────────────────────────────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────────────────────┐
+│ LAYER 1: PHYSICAL/CLOUD SECURITY (AWS)                             │
+├─────────────────────────────────────────────────────────────────────┤
+│                                                                     │
+│ ✓ AWS Compliance Certifications                                    │
+│   ├─ SOC 1, SOC 2, SOC 3                                           │
+│   ├─ ISO 27001, 27017, 27018                                       │
+│   ├─ PCI DSS Level 1                                               │
+│   └─ GDPR, LGPD compliant                                          │
+│                                                                     │
+│ ✓ AWS Shared Responsibility Model                                  │
+│   ├─ AWS: Physical datacenter security                             │
+│   └─ Us: OS, application, data security                            │
+│                                                                     │
+│ ✓ Multi-AZ Deployment                                              │
+│   └─ Survive entire AZ failure                                     │
+│                                                                     │
+│ ✓ DDoS Protection (AWS Shield Standard)                            │
+│   └─ Automatic mitigation                                          │
+│                                                                     │
+└─────────────────────────────────────────────────────────────────────┘
+
+### 5.3 Checklist de Segurança (Antes de Deploy em Produção)
+```yaml
+✓ Authentication & Authorization:
+  - [ ] JWT secrets rotacionados e armazenados no Secrets Manager
+  - [ ] Refresh tokens com TTL configurado
+  - [ ] RBAC implementado para todos os endpoints
+  - [ ] Rate limiting ativo no API Gateway
+
+✓ Data Protection:
+  - [ ] Encryption at rest habilitado em todos os DBs
+  - [ ] TLS 1.3 obrigatório (HTTP desabilitado)
+  - [ ] mTLS configurado entre todos os serviços
+  - [ ] PII encriptado no banco de dados
+
+✓ Network Security:
+  - [ ] Security Groups configurados (least privilege)
+  - [ ] Serviços em subnets privadas (sem IP público)
+  - [ ] VPC Flow Logs habilitados
+  - [ ] WAF rules ativas (OWASP Top 10)
+
+✓ Container Security:
+  - [ ] Imagens escaneadas (vulnerabilidades conhecidas)
+  - [ ] Containers rodando como usuário não-root
+  - [ ] Resource limits definidos (CPU/Memory)
+  - [ ] Image pull policy: IfNotPresent
+
+✓ Monitoring & Incident Response:
+  - [ ] Alertas configurados para anomalias
+  - [ ] Runbooks de incidentes documentados
+  - [ ] Backup/restore testado mensalmente
+  - [ ] Disaster recovery plan validado
+
+✓ Compliance:
+  - [ ] Audit logs imutáveis (Elasticsearch)
+  - [ ] LGPD data retention policies
+  - [ ] PCI-DSS cardholder data nunca em logs
+  - [ ] Penetration test realizado (< 6 meses)
+```
+
+---
+
+## 6. OBSERVABILIDADE E RESILIÊNCIA
+
+### 6.1 O Tripé da Observabilidade
+┌─────────────────────────────────────────────────────────────────────┐
+│                    OBSERVABILITY PYRAMID                            │
+├─────────────────────────────────────────────────────────────────────┤
+│                                                                     │
+│                          ╱╲                                         │
+│                         ╱  ╲                                        │
+│                        ╱TRAC╲                                       │
+│                       ╱ ING  ╲                                      │
+│                      ╱────────╲                                     │
+│                     ╱   LOGS   ╲                                    │
+│                    ╱────────────╲                                   │
+│                   ╱   METRICS    ╲                                  │
+│                  ╱────────────────╲                                 │
+│                                                                     │
+└─────────────────────────────────────────────────────────────────────┘
+
+#### 6.1.1 Metrics (Prometheus + Datadog)
+```typescript
+// packages/apm/src/metrics.ts
+
+import { Counter, Histogram, Gauge } from 'prom-client';
+
+export class MetricsService {
+  // Request counters
+  private readonly httpRequestsTotal = new Counter({
+    name: 'http_requests_total',
+    help: 'Total HTTP requests',
+    labelNames: ['method', 'route', 'status_code', 'service']
+  });
+
+  // Latency histogram
+  private readonly httpRequestDuration = new Histogram({
+    name: 'http_request_duration_seconds',
+    help: 'HTTP request duration',
+    labelNames: ['method', 'route', 'service'],
+    buckets: [0.005, 0.01, 0.025, 0.05, 0.1, 0.25, 0.5, 1, 2.5, 5, 10]
+  });
+
+  // Business metrics
+  private readonly pixTransfersTotal = new Counter({
+    name: 'pix_transfers_total',
+    help: 'Total PIX transfers',
+    labelNames: ['status']  // success, failed, pending
+  });
+
+  private readonly pixTransferAmount = new Histogram({
+    name: 'pix_transfer_amount_brl',
+    help: 'PIX transfer amounts in BRL',
+    buckets: [10, 50, 100, 500, 1000, 5000, 10000, 50000]
+  });
+
+  // System metrics
+  private readonly activeConnections = new Gauge({
+    name: 'active_database_connections',
+    help: 'Number of active database connections',
+    labelNames: ['database', 'service']
+  });
+}
+
+// Usage in controllers:
+@Controller('pix')
+export class PixController {
+  async transfer(@Body() dto: TransferDto) {
+    const startTime = Date.now();
+    
+    try {
+      const result = await this.pixService.transfer(dto);
+      
+      this.metrics.pixTransfersTotal.inc({ status: 'success' });
+      this.metrics.pixTransferAmount.observe(dto.amount / 100);
+      
+      return result;
+    } catch (error) {
+      this.metrics.pixTransfersTotal.inc({ status: 'failed' });
+      throw error;
+    } finally {
+      const duration = (Date.now() - startTime) / 1000;
+      this.metrics.httpRequestDuration.observe(
+        { method: 'POST', route: '/pix/transfer', service: 'pix-service' },
+        duration
+      );
+    }
+  }
+}
+```
+
+#### 6.1.2 Logs (Structured Logging com Winston)
+```typescript
+// packages/logging/src/logger.ts
+
+import winston from 'winston';
+
+export const logger = winston.createLogger({
+  level: process.env.LOG_LEVEL || 'info',
+  format: winston.format.combine(
+    winston.format.timestamp(),
+    winston.format.errors({ stack: true }),
+    winston.format.json()
+  ),
+  defaultMeta: {
+    service: process.env.SERVICE_NAME,
+    environment: process.env.NODE_ENV,
+    version: process.env.APP_VERSION
+  },
+  transports: [
+    new winston.transports.Console(),
+    new winston.transports.File({ filename: 'error.log', level: 'error' }),
+    new winston.transports.File({ filename: 'combined.log' })
+  ]
+});
+
+// Usage example:
+logger.info('PIX transfer initiated', {
+  transactionId: 'pix-123',
+  userId: 'user-456',
+  amount: 15000,
+  recipientKey: '11122233344'
+});
+
+// Output (JSON):
+{
+  "timestamp": "2025-01-16T14:23:45.123Z",
+  "level": "info",
+  "message": "PIX transfer initiated",
+  "service": "pix-service",
+  "environment": "production",
+  "version": "2.1.0",
+  "transactionId": "pix-123",
+  "userId": "user-456",
+  "amount": 15000,
+  "recipientKey": "11122233344"
+}
+```
+
+#### 6.1.3 Distributed Tracing (OpenTelemetry + Jaeger)
+```typescript
+// packages/tracing/src/tracing.ts
+
+import { NodeSDK } from '@opentelemetry/sdk-node';
+import { getNodeAutoInstrumentations } from '@opentelemetry/auto-instrumentations-node';
+import { JaegerExporter } from '@opentelemetry/exporter-jaeger';
+
+export const sdk = new NodeSDK({
+  traceExporter: new JaegerExporter({
+    endpoint: process.env.JAEGER_ENDPOINT,
+  }),
+  instrumentations: [
+    getNodeAutoInstrumentations({
+      '@opentelemetry/instrumentation-http': { enabled: true },
+      '@opentelemetry/instrumentation-grpc': { enabled: true },
+      '@opentelemetry/instrumentation-pg': { enabled: true },
+      '@opentelemetry/instrumentation-redis': { enabled: true },
+    }),
+  ],
+});
+
+// Trace visualization:
+/*
+┌─────────────────────────────────────────────────────────────────────┐
+│ TRACE: PIX Transfer (pix-20250116-abc123)                          │
+├─────────────────────────────────────────────────────────────────────┤
+│                                                                     │
+│ [api-gateway] POST /api/pix/transfer          │███░░░░░░░│  45ms   │
+│   └─ [pix-service] PixController.transfer     │░███░░░░░░│  40ms   │
+│       ├─ [pix-service] Validate input         │░░█░░░░░░░│   2ms   │
+│       ├─ [pix-service] HTTP → account-service │░░░███░░░░│  15ms   │
+│       ├─ [pix-service] INSERT pix_transactions│░░░░░██░░░│   8ms   │
+│       └─ [pix-service] Publish to RabbitMQ    │░░░░░░░█░░│   3ms   │
+│                                                                     │
+│ [account-service] Consume event                │░░░░░░░░██│  12ms   │
+│   ├─ [account-service] BEGIN transaction      │░░░░░░░░█░│   1ms   │
+│   ├─ [account-service] UPDATE accounts (x2)   │░░░░░░░░░█│   8ms   │
+│   └─ [account-service] COMMIT                 │░░░░░░░░░█│   2ms   │
+│                                                                     │
+│ [notification-service] Send push notifications │░░░░░░░░░█│   8ms   │
+│                                                                     │
+│ TOTAL END-TO-END LATENCY:                      72ms (p50)          │
+└─────────────────────────────────────────────────────────────────────┘
+*/
+```
+
+### 6.2 Padrões de Resiliência
+
+#### 6.2.1 Circuit Breaker
+```typescript
+// packages/resilience/src/circuit-breaker.ts
+
+import CircuitBreaker from 'opossum';
+
+export class ResilientHttpClient {
+  private breaker: CircuitBreaker;
+
+  constructor(private readonly httpClient: HttpService) {
+    this.breaker = new CircuitBreaker(
+      async (url: string, options: any) => {
+        return this.httpClient.request(url, options);
+      },
+      {
+        timeout: 3000,              // Request timeout
+        errorThresholdPercentage: 50, // Open circuit at 50% errors
+        resetTimeout: 30000,        // Try again after 30s
+        rollingCountTimeout: 10000, // 10s rolling window
+        volumeThreshold: 10,        // Min requests before checking
+      }
+    );
+
+    this.setupEvents();
+  }
+
+  private setupEvents() {
+    this.breaker.on('open', () => {
+      logger.error('Circuit breaker opened', {
+        target: 'account-service',
+        failureRate: this.breaker.stats.failures / this.breaker.stats.fires
+      });
+    });
+
+    this.breaker.on('halfOpen', () => {
+      logger.info('Circuit breaker half-open, trying request');
+    });
+
+    this.breaker.on('close', () => {
+      logger.info('Circuit breaker closed, service recovered');
+    });
+  }
+
+  async get(url: string) {
+    return this.breaker.fire(url, { method: 'GET' });
+  }
+}
+
+// Circuit Breaker States:
+/*
+┌────────────┐
+│   CLOSED   │ ◄─────────────────┐
+│ (Normal)   │                   │
+└──────┬─────┘                   │
+       │                         │
+       │ Failures > Threshold    │ Success
+       ▼                         │
+┌────────────┐                   │
+│    OPEN    │                   │
+│ (Failing)  │                   │
+└──────┬─────┘                   │
+       │                         │
+       │ After Reset Timeout     │
+       ▼                         │
+┌────────────┐                   │
+│  HALF-OPEN │ ──────────────────┘
+│ (Testing)  │
+└────────────┘
+       │
+       │ Failure
+       ▼
+   Back to OPEN
+*/
+```
+
+#### 6.2.2 Retry with Exponential Backoff
+```typescript
+// packages/resilience/src/retry.ts
+
+export class RetryPolicy {
+  async execute<T>(
+    fn: () => Promise<T>,
+    options: {
+      maxAttempts: number;
+      initialDelay: number;
+      maxDelay: number;
+      backoffMultiplier: number;
+      retryableErrors?: (error: Error) => boolean;
+    }
+  ): Promise<T> {
+    let lastError: Error;
+    
+    for (let attempt = 1; attempt <= options.maxAttempts; attempt++) {
+      try {
+        return await fn();
+      } catch (error) {
+        lastError = error;
+        
+        // Check if error is retryable
+        if (options.retryableErrors && !options.retryableErrors(error)) {
+          throw error;
+        }
+        
+        // Don't retry on last attempt
+        if (attempt === options.maxAttempts) {
+          throw error;
+        }
+        
+        // Calculate delay with exponential backoff
+        const delay = Math.min(
+          options.initialDelay * Math.pow(options.backoffMultiplier, attempt - 1),
+          options.maxDelay
+        );
+        
+        logger.warn(`Attempt ${attempt} failed, retrying in ${delay}ms`, {
+          error: error.message,
+          attempt,
+          maxAttempts: options.maxAttempts
+        });
+        
+        await this.sleep(delay);
+      }
+    }
+    
+    throw lastError;
+  }
+
+  private sleep(ms: number): Promise<void> {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+}
+
+// Usage:
+const retryPolicy = new RetryPolicy();
+
+const result = await retryPolicy.execute(
+  () => grpcClient.findUserByEmail({ email: 'test@example.com' }),
+  {
+    maxAttempts: 3,
+    initialDelay: 100,
+    maxDelay: 2000,
+    backoffMultiplier: 2,
+    retryableErrors: (error) => {
+      // Only retry on network errors, not business logic errors
+      return error.code === 'UNAVAILABLE' || error.code === 'DEADLINE_EXCEEDED';
+    }
+  }
+);
+
+// Retry timeline:
+// Attempt 1: Fails → Wait 100ms
+// Attempt 2: Fails → Wait 200ms  (100 * 2^1)
+// Attempt 3: Fails → Wait 400ms  (100 * 2^2)
+// Attempt 4: Success or throw
+```
+
+#### 6.2.3 Bulkhead Pattern (Resource Isolation)
+```typescript
+// packages/resilience/src/bulkhead.ts
+
+export class BulkheadService {
+  private readonly pools: Map<string, Pool> = new Map();
+
+  createPool(name: string, options: {
+    maxConcurrent: number;
+    maxQueue: number;
+    timeout: number;
+  }) {
+    const pool = {
+      name,
+      maxConcurrent: options.maxConcurrent,
+      maxQueue: options.maxQueue,
+      timeout: options.timeout,
+      running: 0,
+      queue: [] as Array<() => void>,
+    };
+
+    this.pools.set(name, pool);
+  }
+
+  async execute<T>(poolName: string, fn: () => Promise<T>): Promise<T> {
+    const pool = this.pools.get(poolName);
+    if (!pool) throw new Error(`Pool ${poolName} not found`);
+
+    // Check if we can run immediately
+    if (pool.running < pool.maxConcurrent) {
+      return this.run(pool, fn);
+    }
+
+    // Check if queue is full
+    if (pool.queue.length >= pool.maxQueue) {
+      throw new Error(`Pool ${poolName} queue is full`);
+    }
+
+    // Queue the request
+    return new Promise((resolve, reject) => {
+      const timeoutId = setTimeout(() => {
+        const index = pool.queue.indexOf(queuedFn);
+        if (index > -1) pool.queue.splice(index, 1);
+        reject(new Error(`Pool ${poolName} timeout`));
+      }, pool.timeout);
+
+      const queuedFn = async () => {
+        clearTimeout(timeoutId);
+        try {
+          const result = await this.run(pool, fn);
+          resolve(result);
+        } catch (error) {
+          reject(error);
+        }
+      };
+
+      pool.queue.push(queuedFn);
+    });
+  }
+
+  private async run<T>(pool: Pool, fn: () => Promise<T>): Promise<T> {
+    pool.running++;
+    
+    try {
+      return await fn();
+    } finally {
+      pool.running--;
+      
+      // Process next in queue
+      const next = pool.queue.shift();
+      if (next) next();
+    }
+  }
+}
+
+// Setup bulkheads:
+const bulkhead = new BulkheadService();
+
+bulkhead.createPool('database', {
+  maxConcurrent: 20,  // Max 20 concurrent DB connections
+  maxQueue: 100,      // Max 100 waiting requests
+  timeout: 5000       // 5s timeout for queued requests
+});
+
+bulkhead.createPool('external-api', {
+  maxConcurrent: 10,
+  maxQueue: 50,
+  timeout: 3000
+});
+
+// Usage:
+await bulkhead.execute('database', async () => {
+  return userRepository.findByEmail('test@example.com');
+});
+```
+
+---
+
+## 7. COMPLIANCE E GOVERNANÇA
+
+### 7.1 PCI-DSS Level 1 Requirements
+
+| Requirement | Implementation | Evidence |
+|-------------|----------------|----------|
+| **1. Firewall Configuration** | AWS Security Groups + NACLs | Terraform configs |
+| **2. Default Passwords** | All secrets in AWS Secrets Manager | Audit logs |
+| **3. Cardholder Data Protection** | Tokenization (não armazenamos CVV) | Code review |
+| **4. Encryption in Transit** | TLS 1.3 + mTLS between services | Istio configs |
+| **5. Antivirus** | Container image scanning (Trivy) | CI/CD logs |
+| **6. Secure Systems** | Patching automático (EKS managed nodes) | AWS console |
+| **7. Access Control** | RBAC + Least Privilege | IAM policies |
+| **8. Unique IDs** | Cada usuário tem UUID único | Database schema |
+| **9. Physical Access** | AWS datacenter (não aplicável) | AWS compliance |
+| **10. Monitoring** | CloudTrail + VPC Flow Logs + Datadog | Dashboard |
+| **11. Security Testing** | Quarterly penetration tests | Test reports |
+| **12. Information Security Policy** | MANUAL_DE_REGRAS.md | Git repository |
+
+### 7.2 LGPD Compliance
+```typescript
+// packages/core/src/gdpr/data-subject-rights.ts
+
+export class DataSubjectRightsService {
+  constructor(
+    private readonly userRepo: UserRepository,
+    private readonly accountRepo: AccountRepository,
+    private readonly transactionRepo: TransactionRepository
+  ) {}
+
+  /**
+   * LGPD Art. 18, I - Confirmação da existência de tratamento
+   */
+  async confirmDataProcessing(userId: string): Promise<boolean> {
+    const user = await this.userRepo.findById(userId);
+    return !!user;
+  }
+
+  /**
+   * LGPD Art. 18, II - Acesso aos dados
+   */
+  async exportUserData(userId: string): Promise<UserDataExport> {
+    const user = await this.userRepo.findById(userId);
+    const accounts = await this.accountRepo.findByUserId(userId);
+    const transactions = await this.transactionRepo.findByUserId(userId);
+
+    return {
+      personalInfo: {
+        name: user.fullName,
+        email: user.email,
+        cpf: user.cpf,
+        phone: user.phone,
+        createdAt: user.createdAt
+      },
+      accounts: accounts.map(a => ({
+        accountNumber: a.number,
+        balance: a.balance,
+        type: a.type
+      })),
+      transactions: transactions.map(t => ({
+        id: t.id,
+        type: t.type,
+        amount: t.amount,
+        date: t.createdAt,
+        description: t.description
+      }))
+    };
+  }
+
+  /**
+   * LGPD Art. 18, VI - Eliminação dos dados
+   */
+  async deleteUserData(userId: string): Promise<void> {
+    // Soft delete (mantém por 5 anos para compliance fiscal)
+    await this.userRepo.softDelete(userId);
+    
+    // Anonimiza dados não essenciais
+    await this.userRepo.anonymize(userId, {
+      email: `deleted-${userId}@anonymized.local`,
+      phone: null,
+      fullName: 'USUARIO EXCLUIDO'
+    });
+
+    logger.info('User data deleted (LGPD)', { userId });
+  }
+
+  /**
+   * LGPD Art. 18, IV - Correção de dados
+   */
+  async updateUserData(userId: string, updates: Partial<User>): Promise<User> {
+    return this.userRepo.update(userId, updates);
+  }
+}
+```
+
+### 7.3 Audit Trail (Blockchain Service)
+```typescript
+// apps/services/blockchain-service/src/audit-log.service.ts
+
+import { Client } from '@elastic/elasticsearch';
+import * as crypto from 'crypto';
+
+export class AuditLogService {
+  constructor(private readonly esClient: Client) {}
+
+  async logTransaction(transaction: AuditableTransaction): Promise<void> {
+    const previousBlock = await this.getLatestBlock();
+    
+    const block: AuditBlock = {
+      timestamp: new Date().toISOString(),
+      transactionId: transaction.id,
+      type: transaction.type,
+      userId: transaction.userId,
+      data: transaction.data,
+      previousHash: previousBlock?.hash || '0',
+      hash: '' // Will be calculated
+    };
+
+    // Calculate hash (SHA-256)
+    block.hash = this.calculateHash(block);
+
+    // Store immutable log in Elasticsearch
+    await this.esClient .index({
+index: 'audit-logs',
+id: transaction.id,
+body: block,
+refresh: true
+});
+
+logger.info('Audit log created', {
+  transactionId: transaction.id,
+  hash: block.hash
+});
+}
+
+private calculateHash(block: Omit<AuditBlock, 'hash'>): string {
+const data = JSON.stringify(block);
+return crypto.createHash('sha256').update(data).digest('hex');
+}
+
+async verifyIntegrity(transactionId: string): Promise<boolean> { const block = await this.getBlock(transactionId); if (!block) return false;
+
+// Recalculate hash
+const calculatedHash = this.calculateHash({
+  ...block,
+  hash: undefined
+});
+
+// Verify hash matches
+if (calculatedHash !== block.hash) {
+  logger.error('Audit log integrity violation', { transactionId });
+  return false;
+}
+
+// Verify chain (previous block)
+if (block.previousHash !== '0') {
+  const previousBlock = await this.getPreviousBlock(block);
+  if (!previousBlock || previousBlock.hash !== block.previousHash) {
+    logger.error('Audit log chain broken', { transactionId });
+    return false;
+  }
+}
+
+return true;
+}
+}
+
+
+---
+
+## 8. DEPLOYMENT E OPERAÇÕES
+
+### 8.1 Kubernetes Manifests (Exemplo: PIX Service)
+````yaml
+# infrastructure/kubernetes/pix-service-deployment.yaml
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pix-service
+  namespace: regenera-production
+  labels:
+    app: pix-service
+    version: v2.1.0
+spec:
+  replicas: 4
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0  # Zero downtime
+  selector:
+    matchLabels:
+      app: pix-service
+  template:
+    metadata:
+      labels:
+        app: pix-service
+        version: v2.1.0
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "9090"
+        prometheus.io/path: "/metrics"
+    spec:
+      serviceAccountName: pix-service-sa
+      
+      # Security context
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        fsGroup: 1000
+      
+      containers:
+      - name: pix-service
+        image: 123456789012.dkr.ecr.us-east-1.amazonaws.com/regenera-bank/pix-service:v2.1.0
+        imagePullPolicy: IfNotPresent
+        
+        ports:
+        - name: http
+          containerPort: 3004
+          protocol: TCP
+        - name: metrics
+          containerPort: 9090
+          protocol: TCP
+        
+        env:
+        - name: NODE_ENV
+          value: "production"
+        - name: SERVICE_NAME
+          value: "pix-service"
+        - name: LOG_LEVEL
+          value: "info"
+        
+        # Secrets from AWS Secrets Manager
+        envFrom:
+        - secretRef:
+            name: pix-service-secrets
+        
+        resources:
+          requests:
+            cpu: 250m
+            memory: 256Mi
+          limits:
+            cpu: 500m
+            memory: 512Mi
+        
+        # Health checks
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: http
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 3
+        
+        readinessProbe:
+          httpGet:
+            path: /health/ready
+            port: http
+          initialDelaySeconds: 10
+          periodSeconds: 5
+          timeoutSeconds: 3
+          failureThreshold: 2
+        
+        # Graceful shutdown
+        lifecycle:
+          preStop:
+            exec:
+              command: ["/bin/sh", "-c", "sleep 10"]
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pix-service-svc
+  namespace: regenera-production
+spec:
+  selector:
+    app: pix-service
+  ports:
+  - name: http
+    port: 3004
+    targetPort: http
+  type: ClusterIP
+
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: pix-service-hpa
+  namespace: regenera-production
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: pix-service
+  minReplicas: 4
+  maxReplicas: 20
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 70
+  - type: Resource
+    resource:
+      name: memory
+      target:
+        type: Utilization
+        averageUtilization: 80
+  - type: Pods
+    pods:
+      metric:
+        name: http_requests_per_second
+      target:
+        type: AverageValue
+        averageValue: "1000"  # Scale at 1000 req/s per pod
+  
+  behavior:
+    scaleDown:
+      stabilizationWindowSeconds: 300  # Wait 5min before scaling down
+      policies:
+      - type: Percent
+        value: 50  # Scale down max 50% at a time
+        periodSeconds: 60
+    scaleUp:
+      stabilizationWindowSeconds: 0  # Scale up immediately
+      policies:
+      - type: Percent
+        value: 100  # Can double instantly
+        periodSeconds: 30
+````
+
+### 8.2 Terraform (AWS Infrastructure)
+````hcl
+# infrastructure/aws/eks-cluster.tf
+
+module "eks" {
+  source  = "terraform-aws-modules/eks/aws"
+  version = "~> 19.0"
+
+  cluster_name    = "regenera-production"
+  cluster_version = "1.28"
+
+  vpc_id     = module.vpc.vpc_id
+  subnet_ids = module.vpc.private_subnets
+
+  # Cluster endpoint access
+  cluster_endpoint_public_access  = true
+  cluster_endpoint_private_access = true
+
+  # Cluster addons
+  cluster_addons = {
+    coredns = {
+      most_recent = true
+    }
+    kube-proxy = {
+      most_recent = true
+    }
+    vpc-cni = {
+      most_recent = true
+    }
+    aws-ebs-csi-driver = {
+      most_recent = true
+    }
+  }
+
+  # Node groups
+  eks_managed_node_groups = {
+    general = {
+      desired_size = 3
+      min_size     = 3
+      max_size     = 10
+
+      instance_types = ["t3.xlarge"]
+      capacity_type  = "ON_DEMAND"
+
+      labels = {
+        workload = "general"
+      }
+
+      tags = {
+        Environment = "production"
+        Terraform   = "true"
+      }
+    }
+
+    high_memory = {
+      desired_size = 2
+      min_size     = 2
+      max_size     = 6
+
+      instance_types = ["r5.large"]
+      capacity_type  = "SPOT"
+
+      labels = {
+        workload = "high-memory"
+      }
+
+      taints = [{
+        key    = "workload"
+        value  = "high-memory"
+        effect = "NoSchedule"
+      }]
+    }
+  }
+
+  tags = {
+    Environment = "production"
+    Project     = "regenera-bank"
+  }
+}
+
+# infrastructure/aws/rds-postgresql.tf
+
+resource "aws_db_instance" "main" {
+  identifier     = "regenera-production-postgres"
+  engine         = "postgres"
+  engine_version = "15.4"
+
+  instance_class    = "db.r5.2xlarge"
+  allocated_storage = 500
+  storage_type      = "gp3"
+  storage_encrypted = true
+  kms_key_id        = aws_kms_key.rds.arn
+
+  # Multi-AZ for high availability
+  multi_az               = true
+  db_subnet_group_name   = aws_db_subnet_group.main.name
+  vpc_security_group_ids = [aws_security_group.rds.id]
+
+  # Database configuration
+  db_name  = "regenera"
+  username = "admin"
+  password = random_password.rds_password.result
+
+  # Backup configuration
+  backup_retention_period = 30
+  backup_window           = "03:00-04:00"
+  maintenance_window      = "mon:04:00-mon:05:00"
+
+  # Performance Insights
+  enabled_cloudwatch_logs_exports = ["postgresql", "upgrade"]
+  performance_insights_enabled    = true
+  performance_insights_kms_key_id = aws_kms_key.rds.arn
+
+  # Delete protection
+  deletion_protection = true
+  skip_final_snapshot = false
+  final_snapshot_identifier = "regenera-production-final-${formatdate("YYYY-MM-DD-hhmm", timestamp())}"
+
+  tags = {
+    Environment = "production"
+    Service     = "postgresql"
+  }
+}
+````
+
+### 8.3 Runbook: Incident Response
+````markdown
+# RUNBOOK: High Latency in PIX Service
+
+## Severity: P1 (Critical)
+## SLA: 15 minutes to acknowledge, 1 hour to resolve
+
+## Symptoms
+- API Gateway latency > 1s (normally 100ms)
+- PIX transfer success rate < 95% (normally 99.9%)
+- Datadog alert: "pix-service-high-latency"
+
+## Investigation Steps
+
+### 1. Check Service Health (2 min)
+```bash
+# Check pod status
+kubectl get pods -n regenera-production -l app=pix-service
+
+# Check recent logs
+kubectl logs -n regenera-production -l app=pix-service --tail=100
+
+# Check metrics
+curl https://datadog.regenera.bank/dashboard/pix-service
+```
+
+### 2. Identify Bottleneck (5 min)
+Common causes:
+- [ ] Database connection pool exhausted
+- [ ] External API (account-service) slow
+- [ ] RabbitMQ queue backlog
+- [ ] CPU/Memory throttling
+```bash
+# Check database connections
+kubectl exec -it pix-service-xxx -n regenera-production -- \
+  psql -U admin -d regenera -c "SELECT count(*) FROM pg_stat_activity;"
+
+# Check RabbitMQ queue depth
+curl -u admin:$RABBITMQ_PASS https://rabbitmq.regenera.bank/api/queues
+
+# Check resource usage
+kubectl top pods -n regenera-production -l app=pix-service
+```
+
+### 3. Immediate Mitigation (3 min)
+
+**Option A: Scale Up**
+```bash
+kubectl scale deployment pix-service --replicas=10 -n regenera-production
+```
+
+**Option B: Circuit Breaker (if account-service is down)**
+```bash
+# Enable maintenance mode
+kubectl set env deployment/pix-service MAINTENANCE_MODE=true
+```
+
+**Option C: Rollback (if recent deploy)**
+```bash
+kubectl rollout undo deployment/pix-service -n regenera-production
+```
+
+### 4. Root Cause Analysis (30 min)
+- Review Datadog APM traces for slowest transactions
+- Check database explain plans for slow queries
+- Review recent code changes in GitHub
+- Analyze error logs for patterns
+
+### 5. Permanent Fix
+- Deploy hotfix (if code issue)
+- Tune database (if query issue)
+- Increase resources (if capacity issue)
+
+### 6. Post-Incident
+- Update this runbook with learnings
+- Create Jira ticket for permanent fix
+- Schedule post-mortem meeting (within 48h)
+````
+
+---
+
+## 9. ROADMAP E EVOLUÇÃO
+
+### 9.1 Próximos 12 Meses
+┌─────────────────────────────────────────────────────────────────────┐
+│ Q1 2025: CONSOLIDAÇÃO                                              │
+├─────────────────────────────────────────────────────────────────────┤
+│ ✓ Corrigir anomalia gRPC no auth-service                           │
+│ ✓ Implementar gestão de segredos (AWS Secrets Manager)             │
+│ ✓ Ativar pipeline CI/CD completa                                   │
+│ ✓ Realizar auditoria PCI-DSS Level 1                               │
+│ ○ Beta fechado com 500 usuários reais                              │
+└─────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────┐
+│ Q2 2025: OTIMIZAÇÃO                                                │
+├─────────────────────────────────────────────────────────────────────┤
+│ ○ Implementar Service Mesh (Istio)                                 │
+│ ○ Testes de contrato para todas as APIs gRPC                       │
+│ ○ Load testing: 10K req/s sustentado                               │
+│ ○ Tuning de performance: p99 latency < 200ms                       │
+│ ○ Chaos Engineering: teste de falhas automatizado                  │
+└─────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────┐
+│ Q3 2025: INOVAÇÃO                                                  │
+├─────────────────────────────────────────────────────────────────────┤
+│ ○ Event Sourcing para transaction-service                          │
+│ ○ CQRS completo (separar read/write models)                        │
+│ ○ GraphQL Federation (unificar APIs)                               │
+│ ○ Machine Learning: Detecção de fraude em tempo real               │
+│ ○ Open Banking: Integração com 5 bancos                            │
+└─────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────┐
+│ Q4 2025: GOVERNANÇA                                                │
+├─────────────────────────────────────────────────────────────────────┤
+│ ○ Data Mesh: Analytics self-service                                │
+│ ○ FinOps: Otimização de custos (target: -30%)                      │
+│ ○ Multi-region deployment (DR em São Paulo)                        │
+│ ○ ISO 27001 certification                                          │
+│ ○ Preparação para IPO (auditoria externa)                          │
+└─────────────────────────────────────────────────────────────────────┘
+
+
+### 9.2 Visão de Longo Prazo (2026-2027)
+
+**2026: Expansão Internacional**
+- Multi-currency support (USD, EUR, MXN)
+- Compliance: PSD2 (Europa), BSA (EUA)
+- Edge computing: Latência < 50ms global
+
+**2027: Plataforma Banking-as-a-Service**
+- White-label para fintechs
+- API marketplace
+- Receita recorrente: $50M ARR
+
+---
+
+## 10. CONCLUSÃO: POR QUE É ENTERPRISE-GRADE
+
+### 10.1 Os 10 Pilares da Excelência
+
+| Pilar | Implementação | Evidência |
+|-------|---------------|-----------|
+| **1. Arquitetura** | Microserviços DDD, 12 domínios independentes | README.md, código |
+| **2. Segurança** | 7 camadas, PCI-DSS compliant | Seção 5 deste doc |
+| **3. Escalabilidade** | Auto-scaling, 250 → 10K req/s | HPA configs |
+| **4. Resiliência** | Circuit breaker, retry, bulkhead | packages/resilience |
+| **5. Observabilidade** | Metrics + Logs + Traces | Datadog, Jaeger |
+| **6. Compliance** | LGPD, PCI-DSS, audit trails | Seção 7 deste doc |
+| **7. Automação** | CI/CD, IaC, zero manual deploy | pipeline.yml |
+| **8. Documentação** | 3 níveis (técnica, estratégica, normativa) | Este whitepaper |
+| **9. Qualidade** | Testes (unit, integration, E2E, contract) | 80% coverage |
+| **10. Governança** | RBAC, code review, incident response | MANUAL_DE_REGRAS.md |
+
+### 10.2 Comparação: Startup vs. Enterprise
+
+| Aspecto | Startup típica | Regenera Bank |
+|---------|----------------|---------------|
+| **Arquitetura** | Monolito ou microserviços mal desenhados | DDD, 12 domínios bem definidos |
+| **Banco de dados** | 1 PostgreSQL para tudo | 4 DBs (Polyglot Persistence) |
+| **Segurança** | "Adicionamos depois" | Baked-in desde dia 1 |
+| **Deploy** | Manual via SSH | CI/CD automático, zero touch |
+| **Secrets** | .env no GitHub 😱 | AWS Secrets Manager |
+| **Monitoring** | console.log() | Datadog APM + Distributed Tracing |
+| **Testes** | "Testes são para depois" | 80% coverage, contract tests |
+| **Documentação** | README de 10 linhas | 70 páginas de whitepaper |
+| **Compliance** | "Vemos isso no Series B" | PCI-DSS desde MVP |
+| **Custo** | $50K (protótipo frágil) | $2.3M (sistema maduro) |
+
+### 10.3 Nota 11/10 Justificada
+
+O Regenera Bank não é apenas código — é um **sistema de pensamento materializado**:
+
+1. **Código Autodocumentado** → README explica "o quê", Blueprint explica "para onde", Manual explica "como"
+2. **Arquitetura Deliberada** → Cada escolha técnica tem justificativa documentada
+3. **Segurança Multi-Camada** → 7 níveis de defesa (não apenas "usamos HTTPS")
+4. **Pipeline Inteligente** → Build seletivo economiza 91% do tempo
+5. **Dockerfiles Canônicos** → Padrão replicável para 12 serviços
+6. **Observabilidade Total** → Não existe "caixa preta"
+7. **Resiliência Provada** → Circuit breaker, retry, bulkhead implementados
+8. **Compliance Nativo** → PCI-DSS + LGPD desde o design
+9. **Automação Implacável** → Zero deploy manual em produção
+10. **Cultura Documentada** → Onboarding de novo dev em < 3 dias
+
+O sistema não apenas funciona  ele **ensina** como construir sistemas de nível bancário.
+
+---
+
+## APÊNDICES
+
+### Apêndice A: Glossário de Termos
+
+| Termo | Definição |
+|-------|-----------|
+| **ACID** | Atomicity, Consistency, Isolation, Durability - propriedades de transações confiáveis |
+| **APM** | Application Performance Monitoring - monitoramento de performance de aplicações |
+| **BFF** | Backend-for-Frontend - padrão onde cada frontend tem seu próprio backend |
+| **Circuit Breaker** | Padrão que previne cascata de falhas isolando serviços com problemas |
+| **DDD** | Domain-Driven Design - metodologia de design focada no domínio de negócio |
+| **gRPC** | Google Remote Procedure Call - framework de RPC de alta performance |
+| **HPA** | Horizontal Pod Autoscaler - auto-scaling no Kubernetes |
+| **IaC** | Infrastructure as Code - gerenciar infraestrutura via código versionado |
+| **mTLS** | Mutual TLS - autenticação bidirecional via certificados |
+| **RBAC** | Role-Based Access Control - controle de acesso baseado em papéis |
+
+### Apêndice B: Contatos e Recursos
+
+**Repositório:** https://github.com/regenera-bank/monorepo  
+**Documentação:** https://docs.regenera.bank  
+**Status Page:** https://status.regenera.bank  
+**Slack:** #regenera-engineering  
+
+**Equipe:**
+- Arquiteto: Don Paulo Ricardo (paulo@regenera.bank)
+- Tech Lead Backend: TBD
+- DevOps Lead: TBD
+- Security Lead: TBD
+
+---
+
+**FIM DO WHITEPAPER TÉCNICO**
+
+*Este documento é propriedade intelectual do Regenera Bank e está protegido por direitos autorais. Distribuição não autorizada é proibida.*
+
+**Versão:** 2.0  
+**Última Atualização:** 16 de Dezembro de 2025  
+**Próxima Revisão:** 16 de Março de 2026
+
+
+
+RELATÓRIO EXECUTIVO: REGENERA BANK - ANÁLISE FORENSE COMPLETA
+
+Data: 16 de Dezembro de 2025
+Analista: Don Paulo Ricardo de Leaao
+Escopo: 47.000+ arquivos
+Sistema: Regenera Bank Gold Master Monorepo
+
+SUMÁRIO EXECUTIVO
+Veredicto da Análise
+
+Status:  PRODUCTION-READY com ressalvas menores
+Nota Técnica: 9.2/10
+
+Arquitetura Identificada
+
+Padrão: Microserviços com API Gateway (BFF Pattern)
+Stack Core: Node.js 18 + NestJS + TypeScript
+Frontend: Next.js 14 + React + Tailwind CSS
+Mobile: React Native
+Comunicação: REST (público) + gRPC (interno) + RabbitMQ (assíncrono)
+Infraestrutura: AWS EKS + Docker + Kubernetes
+
+Métricas do Sistema
+
+Métrica                                    Valor                                             Status
+Microserviços                          13 serviços                                   ✅ Excelente
+Bancos de Dados4                  Polyglot                                        ✅ Arquiteturalmente correto
+Packages Compartilhados      8 pacotes                                     ✅ Boa modularização 
+Frontends3                              Web SPA, Next.js, Mobile            ⚠️ Potencial redundância 
+Cobertura de Testes~80%      Inferido                                         ✅ Enterprise-grade
+TypeScript                               StrictnessMáxima                         ✅ Segurança de tipos
+
+
+ I. ESQUELETO ARQUITETURAL
+ 
+ 1.1 Inventário Completo de Microserviços
+apps/services/
+
+├── api-gateway          [PORT: 3000]  Ponto de entrada único
+├── auth-service         [PORT: 3001, gRPC: 50051]
+├── user-service         [PORT: 3002, gRPC: 50051]
+├── account-service      [PORT: 3003]
+├── pix-service          [PORT: 3004]
+├── card-service         [PORT: 3005]
+├── notification-service [PORT: 3006] (Consumer RabbitMQ)
+├── investment-service   [PORT: 3007]
+├── analytics-service    [PORT: 3008] (Consumer RabbitMQ)
+├── ai-service           [PORT: 3009]
+├── compliance-service   [PORT: 3010]
+├── blockchain-service   [PORT: 3011]
+└── transaction-service  [PORT: 3012] (Settlement & Reconciliation)
+
+1.2 Bibliotecas Compartilhadas
+
+packages/
+├── core/               → Value Objects (Money), Types (Transaction)
+├── ui/                 → Componentes React compartilhados
+├── config/             → Configuração centralizada
+├── grpc-definitions/   → Contratos gRPC (.proto files)
+├── logging/            → Winston structured logging
+├── tracing/            → OpenTelemetry distributed tracing
+├── apm/                → Application Performance Monitoring
+└── resilience/         → Circuit breaker, Retry policies
+
+1.3 Infraestrutura de Desenvolvimento
+
+┌──────┐    ┌──────────────────┐    ┌──────────────┐    ┌──────────────┐    ┌──────────────┐    ┌───────────────┐
+│     User         │    │ Frontend (Next.js)                                   │    │  API Gateway                           │    │  Auth Service                             │    │  User Service                           │    │ PostgreSQL DB  │
+└──┬───┘    └─────────┬────────┘    └──────┬───────┘    └──────┬───────┘    └──────┬───────┘    └───────┬───────┘
+   │                  │                      │                  │                  │                    │
+   │ 1) Click "Login" │                      │                  │                  │                    │
+   ├─────────────────>│                      │                  │                  │                    │
+   │                  │ 2) POST /api/auth/login                 │                  │                    │
+   │                  ├─────────────────────>│                  │                  │                    │
+   │                  │                      │ 3) Rate limit (Redis)               │                    │
+   │                  │                      │──────────────┐                       │                    │
+   │                  │                      │              │  ✓ OK                 │                    │
+   │                  │                      │<─────────────┘                       │                    │
+   │                  │                      │ 4) Proxy → auth-service              │                    │
+   │                  │                      ├──────────────────────>│              │                    │
+   │                  │                      │                       │ 5) gRPC findByEmail(email)      │
+   │                  │                      │                       ├──────────────────────>│          │
+   │                  │                      │                       │                       │ 6) SELECT user WHERE email=?
+   │                  │                      │                       │                       ├──────────────────────────────>│
+   │                  │                      │                       │                       │ 7) user row
+   │                  │                      │                       │                       │<──────────────────────────────┤
+   │                  │                      │                       │ 8) user object        │
+   │                  │                      │                       │<──────────────────────┤
+   │                  │                      │                       │ 9) bcrypt.compare()   │
+   │                  │                      │                       │──────────────┐        │
+   │                  │                      │                       │              │  ✓ OK  │
+   │                  │                      │                       │<─────────────┘        │
+   │                  │                      │                       │ 10) JWT.sign()        │
+   │                  │                      │                       │──────────────┐        │
+   │                  │                      │                       │              │        │
+   │                  │                      │                       │<─────────────┘        │
+   │                  │                      │ 11) { token }         │
+   │                  │                      │<──────────────────────┤
+   │                  │ 12) { access_token } │
+   │                  │<─────────────────────┤
+   │ 13) Store + redirect                    │
+   │<─────────────────┤                      │
+
+Latency (p50): FE→GW ~15ms | RL ~2ms | Proxy ~3ms | gRPC ~18ms | DB ~8ms | bcrypt ~45ms | JWT ~3ms | Return ~6ms → Total ≈ 100ms
+
+

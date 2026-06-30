@@ -1,0 +1,24 @@
+capacidade,qtd
+Identity,22
+Customer/Party,13
+Accounts,19
+Ledger,13
+Transactions,9
+Payments,23
+Pix,23
+Cards,33
+Credit,24
+Investments,6
+Idempotency,1
+Reconciliation,6
+Accounting,6
+Fraud,72
+AML/KYC,22
+Regulatory Reporting,19
+Notifications,13
+Open Finance,19
+ISO 20022,73
+Audit Trail,25
+Limits,6
+Fees,6
+Settlement,6

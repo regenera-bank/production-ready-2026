@@ -1,0 +1,6 @@
+owners:
+  primary: team-loan-servicing
+  approvers:
+    - team-architecture
+    - team-security
+  on_call: loan-servicing-primary

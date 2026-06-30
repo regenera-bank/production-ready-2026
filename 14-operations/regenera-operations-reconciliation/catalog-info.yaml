@@ -1,0 +1,12 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: regenera-operations-reconciliation
+  description: Componente Regenera do domínio reconciliation.
+  annotations:
+    regenera.io/criticality: critical
+spec:
+  type: service
+  lifecycle: experimental
+  owner: team-operations-reconciliation
+  system: regenera-bank

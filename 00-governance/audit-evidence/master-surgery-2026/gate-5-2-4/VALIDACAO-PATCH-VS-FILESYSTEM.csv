@@ -1,0 +1,9 @@
+arquivo,patch_coincide,alteracao_externa,divergencia
+02-contracts/regenera-idempotency-v1.yaml,SIM,NAO,NENHUMA
+02-contracts/regenera-audit-events-v1.yaml,SIM,NAO,NENHUMA
+05-core-banking/regenera-core-idempotency/src/domain/IdempotencyRecord.ts,SIM,NAO,NENHUMA
+05-core-banking/regenera-core-idempotency/src/domain/IdempotencyStateMachine.ts,SIM,NAO,NENHUMA
+05-core-banking/regenera-core-idempotency/tests/IdempotencyStateMachine.spec.ts,SIM,NAO,NENHUMA
+05-core-banking/regenera-core-audit/src/domain/AuditEvent.ts,SIM,NAO,NENHUMA
+05-core-banking/regenera-core-audit/src/domain/OutboxPublisher.ts,SIM,NAO,NENHUMA
+05-core-banking/regenera-core-audit/tests/AuditEvent.spec.ts,SIM,NAO,NENHUMA

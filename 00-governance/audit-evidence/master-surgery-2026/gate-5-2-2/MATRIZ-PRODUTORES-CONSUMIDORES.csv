@@ -1,0 +1,3 @@
+capacidade,papel,contraparte,contrato
+Idempotency,PRODUTOR,"BFFs, Integrations",Idempotency-Key Header
+Audit Trail,CONSUMIDOR,Todos os Módulos,Audit Event Envelope

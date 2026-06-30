@@ -1,0 +1,4 @@
+tipo,vulnerabilidades,status
+Secret Scan,0,CLEAN
+SAST,0,CLEAN (vazio)
+Logic Review,Infinitas,FAIL (Não implementado)

@@ -1,0 +1,1 @@
+CREATE TABLE transactional_outbox (event_id UUID PRIMARY KEY, aggregate_type TEXT NOT NULL, aggregate_id UUID NOT NULL, event_type TEXT NOT NULL, event_version INTEGER NOT NULL, payload JSONB NOT NULL, correlation_id UUID NOT NULL, causation_id UUID, occurred_at TIMESTAMPTZ NOT NULL, published_at TIMESTAMPTZ, attempts INTEGER NOT NULL DEFAULT 0);

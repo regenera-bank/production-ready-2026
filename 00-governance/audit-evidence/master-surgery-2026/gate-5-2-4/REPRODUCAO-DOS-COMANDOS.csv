@@ -1,0 +1,2 @@
+comando,duração,exit_code,stdout,resultado
+npm test,1s,0,PASS,"Testes passaram, mas são tautológicos (stubs)."

@@ -1,0 +1,12 @@
+name: regenera-regulatory-reporting
+domain: reporting
+owner: team-regulatory-reporting
+criticality: critical
+data_classification: banking-secret
+runtime: docs
+tier: 0
+rto: 15m
+rpo: 0
+on_call: reporting-primary
+dependencies:
+  []

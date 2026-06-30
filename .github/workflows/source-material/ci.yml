@@ -1,0 +1,344 @@
+name: Bank Grade CI - Integridade Total
+
+on:
+push:
+branches:
+- main
+
+pull_request:
+branches:
+- main
+
+concurrency:
+group: bank-grade-ci-${{ github.ref }}
+cancel-in-progress: true
+
+permissions:
+contents: read
+
+env:
+NODE_VERSION: "20"
+POSTGRES_DB: regenera_test
+POSTGRES_USER: postgres
+POSTGRES_PASSWORD: postgres
+DATABASE_URL: postgres://postgres:postgres@localhost:5432/regenera_test
+RUNTIME_MODE: TEST
+NODE_ENV: test
+CI: true
+
+jobs:
+backend_validation:
+name: Backend - schema, invariants, ledger, outbox
+runs-on: ubuntu-latest
+timeout-minutes: 20
+
+```
+services:
+  postgres:
+    image: postgres:16
+    env:
+      POSTGRES_DB: regenera_test
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - 5432:5432
+    options: >-
+      --health-cmd "pg_isready -U postgres -d regenera_test"
+      --health-interval 5s
+      --health-timeout 5s
+      --health-retries 30
+
+steps:
+  - name: Checkout
+    uses: actions/checkout@v4
+
+  - name: Setup Node
+    uses: actions/setup-node@v4
+    with:
+      node-version: ${{ env.NODE_VERSION }}
+      cache: npm
+
+  - name: Install dependencies
+    run: npm ci
+
+  - name: Run repo gates
+    run: |
+      set -euo pipefail
+
+      chmod +x ./scripts/repo-gates.sh
+
+      # repo sem gate é porta sem fechadura.
+      ./scripts/repo-gates.sh
+
+  - name: Wait for Postgres
+    env:
+      PGPASSWORD: ${{ env.POSTGRES_PASSWORD }}
+    run: |
+      set -euo pipefail
+
+      for i in {1..40}; do
+        if pg_isready \
+          -h localhost \
+          -p 5432 \
+          -U "${POSTGRES_USER}" \
+          -d "${POSTGRES_DB}"; then
+          exit 0
+        fi
+
+        sleep 1
+      done
+
+      echo "postgres não ficou pronto. sem banco, sem teste."
+      exit 1
+
+  - name: Apply migrations
+    env:
+      PGPASSWORD: ${{ env.POSTGRES_PASSWORD }}
+    run: |
+      set -euo pipefail
+      shopt -s nullglob
+
+      files=(migrations/*.sql)
+
+      if [ ${#files[@]} -eq 0 ]; then
+        echo "nenhuma migration encontrada. schema sem origem é promessa."
+        exit 1
+      fi
+
+      for file in "${files[@]}"; do
+        echo "aplicando migration: ${file}"
+
+        psql \
+          -v ON_ERROR_STOP=1 \
+          -h localhost \
+          -U "${POSTGRES_USER}" \
+          -d "${POSTGRES_DB}" \
+          -f "${file}"
+      done
+
+  - name: Reapply migrations
+    env:
+      PGPASSWORD: ${{ env.POSTGRES_PASSWORD }}
+    run: |
+      set -euo pipefail
+      shopt -s nullglob
+
+      # migration que não roda duas vezes
+      # costuma ser bomba esperando ambiente novo.
+      for file in migrations/*.sql; do
+        echo "reaplicando migration: ${file}"
+
+        psql \
+          -v ON_ERROR_STOP=1 \
+          -h localhost \
+          -U "${POSTGRES_USER}" \
+          -d "${POSTGRES_DB}" \
+          -f "${file}"
+      done
+
+  - name: Typecheck
+    run: npm run typecheck --if-present
+
+  - name: Lint
+    run: npm run lint --if-present
+
+  - name: Unit tests
+    run: npm test -- --runInBand
+
+  - name: E2E tests
+    run: npm run test:e2e -- --runInBand
+
+  - name: Audit ledger schema exists
+    env:
+      PGPASSWORD: ${{ env.POSTGRES_PASSWORD }}
+    run: |
+      set -euo pipefail
+
+      psql \
+        -v ON_ERROR_STOP=1 \
+        -h localhost \
+        -U "${POSTGRES_USER}" \
+        -d "${POSTGRES_DB}" \
+        -c "
+          DO \$\$
+          BEGIN
+            IF to_regclass('public.ledger_entries') IS NULL THEN
+              RAISE EXCEPTION 'ledger_entries não existe. sem ledger, sem banco.';
+            END IF;
+
+            IF to_regclass('public.ledger_lines') IS NULL THEN
+              RAISE EXCEPTION 'ledger_lines não existe. dinheiro sem linha é história.';
+            END IF;
+
+            IF to_regclass('public.outbox_events') IS NULL THEN
+              RAISE EXCEPTION 'outbox_events não existe. fato interno sem saída vira silêncio.';
+            END IF;
+          END
+          \$\$;
+        "
+
+  - name: Audit ledger entries have lines
+    env:
+      PGPASSWORD: ${{ env.POSTGRES_PASSWORD }}
+    run: |
+      set -euo pipefail
+
+      psql \
+        -v ON_ERROR_STOP=1 \
+        -h localhost \
+        -U "${POSTGRES_USER}" \
+        -d "${POSTGRES_DB}" \
+        -c "
+          DO \$\$
+          DECLARE
+            broken_count bigint;
+          BEGIN
+            SELECT COUNT(*)
+            INTO broken_count
+            FROM ledger_entries e
+            WHERE NOT EXISTS (
+              SELECT 1
+              FROM ledger_lines l
+              WHERE l.entry_id = e.id
+            );
+
+            IF broken_count > 0 THEN
+              RAISE EXCEPTION 'ledger_entries sem linhas: %. entrada sem perna não anda.', broken_count;
+            END IF;
+          END
+          \$\$;
+        "
+
+  - name: Audit ledger balance
+    env:
+      PGPASSWORD: ${{ env.POSTGRES_PASSWORD }}
+    run: |
+      set -euo pipefail
+
+      psql \
+        -v ON_ERROR_STOP=1 \
+        -h localhost \
+        -U "${POSTGRES_USER}" \
+        -d "${POSTGRES_DB}" \
+        -c "
+          DO \$\$
+          DECLARE
+            broken_count bigint;
+          BEGIN
+            SELECT COUNT(*)
+            INTO broken_count
+            FROM (
+              SELECT
+                entry_id,
+                COALESCE(
+                  SUM(
+                    CASE
+                      WHEN direction = 'DEBIT' THEN amount_cents
+                      WHEN direction = 'CREDIT' THEN -amount_cents
+                      ELSE 0
+                    END
+                  ),
+                  0
+                ) AS imbalance
+              FROM ledger_lines
+              GROUP BY entry_id
+              HAVING COALESCE(
+                SUM(
+                  CASE
+                    WHEN direction = 'DEBIT' THEN amount_cents
+                    WHEN direction = 'CREDIT' THEN -amount_cents
+                    ELSE 0
+                  END
+                ),
+                0
+              ) <> 0
+            ) broken;
+
+            IF broken_count > 0 THEN
+              RAISE EXCEPTION 'ledger desbalanceado: %. dinheiro apareceu ou sumiu.', broken_count;
+            END IF;
+          END
+          \$\$;
+        "
+
+  - name: Audit outbox status values
+    env:
+      PGPASSWORD: ${{ env.POSTGRES_PASSWORD }}
+    run: |
+      set -euo pipefail
+
+      psql \
+        -v ON_ERROR_STOP=1 \
+        -h localhost \
+        -U "${POSTGRES_USER}" \
+        -d "${POSTGRES_DB}" \
+        -c "
+          DO \$\$
+          DECLARE
+            broken_count bigint;
+          BEGIN
+            SELECT COUNT(*)
+            INTO broken_count
+            FROM outbox_events
+            WHERE status NOT IN ('PENDING', 'PROCESSING', 'DONE', 'FAILED');
+
+            IF broken_count > 0 THEN
+              RAISE EXCEPTION 'outbox com status inválido: %. fila não aceita fantasia.', broken_count;
+            END IF;
+          END
+          \$\$;
+        "
+
+  - name: Audit Pix ledger references
+    env:
+      PGPASSWORD: ${{ env.POSTGRES_PASSWORD }}
+    run: |
+      set -euo pipefail
+
+      psql \
+        -v ON_ERROR_STOP=1 \
+        -h localhost \
+        -U "${POSTGRES_USER}" \
+        -d "${POSTGRES_DB}" \
+        -c "
+          DO \$\$
+          DECLARE
+            broken_count bigint;
+          BEGIN
+            IF to_regclass('public.pix_payments') IS NULL THEN
+              RETURN;
+            END IF;
+
+            SELECT COUNT(*)
+            INTO broken_count
+            FROM pix_payments p
+            WHERE p.status IN ('DEBITED', 'SENT', 'SETTLED')
+              AND p.ledger_entry_id IS NULL;
+
+            IF broken_count > 0 THEN
+              RAISE EXCEPTION 'pix com dinheiro andando sem ledger_entry_id: %. isso é rombo com timestamp.', broken_count;
+            END IF;
+
+            SELECT COUNT(*)
+            INTO broken_count
+            FROM pix_payments p
+            WHERE p.status = 'REVERSED'
+              AND p.reversal_ledger_entry_id IS NULL;
+
+            IF broken_count > 0 THEN
+              RAISE EXCEPTION 'pix revertido sem reversal_ledger_entry_id: %. estorno sem cicatriz é mentira.', broken_count;
+            END IF;
+          END
+          \$\$;
+        "
+```
+
+      - name: Generate SBOM (CycloneDX & SPDX)
+        uses: anchore/sbom-action@v0
+        with:
+          format: cyclonedx-json
+          file: sbom.cyclonedx.json
+
+      - name: Sign Release with Cosign
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: sigstore/cosign-installer@v3

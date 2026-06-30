@@ -1,0 +1,1 @@
+CREATE TABLE account_identifier (identifier_id UUID PRIMARY KEY, account_id UUID NOT NULL REFERENCES account(account_id), identifier_type VARCHAR(32) NOT NULL, identifier_hash TEXT NOT NULL, active BOOLEAN NOT NULL, UNIQUE(identifier_type, identifier_hash));

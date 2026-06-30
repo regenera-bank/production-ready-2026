@@ -1,0 +1,13 @@
+{
+  "timestamp": "2026-06-26T08:23:58.729075",
+  "capacidades_especificadas": 2,
+  "decisoes_bloqueiam_implementacao": 1,
+  "decisoes_bloqueiam_producao": 2,
+  "quantidade_requisitos": 35,
+  "quantidade_criterios_aceite": 35,
+  "quantidade_cenarios_teste": 50,
+  "estados_maquina_idempotency": 7,
+  "eventos_auditoria_catalogados": 20,
+  "contratos_propostos": 2,
+  "ordem_final_implementacao": 10
+}

@@ -1,0 +1,27 @@
+{
+  "_comment": "@regenera/bank-core Cloud Armor Geo-Blocking Policy - BACEN/LGPD Compliance",
+  "name": "regenera-geo-blocking",
+  "description": "Block all traffic originating outside of permitted operational regions. Hardened for strict Brazilian operations.",
+  "rules": [
+    {
+      "action": "deny(403)",
+      "priority": 500,
+      "match": {
+        "expr": {
+          "expression": "origin.region_code != 'BR' && origin.region_code != 'US'"
+        }
+      },
+      "description": "Deny traffic not originating from Brazil (primary) or US (partners/integrations)"
+    },
+    {
+      "action": "deny(403)",
+      "priority": 510,
+      "match": {
+        "expr": {
+          "expression": "origin.asn in [12345, 67890]"
+        }
+      },
+      "description": "Explicitly block known malicious ASNs/Tor exit nodes based on Threat Intel"
+    }
+  ]
+}

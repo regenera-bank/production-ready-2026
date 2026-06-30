@@ -1,0 +1,52 @@
+capability_id,capacidade,conflict_id,destino_canonico,candidatos,risco_candidato_a,risco_candidato_b,necessidade_merge,necessidade_redesign,decisao_humana_necessaria,impacto_outras_capacidades,ordem_recomendada,confianca
+CAP-IDENTITY,Identity,3429,domains/identity/Dockerfile,2,Regressão ou sobrescrita,Lógica desatualizada,SIM,NAO,Selecionar ou mesclar versão,ALTO,1,ALTA
+CAP-IDENTITY,Identity,3433,domains/identity/README.md,2,Regressão ou sobrescrita,Lógica desatualizada,SIM,NAO,Selecionar ou mesclar versão,ALTO,1,ALTA
+CAP-IDENTITY,Identity,3506,domains/identity/service.yaml,2,Regressão ou sobrescrita,Lógica desatualizada,SIM,NAO,Selecionar ou mesclar versão,ALTO,1,ALTA
+CAP-IDENTITY,Identity,3512,domains/identity/source-material/arquivos-2/session.service.ts,2,Regressão ou sobrescrita,Lógica desatualizada,SIM,NAO,Selecionar ou mesclar versão,ALTO,1,ALTA
+CAP-CUSTOMER_PARTY,Customer/Party,3100,domains/customers/Dockerfile,2,Regressão ou sobrescrita,Lógica desatualizada,SIM,NAO,Selecionar ou mesclar versão,ALTO,1,ALTA
+CAP-CUSTOMER_PARTY,Customer/Party,3104,domains/customers/README.md,2,Regressão ou sobrescrita,Lógica desatualizada,SIM,NAO,Selecionar ou mesclar versão,ALTO,1,ALTA
+CAP-CUSTOMER_PARTY,Customer/Party,3133,domains/customers/service.yaml,2,Regressão ou sobrescrita,Lógica desatualizada,SIM,NAO,Selecionar ou mesclar versão,ALTO,1,ALTA
+CAP-ACCOUNTS,Accounts,2386,domains/accounting/Dockerfile,2,Regressão ou sobrescrita,Lógica desatualizada,SIM,NAO,Selecionar ou mesclar versão,ALTO,1,ALTA
+CAP-ACCOUNTS,Accounts,2390,domains/accounting/README.md,2,Regressão ou sobrescrita,Lógica desatualizada,SIM,NAO,Selecionar ou mesclar versão,ALTO,1,ALTA
+CAP-ACCOUNTS,Accounts,2445,domains/accounting/service.yaml,2,Regressão ou sobrescrita,Lógica desatualizada,SIM,NAO,Selecionar ou mesclar versão,ALTO,1,ALTA
+CAP-ACCOUNTS,Accounts,2474,domains/accounts/Dockerfile,2,Regressão ou sobrescrita,Lógica desatualizada,SIM,NAO,Selecionar ou mesclar versão,ALTO,1,ALTA
+CAP-ACCOUNTS,Accounts,2478,domains/accounts/README.md,2,Regressão ou sobrescrita,Lógica desatualizada,SIM,NAO,Selecionar ou mesclar versão,ALTO,1,ALTA
+CAP-ACCOUNTS,Accounts,2503,domains/accounts/service.yaml,2,Regressão ou sobrescrita,Lógica desatualizada,SIM,NAO,Selecionar ou mesclar versão,ALTO,1,ALTA
+CAP-LEDGER,Ledger,3654,domains/ledger/Dockerfile,2,Regressão ou sobrescrita,Lógica desatualizada,SIM,NAO,Selecionar ou mesclar versão,ALTO,1,ALTA
+CAP-LEDGER,Ledger,3658,domains/ledger/README.md,2,Regressão ou sobrescrita,Lógica desatualizada,SIM,NAO,Selecionar ou mesclar versão,ALTO,1,ALTA
+CAP-LEDGER,Ledger,3691,domains/ledger/service.yaml,2,Regressão ou sobrescrita,Lógica desatualizada,SIM,NAO,Selecionar ou mesclar versão,ALTO,1,ALTA
+CAP-LEDGER,Ledger,3693,domains/ledger/source-material/arquivos-2/ledger-posting.service.ts,2,Regressão ou sobrescrita,Lógica desatualizada,SIM,NAO,Selecionar ou mesclar versão,ALTO,1,ALTA
+CAP-LEDGER,Ledger,3694,domains/ledger/source-material/arquivos-2/2 PARTE /money.value-object.ts,2,Regressão ou sobrescrita,Lógica desatualizada,SIM,NAO,Selecionar ou mesclar versão,ALTO,1,ALTA
+CAP-TRANSACTIONS,Transactions,4336,domains/transactions/Dockerfile,2,Regressão ou sobrescrita,Lógica desatualizada,SIM,NAO,Selecionar ou mesclar versão,ALTO,1,ALTA
+CAP-TRANSACTIONS,Transactions,4340,domains/transactions/README.md,2,Regressão ou sobrescrita,Lógica desatualizada,SIM,NAO,Selecionar ou mesclar versão,ALTO,1,ALTA
+CAP-TRANSACTIONS,Transactions,4358,domains/transactions/service.yaml,2,Regressão ou sobrescrita,Lógica desatualizada,SIM,NAO,Selecionar ou mesclar versão,ALTO,1,ALTA
+CAP-RECONCILIATION,Reconciliation,4129,domains/reconciliation/Dockerfile,2,Regressão ou sobrescrita,Lógica desatualizada,SIM,NAO,Selecionar ou mesclar versão,ALTO,1,ALTA
+CAP-RECONCILIATION,Reconciliation,4133,domains/reconciliation/README.md,2,Regressão ou sobrescrita,Lógica desatualizada,SIM,NAO,Selecionar ou mesclar versão,ALTO,1,ALTA
+CAP-RECONCILIATION,Reconciliation,4153,domains/reconciliation/service.yaml,2,Regressão ou sobrescrita,Lógica desatualizada,SIM,NAO,Selecionar ou mesclar versão,ALTO,1,ALTA
+CAP-PAYMENTS,Payments,607,apps/partner-developer-portal/Dockerfile,2,Regressão ou sobrescrita,Lógica desatualizada,SIM,NAO,Selecionar ou mesclar versão,ALTO,1,ALTA
+CAP-PAYMENTS,Payments,687,apps/web-banking/Dockerfile,2,Regressão ou sobrescrita,Lógica desatualizada,SIM,NAO,Selecionar ou mesclar versão,ALTO,1,ALTA
+CAP-PAYMENTS,Payments,701,apps/web-banking/source-material/mapa-mestre-executado/docs/ARCHITECTURE.md,2,Regressão ou sobrescrita,Lógica desatualizada,SIM,NAO,Selecionar ou mesclar versão,ALTO,1,ALTA
+CAP-PAYMENTS,Payments,708,apps/web-banking/docs/RUNBOOK.md,2,Regressão ou sobrescrita,Lógica desatualizada,SIM,NAO,Selecionar ou mesclar versão,ALTO,1,ALTA
+CAP-PAYMENTS,Payments,1310,bff/mobile-bff/Dockerfile,2,Regressão ou sobrescrita,Lógica desatualizada,SIM,NAO,Selecionar ou mesclar versão,ALTO,1,ALTA
+CAP-PAYMENTS,Payments,1406,bff/operations-bff/Dockerfile,2,Regressão ou sobrescrita,Lógica desatualizada,SIM,NAO,Selecionar ou mesclar versão,ALTO,1,ALTA
+CAP-PAYMENTS,Payments,1470,bff/partner-api-facade/Dockerfile,2,Regressão ou sobrescrita,Lógica desatualizada,SIM,NAO,Selecionar ou mesclar versão,ALTO,1,ALTA
+CAP-PAYMENTS,Payments,1559,bff/web-bff/Dockerfile,2,Regressão ou sobrescrita,Lógica desatualizada,SIM,NAO,Selecionar ou mesclar versão,ALTO,1,ALTA
+CAP-PAYMENTS,Payments,2386,domains/accounting/Dockerfile,2,Regressão ou sobrescrita,Lógica desatualizada,SIM,NAO,Selecionar ou mesclar versão,ALTO,1,ALTA
+CAP-PAYMENTS,Payments,2474,domains/accounts/Dockerfile,2,Regressão ou sobrescrita,Lógica desatualizada,SIM,NAO,Selecionar ou mesclar versão,ALTO,1,ALTA
+CAP-PAYMENTS,Payments,2757,domains/cards/Dockerfile,2,Regressão ou sobrescrita,Lógica desatualizada,SIM,NAO,Selecionar ou mesclar versão,ALTO,1,ALTA
+CAP-PAYMENTS,Payments,3100,domains/customers/Dockerfile,2,Regressão ou sobrescrita,Lógica desatualizada,SIM,NAO,Selecionar ou mesclar versão,ALTO,1,ALTA
+CAP-PAYMENTS,Payments,3287,domains/fees/Dockerfile,2,Regressão ou sobrescrita,Lógica desatualizada,SIM,NAO,Selecionar ou mesclar versão,ALTO,1,ALTA
+CAP-PAYMENTS,Payments,3429,domains/identity/Dockerfile,2,Regressão ou sobrescrita,Lógica desatualizada,SIM,NAO,Selecionar ou mesclar versão,ALTO,1,ALTA
+CAP-PAYMENTS,Payments,3654,domains/ledger/Dockerfile,2,Regressão ou sobrescrita,Lógica desatualizada,SIM,NAO,Selecionar ou mesclar versão,ALTO,1,ALTA
+CAP-PAYMENTS,Payments,3765,domains/limits/Dockerfile,2,Regressão ou sobrescrita,Lógica desatualizada,SIM,NAO,Selecionar ou mesclar versão,ALTO,1,ALTA
+CAP-PAYMENTS,Payments,3852,domains/notifications/Dockerfile,2,Regressão ou sobrescrita,Lógica desatualizada,SIM,NAO,Selecionar ou mesclar versão,ALTO,1,ALTA
+CAP-PAYMENTS,Payments,3983,domains/payments/source-material/arquivos-2/state-machines.ts,2,Regressão ou sobrescrita,Lógica desatualizada,SIM,NAO,Selecionar ou mesclar versão,ALTO,1,ALTA
+CAP-PAYMENTS,Payments,4016,domains/pix/Dockerfile,2,Regressão ou sobrescrita,Lógica desatualizada,SIM,NAO,Selecionar ou mesclar versão,ALTO,1,ALTA
+CAP-PAYMENTS,Payments,4129,domains/reconciliation/Dockerfile,2,Regressão ou sobrescrita,Lógica desatualizada,SIM,NAO,Selecionar ou mesclar versão,ALTO,1,ALTA
+CAP-PAYMENTS,Payments,4336,domains/transactions/Dockerfile,2,Regressão ou sobrescrita,Lógica desatualizada,SIM,NAO,Selecionar ou mesclar versão,ALTO,1,ALTA
+CAP-PIX,Pix,4016,domains/pix/Dockerfile,2,Regressão ou sobrescrita,Lógica desatualizada,SIM,NAO,Selecionar ou mesclar versão,ALTO,1,ALTA
+CAP-PIX,Pix,4020,domains/pix/README.md,2,Regressão ou sobrescrita,Lógica desatualizada,SIM,NAO,Selecionar ou mesclar versão,ALTO,1,ALTA
+CAP-PIX,Pix,4038,domains/pix/service.yaml,2,Regressão ou sobrescrita,Lógica desatualizada,SIM,NAO,Selecionar ou mesclar versão,ALTO,1,ALTA
+CAP-AUDIT_TRAIL,Audit Trail,3,governance/audit-evidence/pipeline-green-v4/raw-repository/.gitattributes,2,Regressão ou sobrescrita,Lógica desatualizada,SIM,NAO,Selecionar ou mesclar versão,ALTO,1,ALTA
+CAP-AUDIT_TRAIL,Audit Trail,12,governance/audit-evidence/pipeline-green-v4/raw-repository/.gitignore,2,Regressão ou sobrescrita,Lógica desatualizada,SIM,NAO,Selecionar ou mesclar versão,ALTO,1,ALTA
+CAP-AUDIT_TRAIL,Audit Trail,19,governance/audit-evidence/pipeline-green-v4/raw-repository/README.md,2,Regressão ou sobrescrita,Lógica desatualizada,SIM,NAO,Selecionar ou mesclar versão,ALTO,1,ALTA

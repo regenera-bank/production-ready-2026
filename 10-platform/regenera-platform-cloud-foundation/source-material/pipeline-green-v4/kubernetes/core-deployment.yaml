@@ -1,0 +1,99 @@
+# |---------------------------------------------------------------------------------------|
+# |  --> REGENERA ENTERPRISE SYSTEM v4.0                                                  |
+# |---------------------------------------------------------------------------------------|
+#
+# PROJECT:       Regenera Bank
+# CEO:           Raphaela Cerveski
+# DEVELOPER:     Don Paulo Ricardo
+# ID:            2098233287
+# COPYRIGHT:     Copyright (c) 2026 Regenera Corporate
+#
+# LICENSE:       EULA (End-User License Agreement)
+# PROTECTION:    PROPRIEDADE INTELECTUAL RESTRITA
+#
+# WARNING:       TODOS OS DIREITOS RESERVADOS. Proibida a cópia, distribuição,
+#                engenharia reversa ou modificação não autorizada.
+#
+# |---------------------------------------------------------------------------------------|
+# |  --> CLASSIFICATION: PROPRIETARY // DEVELOPER MAINTAINED // REQUIRES SENIOR REVIEW          |
+# |---------------------------------------------------------------------------------------|
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: regenera-core-deployment
+  namespace: regenera-prod
+  labels: { app: regenera-core, tier: backend }
+spec:
+  replicas: 3
+  selector:
+    matchLabels: { app: regenera-core }
+  template:
+    metadata:
+      labels: { app: regenera-core }
+    spec:
+      serviceAccountName: regenera-core-sa
+      containers:
+        - name: core-api
+          image: southamerica-east1-docker.pkg.dev/regenera-bank-prod/repo/core-api:latest
+          ports:
+            - containerPort: 3000
+          env:
+            - name: GCP_PROJECT_ID
+              value: regenera-bank-prod
+            - name: GCP_REGION
+              value: southamerica-east1
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef: { name: db-credentials, key: url }
+            - name: JWT_NEURAL_SECRET
+              valueFrom:
+                secretKeyRef: { name: jwt-secrets, key: neural_key }
+            - name: GCS_BUCKET
+              value: regenera-tax-docs
+          livenessProbe:
+            httpGet: { path: /v1/health, port: 3000 }
+            initialDelaySeconds: 15
+            periodSeconds: 20
+          readinessProbe:
+            httpGet: { path: /v1/health, port: 3000 }
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          resources:
+            requests: { cpu: "250m", memory: "512Mi" }
+            limits:   { cpu: "1000m", memory: "1Gi" }
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: regenera-core-service
+  namespace: regenera-prod
+spec:
+  selector: { app: regenera-core }
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000
+  type: ClusterIP
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: regenera-core-hpa
+  namespace: regenera-prod
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: regenera-core-deployment
+  minReplicas: 3
+  maxReplicas: 15
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target: { type: Utilization, averageUtilization: 70 }
+    - type: Resource
+      resource:
+        name: memory
+        target: { type: Utilization, averageUtilization: 75 }

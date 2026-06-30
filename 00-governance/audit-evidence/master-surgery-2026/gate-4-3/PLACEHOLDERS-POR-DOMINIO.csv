@@ -1,0 +1,317 @@
+id,caminho,dominio
+15,governance/release/repository-root/CODEOWNERS,FUNDAÇÃO DO WORKSPACE
+16,governance/release/repository-root/CONTRIBUTING.md,FUNDAÇÃO DO WORKSPACE
+17,governance/release/repository-root/LICENSE.md,FUNDAÇÃO DO WORKSPACE
+18,governance/release/repository-root/Makefile,FUNDAÇÃO DO WORKSPACE
+20,governance/release/repository-root/SECURITY.md,FUNDAÇÃO DO WORKSPACE
+21,governance/release/repository-root/SUPPORT.md,FUNDAÇÃO DO WORKSPACE
+22,governance/release/repository-root/Taskfile.yml,FUNDAÇÃO DO WORKSPACE
+36,apps/android/.tool-versions,CANAIS
+39,apps/android/CODEOWNERS,CANAIS
+355,apps/ios/.tool-versions,CANAIS
+367,apps/ios/CODEOWNERS,CANAIS
+603,apps/partner-developer-portal/.tool-versions,CANAIS
+605,apps/partner-developer-portal/CODEOWNERS,CANAIS
+681,apps/web-banking/.tool-versions,CANAIS
+684,apps/web-banking/CODEOWNERS,CANAIS
+1148,apps/windows-operations/.tool-versions,CANAIS
+1154,apps/windows-operations/CODEOWNERS,CANAIS
+1306,bff/mobile-bff/.tool-versions,BFFs POR CANAL
+1308,bff/mobile-bff/CODEOWNERS,BFFs POR CANAL
+1365,bff/open-finance-api/.tool-versions,BFFs POR CANAL
+1367,bff/open-finance-api/CODEOWNERS,BFFs POR CANAL
+1402,bff/operations-bff/.tool-versions,BFFs POR CANAL
+1404,bff/operations-bff/CODEOWNERS,BFFs POR CANAL
+1465,bff/partner-api-facade/.tool-versions,BFFs POR CANAL
+1468,bff/partner-api-facade/CODEOWNERS,BFFs POR CANAL
+1555,bff/web-bff/.tool-versions,BFFs POR CANAL
+1557,bff/web-bff/CODEOWNERS,BFFs POR CANAL
+1605,governance/release/repository-root/compose.yaml,FUNDAÇÃO DO WORKSPACE
+1617,contracts/iso20022/adapters/.tool-versions,CONTRATOS E MENSAGERIA FINANCEIRA
+1619,contracts/iso20022/adapters/CODEOWNERS,CONTRATOS E MENSAGERIA FINANCEIRA
+1654,contracts/iso20022/mappings/.tool-versions,CONTRATOS E MENSAGERIA FINANCEIRA
+1656,contracts/iso20022/mappings/CODEOWNERS,CONTRATOS E MENSAGERIA FINANCEIRA
+1691,contracts/iso20022/messages/.tool-versions,CONTRATOS E MENSAGERIA FINANCEIRA
+1693,contracts/iso20022/messages/CODEOWNERS,CONTRATOS E MENSAGERIA FINANCEIRA
+1728,contracts/iso20022/schemas/.tool-versions,CONTRATOS E MENSAGERIA FINANCEIRA
+1730,contracts/iso20022/schemas/CODEOWNERS,CONTRATOS E MENSAGERIA FINANCEIRA
+1766,contracts/iso20022/tests/.tool-versions,CONTRATOS E MENSAGERIA FINANCEIRA
+1768,contracts/iso20022/tests/CODEOWNERS,CONTRATOS E MENSAGERIA FINANCEIRA
+1803,contracts/iso20022/validation/.tool-versions,CONTRATOS E MENSAGERIA FINANCEIRA
+1805,contracts/iso20022/validation/CODEOWNERS,CONTRATOS E MENSAGERIA FINANCEIRA
+1840,contracts/asyncapi/.tool-versions,CONTRATOS E MODELOS
+1842,contracts/asyncapi/CODEOWNERS,CONTRATOS E MODELOS
+1884,contracts/error-catalog/.tool-versions,CONTRATOS E MODELOS
+1886,contracts/error-catalog/CODEOWNERS,CONTRATOS E MODELOS
+1926,contracts/events/.tool-versions,CONTRATOS E MODELOS
+1928,contracts/events/CODEOWNERS,CONTRATOS E MODELOS
+1966,contracts/json-schema/.tool-versions,CONTRATOS E MODELOS
+1968,contracts/json-schema/CODEOWNERS,CONTRATOS E MODELOS
+2010,contracts/openapi/.tool-versions,CONTRATOS E MODELOS
+2012,contracts/openapi/CODEOWNERS,CONTRATOS E MODELOS
+2060,contracts/sdk/.tool-versions,CONTRATOS E MODELOS
+2097,design-system/android/.tool-versions,DESIGN SYSTEM MULTIPLATAFORMA
+2099,design-system/android/CODEOWNERS,DESIGN SYSTEM MULTIPLATAFORMA
+2134,design-system/documentation/.tool-versions,DESIGN SYSTEM MULTIPLATAFORMA
+2136,design-system/documentation/CODEOWNERS,DESIGN SYSTEM MULTIPLATAFORMA
+2172,design-system/ios/.tool-versions,DESIGN SYSTEM MULTIPLATAFORMA
+2174,design-system/ios/CODEOWNERS,DESIGN SYSTEM MULTIPLATAFORMA
+2209,design-system/tokens/.tool-versions,DESIGN SYSTEM MULTIPLATAFORMA
+2211,design-system/tokens/CODEOWNERS,DESIGN SYSTEM MULTIPLATAFORMA
+2260,design-system/web/.tool-versions,DESIGN SYSTEM MULTIPLATAFORMA
+2262,design-system/web/CODEOWNERS,DESIGN SYSTEM MULTIPLATAFORMA
+2343,design-system/windows/.tool-versions,DESIGN SYSTEM MULTIPLATAFORMA
+2345,design-system/windows/CODEOWNERS,DESIGN SYSTEM MULTIPLATAFORMA
+2382,domains/accounting/.tool-versions,CONTROLE E CONFIABILIDADE
+2384,domains/accounting/CODEOWNERS,CONTROLE E CONFIABILIDADE
+2405,domains/cosif/.tool-versions,CONTROLE E CONFIABILIDADE
+2407,domains/cosif/CODEOWNERS,CONTROLE E CONFIABILIDADE
+2470,domains/accounts/.tool-versions,SERVIÇOS DE DOMÍNIO
+2472,domains/accounts/CODEOWNERS,SERVIÇOS DE DOMÍNIO
+2542,domains/aml/.tool-versions,CONTROLE E CONFIABILIDADE
+2544,domains/aml/CODEOWNERS,CONTROLE E CONFIABILIDADE
+2603,governance/audit/.tool-versions,"CONTROLE, AUDITORIA E REGULATÓRIO"
+2605,governance/audit/CODEOWNERS,"CONTROLE, AUDITORIA E REGULATÓRIO"
+2642,domains/balance/.tool-versions,SERVIÇOS DE DOMÍNIO
+2644,domains/balance/CODEOWNERS,SERVIÇOS DE DOMÍNIO
+2679,domains/card-authorization/.tool-versions,SERVIÇOS DE DOMÍNIO
+2681,domains/card-authorization/CODEOWNERS,SERVIÇOS DE DOMÍNIO
+2716,domains/card-clearing/.tool-versions,SERVIÇOS DE DOMÍNIO
+2718,domains/card-clearing/CODEOWNERS,SERVIÇOS DE DOMÍNIO
+2753,domains/cards/.tool-versions,SERVIÇOS DE DOMÍNIO
+2755,domains/cards/CODEOWNERS,SERVIÇOS DE DOMÍNIO
+2815,domains/case-management/.tool-versions,CONTROLE E CONFIABILIDADE
+2817,domains/case-management/CODEOWNERS,CONTROLE E CONFIABILIDADE
+2852,domains/consents/.tool-versions,SERVIÇOS DE DOMÍNIO
+2854,domains/consents/CODEOWNERS,SERVIÇOS DE DOMÍNIO
+2889,domains/credit-decision/.tool-versions,SERVIÇOS DE DOMÍNIO
+2891,domains/credit-decision/CODEOWNERS,SERVIÇOS DE DOMÍNIO
+2926,domains/credit-origination/.tool-versions,SERVIÇOS DE DOMÍNIO
+2928,domains/credit-origination/CODEOWNERS,SERVIÇOS DE DOMÍNIO
+2963,domains/credit/.tool-versions,CONTROLE E CONFIABILIDADE
+2965,domains/credit/CODEOWNERS,CONTROLE E CONFIABILIDADE
+3022,domains/custody-positions/.tool-versions,SERVIÇOS DE DOMÍNIO
+3024,domains/custody-positions/CODEOWNERS,SERVIÇOS DE DOMÍNIO
+3059,domains/customer-support/.tool-versions,SERVIÇOS DE DOMÍNIO
+3061,domains/customer-support/CODEOWNERS,SERVIÇOS DE DOMÍNIO
+3096,domains/customers/.tool-versions,SERVIÇOS DE DOMÍNIO
+3098,domains/customers/CODEOWNERS,SERVIÇOS DE DOMÍNIO
+3172,domains/device-trust/.tool-versions,SERVIÇOS DE DOMÍNIO
+3174,domains/device-trust/CODEOWNERS,SERVIÇOS DE DOMÍNIO
+3209,domains/disputes/.tool-versions,SERVIÇOS DE DOMÍNIO
+3211,domains/disputes/CODEOWNERS,SERVIÇOS DE DOMÍNIO
+3246,domains/documents/.tool-versions,SERVIÇOS DE DOMÍNIO
+3248,domains/documents/CODEOWNERS,SERVIÇOS DE DOMÍNIO
+3283,domains/fees/.tool-versions,SERVIÇOS DE DOMÍNIO
+3285,domains/fees/CODEOWNERS,SERVIÇOS DE DOMÍNIO
+3333,domains/fraud/.tool-versions,CONTROLE E CONFIABILIDADE
+3335,domains/fraud/CODEOWNERS,CONTROLE E CONFIABILIDADE
+3388,domains/fx/.tool-versions,SERVIÇOS DE DOMÍNIO
+3390,domains/fx/CODEOWNERS,SERVIÇOS DE DOMÍNIO
+3425,domains/identity/.tool-versions,SERVIÇOS DE DOMÍNIO
+3427,domains/identity/CODEOWNERS,SERVIÇOS DE DOMÍNIO
+3461,domains/kyc/.tool-versions,CONTROLE E CONFIABILIDADE
+3463,domains/kyc/CODEOWNERS,CONTROLE E CONFIABILIDADE
+3548,domains/investment-orders/.tool-versions,SERVIÇOS DE DOMÍNIO
+3550,domains/investment-orders/CODEOWNERS,SERVIÇOS DE DOMÍNIO
+3613,domains/invoices/.tool-versions,SERVIÇOS DE DOMÍNIO
+3615,domains/invoices/CODEOWNERS,SERVIÇOS DE DOMÍNIO
+3650,domains/ledger/.tool-versions,SERVIÇOS DE DOMÍNIO
+3652,domains/ledger/CODEOWNERS,SERVIÇOS DE DOMÍNIO
+3761,domains/limits/.tool-versions,SERVIÇOS DE DOMÍNIO
+3763,domains/limits/CODEOWNERS,SERVIÇOS DE DOMÍNIO
+3811,domains/loan-servicing/.tool-versions,SERVIÇOS DE DOMÍNIO
+3813,domains/loan-servicing/CODEOWNERS,SERVIÇOS DE DOMÍNIO
+3848,domains/notifications/.tool-versions,SERVIÇOS DE DOMÍNIO
+3850,domains/notifications/CODEOWNERS,SERVIÇOS DE DOMÍNIO
+3903,domains/onboarding/.tool-versions,SERVIÇOS DE DOMÍNIO
+3905,domains/onboarding/CODEOWNERS,SERVIÇOS DE DOMÍNIO
+3940,domains/payment-orchestrator/.tool-versions,SERVIÇOS DE DOMÍNIO
+4012,domains/pix/.tool-versions,SERVIÇOS DE DOMÍNIO
+4014,domains/pix/CODEOWNERS,SERVIÇOS DE DOMÍNIO
+4088,domains/product-catalog/.tool-versions,SERVIÇOS DE DOMÍNIO
+4090,domains/product-catalog/CODEOWNERS,SERVIÇOS DE DOMÍNIO
+4125,domains/reconciliation/.tool-versions,CONTROLE E CONFIABILIDADE
+4127,domains/reconciliation/CODEOWNERS,CONTROLE E CONFIABILIDADE
+4183,governance/regulatory-reporting/.tool-versions,"CONTROLE, AUDITORIA E REGULATÓRIO"
+4220,domains/sanctions/.tool-versions,CONTROLE E CONFIABILIDADE
+4222,domains/sanctions/CODEOWNERS,CONTROLE E CONFIABILIDADE
+4257,domains/session/.tool-versions,SERVIÇOS DE DOMÍNIO
+4259,domains/session/CODEOWNERS,SERVIÇOS DE DOMÍNIO
+4295,domains/statements/.tool-versions,SERVIÇOS DE DOMÍNIO
+4297,domains/statements/CODEOWNERS,SERVIÇOS DE DOMÍNIO
+4332,domains/transactions/.tool-versions,SERVIÇOS DE DOMÍNIO
+4334,domains/transactions/CODEOWNERS,SERVIÇOS DE DOMÍNIO
+5036,governance/policies/engineering/.tool-versions,GOVERNANÇA
+5079,governance/architecture/.tool-versions,GOVERNANÇA
+5081,governance/architecture/CODEOWNERS,GOVERNANÇA
+5135,governance/product/.tool-versions,GOVERNANÇA
+5137,governance/product/CODEOWNERS,GOVERNANÇA
+5472,governance/regulatory/aml/.tool-versions,GOVERNANÇA REGULATÓRIA
+5474,governance/regulatory/aml/CODEOWNERS,GOVERNANÇA REGULATÓRIA
+5510,governance/regulatory/card-pci/.tool-versions,GOVERNANÇA REGULATÓRIA
+5512,governance/regulatory/card-pci/CODEOWNERS,GOVERNANÇA REGULATÓRIA
+5548,governance/regulatory/cloud-outsourcing/.tool-versions,GOVERNANÇA REGULATÓRIA
+5586,governance/regulatory/cosif/.tool-versions,GOVERNANÇA REGULATÓRIA
+5588,governance/regulatory/cosif/CODEOWNERS,GOVERNANÇA REGULATÓRIA
+5624,governance/regulatory/cvm/.tool-versions,GOVERNANÇA REGULATÓRIA
+5626,governance/regulatory/cvm/CODEOWNERS,GOVERNANÇA REGULATÓRIA
+5662,governance/regulatory/cybersecurity/.tool-versions,GOVERNANÇA REGULATÓRIA
+5700,governance/regulatory/lgpd/.tool-versions,GOVERNANÇA REGULATÓRIA
+5702,governance/regulatory/lgpd/CODEOWNERS,GOVERNANÇA REGULATÓRIA
+5740,governance/regulatory/open-finance/.tool-versions,GOVERNANÇA REGULATÓRIA
+5778,governance/regulatory/pix/.tool-versions,GOVERNANÇA REGULATÓRIA
+5780,governance/regulatory/pix/CODEOWNERS,GOVERNANÇA REGULATÓRIA
+5816,governance/regulatory/reporting/.tool-versions,GOVERNANÇA REGULATÓRIA
+5854,governance/regulatory/sisbacen/.tool-versions,GOVERNANÇA REGULATÓRIA
+5856,governance/regulatory/sisbacen/CODEOWNERS,GOVERNANÇA REGULATÓRIA
+5892,governance/regulatory/sisorf/.tool-versions,GOVERNANÇA REGULATÓRIA
+5894,governance/regulatory/sisorf/CODEOWNERS,GOVERNANÇA REGULATÓRIA
+5930,governance/regulatory/susep/.tool-versions,GOVERNANÇA REGULATÓRIA
+5932,governance/regulatory/susep/CODEOWNERS,GOVERNANÇA REGULATÓRIA
+5968,governance/regulatory/unicad/.tool-versions,GOVERNANÇA REGULATÓRIA
+5970,governance/regulatory/unicad/CODEOWNERS,GOVERNANÇA REGULATÓRIA
+6021,governance/runbooks/operations/accounting/.tool-versions,OPERAÇÃO 24×7
+6058,governance/runbooks/operations/aml/.tool-versions,OPERAÇÃO 24×7
+6060,governance/runbooks/operations/aml/CODEOWNERS,OPERAÇÃO 24×7
+6095,governance/business-continuity/.tool-versions,OPERAÇÃO 24×7
+6132,governance/runbooks/operations/cards/.tool-versions,OPERAÇÃO 24×7
+6134,governance/runbooks/operations/cards/CODEOWNERS,OPERAÇÃO 24×7
+6169,governance/runbooks/operations/change-management/.tool-versions,OPERAÇÃO 24×7
+6206,governance/runbooks/operations/customer-support/.tool-versions,OPERAÇÃO 24×7
+6243,governance/runbooks/operations/fraud/.tool-versions,OPERAÇÃO 24×7
+6245,governance/runbooks/operations/fraud/CODEOWNERS,OPERAÇÃO 24×7
+6280,governance/runbooks/operations/incident-management/.tool-versions,OPERAÇÃO 24×7
+6317,governance/runbooks/operations/noc/.tool-versions,OPERAÇÃO 24×7
+6319,governance/runbooks/operations/noc/CODEOWNERS,OPERAÇÃO 24×7
+6354,governance/runbooks/operations/payment/.tool-versions,OPERAÇÃO 24×7
+6356,governance/runbooks/operations/payment/CODEOWNERS,OPERAÇÃO 24×7
+6391,governance/runbooks/operations/pix/.tool-versions,OPERAÇÃO 24×7
+6393,governance/runbooks/operations/pix/CODEOWNERS,OPERAÇÃO 24×7
+6428,governance/runbooks/operations/reconciliation/.tool-versions,OPERAÇÃO 24×7
+6465,governance/runbooks/operations/soc/.tool-versions,OPERAÇÃO 24×7
+6467,governance/runbooks/operations/soc/CODEOWNERS,OPERAÇÃO 24×7
+6502,governance/runbooks/operations/treasury/.tool-versions,OPERAÇÃO 24×7
+6504,governance/runbooks/operations/treasury/CODEOWNERS,OPERAÇÃO 24×7
+6539,platform/backups/.tool-versions,PLATAFORMA E INFRAESTRUTURA
+6541,platform/backups/CODEOWNERS,PLATAFORMA E INFRAESTRUTURA
+6576,platform/cache/.tool-versions,PLATAFORMA E INFRAESTRUTURA
+6578,platform/cache/CODEOWNERS,PLATAFORMA E INFRAESTRUTURA
+6616,platform/ci-cd/.tool-versions,PLATAFORMA E INFRAESTRUTURA
+6618,platform/ci-cd/CODEOWNERS,PLATAFORMA E INFRAESTRUTURA
+6658,platform/data/analytics/.tool-versions,PLATAFORMA DE DADOS
+6660,platform/data/analytics/CODEOWNERS,PLATAFORMA DE DADOS
+6695,platform/data/finance-reporting/.tool-versions,PLATAFORMA DE DADOS
+6732,platform/data/governance/.tool-versions,PLATAFORMA DE DADOS
+6734,platform/data/governance/CODEOWNERS,PLATAFORMA DE DADOS
+6769,platform/data/ingestion/.tool-versions,PLATAFORMA DE DADOS
+6771,platform/data/ingestion/CODEOWNERS,PLATAFORMA DE DADOS
+6806,platform/data/lake/.tool-versions,PLATAFORMA DE DADOS
+6808,platform/data/lake/CODEOWNERS,PLATAFORMA DE DADOS
+6843,platform/data/lineage/.tool-versions,PLATAFORMA DE DADOS
+6845,platform/data/lineage/CODEOWNERS,PLATAFORMA DE DADOS
+6880,platform/data/privacy/.tool-versions,PLATAFORMA DE DADOS
+6882,platform/data/privacy/CODEOWNERS,PLATAFORMA DE DADOS
+6917,platform/data/quality/.tool-versions,PLATAFORMA DE DADOS
+6919,platform/data/quality/CODEOWNERS,PLATAFORMA DE DADOS
+6954,platform/data/risk-models/.tool-versions,PLATAFORMA DE DADOS
+6956,platform/data/risk-models/CODEOWNERS,PLATAFORMA DE DADOS
+6991,platform/data/streaming/.tool-versions,PLATAFORMA DE DADOS
+6993,platform/data/streaming/CODEOWNERS,PLATAFORMA DE DADOS
+7028,platform/data/warehouse/.tool-versions,PLATAFORMA DE DADOS
+7030,platform/data/warehouse/CODEOWNERS,PLATAFORMA DE DADOS
+7065,platform/databases/.tool-versions,PLATAFORMA E INFRAESTRUTURA
+7067,platform/databases/CODEOWNERS,PLATAFORMA E INFRAESTRUTURA
+7113,platform/developer-portal/.tool-versions,PLATAFORMA E INFRAESTRUTURA
+7150,platform/disaster-recovery/.tool-versions,PLATAFORMA E INFRAESTRUTURA
+7187,platform/event-bus/.tool-versions,PLATAFORMA E INFRAESTRUTURA
+7189,platform/event-bus/CODEOWNERS,PLATAFORMA E INFRAESTRUTURA
+7234,platform/integrations/b3/.tool-versions,MUNDO EXTERNO E ADAPTADORES
+7236,platform/integrations/b3/CODEOWNERS,MUNDO EXTERNO E ADAPTADORES
+7272,platform/integrations/bacen/.tool-versions,MUNDO EXTERNO E ADAPTADORES
+7274,platform/integrations/bacen/CODEOWNERS,MUNDO EXTERNO E ADAPTADORES
+7310,platform/integrations/bureaus/.tool-versions,MUNDO EXTERNO E ADAPTADORES
+7312,platform/integrations/bureaus/CODEOWNERS,MUNDO EXTERNO E ADAPTADORES
+7348,platform/integrations/card-networks/.tool-versions,MUNDO EXTERNO E ADAPTADORES
+7386,platform/integrations/card-processor/.tool-versions,MUNDO EXTERNO E ADAPTADORES
+7424,platform/integrations/correspondents/.tool-versions,MUNDO EXTERNO E ADAPTADORES
+7462,platform/integrations/custody/.tool-versions,MUNDO EXTERNO E ADAPTADORES
+7464,platform/integrations/custody/CODEOWNERS,MUNDO EXTERNO E ADAPTADORES
+7500,platform/integrations/dict/.tool-versions,MUNDO EXTERNO E ADAPTADORES
+7502,platform/integrations/dict/CODEOWNERS,MUNDO EXTERNO E ADAPTADORES
+7538,platform/integrations/kyc-providers/.tool-versions,MUNDO EXTERNO E ADAPTADORES
+7577,platform/integrations/notifications/.tool-versions,MUNDO EXTERNO E ADAPTADORES
+7615,platform/integrations/open-finance/.tool-versions,MUNDO EXTERNO E ADAPTADORES
+7656,platform/integrations/spi/.tool-versions,MUNDO EXTERNO E ADAPTADORES
+7658,platform/integrations/spi/CODEOWNERS,MUNDO EXTERNO E ADAPTADORES
+7694,platform/integrations/susep/.tool-versions,MUNDO EXTERNO E ADAPTADORES
+7696,platform/integrations/susep/CODEOWNERS,MUNDO EXTERNO E ADAPTADORES
+7732,platform/integrations/swift/.tool-versions,MUNDO EXTERNO E ADAPTADORES
+7734,platform/integrations/swift/CODEOWNERS,MUNDO EXTERNO E ADAPTADORES
+7770,platform/kms-hsm/.tool-versions,PLATAFORMA E INFRAESTRUTURA
+7772,platform/kms-hsm/CODEOWNERS,PLATAFORMA E INFRAESTRUTURA
+7807,platform/kubernetes/.tool-versions,PLATAFORMA E INFRAESTRUTURA
+7809,platform/kubernetes/CODEOWNERS,PLATAFORMA E INFRAESTRUTURA
+7856,platform/object-storage/.tool-versions,PLATAFORMA E INFRAESTRUTURA
+7893,platform/observability/.tool-versions,PLATAFORMA E INFRAESTRUTURA
+7942,platform/secrets/.tool-versions,PLATAFORMA E INFRAESTRUTURA
+7944,platform/secrets/CODEOWNERS,PLATAFORMA E INFRAESTRUTURA
+7979,platform/security/appsec/.tool-versions,SEGURANÇA TRANSVERSAL
+7981,platform/security/appsec/CODEOWNERS,SEGURANÇA TRANSVERSAL
+8016,platform/security/cloud/.tool-versions,SEGURANÇA TRANSVERSAL
+8018,platform/security/cloud/CODEOWNERS,SEGURANÇA TRANSVERSAL
+8053,platform/security/detection/.tool-versions,SEGURANÇA TRANSVERSAL
+8055,platform/security/detection/CODEOWNERS,SEGURANÇA TRANSVERSAL
+8090,platform/security/iam/.tool-versions,SEGURANÇA TRANSVERSAL
+8092,platform/security/iam/CODEOWNERS,SEGURANÇA TRANSVERSAL
+8127,platform/security/incident-response/.tool-versions,SEGURANÇA TRANSVERSAL
+8164,platform/security/kms-hsm/.tool-versions,SEGURANÇA TRANSVERSAL
+8166,platform/security/kms-hsm/CODEOWNERS,SEGURANÇA TRANSVERSAL
+8201,platform/security/mobile/.tool-versions,SEGURANÇA TRANSVERSAL
+8203,platform/security/mobile/CODEOWNERS,SEGURANÇA TRANSVERSAL
+8238,platform/security/pam/.tool-versions,SEGURANÇA TRANSVERSAL
+8240,platform/security/pam/CODEOWNERS,SEGURANÇA TRANSVERSAL
+8275,platform/security/pki/.tool-versions,SEGURANÇA TRANSVERSAL
+8277,platform/security/pki/CODEOWNERS,SEGURANÇA TRANSVERSAL
+8312,platform/security/red-team/.tool-versions,SEGURANÇA TRANSVERSAL
+8314,platform/security/red-team/CODEOWNERS,SEGURANÇA TRANSVERSAL
+8349,platform/security/threat-intelligence/.tool-versions,SEGURANÇA TRANSVERSAL
+8386,platform/security/vulnerability-management/.tool-versions,SEGURANÇA TRANSVERSAL
+8423,platform/siem/.tool-versions,PLATAFORMA E INFRAESTRUTURA
+8425,platform/siem/CODEOWNERS,PLATAFORMA E INFRAESTRUTURA
+8460,platform/terraform/.tool-versions,PLATAFORMA E INFRAESTRUTURA
+8462,platform/terraform/CODEOWNERS,PLATAFORMA E INFRAESTRUTURA
+8520,platform/tools/comment-gate/.tool-versions,FERRAMENTAS DE ENGENHARIA
+8558,platform/tools/contract-linter/.tool-versions,FERRAMENTAS DE ENGENHARIA
+8596,platform/tools/developer-cli/.tool-versions,FERRAMENTAS DE ENGENHARIA
+8638,platform/tools/local-environment/.tool-versions,FERRAMENTAS DE ENGENHARIA
+8675,platform/tools/migration-validator/.tool-versions,FERRAMENTAS DE ENGENHARIA
+8715,platform/tools/release-manifest/.tool-versions,FERRAMENTAS DE ENGENHARIA
+8752,platform/tools/sbom/.tool-versions,FERRAMENTAS DE ENGENHARIA
+8789,platform/tools/schema-validator/.tool-versions,FERRAMENTAS DE ENGENHARIA
+8826,platform/tools/secret-scanner/.tool-versions,FERRAMENTAS DE ENGENHARIA
+8864,platform/tools/test-data/.tool-versions,FERRAMENTAS DE ENGENHARIA
+8901,quality/chaos/.tool-versions,QUALIDADE E HOMOLOGAÇÃO
+8903,quality/chaos/CODEOWNERS,QUALIDADE E HOMOLOGAÇÃO
+8938,quality/contract/.tool-versions,QUALIDADE E HOMOLOGAÇÃO
+8940,quality/contract/CODEOWNERS,QUALIDADE E HOMOLOGAÇÃO
+8975,quality/e2e/.tool-versions,QUALIDADE E HOMOLOGAÇÃO
+8977,quality/e2e/CODEOWNERS,QUALIDADE E HOMOLOGAÇÃO
+9012,quality/financial-invariants/.tool-versions,QUALIDADE E HOMOLOGAÇÃO
+9014,quality/financial-invariants/CODEOWNERS,QUALIDADE E HOMOLOGAÇÃO
+9066,quality/integration/.tool-versions,QUALIDADE E HOMOLOGAÇÃO
+9068,quality/integration/CODEOWNERS,QUALIDADE E HOMOLOGAÇÃO
+9114,quality/performance/.tool-versions,QUALIDADE E HOMOLOGAÇÃO
+9116,quality/performance/CODEOWNERS,QUALIDADE E HOMOLOGAÇÃO
+9152,quality/regulatory/.tool-versions,QUALIDADE E HOMOLOGAÇÃO
+9154,quality/regulatory/CODEOWNERS,QUALIDADE E HOMOLOGAÇÃO
+9189,quality/resilience/.tool-versions,QUALIDADE E HOMOLOGAÇÃO
+9191,quality/resilience/CODEOWNERS,QUALIDADE E HOMOLOGAÇÃO
+9226,quality/security/.tool-versions,QUALIDADE E HOMOLOGAÇÃO
+9228,quality/security/CODEOWNERS,QUALIDADE E HOMOLOGAÇÃO
+9264,quality/test-data/.tool-versions,QUALIDADE E HOMOLOGAÇÃO
+9266,quality/test-data/CODEOWNERS,QUALIDADE E HOMOLOGAÇÃO
+9301,quality/unit/.tool-versions,QUALIDADE E HOMOLOGAÇÃO
+9303,quality/unit/CODEOWNERS,QUALIDADE E HOMOLOGAÇÃO
+9327,governance/release/repository-root/renovate.json,FUNDAÇÃO DO WORKSPACE
+9328,governance/release/repository-root/sonar-project.properties,FUNDAÇÃO DO WORKSPACE

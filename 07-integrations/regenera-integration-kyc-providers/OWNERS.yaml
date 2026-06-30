@@ -1,0 +1,6 @@
+owners:
+  primary: team-integration-kyc-providers
+  approvers:
+    - team-architecture
+    - team-security
+  on_call: kyc-providers-primary

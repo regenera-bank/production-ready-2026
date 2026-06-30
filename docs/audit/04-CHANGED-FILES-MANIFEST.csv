@@ -1,0 +1,10 @@
+caminho,estado_anterior,estado_posterior,motivo_tecnico,agente,teste,risco,hash_sha256
+bff/web-bff/src/auth/auth.service.ts,sem password-reset,fluxo completo reset,A03,auth.service.spec.ts,enumeração,N/A
+bff/web-bff/src/auth/auth.controller.ts,sem endpoints reset,POST request+confirm,A03,auth.service.spec.ts,token leak,N/A
+bff/web-bff/src/persistence/homolog-store.types.ts,sem tokens reset,PasswordResetTokenRecord,A03,auth.service.spec.ts,auditoria,N/A
+bff/web-bff/src/integrations/risk-kyc/test-vision.mock.ts,inexistente,mock Vision completo,A04,banking+onboarding specs,KYC falso positivo,N/A
+apps/web-banking/src/components/Auth/LoginScreen.tsx,sem forgot UI,fluxo recuperação,A05,web build,G8,N/A
+apps/web-banking/src/platform/bff-client.ts,sem reset API,+request/confirm,A05,web build,contrato,N/A
+apps/web-banking/src/App.tsx,18 erros TS,build limpo,A05,npm run build exit 0,G8,N/A
+apps/web-banking/package.json,sem @simplewebauthn/types,dep explícita,A05,tsc,N/A
+docs/audit/*,parcial,estrutura completa,A01-A10,manual,rastreabilidade,N/A

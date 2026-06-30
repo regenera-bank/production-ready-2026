@@ -1,0 +1,6 @@
+owners:
+  primary: team-regulatory-cybersecurity
+  approvers:
+    - team-architecture
+    - team-security
+  on_call: cybersecurity-primary

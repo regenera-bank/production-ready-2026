@@ -1,0 +1,11 @@
+{
+  "timestamp": "2026-06-26T08:20:35.387337",
+  "capacidades_especificadas": 2,
+  "decisoes_pendentes_audit": 1,
+  "decisoes_pendentes_idempotency": 1,
+  "contratos_propostos": 2,
+  "modelos_persist\u00eancia_propostos": 2,
+  "criterios_aceite": 2,
+  "cenarios_teste": 6,
+  "bloqueios_implementacao": 2
+}

@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: { name: partner-api }
+spec:
+  replicas: 3
+  selector: { matchLabels: { app: partner-api } }
+  template:
+    metadata: { labels: { app: partner-api } }
+    spec:
+      serviceAccountName: partner-api
+      containers:
+        - name: api
+          image: REGISTRY/partner-api:RELEASE_DIGEST
+          ports: [{ containerPort: 8443 }]
+          readinessProbe: { httpGet: { path: /health/live, port: 8443, scheme: HTTPS }, initialDelaySeconds: 10, periodSeconds: 10 }
+          resources: { requests: { cpu: 250m, memory: 256Mi }, limits: { cpu: "2", memory: 1Gi } }
+          securityContext: { allowPrivilegeEscalation: false, readOnlyRootFilesystem: true, runAsNonRoot: true }

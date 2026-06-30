@@ -1,0 +1,30 @@
+{
+  "amount": {
+    "currency": "BRL",
+    "minorUnits": "50000"
+  },
+  "authorization": [
+    {
+      "side": "DEBIT",
+      "account": "CUSTOMER_LIABILITY",
+      "minorUnits": "50000"
+    },
+    {
+      "side": "CREDIT",
+      "account": "PIX_TRANSITORY",
+      "minorUnits": "50000"
+    }
+  ],
+  "settlement": [
+    {
+      "side": "DEBIT",
+      "account": "PIX_TRANSITORY",
+      "minorUnits": "50000"
+    },
+    {
+      "side": "CREDIT",
+      "account": "SETTLEMENT_AVAILABILITY",
+      "minorUnits": "50000"
+    }
+  ]
+}

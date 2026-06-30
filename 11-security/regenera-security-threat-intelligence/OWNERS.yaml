@@ -1,0 +1,6 @@
+owners:
+  primary: team-security-threat-intelligence
+  approvers:
+    - team-architecture
+    - team-security
+  on_call: threat-intelligence-primary

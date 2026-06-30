@@ -1,0 +1,46 @@
+// [FILE] packages/grpc-definitions/src/auth.proto
+// Protocol Buffer Definition for Auth Service
+// Desenvolvedor: Don Paulo Ricardo
+
+syntax = "proto3";
+
+package auth;
+
+// Importar a definição do usuário, pois o serviço de autenticação pode retornar objetos de usuário.
+import "user.proto";
+
+// Define o serviço de autenticação.
+service AuthService {
+  // RPC para realizar o login do usuário.
+  rpc Login (LoginRequest) returns (LoginResponse);
+
+  // RPC para registrar um novo usuário.
+  rpc Register (RegisterRequest) returns (user.User); // Reutiliza o User do user.proto
+
+  // RPC para obter o perfil do usuário autenticado.
+  rpc GetProfile (GetProfileRequest) returns (user.User); // Reutiliza o User do user.proto
+}
+
+// Mensagem de requisição para o método Login.
+message LoginRequest {
+  string email = 1;
+  string password = 2;
+}
+
+// Mensagem de resposta para o método Login.
+message LoginResponse {
+  string access_token = 1;
+}
+
+// Mensagem de requisição para o método Register.
+message RegisterRequest {
+  string full_name = 1; // Corresponde ao fullName do frontend
+  string email = 2;
+  string password = 3;
+}
+
+// Mensagem de requisição para o método GetProfile.
+// Pode ser vazia se o token JWT for passado via metadata do gRPC.
+message GetProfileRequest {
+  // string token = 1; // Exemplo se o token for enviado no body da requisição
+}

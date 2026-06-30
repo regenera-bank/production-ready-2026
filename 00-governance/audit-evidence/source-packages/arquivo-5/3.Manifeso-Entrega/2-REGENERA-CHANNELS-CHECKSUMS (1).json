@@ -1,0 +1,40 @@
+{
+  "algorithm": "SHA-256",
+  "artifacts": [
+    {
+      "package": "01-Regenera-Web-Production",
+      "file": "01-Regenera-Web-Production.zip",
+      "sha256": "f113ce0447076a9dc43817002dd4a165ec06dd052625ccd2e5405d2c6d6e60e9",
+      "bytes": 100013,
+      "source_files": 45
+    },
+    {
+      "package": "02-Regenera-Android-Production",
+      "file": "02-Regenera-Android-Production.zip",
+      "sha256": "ec22fe94515769060d238f1341d832c6d21a530d453603dcca1f86d929246bb1",
+      "bytes": 36176,
+      "source_files": 37
+    },
+    {
+      "package": "03-Regenera-iOS-Production",
+      "file": "03-Regenera-iOS-Production.zip",
+      "sha256": "9dd459c34031f71804c77eb843bbb88124189341990569abaeee94e0dcdf64d9",
+      "bytes": 34657,
+      "source_files": 32
+    },
+    {
+      "package": "04-Regenera-Windows-Operations-Production",
+      "file": "04-Regenera-Windows-Operations-Production.zip",
+      "sha256": "c16be611d3ed9ed016df73a7016fb97314540cbff810578d975913ae55f1f191",
+      "bytes": 33243,
+      "source_files": 30
+    },
+    {
+      "package": "05-Regenera-Partner-APIs-Production",
+      "file": "05-Regenera-Partner-APIs-Production.zip",
+      "sha256": "ea79863e79f4e862fafc353f01551e4902a020a17b17320583a0fa04b8e90930",
+      "bytes": 48038,
+      "source_files": 31
+    }
+  ]
+}

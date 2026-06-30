@@ -1,0 +1,12 @@
+name: regenera-operations-reconciliation
+domain: reconciliation
+owner: team-operations-reconciliation
+criticality: critical
+data_classification: banking-secret
+runtime: docs
+tier: 1
+rto: 4h
+rpo: 1h
+on_call: reconciliation-primary
+dependencies:
+  []

@@ -1,0 +1,17 @@
+capacidade,dependencia_obrigatoria,dependencia_opcional,dependencia_circular,capacidade_predecessora,capacidade_consumidora,impacto_indisponibilidade
+Identity,Audit Trail,NAO,NAO,Audit Trail,Identity,ALTO
+Authorization,Identity,NAO,NAO,Identity,Authorization,ALTO
+Customer/Party,Identity,NAO,NAO,Identity,Customer/Party,ALTO
+Customer/Party,Authorization,NAO,NAO,Authorization,Customer/Party,ALTO
+Accounts,Customer/Party,NAO,NAO,Customer/Party,Accounts,ALTO
+Accounts,Audit Trail,NAO,NAO,Audit Trail,Accounts,ALTO
+Ledger,Audit Trail,NAO,NAO,Audit Trail,Ledger,ALTO
+Transactions,Accounts,NAO,NAO,Accounts,Transactions,ALTO
+Transactions,Ledger,NAO,NAO,Ledger,Transactions,ALTO
+Transactions,Idempotency,NAO,NAO,Idempotency,Transactions,ALTO
+Payments,Transactions,NAO,NAO,Transactions,Payments,ALTO
+Pix,Transactions,NAO,NAO,Transactions,Pix,ALTO
+Reconciliation,Ledger,NAO,NAO,Ledger,Reconciliation,ALTO
+Reconciliation,Transactions,NAO,NAO,Transactions,Reconciliation,ALTO
+Reconciliation,Payments,NAO,NAO,Payments,Reconciliation,ALTO
+Reconciliation,Pix,NAO,NAO,Pix,Reconciliation,ALTO

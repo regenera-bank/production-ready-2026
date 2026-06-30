@@ -1,0 +1,1169 @@
+# 🏦 REGENERA BANK - MAPA COMPLETO DA ARQUITETURA
+### Gold Master Build - Dissecação Completa do Sistema Bancário
+
+*Desenvolvido por: Don Paulo Ricardo | CEO: Raphaela Cervesky*  
+*42-47 mil arquivos | Monorepo Bancário Completo*
+
+---
+
+## 📊 VISÃO PANORÂMICA DO ECOSSISTEMA
+
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│                         CAMADA DE USUÁRIO                            │
+├─────────────────────────────────────────────────────────────────────┤
+│  🌐 Frontend Web     📱 Mobile App      🎨 Next.js Frontend         │
+│  (React + Vite)      (React Native)    (Server-Side Rendering)      │
+│  Port: 5173          Port: 8081        Port: 3010                   │
+└────────────────────────────┬────────────────────────────────────────┘
+                             │
+                             ▼
+┌─────────────────────────────────────────────────────────────────────┐
+│                    🚪 API GATEWAY (Port 3000)                        │
+│  • Rate Limiting (100 req/min/IP) • Redis Cache                     │
+│  • HTTP Proxy Middleware           • APM Monitoring                 │
+│  • Request Tracing                 • Centralized Logging            │
+└────────────────────────────┬────────────────────────────────────────┘
+                             │
+            ┌────────────────┼────────────────┐
+            ▼                ▼                ▼
+┌───────────────────┐ ┌──────────────┐ ┌──────────────┐
+│  gRPC (Port 50051)│ │ HTTP/REST    │ │ RabbitMQ     │
+│  Microserviços    │ │ Microserviços│ │ Event Bus    │
+└───────────────────┘ └──────────────┘ └──────────────┘
+```
+
+---
+
+## 🎯 ARQUITETURA DE MICROSERVIÇOS
+
+### **13 Microserviços Especializados**
+
+#### **CAMADA DE AUTENTICAÇÃO & IDENTIDADE**
+
+##### 🔐 **AUTH SERVICE** (Port 3001)
+**Responsabilidade:** Autenticação e Autorização JWT  
+**Stack:** NestJS + Passport + JWT  
+**Comunicação:**
+- **gRPC** → User Service (busca usuários)
+- **REST** → User Service (criação de usuários)
+- **Emite:** JWT Tokens (HS256)
+
+**Fluxo de Registro:**
+```
+1. POST /register → Valida dados
+2. gRPC → User Service (verifica email)
+3. Hash password (bcrypt, salt rounds: 10)
+4. HTTP POST → User Service (cria usuário)
+5. Retorna: { id, email, fullName }
+```
+
+**Fluxo de Login:**
+```
+1. POST /login → Valida credenciais
+2. gRPC → User Service (busca por email)
+3. Compara hash (bcrypt.compare)
+4. Gera JWT (exp: 1 hora)
+5. Retorna: { access_token }
+```
+
+##### 👤 **USER SERVICE** (Port 3002)
+**Responsabilidade:** Gestão de Usuários e Perfis  
+**Stack:** NestJS + TypeORM + PostgreSQL  
+**Entidades:**
+```typescript
+User {
+  id: UUID (PK)
+  email: string (unique)
+  passwordHash: string
+  fullName: string
+  createdAt: timestamp
+  updatedAt: timestamp
+}
+```
+
+**Endpoints:**
+- `POST /users` - Criar usuário
+- `GET /users/:id` - Buscar usuário
+- `PATCH /users/:id` - Atualizar usuário
+- `gRPC: findOneByEmail` - Busca por email
+
+---
+
+#### **CAMADA FINANCEIRA CORE**
+
+##### 💰 **ACCOUNT SERVICE** (Port 3003)
+**Responsabilidade:** Gestão de Contas e Saldos  
+**Stack:** NestJS + TypeORM + PostgreSQL  
+
+**Entidades:**
+```typescript
+Account {
+  id: UUID (PK)
+  userId: UUID (FK)
+  accountNumber: string (unique)
+  balanceInCents: integer
+  currency: string (default: 'BRL')
+  status: enum ['active', 'suspended', 'closed']
+  createdAt: timestamp
+}
+```
+
+**Operações Críticas:**
+```javascript
+// Débito - Operação Atômica
+async debit(accountId, amountInCents) {
+  await queryRunner.startTransaction();
+  try {
+    const account = await findOne(accountId, { lock: 'pessimistic_write' });
+    if (account.balanceInCents < amountInCents) {
+      throw new BadRequestException('Saldo insuficiente');
+    }
+    account.balanceInCents -= amountInCents;
+    await save(account);
+    await queryRunner.commitTransaction();
+  } catch (error) {
+    await queryRunner.rollbackTransaction();
+    throw error;
+  }
+}
+
+// Crédito - Operação Atômica
+async credit(accountId, amountInCents) {
+  // Similar atomic transaction
+}
+```
+
+**Endpoints Internos (não expostos pelo Gateway):**
+- `PATCH /internal/accounts/:id/debit`
+- `PATCH /internal/accounts/:id/credit`
+
+##### 💸 **PIX SERVICE** (Port 3004)
+**Responsabilidade:** Transferências PIX via Padrão SAGA  
+**Stack:** NestJS + TypeORM + PostgreSQL + RabbitMQ  
+
+**Entidades:**
+```typescript
+PixTransaction {
+  id: UUID (PK)
+  sourceAccountId: UUID
+  destinationAccountId: UUID
+  amountInCents: integer
+  externalTransactionId: string (SPI)
+  status: enum ['pending', 'completed', 'failed', 'rolled_back']
+  completedAt: timestamp
+}
+```
+
+**🎭 SAGA PATTERN - Transação Distribuída:**
+
+```
+┌─────────────────────────────────────────────────────────┐
+│          PIX TRANSFER SAGA ORCHESTRATION                 │
+├─────────────────────────────────────────────────────────┤
+│                                                          │
+│  STEP 1: Central Bank SPI Integration                   │
+│  ├─ POST → Central Bank (mock)                          │
+│  ├─ Obtém: spiTransactionId                             │
+│  └─ COMPENSATION: Manual cancellation (if fails later)  │
+│                                                          │
+│  STEP 2: Debit Source Account                           │
+│  ├─ PATCH /internal/accounts/:id/debit                  │
+│  ├─ Lock pessimista no banco                            │
+│  └─ COMPENSATION: Re-credit source (if Step 3 fails)    │
+│                                                          │
+│  STEP 3: Credit Destination Account                     │
+│  ├─ PATCH /internal/accounts/:id/credit                 │
+│  ├─ Lock pessimista no banco                            │
+│  └─ COMPENSATION: Debit destination + Credit source     │
+│                                                          │
+│  STEP 4: Persist PIX Transaction Record                 │
+│  ├─ INSERT INTO pix_transactions                        │
+│  └─ COMPENSATION: Manual reconciliation required        │
+│                                                          │
+│  STEP 5: Publish Event (RabbitMQ)                       │
+│  ├─ emit('transaction_completed')                       │
+│  ├─ Notifica: Transaction, Notification, Analytics      │
+│  └─ COMPENSATION: Retry mechanism via RabbitMQ          │
+│                                                          │
+└─────────────────────────────────────────────────────────┘
+```
+
+**Payload do Evento:**
+```json
+{
+  "event": "transaction_completed",
+  "transactionId": "uuid",
+  "userId": "uuid",
+  "sourceAccountId": "uuid",
+  "destinationAccountId": "uuid",
+  "amountInCents": 10000,
+  "timestamp": "ISO-8601",
+  "status": "COMPLETED",
+  "spiTransactionId": "external-id"
+}
+```
+
+##### 💳 **CARD SERVICE** (Port 3005)
+**Responsabilidade:** Gestão de Cartões  
+**Stack:** NestJS + TypeORM + PostgreSQL  
+
+**Entidades:**
+```typescript
+Card {
+  id: UUID (PK)
+  userId: UUID (FK)
+  accountId: UUID (FK)
+  cardNumber: string (encrypted)
+  cardType: enum ['debit', 'credit']
+  status: enum ['active', 'blocked', 'expired']
+  expiryDate: date
+  cvv: string (encrypted)
+  limitInCents: integer
+  createdAt: timestamp
+}
+```
+
+**Operações:**
+- `POST /cards` - Emitir cartão
+- `PATCH /cards/:id/block` - Bloquear cartão
+- `PATCH /cards/:id/activate` - Ativar cartão
+- `GET /cards/user/:userId` - Listar cartões
+
+##### 📈 **INVESTMENT SERVICE** (Port 3007)
+**Responsabilidade:** Carteiras de Investimento  
+**Stack:** NestJS + TypeORM + PostgreSQL  
+
+**Entidades:**
+```typescript
+Portfolio {
+  id: UUID (PK)
+  userId: UUID (FK)
+  name: string
+  totalValueInCents: integer
+  createdAt: timestamp
+}
+
+Investment {
+  id: UUID (PK)
+  portfolioId: UUID (FK)
+  assetType: enum ['stock', 'bond', 'fund', 'crypto']
+  ticker: string
+  quantity: decimal
+  averagePriceInCents: integer
+  currentValueInCents: integer
+  purchaseDate: date
+}
+```
+
+##### 💼 **TRANSACTION SERVICE** (Port 3006)
+**Responsabilidade:** Registro e Reconciliação de Transações  
+**Stack:** NestJS + TypeORM + PostgreSQL  
+
+**Entidades:**
+```typescript
+Transaction {
+  id: UUID (PK)
+  userId: UUID (FK)
+  accountId: UUID (FK)
+  type: enum ['pix', 'transfer', 'payment', 'investment']
+  amountInCents: integer
+  status: enum ['pending', 'completed', 'settled', 'failed']
+  metadata: jsonb
+  createdAt: timestamp
+  settledAt: timestamp
+}
+```
+
+**Processos Assíncronos:**
+- Settlement (liquidação após 1.5s)
+- Reconciliation (validação de integridade)
+- Audit Trail (imutável)
+
+---
+
+#### **CAMADA DE INTELIGÊNCIA & COMPLIANCE**
+
+##### 🤖 **AI SERVICE** (Port 3009)
+**Responsabilidade:** Assistente Virtual via Google Gemini  
+**Stack:** NestJS + Google Gemini API  
+**Features:**
+- Chat bancário inteligente
+- Análise de gastos
+- Recomendações personalizadas
+
+##### 🛡️ **COMPLIANCE SERVICE** (Port 3008)
+**Responsabilidade:** KYC, AML, Anti-Fraude  
+**Stack:** NestJS + Rules Engine  
+**Checagens:**
+- Validação KYC (Know Your Customer)
+- Lista de sanções internacionais
+- Detecção de transações suspeitas
+- Limites regulatórios
+
+##### 📊 **ANALYTICS SERVICE** (Port não especificado)
+**Responsabilidade:** Métricas e Business Intelligence  
+**Stack:** NestJS + MongoDB + Elasticsearch  
+**Schema (MongoDB):**
+```javascript
+AnalyticsEvent {
+  _id: ObjectId,
+  userId: string,
+  eventType: string,
+  eventData: object,
+  timestamp: Date,
+  metadata: {
+    userAgent: string,
+    ipAddress: string,
+    location: object
+  }
+}
+```
+
+##### ⛓️ **BLOCKCHAIN SERVICE** (Port não especificado)
+**Responsabilidade:** Registro Imutável de Transações  
+**Stack:** NestJS + Blockchain privado (conceitual)  
+**Funcionalidade:**
+- Log imutável de transações críticas
+- Auditoria criptográfica
+- Proof of execution
+
+##### 🔔 **NOTIFICATION SERVICE** (Port não especificado)
+**Responsabilidade:** Notificações Multi-Canal  
+**Stack:** NestJS + RabbitMQ Consumer  
+**Canais:**
+- Email (SMTP)
+- SMS (Twilio)
+- Push Notifications (FCM)
+- In-app Notifications
+
+**Consumer Pattern:**
+```javascript
+@MessagePattern('transaction_completed')
+async handleTransactionCompleted(data: any) {
+  await this.sendEmail(data.userId, 'Transação realizada');
+  await this.sendPush(data.userId, 'PIX enviado');
+}
+```
+
+---
+
+## 🗄️ CAMADA DE DADOS
+
+### **PostgreSQL - Banco Relacional Principal**
+**Host:** localhost:5432  
+**Database:** regenera_bank  
+**Schemas:**
+
+```sql
+-- users (User Service)
+CREATE TABLE users (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    email VARCHAR(255) UNIQUE NOT NULL,
+    password_hash VARCHAR(255) NOT NULL,
+    full_name VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT NOW(),
+    updated_at TIMESTAMP DEFAULT NOW()
+);
+
+-- accounts (Account Service)
+CREATE TABLE accounts (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_id UUID REFERENCES users(id),
+    account_number VARCHAR(20) UNIQUE NOT NULL,
+    balance_in_cents BIGINT NOT NULL DEFAULT 0,
+    currency VARCHAR(3) DEFAULT 'BRL',
+    status VARCHAR(20) DEFAULT 'active',
+    created_at TIMESTAMP DEFAULT NOW(),
+    CHECK (balance_in_cents >= 0)
+);
+
+-- pix_transactions (PIX Service)
+CREATE TABLE pix_transactions (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    source_account_id UUID REFERENCES accounts(id),
+    destination_account_id UUID REFERENCES accounts(id),
+    amount_in_cents BIGINT NOT NULL,
+    external_transaction_id VARCHAR(255),
+    status VARCHAR(20) DEFAULT 'pending',
+    completed_at TIMESTAMP,
+    created_at TIMESTAMP DEFAULT NOW()
+);
+
+-- cards (Card Service)
+CREATE TABLE cards (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_id UUID REFERENCES users(id),
+    account_id UUID REFERENCES accounts(id),
+    card_number_encrypted TEXT NOT NULL,
+    card_type VARCHAR(10) NOT NULL,
+    status VARCHAR(20) DEFAULT 'active',
+    expiry_date DATE NOT NULL,
+    cvv_encrypted TEXT NOT NULL,
+    limit_in_cents BIGINT,
+    created_at TIMESTAMP DEFAULT NOW()
+);
+
+-- transactions (Transaction Service)
+CREATE TABLE transactions (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_id UUID REFERENCES users(id),
+    account_id UUID REFERENCES accounts(id),
+    type VARCHAR(50) NOT NULL,
+    amount_in_cents BIGINT NOT NULL,
+    status VARCHAR(20) DEFAULT 'pending',
+    metadata JSONB,
+    created_at TIMESTAMP DEFAULT NOW(),
+    settled_at TIMESTAMP
+);
+
+-- investments & portfolios (Investment Service)
+CREATE TABLE portfolios (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_id UUID REFERENCES users(id),
+    name VARCHAR(255) NOT NULL,
+    total_value_in_cents BIGINT DEFAULT 0,
+    created_at TIMESTAMP DEFAULT NOW()
+);
+
+CREATE TABLE investments (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    portfolio_id UUID REFERENCES portfolios(id),
+    asset_type VARCHAR(50) NOT NULL,
+    ticker VARCHAR(20) NOT NULL,
+    quantity DECIMAL(18, 8) NOT NULL,
+    average_price_in_cents BIGINT NOT NULL,
+    current_value_in_cents BIGINT,
+    purchase_date DATE NOT NULL,
+    created_at TIMESTAMP DEFAULT NOW()
+);
+```
+
+### **MongoDB - Analytics & Eventos**
+**Host:** localhost:27017  
+**Collections:**
+- `analytics_events` - Eventos de negócio
+- `user_behavior` - Tracking de comportamento
+
+### **Redis - Cache & Sessions**
+**Host:** localhost:6379  
+**Uso:**
+- Cache de consultas frequentes (TTL: 10s-60s)
+- Rate limiting (Throttler)
+- Session storage
+
+### **Elasticsearch - Logs & Busca**
+**Host:** localhost:9200  
+**Índices:**
+- `app-logs-*` - Logs estruturados
+- `transactions-*` - Índice de busca de transações
+- `audit-trail-*` - Trilha de auditoria
+
+---
+
+## 🔄 COMUNICAÇÃO ENTRE SERVIÇOS
+
+### **Padrões de Comunicação:**
+
+#### **1. Síncrono - gRPC**
+```protobuf
+// user.proto
+syntax = "proto3";
+package user;
+
+service UserService {
+  rpc FindOneByEmail (FindByEmailRequest) returns (UserResponse);
+  rpc CreateUser (CreateUserRequest) returns (UserResponse);
+}
+
+message FindByEmailRequest {
+  string email = 1;
+}
+
+message UserResponse {
+  string id = 1;
+  string email = 2;
+  string passwordHash = 3;
+  string fullName = 4;
+}
+```
+
+**Comunicação gRPC:**
+- Auth Service ←gRPC→ User Service
+- Account Service ←gRPC→ User Service
+- Card Service ←gRPC→ Account Service
+
+#### **2. Síncrono - HTTP/REST**
+```
+API Gateway uses HTTP Proxy:
+- /api/auth/* → http://localhost:3001
+- /api/users/* → http://localhost:3002
+- /api/accounts/* → http://localhost:3003
+- /api/pix/* → http://localhost:3004
+- /api/cards/* → http://localhost:3005
+- /api/investments/* → http://localhost:3007
+- /api/ai/* → http://localhost:3009
+```
+
+#### **3. Assíncrono - RabbitMQ (Event-Driven)**
+```
+Exchange: banking_events (topic)
+
+Routing Keys:
+├─ transaction.completed
+├─ transaction.failed
+├─ user.registered
+├─ account.created
+├─ card.blocked
+└─ compliance.alert
+
+Consumers:
+├─ Transaction Service (transaction.*)
+├─ Notification Service (*.*)
+├─ Analytics Service (*.*)
+├─ Blockchain Service (transaction.completed)
+└─ Compliance Service (compliance.*)
+```
+
+---
+
+## 🎨 FRONTEND - CAMADA DE APRESENTAÇÃO
+
+### **Frontend Web (React + Vite)**
+**Port:** 5173  
+**Stack:** React 18 + TypeScript + Tailwind + Framer Motion
+
+**Estrutura de Features:**
+```
+src/
+├── features/
+│   ├── auth/
+│   │   ├── LoginPage.tsx
+│   │   ├── RegisterPage.tsx
+│   │   └── AuthForm.tsx
+│   ├── dashboard/
+│   │   ├── DashboardPage.tsx
+│   │   └── useAccount.ts (custom hook)
+│   ├── transfer/
+│   │   ├── TransferContactScreen.tsx
+│   │   ├── PixTransferForm.tsx
+│   │   ├── ContactList.tsx
+│   │   └── useTransferContacts.ts
+│   ├── cards/
+│   │   ├── CardList.tsx
+│   │   └── useCards.ts
+│   ├── investments/
+│   │   ├── InvestmentPortfolio.tsx
+│   │   └── useInvestments.ts
+│   ├── ai-chat/
+│   │   ├── AiChatInterface.tsx
+│   │   └── useAiChat.ts
+│   └── profile/
+│       └── ContactList.tsx
+├── shared/
+│   └── components/ (UI compartilhados)
+└── lib/
+    └── api.ts (axios client)
+```
+
+**Fluxo de Autenticação:**
+```javascript
+// 1. Usuário clica em "Entrar"
+const handleLogin = async (email, password) => {
+  const response = await fetch('/api/auth/login', {
+    method: 'POST',
+    body: JSON.stringify({ email, password })
+  });
+  
+  const { access_token } = await response.json();
+  
+  // 2. Armazena token
+  localStorage.setItem('auth_token', access_token);
+  
+  // 3. Configura header para próximas requisições
+  axios.defaults.headers.common['Authorization'] = `Bearer ${access_token}`;
+  
+  // 4. Redireciona para dashboard
+  navigate('/dashboard');
+};
+```
+
+### **Mobile App (React Native)**
+**Port:** 8081 (Metro Bundler)  
+**Stack:** React Native + TypeScript + Native Base
+
+**Screens:**
+- `LoginScreen.tsx`
+- `DashboardScreen.tsx`
+- (Estrutura similar ao web)
+
+### **Next.js Frontend (SSR)**
+**Port:** 3010  
+**Stack:** Next.js 14 + App Router + Server Components
+
+---
+
+## 📦 PACOTES COMPARTILHADOS (packages/)
+
+### **@repo/core**
+**Propósito:** Lógica de negócio compartilhada  
+**Exports:**
+```typescript
+// Value Objects
+export class Money {
+  constructor(
+    private readonly amountInCents: number,
+    private readonly currency: string = 'BRL'
+  ) {}
+  
+  add(other: Money): Money { /* ... */ }
+  subtract(other: Money): Money { /* ... */ }
+  isGreaterThan(other: Money): boolean { /* ... */ }
+}
+
+// Domain Types
+export enum TransactionType {
+  PIX = 'pix',
+  TRANSFER = 'transfer',
+  PAYMENT = 'payment'
+}
+```
+
+### **@repo/ui**
+**Propósito:** Componentes UI compartilhados  
+**Exports:** Button, Card, Input, Modal, etc.
+
+### **@repo/grpc-definitions**
+**Propósito:** Contratos gRPC (.proto files)  
+**Files:**
+- `user.proto`
+- `account.proto`
+- (outros serviços)
+
+### **@repo/config**
+**Propósito:** Configuração centralizada  
+```typescript
+@Injectable()
+export class AppConfigService {
+  getJwtSecret(): string { /* ... */ }
+  getDatabaseUrl(): string { /* ... */ }
+  getRedisHost(): string { /* ... */ }
+  getAccountServiceUrl(): string { /* ... */ }
+}
+```
+
+### **@repo/logging**
+**Propósito:** Logging estruturado (Winston)  
+```typescript
+logger.info('User logged in', { userId, timestamp });
+logger.error('Transaction failed', { error, transactionId });
+```
+
+### **@repo/tracing**
+**Propósito:** Distributed Tracing (Jaeger/Zipkin)  
+**Features:**
+- Trace ID propagation
+- Span creation
+- Performance monitoring
+
+### **@repo/apm**
+**Propósito:** Application Performance Monitoring  
+**Integração:** New Relic / Datadog (mock)
+
+### **@repo/resilience**
+**Propósito:** Padrões de resiliência  
+**Features:**
+- Circuit Breaker
+- Retry com exponential backoff
+- Timeout handling
+- Bulkhead pattern
+
+---
+
+## ☁️ INFRAESTRUTURA - AWS
+
+### **Terraform Modules (infrastructure/aws/)**
+
+```hcl
+# eks.tf - Kubernetes Cluster
+resource "aws_eks_cluster" "regenera_bank" {
+  name     = "regenera-bank-cluster"
+  role_arn = aws_iam_role.eks_cluster.arn
+  
+  vpc_config {
+    subnet_ids = [...]
+  }
+}
+
+# rds.tf - PostgreSQL Managed
+resource "aws_db_instance" "main" {
+  identifier        = "regenera-bank-db"
+  engine            = "postgres"
+  engine_version    = "15.3"
+  instance_class    = "db.t3.medium"
+  allocated_storage = 100
+  
+  backup_retention_period = 7
+  multi_az               = true
+}
+
+# documentdb.tf - MongoDB Compatible
+resource "aws_docdb_cluster" "analytics" {
+  cluster_identifier = "regenera-analytics"
+  engine            = "docdb"
+  master_username   = "admin"
+  # ...
+}
+
+# alb.tf - Application Load Balancer
+resource "aws_lb" "main" {
+  name               = "regenera-alb"
+  load_balancer_type = "application"
+  # ...
+}
+
+# waf.tf - Web Application Firewall
+resource "aws_wafv2_web_acl" "main" {
+  name  = "regenera-waf"
+  scope = "REGIONAL"
+  # DDoS protection rules
+}
+
+# kms.tf - Encryption Keys
+resource "aws_kms_key" "main" {
+  description = "Regenera Bank master key"
+  # ...
+}
+
+# cloudfront.tf - CDN
+resource "aws_cloudfront_distribution" "main" {
+  # Frontend asset distribution
+}
+```
+
+### **Kubernetes Deployments (infrastructure/kubernetes/)**
+
+```yaml
+# user-service.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-service
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: user-service
+  template:
+    metadata:
+      labels:
+        app: user-service
+    spec:
+      containers:
+      - name: user-service
+        image: regenera/user-service:latest
+        ports:
+        - containerPort: 3002
+        env:
+        - name: DATABASE_URL
+          valueFrom:
+            secretKeyRef:
+              name: db-credentials
+              key: url
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 3002
+          initialDelaySeconds: 30
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 3002
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: user-service
+spec:
+  selector:
+    app: user-service
+  ports:
+  - protocol: TCP
+    port: 3002
+    targetPort: 3002
+  type: ClusterIP
+```
+
+---
+
+## 🔒 SEGURANÇA
+
+### **Camadas de Segurança:**
+
+1. **Network Layer (AWS WAF)**
+   - DDoS protection
+   - SQL Injection blocking
+   - Rate limiting
+
+2. **Application Layer (API Gateway)**
+   - JWT validation
+   - Rate limiting (100 req/min/IP)
+   - Request sanitization
+
+3. **Service Layer (Microserviços)**
+   - JWT Guards em endpoints protegidos
+   - Role-Based Access Control (RBAC)
+   - Input validation (DTOs)
+
+4. **Data Layer (Banco de Dados)**
+   - Encryption at rest (KMS)
+   - Encryption in transit (TLS 1.3)
+   - Prepared statements (SQL injection protection)
+
+### **Secrets Management:**
+```
+AWS Secrets Manager:
+├─ regenera/db/credentials
+├─ regenera/jwt/secret
+├─ regenera/api-keys/gemini
+└─ regenera/api-keys/twilio
+```
+
+---
+
+## 🔍 OBSERVABILIDADE
+
+### **Three Pillars:**
+
+#### **1. Logging (Elasticsearch + Kibana)**
+```json
+{
+  "timestamp": "2025-12-17T10:30:00Z",
+  "level": "info",
+  "service": "pix-service",
+  "traceId": "abc-123",
+  "userId": "user-uuid",
+  "message": "PIX transfer initiated",
+  "metadata": {
+    "amount": 10000,
+    "destination": "dest-account"
+  }
+}
+```
+
+#### **2. Metrics (Prometheus + Grafana)**
+```
+Métricas coletadas:
+- http_requests_total{service, method, status}
+- transaction_duration_seconds{type}
+- account_balance_changes{operation}
+- error_rate{service}
+- cpu_usage{pod}
+- memory_usage{pod}
+```
+
+#### **3. Tracing (Jaeger)**
+```
+Trace Example: PIX Transfer
+├─ api-gateway (100ms)
+│  └─ pix-service (500ms)
+│     ├─ central-bank-spi (50ms)
+│     ├─ account-service/debit (100ms)
+│     │  └─ postgres query (20ms)
+│     ├─ account-service/credit (100ms)
+│     │  └─ postgres query (20ms)
+│     └─ rabbitmq publish (10ms)
+└─ Total: 600ms
+```
+
+---
+
+## 🚀 FLUXO COMPLETO: DO CLIQUE À RESPOSTA
+
+### **Exemplo: Transferência PIX**
+
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│ 1. FRONTEND (React)                                                  │
+│    Usuário clica em "Enviar PIX"                                    │
+│    Component: PixTransferForm.tsx                                    │
+│    ├─ useState para form data                                        │
+│    ├─ Validação local (amount > 0)                                   │
+│    └─ onClick → handleSubmit()                                       │
+└─────────────────────────────────────────────────────────────────────┘
+           │
+           │ POST /api/pix/transfer
+           │ Headers: { Authorization: Bearer <JWT> }
+           │ Body: { sourceAccountId, destinationAccountId, amountInCents }
+           │
+           ▼
+┌─────────────────────────────────────────────────────────────────────┐
+│ 2. API GATEWAY (NestJS) - Port 3000                                 │
+│    ├─ ThrottlerGuard verifica rate limit                            │
+│    ├─ Verifica cache Redis (cache miss)                             │
+│    ├─ HTTP Proxy Middleware                                         │
+│    └─ Forward para: http://localhost:3004                           │
+└─────────────────────────────────────────────────────────────────────┘
+           │
+           │ Proxied Request
+           │
+           ▼
+┌─────────────────────────────────────────────────────────────────────┐
+│ 3. PIX SERVICE (NestJS) - Port 3004                                 │
+│    Controller: PixController                                         │
+│    ├─ @UseGuards(JwtAuthGuard) verifica JWT                         │
+│    ├─ @Body() CreateTransferDto validação                           │
+│    └─ PixService.createTransfer()                                   │
+│       └─ PixSagaService.createPixTransferSaga()                     │
+└─────────────────────────────────────────────────────────────────────┘
+           │
+           │ SAGA STEP 1
+           │
+           ▼
+┌─────────────────────────────────────────────────────────────────────┐
+│ 4. CENTRAL BANK SPI (Mock) - External Service                       │
+│    CentralBankService.initiatePixTransaction()                      │
+│    ├─ Simula comunicação com SPI (BACEN)                            │
+│    ├─ Retorna: { success: true, spiTransactionId: 'SPI-12345' }    │
+│    └─ Tempo de resposta: ~50ms                                      │
+└─────────────────────────────────────────────────────────────────────┘
+           │
+           │ SAGA STEP 2
+           │
+           ▼
+┌─────────────────────────────────────────────────────────────────────┐
+│ 5. ACCOUNT SERVICE - Debit (Port 3003)                              │
+│    PATCH /internal/accounts/:id/debit                               │
+│    AccountService.debit()                                            │
+│    ├─ PostgreSQL Transaction BEGIN                                  │
+│    ├─ SELECT * FROM accounts WHERE id = ? FOR UPDATE (lock)        │
+│    ├─ Valida saldo >= amountInCents                                 │
+│    ├─ UPDATE accounts SET balance_in_cents = balance - ?           │
+│    └─ COMMIT                                                         │
+│    Tempo: ~100ms                                                     │
+└─────────────────────────────────────────────────────────────────────┘
+           │
+           │ SAGA STEP 3
+           │
+           ▼
+┌─────────────────────────────────────────────────────────────────────┐
+│ 6. ACCOUNT SERVICE - Credit (Port 3003)                             │
+│    PATCH /internal/accounts/:id/credit                              │
+│    AccountService.credit()                                           │
+│    ├─ PostgreSQL Transaction BEGIN                                  │
+│    ├─ SELECT * FROM accounts WHERE id = ? FOR UPDATE               │
+│    ├─ UPDATE accounts SET balance_in_cents = balance + ?           │
+│    └─ COMMIT                                                         │
+│    Tempo: ~100ms                                                     │
+└─────────────────────────────────────────────────────────────────────┘
+           │
+           │ SAGA STEP 4
+           │
+           ▼
+┌─────────────────────────────────────────────────────────────────────┐
+│ 7. PIX SERVICE - Persist Transaction                                │
+│    PixRepository.save()                                              │
+│    ├─ INSERT INTO pix_transactions VALUES (...)                    │
+│    └─ PostgreSQL COMMIT                                              │
+│    Tempo: ~50ms                                                      │
+└─────────────────────────────────────────────────────────────────────┘
+           │
+           │ SAGA STEP 5
+           │
+           ▼
+┌─────────────────────────────────────────────────────────────────────┐
+│ 8. EVENT BUS - RabbitMQ                                             │
+│    client.emit('transaction_completed', payload)                    │
+│    ├─ Exchange: banking_events                                       │
+│    ├─ Routing Key: transaction.completed                            │
+│    └─ Tempo: ~10ms                                                   │
+└─────────────────────────────────────────────────────────────────────┘
+           │
+           ├─────────────┬─────────────┬─────────────┐
+           │             │             │             │
+           ▼             ▼             ▼             ▼
+┌──────────────┐ ┌─────────────┐ ┌────────────┐ ┌──────────────┐
+│ TRANSACTION  │ │ NOTIFICATION│ │ ANALYTICS  │ │ BLOCKCHAIN   │
+│ SERVICE      │ │ SERVICE     │ │ SERVICE    │ │ SERVICE      │
+│ • Settlement │ │ • Email     │ │ • Metrics  │ │ • Immutable  │
+│ • Reconcile  │ │ • Push      │ │ • Events   │ │   Log        │
+└──────────────┘ └─────────────┘ └────────────┘ └──────────────┘
+           │
+           │ Response propagates back
+           │
+           ▼
+┌─────────────────────────────────────────────────────────────────────┐
+│ 9. API GATEWAY Response                                              │
+│    Status: 200 OK                                                    │
+│    Body: {                                                           │
+│      status: 'completed',                                            │
+│      message: 'Transfer of 10000 cents successful',                 │
+│      transactionId: 'uuid-here'                                      │
+│    }                                                                 │
+└─────────────────────────────────────────────────────────────────────┘
+           │
+           │
+           ▼
+┌─────────────────────────────────────────────────────────────────────┐
+│ 10. FRONTEND Update                                                  │
+│     ├─ Toast success message                                         │
+│     ├─ Refetch account balance                                       │
+│     ├─ Update transaction list                                       │
+│     └─ Navigate to success page                                      │
+│                                                                      │
+│     TOTAL TIME: ~600ms                                               │
+└─────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 📝 TESTES
+
+### **Estratégia de Testes:**
+
+#### **Unit Tests** (Jest)
+```typescript
+// account.service.spec.ts
+describe('AccountService', () => {
+  it('should debit account successfully', async () => {
+    const result = await service.debit('account-id', 1000);
+    expect(result.balanceInCents).toBe(9000);
+  });
+  
+  it('should throw error on insufficient balance', async () => {
+    await expect(
+      service.debit('account-id', 20000)
+    ).rejects.toThrow('Saldo insuficiente');
+  });
+});
+```
+
+#### **Integration Tests** (Supertest + TestContainers)
+```typescript
+// auth.service.integration.spec.ts
+describe('AuthService (Integration)', () => {
+  it('should register and login user', async () => {
+    // 1. Register
+    const registerRes = await request(app.getHttpServer())
+      .post('/register')
+      .send({ email, password, fullName });
+    
+    expect(registerRes.status).toBe(201);
+    
+    // 2. Login
+    const loginRes = await request(app.getHttpServer())
+      .post('/login')
+      .send({ email, password });
+    
+    expect(loginRes.body).toHaveProperty('access_token');
+  });
+});
+```
+
+#### **E2E Tests** (Cypress)
+```javascript
+// auth.cy.ts
+describe('Authentication Flow', () => {
+  it('should allow user to register and login', () => {
+    cy.visit('/login');
+    cy.contains('Criar Conta').click();
+    
+    cy.get('input[name="email"]').type('test@example.com');
+    cy.get('input[name="password"]').type('password123');
+    cy.contains('Registrar').click();
+    
+    cy.url().should('include', '/dashboard');
+    cy.contains('Bem-vindo').should('be.visible');
+  });
+});
+```
+
+---
+
+## 🎓 ESTATÍSTICAS DO SISTEMA
+
+### **Métricas de Código:**
+- **Total de Arquivos:** 42.000 - 47.000
+- **Linhas de Código:** ~500.000+
+- **Linguagens:** TypeScript (95%), JavaScript (3%), YAML/JSON (2%)
+- **Microserviços:** 13
+- **Endpoints REST:** ~80+
+- **Endpoints gRPC:** ~15+
+- **Tabelas de Banco:** ~20+
+- **Testes:** ~300+ (unit + integration + e2e)
+
+### **Performance Targets:**
+- **Latência P95:** < 500ms
+- **Throughput:** 1000 req/s
+- **Uptime:** 99.9%
+- **Transaction Success Rate:** 99.99%
+
+### **Escalabilidade:**
+```
+Kubernetes Autoscaling:
+├─ Min replicas: 2 por serviço
+├─ Max replicas: 10 por serviço
+├─ CPU target: 70%
+└─ Memory target: 80%
+
+Database:
+├─ PostgreSQL RDS: Multi-AZ, Read Replicas
+├─ Redis Cluster: 3 nodes
+└─ MongoDB Atlas: Sharded cluster
+```
+
+---
+
+## 🏆 DESTAQUES ARQUITETURAIS
+
+### **Padrões de Design Implementados:**
+1. ✅ **Microserviços** - Separação de responsabilidades
+2. ✅ **Saga Pattern** - Transações distribuídas
+3. ✅ **Event-Driven Architecture** - RabbitMQ
+4. ✅ **CQRS** - Separação de leitura/escrita (parcial)
+5. ✅ **Repository Pattern** - Abstração de dados
+6. ✅ **DTO Pattern** - Validação de entrada
+7. ✅ **JWT Authentication** - Stateless auth
+8. ✅ **Circuit Breaker** - Resiliência
+9. ✅ **API Gateway** - Single entry point
+10. ✅ **Database per Service** - Isolamento de dados
+
+### **Tecnologias Core:**
+- **Backend:** NestJS 10 + TypeScript 5.4
+- **Frontend:** React 18 + Vite 5 + Tailwind 3
+- **Banco de Dados:** PostgreSQL 15 + MongoDB 5 + Redis 6
+- **Mensageria:** RabbitMQ 3
+- **Observabilidade:** Elasticsearch 7 + Prometheus + Jaeger
+- **Infraestrutura:** AWS + Kubernetes + Terraform
+- **CI/CD:** GitHub Actions (presumido)
+
+---
+
+## 🎯 CONCLUSÃO
+
+O **REGENERA BANK** é um sistema bancário completo de nível enterprise, construído com as melhores práticas da indústria. Cada decisão arquitetural foi feita pensando em:
+
+- 🔒 **Segurança** - Múltiplas camadas de proteção
+- ⚡ **Performance** - Sub-segundo response times
+- 📈 **Escalabilidade** - Horizontal scaling via Kubernetes
+- 🛡️ **Resiliência** - Circuit breakers, retries, saga patterns
+- 🔍 **Observabilidade** - Logs, métricas, tracing completo
+- 🧪 **Testabilidade** - Unit, integration, e2e tests
+
+Este é um **Gold Master Build** - um padrão de referência para sistemas bancários modernos.
+
+---
+
+*"A clareza nos detalhes é a base da performance superior."*  
+— Don Paulo Ricardo, Arquiteto-Chefe
+
+*Copyright © 2025 Regenera Ecosystem. All rights reserved.*  
+*ORCID: https://orcid.org/0009-0002-1934-3559*

@@ -1,0 +1,46 @@
+// [FILE] packages/grpc-definitions/src/user.proto
+// Protocol Buffer Definition for User Service
+// Desenvolvedor: Don Paulo Ricardo
+
+syntax = "proto3";
+
+package user; // Deve corresponder ao 'package' definido no ClientsModule.register
+
+// Define o serviço de usuário que o auth-service irá consumir.
+service UserService {
+  // RPC para encontrar um usuário pelo seu email.
+  rpc FindOneByEmail (FindOneByEmailRequest) returns (User);
+  // Adicionar outros métodos RPC conforme necessário para o user-service.
+  // rpc CreateUser (CreateUserRequest) returns (User);
+  // rpc UpdateUser (UpdateUserRequest) returns (User);
+}
+
+// Mensagem de requisição para o método FindOneByEmail.
+message FindOneByEmailRequest {
+  string email = 1;
+}
+
+// Mensagem que representa um objeto User.
+// Os campos devem corresponder aos dados que o auth-service espera receber.
+message User {
+  string id = 1;
+  string email = 2;
+  string passwordHash = 3; // Hash da senha para validação no auth-service
+  // Adicionar outros campos do perfil do usuário conforme necessário (e.g., nome, sobrenome)
+  // string firstName = 4;
+  // string lastName = 5;
+}
+
+// Mensagem de requisição para criação de usuário (exemplo)
+// message CreateUserRequest {
+//   string email = 1;
+//   string password = 2;
+//   string fullName = 3;
+// }
+
+// Mensagem de requisição para atualização de usuário (exemplo)
+// message UpdateUserRequest {
+//   string id = 1;
+//   string email = 2;
+//   // Adicionar outros campos para atualização
+// }

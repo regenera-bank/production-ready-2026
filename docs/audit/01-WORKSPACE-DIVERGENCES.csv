@@ -1,0 +1,9 @@
+path,only_in_eleve,only_in_parallel,newer_in,notes
+bff/web-bff,yes,no,eleve,"BFF NestJS completo; paralelo tem stub Fastify"
+bff/web-bff/src/auth,yes,no,eleve,"Auth password Firebase passkey + password-reset (novo)"
+bff/web-bff/src/integrations/risk-kyc,yes,partial_parallel_06-risk-control,eleve,"KYC integrado no BFF"
+apps/web-banking,yes,no,eleve,"Canal homolog React+Vite+BFF"
+domains/core-bank,yes,no,eleve,"Pacote unificado @regenera/core-bank"
+05-core-banking,no,yes,parallel,"Legado fragmentado — não promovido"
+04-bffs/regenera-bff-web,no,yes,parallel,"Placeholder 501 — não promovido"
+git_metadata,no,yes,parallel,"Eleve sem git — bloqueio G1 parcial"

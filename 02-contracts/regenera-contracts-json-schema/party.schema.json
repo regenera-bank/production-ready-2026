@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "partyId",
+    "partyType"
+  ],
+  "properties": {
+    "partyId": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "partyType": {
+      "enum": [
+        "PERSON",
+        "LEGAL_ENTITY"
+      ]
+    }
+  }
+}

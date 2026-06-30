@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.data/
+.env
+.env.local
+.env.secrets.local
+.env.backup.*
+src/**/*.js
+src/**/*.d.ts
+src/**/*.js.map

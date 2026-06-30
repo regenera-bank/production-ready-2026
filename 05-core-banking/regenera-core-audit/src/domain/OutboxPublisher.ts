@@ -1,0 +1,1 @@
+export interface OutboxPublisher { publish(event: AuditEvent): Promise<void>; }

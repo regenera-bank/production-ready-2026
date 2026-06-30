@@ -1,0 +1,6 @@
+owners:
+  primary: team-identity
+  approvers:
+    - team-architecture
+    - team-security
+  on_call: identity-primary

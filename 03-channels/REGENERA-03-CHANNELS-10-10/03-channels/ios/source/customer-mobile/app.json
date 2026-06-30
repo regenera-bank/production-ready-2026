@@ -1,0 +1,47 @@
+{
+  "expo": {
+    "name": "Regenera Bank",
+    "slug": "regenera-bank",
+    "version": "4.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "dark",
+    "backgroundColor": "#080d1a",
+    "icon": "./assets/icon.png",
+
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#080d1a"
+    },
+
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "app.regenerabank.mobile",
+      "buildNumber": "1"
+    },
+
+    "android": {
+      "package": "app.regenerabank.mobile",
+      "versionCode": 4,
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png",
+        "backgroundColor": "#080d1a"
+      },
+      "predictiveBackGestureEnabled": false
+    },
+
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+
+    "extra": {
+      "eas": {
+        "projectId": "cc723c9e-24bb-44aa-aa12-0520d0acbafc"
+      }
+    },
+
+    "owner": "regenerabankcorporate"
+  }
+}

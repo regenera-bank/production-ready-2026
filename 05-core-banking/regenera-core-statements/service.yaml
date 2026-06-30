@@ -1,0 +1,12 @@
+name: regenera-core-statements
+domain: statements
+owner: team-statements
+criticality: high
+data_classification: banking-secret
+runtime: jvm
+tier: 1
+rto: 4h
+rpo: 1h
+on_call: statements-primary
+dependencies:
+  []

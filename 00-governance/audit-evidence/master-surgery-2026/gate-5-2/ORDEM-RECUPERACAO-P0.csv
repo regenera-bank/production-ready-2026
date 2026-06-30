@@ -1,0 +1,12 @@
+ordem,capacidade
+1,Audit Trail
+2,Idempotency
+3,Identity
+4,Authorization
+5,Customer/Party
+6,Accounts
+7,Ledger
+8,Transactions
+9,Payments
+10,Pix
+11,Reconciliation

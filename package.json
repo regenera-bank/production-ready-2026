@@ -1,0 +1,11 @@
+{
+  "name": "regenera-bank",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Monorepo Regenera Bank — use npm run dev:canal-web para subir tudo",
+  "scripts": {
+    "dev:canal-web": "bash scripts/dev-canal-web.sh",
+    "pull-secrets": "npm run pull-secrets --prefix bff/web-bff",
+    "bootstrap-secrets": "npm run bootstrap-secrets --prefix bff/web-bff"
+  }
+}

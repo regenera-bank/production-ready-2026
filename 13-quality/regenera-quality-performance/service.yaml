@@ -1,0 +1,12 @@
+name: regenera-quality-performance
+domain: performance
+owner: team-quality
+criticality: high
+data_classification: banking-secret
+runtime: python
+tier: 1
+rto: 4h
+rpo: 1h
+on_call: performance-primary
+dependencies:
+  []

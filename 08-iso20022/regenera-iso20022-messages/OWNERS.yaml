@@ -1,0 +1,6 @@
+owners:
+  primary: team-payments
+  approvers:
+    - team-architecture
+    - team-security
+  on_call: iso20022-messages-primary

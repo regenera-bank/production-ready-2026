@@ -1,0 +1,217 @@
+openapi: 3.1.0
+info:
+  title: Regenera Banking Channel Contract
+  version: 1.0.0
+  description: Contrato canônico consumido pelos canais. Valores monetários trafegam como strings decimais.
+servers:
+  - url: https://api.regenerabank.example/v1
+security:
+  - bearerAuth: []
+paths:
+  /session/me:
+    get:
+      operationId: getSession
+      responses:
+        '200':
+          description: Sessão autenticada
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Session' }
+  /accounts:
+    get:
+      operationId: listAccounts
+      responses:
+        '200':
+          description: Contas do cliente
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/Account' }
+  /accounts/{accountId}/balance:
+    get:
+      operationId: getBalance
+      parameters:
+        - $ref: '#/components/parameters/AccountId'
+      responses:
+        '200':
+          description: Posição financeira no instante informado
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Balance' }
+  /accounts/{accountId}/transactions:
+    get:
+      operationId: listTransactions
+      parameters:
+        - $ref: '#/components/parameters/AccountId'
+        - name: cursor
+          in: query
+          schema: { type: string }
+        - name: limit
+          in: query
+          schema: { type: integer, minimum: 1, maximum: 100, default: 30 }
+      responses:
+        '200':
+          description: Extrato paginado
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/TransactionPage' }
+  /pix/payments:
+    post:
+      operationId: createPixPayment
+      parameters:
+        - $ref: '#/components/parameters/IdempotencyKey'
+        - $ref: '#/components/parameters/CorrelationId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/CreatePixPayment' }
+      responses:
+        '202':
+          description: Ordem aceita para processamento
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/PixPayment' }
+        '409':
+          description: Chave de idempotência reutilizada com payload divergente
+          content:
+            application/problem+json:
+              schema: { $ref: '#/components/schemas/Problem' }
+  /pix/payments/{paymentId}:
+    get:
+      operationId: getPixPayment
+      parameters:
+        - name: paymentId
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      responses:
+        '200':
+          description: Estado da ordem
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/PixPayment' }
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  parameters:
+    AccountId:
+      name: accountId
+      in: path
+      required: true
+      schema: { type: string, minLength: 8, maxLength: 80 }
+    IdempotencyKey:
+      name: Idempotency-Key
+      in: header
+      required: true
+      schema: { type: string, format: uuid }
+    CorrelationId:
+      name: X-Correlation-ID
+      in: header
+      required: true
+      schema: { type: string, format: uuid }
+  schemas:
+    Money:
+      type: object
+      additionalProperties: false
+      required: [currency, value]
+      properties:
+        currency: { type: string, enum: [BRL] }
+        value: { type: string, pattern: '^-?\d{1,17}\.\d{2}$', examples: ['1250.00'] }
+    Session:
+      type: object
+      additionalProperties: false
+      required: [subject, expiresAt, assuranceLevel]
+      properties:
+        subject: { type: string }
+        customerId: { type: string }
+        expiresAt: { type: string, format: date-time }
+        assuranceLevel: { type: string, enum: [AAL1, AAL2, AAL3] }
+    Account:
+      type: object
+      additionalProperties: false
+      required: [id, displayName, type, currency, status]
+      properties:
+        id: { type: string }
+        displayName: { type: string }
+        type: { type: string, enum: [CHECKING, PAYMENT, INVESTMENT] }
+        currency: { type: string, enum: [BRL] }
+        status: { type: string, enum: [ACTIVE, RESTRICTED, BLOCKED, CLOSING, CLOSED] }
+    Balance:
+      type: object
+      additionalProperties: false
+      required: [accountId, book, available, blocked, asOf]
+      properties:
+        accountId: { type: string }
+        book: { $ref: '#/components/schemas/Money' }
+        available: { $ref: '#/components/schemas/Money' }
+        blocked: { $ref: '#/components/schemas/Money' }
+        asOf: { type: string, format: date-time }
+    Transaction:
+      type: object
+      additionalProperties: false
+      required: [id, accountId, type, direction, amount, status, occurredAt, description]
+      properties:
+        id: { type: string }
+        accountId: { type: string }
+        type: { type: string }
+        direction: { type: string, enum: [DEBIT, CREDIT] }
+        amount: { $ref: '#/components/schemas/Money' }
+        status: { $ref: '#/components/schemas/TransactionStatus' }
+        occurredAt: { type: string, format: date-time }
+        description: { type: string }
+        counterpartyName: { type: string }
+    TransactionPage:
+      type: object
+      additionalProperties: false
+      required: [items]
+      properties:
+        items:
+          type: array
+          items: { $ref: '#/components/schemas/Transaction' }
+        nextCursor: { type: [string, 'null'] }
+    PixDestination:
+      type: object
+      additionalProperties: false
+      required: [keyType, key]
+      properties:
+        keyType: { type: string, enum: [CPF, CNPJ, EMAIL, PHONE, EVP] }
+        key: { type: string, minLength: 1, maxLength: 140 }
+    CreatePixPayment:
+      type: object
+      additionalProperties: false
+      required: [sourceAccountId, destination, amount]
+      properties:
+        sourceAccountId: { type: string }
+        destination: { $ref: '#/components/schemas/PixDestination' }
+        amount: { $ref: '#/components/schemas/Money' }
+        description: { type: string, maxLength: 140 }
+    PixPayment:
+      type: object
+      additionalProperties: false
+      required: [id, status, amount, createdAt]
+      properties:
+        id: { type: string, format: uuid }
+        status: { $ref: '#/components/schemas/TransactionStatus' }
+        amount: { $ref: '#/components/schemas/Money' }
+        createdAt: { type: string, format: date-time }
+        settledAt: { type: [string, 'null'], format: date-time }
+        failureCode: { type: [string, 'null'] }
+    TransactionStatus:
+      type: string
+      enum: [CREATED, VALIDATING, RISK_REVIEW, AUTHORIZED, FUNDS_RESERVED, SENT, ACCEPTED, SETTLED, RECONCILED, REJECTED, FAILED, UNKNOWN, REVERSED, CANCELLED, MANUAL_REVIEW]
+    Problem:
+      type: object
+      additionalProperties: true
+      required: [type, title, status, code, correlationId]
+      properties:
+        type: { type: string, format: uri }
+        title: { type: string }
+        status: { type: integer }
+        code: { type: string }
+        detail: { type: string }
+        correlationId: { type: string }

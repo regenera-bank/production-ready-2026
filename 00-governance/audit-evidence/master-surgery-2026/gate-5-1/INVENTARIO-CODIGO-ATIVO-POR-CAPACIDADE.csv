@@ -1,0 +1,25 @@
+capacidade,total_arquivos,modulos
+Identity,187,03-channels | 05-core-banking | 11-security | 04-bffs | 02-contracts
+Customer/Party,184,03-channels | 05-core-banking | 04-bffs | 02-contracts | 06-risk-control
+Accounts,219,03-channels | 05-core-banking | 04-bffs | 02-contracts | 06-risk-control
+Ledger,118,03-channels | 05-core-banking | 04-bffs | 02-contracts | 06-risk-control
+Transactions,131,03-channels | 05-core-banking | 04-bffs | 02-contracts | 06-risk-control
+Payments,1194,03-channels | 07-integrations | 05-core-banking | 11-security | 04-bffs | 08-iso20022 | 02-contracts | 09-data-platform | 06-risk-control
+Pix,242,03-channels | 07-integrations | 05-core-banking | 04-bffs | 08-iso20022 | 02-contracts | 06-risk-control
+Cards,295,03-channels | 07-integrations | 05-core-banking | 04-bffs | 02-contracts | 06-risk-control
+Credit,196,03-channels | 02-contracts | 05-core-banking | 06-risk-control
+Investments,91,03-channels | 02-contracts | 05-core-banking
+Idempotency,6,03-channels | 04-bffs | 05-core-banking
+Reconciliation,81,03-channels | 07-integrations | 05-core-banking | 04-bffs | 06-risk-control
+Accounting,57,05-core-banking | 06-risk-control
+Fraud,569,03-channels | 05-core-banking | 02-contracts | 09-data-platform | 06-risk-control
+AML/KYC,550,03-channels | 07-integrations | 05-core-banking | 11-security | 04-bffs | 08-iso20022 | 02-contracts | 09-data-platform | 06-risk-control
+Regulatory Reporting,139,07-integrations | 09-data-platform | 06-risk-control
+Notifications,116,03-channels | 04-bffs | 05-core-banking | 07-integrations
+Open Finance,134,03-channels | 04-bffs | 05-core-banking | 07-integrations
+ISO 20022,256,08-iso20022
+Audit Trail,406,03-channels | 07-integrations | 05-core-banking | 11-security | 04-bffs | 08-iso20022 | 02-contracts | 09-data-platform | 06-risk-control
+Authorization,7,03-channels | 04-bffs
+Limits,58,03-channels | 04-bffs | 05-core-banking
+Fees,51,05-core-banking
+Settlement,39,05-core-banking

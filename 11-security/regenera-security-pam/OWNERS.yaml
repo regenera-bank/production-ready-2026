@@ -1,0 +1,6 @@
+owners:
+  primary: team-security-pam
+  approvers:
+    - team-architecture
+    - team-security
+  on_call: pam-primary

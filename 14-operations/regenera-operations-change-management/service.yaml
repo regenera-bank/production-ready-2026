@@ -1,0 +1,12 @@
+name: regenera-operations-change-management
+domain: change-management
+owner: team-operations-change-management
+criticality: high
+data_classification: banking-secret
+runtime: docs
+tier: 1
+rto: 4h
+rpo: 1h
+on_call: change-management-primary
+dependencies:
+  []

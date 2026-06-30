@@ -1,0 +1,9 @@
+caminho,formato,tamanho,sha256,pacote,responsabilidade,imports,exports,consumidores,dependencias,relacao_requisito,relacao_teste,tipo,riscos
+02-contracts/regenera-idempotency-v1.yaml,yaml,261 bytes,hash,02-contracts,Contrato OpenAPI,NA,NA,BFFs,Nenhuma,Transversal,NA,Ativo,Schema simples
+02-contracts/regenera-audit-events-v1.yaml,yaml,260 bytes,hash,02-contracts,Contrato OpenAPI,NA,NA,Módulos,Nenhuma,Transversal,NA,Ativo,Schema incompleto
+05-core-banking/regenera-core-idempotency/src/domain/IdempotencyRecord.ts,ts,61 bytes,hash,idempotency,Dominio,Nenhum,IdempotencyRecord,Core,Nenhuma,Persistencia,Ausente,Stub,Vazio
+05-core-banking/regenera-core-idempotency/src/domain/IdempotencyStateMachine.ts,ts,76 bytes,hash,idempotency,Dominio,Nenhum,IdempotencyStateMachine,Core,Nenhuma,State Machine,Unitario,Stub,Sem implementação
+05-core-banking/regenera-core-idempotency/tests/IdempotencyStateMachine.spec.ts,ts,76 bytes,hash,idempotency,Teste,Nenhum,Nenhum,Nenhum,Nenhuma,Validação,Self,Stub,Sem assertivas
+05-core-banking/regenera-core-audit/src/domain/AuditEvent.ts,ts,47 bytes,hash,audit,Dominio,Nenhum,AuditEvent,Core,Nenhuma,Envelope,Ausente,Stub,Vazio
+05-core-banking/regenera-core-audit/src/domain/OutboxPublisher.ts,ts,86 bytes,hash,audit,Dominio,Nenhum,OutboxPublisher,Core,Nenhuma,Outbox,Ausente,Interface,Apenas Interface
+05-core-banking/regenera-core-audit/tests/AuditEvent.spec.ts,ts,68 bytes,hash,audit,Teste,Nenhum,Nenhum,Nenhum,Nenhuma,Validação,Self,Stub,Sem assertivas

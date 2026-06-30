@@ -1,0 +1,1 @@
+CREATE TABLE customer_risk_profile (customer_id UUID NOT NULL, version BIGINT NOT NULL, rating VARCHAR(16) NOT NULL, pep BOOLEAN NOT NULL, sanctions_match BOOLEAN NOT NULL, blocked BOOLEAN NOT NULL, model_version TEXT NOT NULL, assessed_at TIMESTAMPTZ NOT NULL, PRIMARY KEY (customer_id, version));

@@ -1,0 +1,1 @@
+CREATE TABLE party_address (address_id UUID PRIMARY KEY, party_id UUID NOT NULL REFERENCES party(party_id), country_code CHAR(2) NOT NULL, postal_code TEXT NOT NULL, city TEXT NOT NULL, line1 TEXT NOT NULL, line2 TEXT, valid_from TIMESTAMPTZ NOT NULL DEFAULT now(), valid_until TIMESTAMPTZ);

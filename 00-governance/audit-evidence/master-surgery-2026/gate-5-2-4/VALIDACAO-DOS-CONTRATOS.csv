@@ -1,0 +1,3 @@
+contrato,sintaxe,schema,alinhamento_ts,falhas
+regenera-idempotency-v1.yaml,OK,Basico,NA,Faltam restrições estritas e enumerações
+regenera-audit-events-v1.yaml,OK,Incompleto,Parcial,Faltam campos complexos especificados

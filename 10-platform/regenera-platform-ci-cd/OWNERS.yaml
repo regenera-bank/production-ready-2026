@@ -1,0 +1,6 @@
+owners:
+  primary: team-platform-ci-cd
+  approvers:
+    - team-architecture
+    - team-security
+  on_call: ci-cd-primary

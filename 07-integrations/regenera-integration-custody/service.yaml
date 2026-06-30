@@ -1,0 +1,12 @@
+name: regenera-integration-custody
+domain: custody
+owner: team-integration-custody
+criticality: high
+data_classification: banking-secret
+runtime: jvm
+tier: 1
+rto: 4h
+rpo: 1h
+on_call: custody-primary
+dependencies:
+  []

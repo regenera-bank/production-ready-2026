@@ -1,0 +1,1 @@
+CREATE TABLE ledger_account (ledger_account_id UUID PRIMARY KEY, code TEXT NOT NULL UNIQUE, account_type VARCHAR(16) NOT NULL, currency CHAR(3) NOT NULL, status VARCHAR(16) NOT NULL, created_at TIMESTAMPTZ NOT NULL DEFAULT now());

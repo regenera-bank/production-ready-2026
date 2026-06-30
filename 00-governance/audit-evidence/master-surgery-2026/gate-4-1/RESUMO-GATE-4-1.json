@@ -1,0 +1,24 @@
+{
+  "timestamp": "2026-06-26T07:50:26.603337",
+  "total_reavaliados": 316,
+  "placeholders_reais": 316,
+  "removidos": 0,
+  "totais_tipo": {
+    "A": 4,
+    "B": 0,
+    "C": 312,
+    "D": 0
+  },
+  "totais_prioridade": {
+    "P0": 56,
+    "P1": 119,
+    "P2": 39,
+    "P3": 102
+  },
+  "intencionalmente_minimos_confirmados": 0,
+  "bloqueados_por_contexto": 316,
+  "p0_com_especificacao": 0,
+  "p0_bloqueados": 56,
+  "relacoes_conflitos": 0,
+  "relacoes_source": 0
+}

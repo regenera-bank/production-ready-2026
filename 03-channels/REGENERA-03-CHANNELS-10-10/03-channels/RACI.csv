@@ -1,0 +1,9 @@
+activity,responsible,accountable,consulted,informed
+Manter Web Banking,channel-web,Don Paulo Ricardo,security-architecture,operations-governance
+Manter Android,channel-android,Don Paulo Ricardo,security-architecture,operations-governance
+Manter iOS,channel-ios,Don Paulo Ricardo,security-architecture,operations-governance
+Manter Windows Operations,operations-platform,Don Paulo Ricardo,security-architecture,operations-governance
+Manter Partner Portal,partner-platform,Don Paulo Ricardo,security-architecture,operations-governance
+Aprovar release,release-engineering,independent-reviewer,security-architecture,Don Paulo Ricardo
+Responder incidente,incident-command,operations-governance,channel-engineering,executive-duty
+Declarar exceção,control-owner,risk-acceptance-authority,security-governance,internal-audit

@@ -1,0 +1,3 @@
+decision_id,capacidade,tema,decisão_necessária,alternativas,impacto,risco,evidência_existente,owner_necessário,bloqueia_implementação,status
+D-01,Audit Trail,Retenção,Período TTL WORM vs Exclusão Ativa,1 ano / 5 anos / Indefinido,Custo Storage,Compliance Bacen,Nenhuma,CISO / Legal,SIM,RETENTION_DECISION_REQUIRED
+D-02,Idempotency,Concorrência,Mecanismo Locking DB,Row-level lock Postgres vs Redis Distributed Lock,Latência Transacional,Deadlocks,Apenas Postgres rodando,Arquitetura,SIM,PERSISTENCE_DECISION_REQUIRED

@@ -1,0 +1,244 @@
+# ═══════════════════════════════════════════════════════════════
+# REGENERA BANK - BLOCKCHAIN CERTIFICATE
+# .gitignore - Arquivos a não versionar
+# ═══════════════════════════════════════════════════════════════
+
+# ───────────────────────────────────────────────────────────────
+# CRÍTICO - NUNCA COMMITE ESTES ARQUIVOS
+# ───────────────────────────────────────────────────────────────
+
+# Environment variables (contém chaves privadas!)
+.env
+.env.local
+.env.production
+.env.*.local
+
+# Private keys e wallets
+*.key
+*.pem
+*.p12
+*.pfx
+wallet.json
+keystore/
+
+# Deployment info (pode conter endereços sensíveis)
+deployment-addresses.json
+deployment-info.json
+deployment-*.json
+
+# ───────────────────────────────────────────────────────────────
+# NODE.JS / NPM
+# ───────────────────────────────────────────────────────────────
+
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+.pnpm-store/
+
+# Package locks (escolher um)
+# package-lock.json (descomente se usar npm)
+# yarn.lock (descomente se usar yarn)
+# pnpm-lock.yaml (descomente se usar pnpm)
+
+# ───────────────────────────────────────────────────────────────
+# HARDHAT / ETHEREUM
+# ───────────────────────────────────────────────────────────────
+
+# Hardhat cache e artifacts
+cache/
+artifacts/
+typechain/
+typechain-types/
+
+# Coverage reports
+coverage/
+coverage.json
+.coverage_cache/
+.coverage_contracts/
+
+# Gas reporter
+gas-report.txt
+.gas-snapshot
+
+# Hardhat network fork cache
+.hardhat-network-fork-cache/
+
+# ───────────────────────────────────────────────────────────────
+# IPFS
+# ───────────────────────────────────────────────────────────────
+
+.ipfs/
+ipfs-cache/
+*.car
+
+# ───────────────────────────────────────────────────────────────
+# OUTPUT / BUILD
+# ───────────────────────────────────────────────────────────────
+
+output/
+dist/
+build/
+out/
+*.log
+
+# Exceto arquivos importantes de output (descomente se necessário)
+# !output/verification-report.json
+# !output/authenticity-certificate.txt
+
+# ───────────────────────────────────────────────────────────────
+# IDE / EDITORS
+# ───────────────────────────────────────────────────────────────
+
+# VSCode
+.vscode/
+*.code-workspace
+.history/
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+*.swp
+*.swo
+*~
+
+# Emacs
+*~
+\#*\#
+.\#*
+
+# ───────────────────────────────────────────────────────────────
+# SISTEMA OPERACIONAL
+# ───────────────────────────────────────────────────────────────
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.stackdump
+[Dd]esktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+*.lnk
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+# ───────────────────────────────────────────────────────────────
+# TESTES
+# ───────────────────────────────────────────────────────────────
+
+test-results/
+*.test.cache
+*.spec.cache
+
+# ───────────────────────────────────────────────────────────────
+# TEMPORÁRIOS
+# ───────────────────────────────────────────────────────────────
+
+tmp/
+temp/
+*.tmp
+*.temp
+*.bak
+*.backup
+*.old
+
+# ───────────────────────────────────────────────────────────────
+# DOCUMENTAÇÃO GERADA
+# ───────────────────────────────────────────────────────────────
+
+docs/_build/
+docs/.doctrees/
+*.pdf (se for gerado automaticamente)
+
+# ───────────────────────────────────────────────────────────────
+# BANCO DE DADOS LOCAL
+# ───────────────────────────────────────────────────────────────
+
+*.db
+*.sqlite
+*.sqlite3
+
+# ───────────────────────────────────────────────────────────────
+# SEGURANÇA
+# ───────────────────────────────────────────────────────────────
+
+# Secrets
+secrets/
+.secrets/
+*.secret
+
+# Certificates (SSL/TLS)
+*.crt
+*.cer
+*.der
+
+# ───────────────────────────────────────────────────────────────
+# CUSTOM - REGENERA BANK
+# ───────────────────────────────────────────────────────────────
+
+# Scripts locais de teste
+test-*.sh
+test-*.js
+local-*.sh
+
+# Backups
+backups/
+*.backup.json
+
+# ═══════════════════════════════════════════════════════════════
+# ARQUIVOS QUE DEVEM SER VERSIONADOS
+# ═══════════════════════════════════════════════════════════════
+
+# Sempre versionar:
+# ✅ .env.example (template sem credenciais)
+# ✅ hardhat.config.js (configuração)
+# ✅ package.json (dependências)
+# ✅ contracts/ (smart contracts)
+# ✅ scripts/ (scripts de deployment)
+# ✅ test/ (testes)
+# ✅ README*.md (documentação)
+# ✅ *.sol (contratos Solidity)
+# ✅ .gitignore (este arquivo)
+
+# ═══════════════════════════════════════════════════════════════

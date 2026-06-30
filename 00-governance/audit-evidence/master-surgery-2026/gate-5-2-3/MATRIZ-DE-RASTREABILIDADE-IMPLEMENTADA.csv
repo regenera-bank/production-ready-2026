@@ -1,0 +1,2 @@
+requisito,codigo_fonte,teste
+REQ-1,IdempotencyStateMachine.ts,IdempotencyStateMachine.spec.ts

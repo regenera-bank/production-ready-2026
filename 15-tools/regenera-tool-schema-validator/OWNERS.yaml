@@ -1,0 +1,6 @@
+owners:
+  primary: team-developer-experience
+  approvers:
+    - team-architecture
+    - team-security
+  on_call: schema-validator-primary

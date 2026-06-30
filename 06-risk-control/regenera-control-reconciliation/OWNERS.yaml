@@ -1,0 +1,6 @@
+owners:
+  primary: team-reconciliation
+  approvers:
+    - team-architecture
+    - team-security
+  on_call: reconciliation-primary

@@ -1,0 +1,12 @@
+name: regenera-security-incident-response
+domain: incident-response
+owner: team-security-incident-response
+criticality: critical
+data_classification: banking-secret
+runtime: docs
+tier: 0
+rto: 15m
+rpo: 0
+on_call: incident-response-primary
+dependencies:
+  []

@@ -1,0 +1,7 @@
+estado,entrada,transicoes_permitidas,resposta_cliente,commit_financeiro
+RECEIVED,Interceptador acionado,PROCESSING,202 Accepted / Pendente,NAO
+PROCESSING,Início lógica negócio,"COMPLETED, FAILED_RETRYABLE, FAILED_FINAL, EXPIRED",Bloqueado (Conflito - 409),NAO
+COMPLETED,Commit persistido,Nenhuma,Replay resposta original (ex: 200/201),SIM
+FAILED_RETRYABLE,Falha transiente ou rede,PROCESSING,Replay resposta original (ex: 503),NAO
+FAILED_FINAL,Erro regra negócio (ex: sem saldo),Nenhuma,Replay resposta original (ex: 400/422),NAO
+UNKNOWN,Timeout após chamada,Manual Intervention,504 Gateway Timeout,DESCONHECIDO

@@ -1,0 +1,6 @@
+owners:
+  primary: team-data-risk-models
+  approvers:
+    - team-architecture
+    - team-security
+  on_call: risk-models-primary

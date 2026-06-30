@@ -1,0 +1,6 @@
+owners:
+  primary: team-sanctions
+  approvers:
+    - team-architecture
+    - team-security
+  on_call: sanctions-primary

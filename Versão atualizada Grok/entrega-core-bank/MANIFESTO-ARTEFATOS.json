@@ -1,0 +1,96 @@
+{
+  "sessao": "2026-06-29-grok-orquestracao-regenera-bank",
+  "workspace": "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank",
+  "pasta_entrega": "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/Versão atualizada Grok",
+  "autoridade": {
+    "nome": "Don Paulo Ricardo de Leão",
+    "email": "finance@regenerabank.world",
+    "gpg": "730834AB4126C341A70F6B969826A3AC0BF6A90C"
+  },
+  "referencias_imutaveis": [
+    {
+      "arquivo": "desing-final-escolhido-geral-index.html",
+      "linhas": 4251,
+      "papel": "protótipo UX — 23 módulos, estado em memória"
+    },
+    {
+      "arquivo": "MAPA_MESTRE_DESENVOLVIMENTO_CANAIS_REGENERA_BANK(1).md",
+      "linhas": 1225,
+      "papel": "plano 90 dias, ondas A–E"
+    },
+    {
+      "arquivo": "money.value-object.ts",
+      "linhas": 234,
+      "papel": "Money canônico BigInt — importar, não reescrever"
+    },
+    {
+      "arquivo": "STYLE.pt-BR.md",
+      "linhas": 125,
+      "papel": "tom comentários — porquê e risco"
+    },
+    {
+      "arquivo": "regenera-agent.mjs",
+      "papel": "portão byte-a-byte comentários"
+    }
+  ],
+  "artefatos_criados_sessao": [
+    { "pr": "mandato", "path": "AGENTS.md", "linhas": 562, "status": "CONCLUIDO" },
+    { "pr": "alias", "path": "STYLE_pt-BR.md", "status": "CONCLUIDO" },
+    { "pr": "PR-00", "path": "domains/core-bank/docs/adr/ADR-001-LEDGER-APPEND-ONLY.md", "status": "CONCLUIDO" },
+    { "pr": "PR-00", "path": "domains/core-bank/docs/adr/ADR-002-IDEMPOTENCIA-HASH-PAYLOAD.md", "status": "CONCLUIDO" },
+    { "pr": "PR-00", "path": "domains/core-bank/docs/adr/ADR-003-ESTADO-UNKNOWN.md", "status": "CONCLUIDO" },
+    { "pr": "PR-00", "path": "domains/core-bank/docs/adr/ADR-004-ENQUADRAMENTO-BACEN.md", "status": "CONCLUIDO" },
+    { "pr": "PR-00", "path": "domains/core-bank/docs/EXTERNAL-BLOCKERS.md", "status": "CONCLUIDO" },
+    { "pr": "PR-00", "path": "domains/core-bank/docs/runbooks/RUNBOOK-CORE-001-UNKNOWN.md", "status": "CONCLUIDO" },
+    { "pr": "PR-00", "path": "domains/core-bank/docs/runbooks/RUNBOOK-CORE-002-LEDGER-IMBALANCE.md", "status": "CONCLUIDO" },
+    { "pr": "PR-00", "path": "domains/core-bank/docs/runbooks/RUNBOOK-CORE-003-DR-RESTORE.md", "status": "CONCLUIDO" },
+    { "pr": "PR-00", "path": "domains/core-bank/governance/CONTROL-MATRIX.csv", "status": "CONCLUIDO" },
+    { "pr": "PR-00", "path": "domains/core-bank/governance/OWNERS.json", "status": "CONCLUIDO" },
+    { "pr": "PR-00", "path": "domains/core-bank/governance/REGULATORY-TRACEABILITY.csv", "status": "CONCLUIDO" },
+    { "pr": "PR-00", "path": "domains/core-bank/docs/DESIGN-CORE-BANKING-001.md", "status": "CONCLUIDO_PRE_EXISTENTE" },
+    { "pr": "PR-00b", "path": "domains/core-bank/package.json", "status": "CONCLUIDO_NAO_VERIFICADO" },
+    { "pr": "PR-00b", "path": "domains/core-bank/tsconfig.json", "status": "CONCLUIDO" },
+    { "pr": "PR-00b", "path": "domains/core-bank/nest-cli.json", "status": "CONCLUIDO" },
+    { "pr": "PR-00b", "path": "domains/core-bank/jest.config.js", "status": "CONCLUIDO" },
+    { "pr": "PR-00b", "path": "domains/core-bank/src/main.ts", "status": "CONCLUIDO" },
+    { "pr": "PR-00b", "path": "domains/core-bank/src/app.module.ts", "status": "CONCLUIDO" },
+    { "pr": "PR-00b", "path": "domains/core-bank/src/core-bank-health.controller.ts", "status": "CONCLUIDO" },
+    { "pr": "PR-00b", "path": ".github/workflows/core-bank-ci.yml", "status": "CONCLUIDO" },
+    { "pr": "PR-01", "path": "domains/core-bank/src/money/money.value-object.ts", "status": "SINCRONIZADO_DA_RAIZ" },
+    { "pr": "PR-01", "path": "domains/core-bank/src/money/money.value-object.spec.ts", "status": "VERIFICADO_16_TESTES" },
+    { "pr": "PR-02", "path": "domains/core-bank/src/errors/core-banking.errors.ts", "status": "CONCLUIDO_NAO_VERIFICADO" },
+    { "pr": "PR-02", "path": "domains/core-bank/src/errors/core-banking.errors.spec.ts", "status": "CONCLUIDO_NAO_VERIFICADO" }
+  ],
+  "dag_progresso": {
+    "PR-00": "CONCLUIDO",
+    "PR-00b": "VERIFICADO_VERDE_2026-06-29",
+    "PR-01": "VERIFICADO_VERDE_2026-06-29_16_TESTES",
+    "PR-02": "VERIFICADO_VERDE_2026-06-29_22_TESTES",
+    "PR-03": "VERIFICADO_VERDE_2026-06-29_33_TESTES",
+    "PR-04a": "PENDENTE",
+    "PR-04b": "PENDENTE",
+    "PR-05": "PENDENTE",
+    "PR-06": "PENDENTE",
+    "PR-07": "PENDENTE",
+    "PR-08": "PENDENTE",
+    "PR-09": "PENDENTE",
+    "PR-10": "PENDENTE",
+    "PR-11": "PENDENTE",
+    "PR-12": "PENDENTE",
+    "PR-13": "PENDENTE",
+    "PR-14": "PENDENTE",
+    "PR-15": "PENDENTE"
+  },
+  "bloqueios_sessao": [
+    "shell_agente_indisponivel_no_cursor",
+    "home_claude_agents_md_nao_criado"
+  ],
+  "verificacao_local_2026_06_29": {
+    "lint": "PASS",
+    "test_suites": 3,
+    "test_total": 33,
+    "test_failed": 0,
+    "build": "PASS",
+    "regenera_agent": "5_limpos_0_rejeitados"
+  }
+}

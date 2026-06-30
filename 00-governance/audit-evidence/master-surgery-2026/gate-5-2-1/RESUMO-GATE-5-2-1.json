@@ -1,0 +1,18 @@
+{
+  "timestamp": "2026-06-26T08:18:13.803852",
+  "capacidades_reavaliadas": 11,
+  "maturidades_invalidadas": 11,
+  "totais_maturidade_corrigida": {
+    "SKELETON_ONLY": 5,
+    "FRAGMENT_ONLY": 3,
+    "BLOCKED_BY_CONTRACT": 3
+  },
+  "bloqueadas_contratos": 3,
+  "bloqueadas_dependencias": 0,
+  "bloqueadas_dominio": 0,
+  "sem_testes": 11,
+  "candidatas_lote_zero": [
+    "Audit Trail",
+    "Idempotency"
+  ]
+}

@@ -1,0 +1,829 @@
+<!-- Dashboard Overview: Regenera Bank Web Interface -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arquitetura Dashboard Regenera</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        'bg-dark': '#030712',
+                        'phone-bg': '#070B15',
+                        'c-01': '#3B82F6', // Blue
+                        'c-02': '#06B6D4', // Cyan
+                        'c-03': '#84CC16', // Lime/Green
+                        'c-04': '#EAB308', // Yellow
+                        'c-05': '#F97316', // Orange
+                        'c-06': '#8B5CF6'  // Purple
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 6s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'float-delayed': 'float 6s ease-in-out infinite 3s',
+                        'dash': 'dash 2s linear infinite',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { margin: 0; background-color: #010204; overflow: hidden; font-family: 'Inter', sans-serif; }
+        
+        #app-wrapper { width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center; background-color: #010204; }
+        
+        /* Fixed 16:9 Canvas with premium outer shadow */
+        .slide-frame { 
+            width: 1920px; height: 1080px; 
+            background-color: #050811; 
+            position: relative; overflow: hidden; 
+            transform-origin: center; 
+            box-shadow: 0 25px 70px -10px rgba(0,0,0,0.9), 0 0 100px rgba(59, 130, 246, 0.05);
+            border: 1px solid rgba(255,255,255,0.03);
+        }
+
+        /* --- CSS Shapes & Clips --- */
+        .clip-arrow-left { clip-path: polygon(30px 50%, 100% 0, 100% 100%); }
+        .clip-chevron-right { clip-path: polygon(0 0, calc(100% - 25px) 0, 100% 50%, calc(100% - 25px) 100%, 0 100%, 25px 50%); }
+        .clip-chevron-down { clip-path: polygon(0 0, 100% 0, 100% calc(100% - 25px), 50% 100%, 0 calc(100% - 25px)); }
+        .clip-pentagon { clip-path: polygon(50% 0%, 100% 35%, 80% 100%, 20% 100%, 0% 35%); }
+        .clip-hexagon { clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%); }
+
+        /* Fold Shadows for Ribbons */
+        .shadow-fold-bl { background: linear-gradient(to top right, rgba(0,0,0,0.6) 50%, transparent 50%); }
+        .shadow-fold-tl { background: linear-gradient(to bottom right, rgba(0,0,0,0.6) 50%, transparent 50%); }
+
+        /* Blobs */
+        .blob-1 { border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; }
+        .blob-2 { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+        
+        .bg-dots { background-image: radial-gradient(rgba(255, 255, 255, 0.02) 1.5px, transparent 1.5px); background-size: 30px 30px; }
+
+        /* Slide Stagger Animations */
+        .slide { position: absolute; inset: 0; opacity: 0; transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1); pointer-events: none; z-index: 10; }
+        .slide.active { opacity: 1; pointer-events: auto; z-index: 20; }
+        
+        .slide-element {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .slide.active .slide-element {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(1deg); }
+        }
+
+        @keyframes dash {
+            to { stroke-dashoffset: -40; }
+        }
+
+        /* Ambient glowing lights in background */
+        .neon-glow-1 {
+            position: absolute; width: 600px; height: 600px; border-radius: 50%;
+            background: radial-gradient(circle, rgba(59,130,246,0.08) 0%, rgba(0,0,0,0) 70%);
+            top: -200px; left: -100px; filter: blur(50px); pointer-events: none;
+        }
+        .neon-glow-2 {
+            position: absolute; width: 700px; height: 700px; border-radius: 50%;
+            background: radial-gradient(circle, rgba(139,92,246,0.06) 0%, rgba(0,0,0,0) 70%);
+            bottom: -300px; right: -100px; filter: blur(60px); pointer-events: none;
+        }
+        
+        /* Modern UI Navigation Controls */
+        .nav-controls {
+            position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
+            display: flex; align-items: center; gap: 24px; z-index: 999;
+            background: rgba(7, 11, 21, 0.85); backdrop-filter: blur(20px);
+            padding: 12px 24px; border-radius: 100px; border: 1px solid rgba(255,255,255,0.08);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.1);
+        }
+        .nav-btn {
+            background: rgba(255,255,255,0.05); color: white; border: 1px solid rgba(255,255,255,0.05);
+            padding: 10px 24px; border-radius: 50px; font-weight: 600; cursor: pointer;
+            display: flex; align-items: center; gap: 10px; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); font-size: 14px;
+        }
+        .nav-btn:hover { background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.2); transform: translateY(-1px); }
+        .nav-btn:active { transform: scale(0.95) translateY(0); }
+    </style>
+    <!-- React & ReactDOM -->
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        // Global context mimicking or simple state-passing simulation for interactive phone screen state
+        const PhoneMockup = ({ activeAction = "Pix", onActionSelect }) => {
+            
+            // Build dynamic display based on selected action
+            const getDynamicContent = () => {
+                switch(activeAction) {
+                    case "Pix":
+                        return (
+                            <div className="space-y-3.5 animate-[fadeIn_0.3s_ease]">
+                                <div className="flex justify-between items-center mb-1">
+                                    <p className="text-gray-400 text-[10px] font-bold tracking-widest pl-2 border-l-2 border-c-01">SOCKET.IO REAL-TIME</p>
+                                    <span className="text-c-02 text-[9px] font-bold tracking-wider">TX-ID PRE-CHECKED</span>
+                                </div>
+                                <div className="bg-[#0D1527] rounded-[18px] p-3.5 flex items-center justify-between border border-white/5 shadow-md">
+                                    <div className="flex items-center gap-3">
+                                        <div className="w-9 h-9 bg-emerald-500/10 rounded-full flex items-center justify-center border border-emerald-500/20">
+                                            <i className="ph ph-arrow-down-left text-emerald-400 text-lg"></i>
+                                        </div>
+                                        <div>
+                                            <p className="text-white text-[12px] font-bold">PIX Recebido (ACID)</p>
+                                            <p className="text-gray-500 text-[9px]">Push via Pub/Sub Backend</p>
+                                        </div>
+                                    </div>
+                                    <span className="text-emerald-400 text-[13px] font-bold">+ 250000 CENTS</span>
+                                </div>
+                                <div className="bg-[#0D1527] rounded-[18px] p-3.5 flex items-center justify-between border border-white/5 shadow-md">
+                                    <div className="flex items-center gap-3">
+                                        <div className="w-9 h-9 bg-rose-500/10 rounded-full flex items-center justify-center border border-rose-500/20">
+                                            <i className="ph ph-arrow-up-right text-rose-400 text-lg"></i>
+                                        </div>
+                                        <div>
+                                            <p className="text-white text-[12px] font-bold">PIX Enviado</p>
+                                            <p className="text-gray-500 text-[9px]">Lock Pessimista (TypeORM)</p>
+                                        </div>
+                                    </div>
+                                    <span className="text-rose-400 text-[13px] font-bold">- 15000 CENTS</span>
+                                </div>
+                            </div>
+                        );
+                    case "Cloud":
+                        return (
+                            <div className="space-y-3.5 animate-[fadeIn_0.3s_ease]">
+                                <div className="flex justify-between items-center mb-1">
+                                    <p className="text-gray-400 text-[10px] font-bold tracking-widest pl-2 border-l-2 border-c-02">INFRAESTRUTURA GCP</p>
+                                    <span className="text-emerald-400 text-[9px] font-bold flex items-center gap-1">
+                                        <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-ping"></span> CLOUD RUN ATIVO
+                                    </span>
+                                </div>
+                                <div className="bg-[#0D1527] rounded-[18px] p-3.5 border border-white/5 shadow-md space-y-3">
+                                    <div className="flex items-center justify-between">
+                                        <div className="flex items-center gap-2">
+                                            <i className="ph ph-cpu text-c-02 text-lg"></i>
+                                            <span className="text-white text-xs font-semibold">Admin API (NestJS)</span>
+                                        </div>
+                                        <span className="text-[10px] bg-emerald-500/10 text-emerald-400 px-2 py-0.5 rounded border border-emerald-500/20 font-bold">LIVENESS REQ</span>
+                                    </div>
+                                    <div className="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
+                                        <div className="bg-c-02 h-full w-[42%] rounded-full shadow-[0_0_8px_#06B6D4]"></div>
+                                    </div>
+                                    <div className="flex justify-between text-[9px] text-gray-500">
+                                        <span>IAM Claim SysAdmin</span>
+                                        <span>Cloud Vision Liveness</span>
+                                    </div>
+                                </div>
+                            </div>
+                        );
+                    case "Cartões":
+                        return (
+                            <div className="space-y-3.5 animate-[fadeIn_0.3s_ease]">
+                                <p className="text-gray-400 text-[10px] font-bold tracking-widest pl-2 border-l-2 border-c-05 mb-1">CARTÃO VIRTUAL ATIVO</p>
+                                <div className="bg-gradient-to-br from-indigo-900/60 via-[#0D1527] to-purple-950/40 rounded-[18px] p-4 border border-white/10 shadow-lg relative overflow-hidden">
+                                    <div className="absolute top-0 right-0 w-24 h-24 bg-c-06/10 rounded-full blur-xl"></div>
+                                    <div className="flex justify-between items-start mb-4">
+                                        <i className="ph ph-contactless-payment text-white/50 text-xl"></i>
+                                        <span className="text-[9px] font-mono tracking-widest text-c-05 bg-c-05/10 px-2 py-0.5 rounded border border-c-05/20">HOOK ORVAL GERADO</span>
+                                    </div>
+                                    <p className="text-white text-xs font-mono tracking-widest mb-2">•••• •••• •••• 1042</p>
+                                    <div className="flex justify-between items-end">
+                                        <div>
+                                            <p className="text-[8px] text-gray-500">OPENAPI SPEC</p>
+                                            <p className="text-white text-[10px] font-semibold">v1/api-docs</p>
+                                        </div>
+                                        <i className="ph ph-arrows-merge text-white/30 text-2xl"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        );
+                    case "Invest.":
+                        return (
+                            <div className="space-y-3.5 animate-[fadeIn_0.3s_ease]">
+                                <p className="text-gray-400 text-[10px] font-bold tracking-widest pl-2 border-l-2 border-c-03 mb-1">NEURAL CORE ENGINE</p>
+                                <div className="bg-[#0D1527] rounded-[18px] p-3.5 border border-white/5 shadow-md">
+                                    <div className="flex justify-between items-center mb-2">
+                                        <span className="text-[11px] text-gray-400">Auditoria Vertex AI</span>
+                                        <span className="text-emerald-400 text-[11px] font-bold">STRICT JSON</span>
+                                    </div>
+                                    {/* Mini SVG Chart */}
+                                    <svg viewBox="0 0 100 30" className="w-full h-10 stroke-c-03 fill-c-03/10 stroke-2">
+                                        <path d="M0,30 L10,24 L25,28 L40,15 L55,18 L70,5 L85,8 L100,2 L100,30 L0,30 Z" style={{ strokeWidth: 0.5, fill: 'rgba(132, 204, 22, 0.1)' }} />
+                                        <path d="M0,30 L10,24 L25,28 L40,15 L55,18 L70,5 L85,8 L100,2" fill="none" />
+                                    </svg>
+                                    <div className="flex justify-between text-[9px] text-gray-500 mt-2">
+                                        <span>blocklist + REGRA 1-4 + validateGeminiOutput</span>
+                                        <span>Revisão Manual Exigida</span>
+                                    </div>
+                                </div>
+                            </div>
+                        );
+                    default:
+                        return null;
+                }
+            };
+
+            return (
+                <div className="w-[370px] h-[750px] bg-gradient-to-b from-[#11182B] to-[#04060C] rounded-[48px] shadow-[inset_0_0_0_8px_#1E293B,inset_0_0_0_12px_#000,0_25px_50px_-12px_rgba(0,0,0,0.8)] relative overflow-hidden shrink-0 z-50 border border-white/10 transition-all duration-300 hover:scale-[1.01] hover:shadow-[0_0_60px_rgba(59,130,246,0.15)]">
+                    {/* Speaker & Dynamic Island Slot */}
+                    <div className="absolute top-[12px] left-1/2 -translate-x-1/2 w-[120px] h-[28px] bg-black rounded-full z-40 flex items-center justify-between px-4">
+                        <span className="w-1.5 h-1.5 rounded-full bg-blue-900/40"></span>
+                        <span className="w-12 h-1 bg-neutral-900 rounded"></span>
+                        <span className="w-2.5 h-2.5 rounded-full bg-blue-900/20"></span>
+                    </div>
+
+                    {/* StatusBar Mobile */}
+                    <div className="absolute top-[4px] left-0 right-0 px-8 pt-2.5 flex justify-between items-center text-[11px] text-gray-400 font-semibold z-30">
+                        <span>14:32</span>
+                        <div className="flex items-center gap-1.5">
+                            <i className="ph-fill ph-wifi-high"></i>
+                            <i className="ph-fill ph-battery-full text-[14px]"></i>
+                        </div>
+                    </div>
+                    
+                    {/* Header */}
+                    <div className="pt-[52px] px-[24px] pb-[16px] flex justify-between items-center relative z-10">
+                        <div className="flex items-center gap-3">
+                            <i className="ph ph-list text-2xl text-gray-400 hover:text-white cursor-pointer transition-colors"></i>
+                            <span className="text-white font-extrabold tracking-[0.25em] text-[13px] bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">REGENERA</span>
+                        </div>
+                        <div className="relative cursor-pointer">
+                            <i className="ph ph-bell text-2xl text-gray-400 hover:text-white transition-colors"></i>
+                            <div className="absolute top-0 right-0 w-2.5 h-2.5 bg-c-02 rounded-full border-2 border-phone-bg animate-pulse"></div>
+                        </div>
+                    </div>
+
+                    {/* Card Global Balance */}
+                    <div className="mx-[20px] mb-[24px] bg-gradient-to-br from-indigo-950 via-[#0B101E] to-[#04060C] rounded-[24px] p-[20px] shadow-2xl relative border border-white/5 overflow-hidden">
+                        <div className="absolute -right-10 -bottom-10 w-32 h-32 bg-c-01/5 rounded-full blur-2xl"></div>
+                        <div className="flex justify-between items-center mb-[16px]">
+                            <span className="text-[9px] font-bold tracking-widest text-c-02 bg-c-02/10 px-3 py-1 rounded-full border border-c-02/20 uppercase">ENTERPRISE CLOUD</span>
+                            <i className="ph ph-fingerprint text-white/10 text-2xl"></i>
+                        </div>
+                        <p className="text-gray-500 text-[10px] font-semibold tracking-wider mb-1.5">SALDO GLOBAL (globalBalanceCents)</p>
+                        <div className="flex justify-between items-center mb-4">
+                            <h2 className="text-[28px] font-extrabold text-white tracking-tight leading-none">24783290 ¢</h2>
+                            <i className="ph ph-eye-slash text-gray-500 text-base cursor-pointer hover:text-white transition-colors"></i>
+                        </div>
+                        <div className="flex justify-between items-end border-t border-white/5 pt-3">
+                            <div>
+                                <p className="text-white text-[12px] font-bold">RAPHAELA CERVESKI</p>
+                                <p className="text-gray-500 text-[10px] tracking-widest flex items-center gap-1 font-mono">
+                                    <span className="text-md leading-[0]">••••</span> NO FLOATS
+                                </p>
+                            </div>
+                            <div className="flex items-center gap-1.5 bg-emerald-500/10 px-2.5 py-1 rounded-full border border-emerald-500/20">
+                                <div className="w-1.5 h-1.5 bg-emerald-500 rounded-full shadow-[0_0_8px_#10B981]"></div>
+                                <span className="text-emerald-400 text-[9px] font-bold tracking-wider">ONLINE</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Quick Actions (INTERACTIVE) */}
+                    <div className="px-[20px] mb-[24px]">
+                        <p className="text-gray-500 text-[10px] font-bold tracking-widest mb-3 pl-2 border-l-2 border-c-01 uppercase">DOMÍNIOS DE NEGÓCIO</p>
+                        <div className="grid grid-cols-4 gap-2">
+                            {[
+                                { icon: "ph-lightning", label: "Pix", col: "c-01" },
+                                { icon: "ph-cloud", label: "Cloud", col: "c-02" },
+                                { icon: "ph-credit-card", label: "Cartões", col: "c-05" },
+                                { icon: "ph-trend-up", label: "Invest.", col: "c-03" }
+                            ].map((action, i) => {
+                                const isSelected = activeAction === action.label;
+                                return (
+                                    <div 
+                                        key={i} 
+                                        onClick={() => onActionSelect && onActionSelect(action.label)}
+                                        className="flex flex-col items-center gap-1.5 cursor-pointer group"
+                                    >
+                                        <div className={`w-[60px] h-[60px] rounded-[18px] flex items-center justify-center border transition-all duration-300 ${
+                                            isSelected 
+                                            ? `bg-slate-900 border-${action.col} shadow-[0_0_15px_rgba(59,130,246,0.3)] scale-105` 
+                                            : 'bg-[#0E1526] border-white/5 group-hover:border-white/20 group-hover:bg-[#121B32]'
+                                        }`}>
+                                            <i className={`ph ${action.icon} text-[24px] ${
+                                                isSelected ? `text-${action.col}` : 'text-gray-400 group-hover:text-white'
+                                            }`}></i>
+                                        </div>
+                                        <span className={`text-[10px] font-medium transition-colors ${
+                                            isSelected ? 'text-white font-semibold' : 'text-gray-500 group-hover:text-gray-300'
+                                        }`}>{action.label}</span>
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    </div>
+
+                    {/* Dynamic View Area based on Action Selection */}
+                    <div className="px-[20px]">
+                        {getDynamicContent()}
+                    </div>
+
+                    {/* Navigation Footer */}
+                    <div className="absolute bottom-0 left-0 right-0 bg-slate-950/85 backdrop-blur-xl border-t border-white/5 pt-3 pb-6 px-6 flex justify-between items-end z-30">
+                        <div className="flex flex-col items-center gap-1 cursor-pointer hover:opacity-100 transition-opacity"><i className="ph-fill ph-house text-c-01 text-[20px]"></i><span className="text-c-01 text-[8px] font-bold">INÍCIO</span></div>
+                        <div className="flex flex-col items-center gap-1 opacity-40 cursor-pointer hover:opacity-80 transition-opacity"><i className="ph ph-file-text text-white text-[20px]"></i><span className="text-white text-[8px] font-bold">EXTRATO</span></div>
+                        <div className="relative -top-5">
+                            <div className="w-[52px] h-[52px] bg-gradient-to-tr from-c-01 to-c-06 rounded-full flex items-center justify-center border-4 border-[#070B15] shadow-lg relative z-10 hover:scale-105 transition-transform cursor-pointer">
+                                <span className="text-white font-black italic text-lg">R</span>
+                            </div>
+                        </div>
+                        <div className="flex flex-col items-center gap-1 opacity-40 cursor-pointer hover:opacity-80 transition-opacity"><i className="ph ph-credit-card text-white text-[20px]"></i><span className="text-white text-[8px] font-bold">CARTÕES</span></div>
+                        <div className="flex flex-col items-center gap-1 opacity-40 cursor-pointer hover:opacity-80 transition-opacity"><i className="ph ph-user text-white text-[20px]"></i><span className="text-white text-[8px] font-bold">PERFIL</span></div>
+                    </div>
+                </div>
+            );
+        };
+
+        // --- SLIDES ---
+
+        // Slide 1: Ribbons (Arquitetura)
+        const Slide1 = ({ active, phoneAction, setPhoneAction }) => (
+            <div className={`slide ${active ? 'active' : ''} flex items-center justify-between px-[140px]`}>
+                
+                {/* TEXT CONTAINER */}
+                <div className="w-[620px] z-30 space-y-8">
+                    <div className="slide-element delay-100">
+                        <div className="inline-flex items-center gap-2 bg-c-01/10 border border-c-01/20 px-4 py-1.5 rounded-full text-c-01 text-xs font-bold tracking-widest uppercase mb-4">
+                            ALINHADO 1:1 AOS UX FLOWS HTML + CÓDIGO REAL + PRE-MORTEM RTF FECHADO
+                        </div>
+                        <h1 className="text-white text-[56px] font-black leading-tight tracking-tight">
+                            Arquitetura Real<br/>Regenera Bank Enterprise
+                        </h1>
+                    </div>
+                    
+                    <div className="space-y-6 slide-element delay-200">
+                        <div className="flex items-start gap-4">
+                            <div className="w-10 h-10 rounded-xl bg-c-01/10 border border-c-01/20 flex items-center justify-center shrink-0 mt-0.5 shadow-[0_0_15px_rgba(59,130,246,0.15)]">
+                                <i className="ph ph-check text-c-01 text-xl font-bold"></i>
+                            </div>
+                            <div>
+                                <h3 className="text-white text-lg font-bold">Frontend 100% Alinhado aos UX Flows HTML</h3>
+                                <p className="text-gray-400 text-sm">Intro com hexagon R + RAPHAELA A.I. badge + "ACESSAR CONTA ▶". Login com T1a split ("JÁ SOU CLIENTE" / "QUERO SER REGENERA") + T2 tabs (CPF primary) + iris HUD exato ("ESCANEANDO ÍRIS...", brackets, ID DOW-PAULO-AGI-01). Home com header ham+REGENERA+bell, Enterprise card "RAPHAELA CERVESKI ····8429 ONLINE", 4 quick actions exatas ⚡PIX ☁️CLOUD 💳CARTÕES 📈INVEST., sidebar 6 seções ("1. ESSENCIAL" com emojis, locked premium).</p>
+                            </div>
+                        </div>
+                        
+                        <div className="flex items-start gap-4">
+                            <div className="w-10 h-10 rounded-xl bg-c-02/10 border border-c-02/20 flex items-center justify-center shrink-0 mt-0.5 shadow-[0_0_15px_rgba(6,182,212,0.15)]">
+                                <i className="ph ph-check text-c-02 text-xl font-bold"></i>
+                            </div>
+                            <div>
+                                <h3 className="text-white text-lg font-bold">Backend como Source of Truth (NestJS + Neon)</h3>
+                                <p className="text-gray-400 text-sm">Todo saldo vem de /core/dashboard ou mutation result como newBalanceCents (nunca optimistic). Pix: View useRef(crypto.randomUUID()) + POST /pix/transfer com Idempotency-Key header+body. Backend: core.executePixAtomic com dataSource.transaction + repo.setLock('pessimistic_write') + pre-check por idempotencyKey antes do lock. Pub/Sub + Socket para realtime PIX_RECEIVED atualizando cents.</p>
+                            </div>
+                        </div>
+
+                        <div className="flex items-start gap-4">
+                            <div className="w-10 h-10 rounded-xl bg-c-03/10 border border-c-03/20 flex items-center justify-center shrink-0 mt-0.5 shadow-[0_0_15px_rgba(132,204,22,0.15)]">
+                                <i className="ph ph-check text-c-03 text-xl font-bold"></i>
+                            </div>
+                            <div>
+                                <h3 className="text-white text-lg font-bold">GCP Native + Zero Client Secrets</h3>
+                                <p className="text-gray-400 text-sm">Frontend: só VITE_API_URL + Firebase web config. Tudo via BFF. GCP: Secret Manager injetado no Cloud Run (--set-secrets DATABASE_URL,PROMETEO_API_KEY,GEMINI_API_KEY,JWT_NEURAL_SECRET,FIREBASE_*). Infra: GCPDashboard faz getUserMedia + /auth/face-enrollment (livenessRequired) antes de /infra/cloud/toggle. Backend usa GoogleAuth + infra.service: GoogleAuth + direct run.googleapis.com PATCH scale (min/maxInstanceCount). Guard + claim check obrigatório. + checkAdminClaim (role de customClaims no Firebase IdToken).</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {/* GRAPHICS & PHONE CONTAINER */}
+                <div className="relative w-[850px] h-[800px] flex items-center justify-end z-20">
+                    {/* Background Ribbons */}
+                    <div className="absolute right-[220px] w-[600px] h-[650px] flex flex-col justify-between py-[30px] z-10 slide-element delay-300">
+                        
+                        {/* 01 Blue */}
+                        <div className="relative h-[75px] w-[450px] bg-gradient-to-r from-blue-600 to-c-01 rounded-l-2xl self-end flex items-center px-8 shadow-xl transition-all hover:-translate-x-2">
+                            <span className="text-white font-bold text-lg">01. React/Vite + AppLayout (Sidebar 6 seções exatas + Bottom Orb "R RAPHAELA")</span>
+                            {/* Origami Fold */}
+                            <div className="absolute left-[-90px] bottom-0 w-[90px] h-[150px] bg-blue-700 shadow-fold-bl flex justify-center pt-4" style={{clipPath: 'polygon(50% 0, 100% 30px, 100% 100%, 0 100%, 0 30px)'}}>
+                                <span className="text-white font-black text-2xl">01</span>
+                            </div>
+                        </div>
+
+                        {/* 02 Cyan */}
+                        <div className="relative h-[75px] w-[500px] bg-gradient-to-r from-cyan-600 to-c-02 rounded-l-2xl self-end flex items-center px-8 shadow-xl transition-all hover:-translate-x-2">
+                            <span className="text-white font-bold text-lg">02. Orval + customAxiosInstance (IdToken + View Idempotency-Key por chamada)</span>
+                            <div className="absolute left-[-90px] bottom-0 w-[90px] h-[150px] bg-cyan-700 shadow-fold-bl flex justify-center pt-4" style={{clipPath: 'polygon(50% 0, 100% 30px, 100% 100%, 0 100%, 0 30px)'}}>
+                                <span className="text-white font-black text-2xl">02</span>
+                            </div>
+                        </div>
+
+                        {/* 03 Green (Points Left) */}
+                        <div className="relative h-[85px] w-[580px] bg-gradient-to-l from-lime-600 to-c-03 rounded-l-2xl self-end flex items-center justify-end pr-[120px] shadow-2xl z-20 transition-all hover:-translate-x-2">
+                            <div className="absolute left-[-50px] top-0 w-[50px] h-full bg-c-03 clip-arrow-left"></div>
+                            <span className="text-white font-black text-lg mr-6">03. NestJS Core + NeuralCore + Infra (Gemini REGRA 1-4 + Cloud Run Admin real)</span>
+                            <div className="absolute left-[20px] w-[44px] h-[44px] bg-bg-dark rounded-full flex items-center justify-center text-white font-black text-lg border border-white/10">03</div>
+                        </div>
+
+                        {/* 04 Yellow */}
+                        <div className="relative h-[75px] w-[480px] bg-gradient-to-r from-yellow-600 to-c-04 rounded-l-2xl self-end flex items-center px-8 shadow-xl transition-all hover:-translate-x-2">
+                            <span className="text-white font-bold text-lg">04. TypeORM + pessimistic_write + pre-check idempotencyKey (ACID real, cents only)</span>
+                            <div className="absolute left-[-90px] top-0 w-[90px] h-[150px] bg-yellow-700 shadow-fold-tl flex justify-center items-end pb-4" style={{clipPath: 'polygon(0 0, 100% 0, 100% calc(100% - 30px), 50% 100%, 0 calc(100% - 30px))'}}>
+                                <span className="text-white font-black text-2xl">04</span>
+                            </div>
+                        </div>
+
+                        {/* 05 Orange */}
+                        <div className="relative h-[75px] w-[400px] bg-gradient-to-r from-orange-600 to-c-05 rounded-l-2xl self-end flex items-center px-8 shadow-xl transition-all hover:-translate-x-2">
+                            <span className="text-white font-bold text-lg">05. Firebase IdToken zero-trust + Secret Manager (nada no client) + Pub/Sub realtime</span>
+                            <div className="absolute left-[-90px] top-0 w-[90px] h-[150px] bg-orange-700 shadow-fold-tl flex justify-center items-end pb-4" style={{clipPath: 'polygon(0 0, 100% 0, 100% calc(100% - 30px), 50% 100%, 0 calc(100% - 30px))'}}>
+                                <span className="text-white font-black text-2xl">05</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Phone */}
+                    <div className="relative z-30 mr-[30px] slide-element delay-450">
+                        <PhoneMockup activeAction={phoneAction} onActionSelect={setPhoneAction} />
+                    </div>
+                </div>
+            </div>
+        );
+
+        // Slide 2: Grid Lists (Estrutura Interna)
+        const Slide2 = ({ active }) => {
+            const data = [
+                { num: "01", col: "border-c-01 bg-c-01/10 text-c-01", t: "globalBalanceCents (Integer Only)", d: "Store e backend usam apenas cents. Math.round(*100) no ingest, /100 só no render. Sem float drift nunca.", i: "ph-math-operations" },
+                { num: "05", col: "border-c-03 bg-c-03/10 text-c-03", t: "View Idempotency (useRef UUID)", d: "PixPage: txIdRef = useRef(crypto.randomUUID()). clear só em business 400 validation. Network retry usa o mesmo key exato.", i: "ph-fingerprint" },
+                { num: "02", col: "border-c-02 bg-c-02/10 text-c-02", t: "Pessimistic Lock + Pre-check", d: "core.service: withAccountTransaction usa setLock('pessimistic_write'). Antes do lock: txRepo.findOne por idempotencyKey (retorna saldo sem re-debit).", i: "ph-lock-key" },
+                { num: "06", col: "border-c-04 bg-c-04/10 text-c-04", t: "Firebase IdToken per Call", d: "client.ts: getIdToken() ou getIdToken(true) em 401. customAxiosInstance injeta Bearer. Backend firebase-admin.verifyIdToken + customClaims.role.", i: "ph-shield-check" },
+                { num: "03", col: "border-c-02 bg-c-02/10 text-c-02", t: "Orval + React Query (stale 10s)", d: "orval.config: tags-split, custom mutator client.ts, query options {staleTime:10000, retry:2} para financial data.", i: "ph-code" },
+                { num: "07", col: "border-c-05 bg-c-05/10 text-c-05", t: "Biometric Step-Up + Cloud Vision", d: "GCPDashboard: getUserMedia + canvas + POST /auth/face-enrollment {livenessRequired:true} antes de toggle. Backend: Cloud Vision contract.", i: "ph-scan" },
+                { num: "04", col: "border-c-03 bg-c-03/10 text-c-03", t: "BFF Price Cache + 429 Handling", d: "investments.service: Map TTL 30s. On CoinGecko 429: serve cached + throw {code:'RATE_LIMIT'}. Client intention only, server decide fill.", i: "ph-database" },
+                { num: "08", col: "border-c-06 bg-c-06/10 text-c-06", t: "Pub/Sub + Socket Realtime", d: "pix.service: pubsub.topic('pix-events'). PixEventsGateway broadcast. App.tsx io('/pix-events') on 'PIX_RECEIVED' -> updateBalanceCents from event.", i: "ph-plugs-connected" },
+            ];
+
+            return (
+                <div className={`slide bg-dots ${active ? 'active' : ''} flex flex-col justify-center px-[140px]`}>
+                    <div className="slide-element delay-100 mb-12">
+                        <div className="inline-flex items-center gap-2 bg-c-02/10 border border-c-02/20 px-4 py-1.5 rounded-full text-c-02 text-xs font-bold tracking-widest uppercase mb-4">
+                            SENIOR ARCHITECTURE LEVEL
+                        </div>
+                        <h1 className="text-[52px] font-black text-white leading-tight">Princípios de Engenharia</h1>
+                        <p className="text-gray-400 text-xl font-light">As decisões tecnológicas severas tomadas para sustentar a aplicação sem riscos ao usuário.</p>
+                    </div>
+                    
+                    <div className="grid grid-cols-2 gap-x-12 gap-y-6 slide-element delay-350">
+                        {data.map((item, idx) => (
+                            <div key={idx} className="flex h-[115px] bg-[#0A101E]/60 backdrop-blur-md rounded-2xl border border-white/5 shadow-xl hover:border-white/10 hover:translate-y-[-2px] transition-all duration-300">
+                                <div className={`w-[110px] ${item.col.split(' ')[0]} ${item.col.split(' ')[1]} clip-chevron-down flex items-center justify-center shadow-lg z-20`}>
+                                    <span className="text-white font-extrabold text-3xl mb-3">{item.num}</span>
+                                </div>
+                                <div className="flex-1 flex items-center justify-between px-8 -ml-[15px] z-10">
+                                    <div className="max-w-[420px]">
+                                        <h3 className="text-white font-bold text-xl mb-1">{item.t}</h3>
+                                        <p className="text-gray-400 text-xs leading-relaxed">{item.d}</p>
+                                    </div>
+                                    <i className={`ph ${item.i} text-4xl ${item.col.split(' ')[2]}`}></i>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            );
+        };
+
+        // Slide 3: Timeline (API Layer)
+        const Slide3 = ({ active, phoneAction, setPhoneAction }) => (
+            <div className={`slide bg-dots ${active ? 'active' : ''} flex items-center justify-between px-[140px]`}>
+                
+                <div className="w-[1050px] flex flex-col justify-center h-full">
+                    <div className="slide-element delay-100 mb-20">
+                        <div className="inline-flex items-center gap-2 bg-c-06/10 border border-c-06/20 px-4 py-1.5 rounded-full text-c-06 text-xs font-bold tracking-widest uppercase mb-4">
+                            ZERO-TRUST ARCHITECTURE
+                        </div>
+                        <h1 className="text-[52px] font-black text-white leading-tight">Autenticação Zero-Trust</h1>
+                        <p className="text-gray-400 text-xl font-light">Os três muros invisíveis que mantêm a operação do banco segura e impenetrável do lado do cliente.</p>
+                    </div>
+                    
+                    <div className="relative flex justify-between w-[950px] pt-10 slide-element delay-300">
+                        {/* Connecting SVG Flow Line */}
+                        <div className="absolute top-[35px] left-[50px] right-[50px] h-[6px] z-0">
+                            <svg className="w-full h-2" fill="none">
+                                <line x1="0" y1="3" x2="100%" y2="3" stroke="#1E293B" strokeWidth="4" />
+                                <line x1="0" y1="3" x2="100%" y2="3" stroke="#8B5CF6" strokeWidth="4" strokeDasharray="15 30" className="animate-dash" />
+                            </svg>
+                        </div>
+                        
+                        {/* Steps */}
+                        {[
+                            { n: "01", col: "bg-c-02/10 border-c-02 text-c-02", t: "Firebase IdToken (client.ts)", d: "Todo request (wretch + customAxiosInstance) faz auth.currentUser.getIdToken() fresco. 401 força getIdToken(true). Zero client JWT próprio.", i: "ph-plugs" },
+                            { n: "02", col: "bg-c-01/10 border-c-01 text-c-01", t: "NeuralAuthGuard + Firebase Admin", d: "Backend: verifyIdToken com firebase-admin. Emite Neural JWT com role de customClaims (admin/SysAdmin) para guards de infra.", i: "ph-shield-check" },
+                            { n: "03", col: "bg-c-06/10 border-c-06 text-c-06", t: "Step-Up + IAM Claims (infra)", d: "GCPDashboard exige face-enrollment liveness antes de /infra/cloud/toggle. Controller: checkAdminClaim(req) + GoogleAuth para infra.service: GoogleAuth + direct run.googleapis.com PATCH scale (min/maxInstanceCount). Guard + claim check obrigatório. real.", i: "ph-rocket-launch" }
+                        ].map((step, idx) => (
+                            <div key={idx} className="relative flex flex-col items-center w-[280px] z-10 transition-transform hover:scale-105 duration-300">
+                                <span className="absolute -top-[90px] text-white text-[70px] font-black opacity-5">{step.n}</span>
+                                <div className={`w-[120px] h-[75px] ${step.col.split(' ')[0]} border ${step.col.split(' ')[1]} clip-chevron-right flex items-center justify-center pl-3 shadow-xl`}>
+                                    <i className={`ph ${step.i} ${step.col.split(' ')[2]} text-3xl`}></i>
+                                </div>
+                                <div className="mt-10 text-center">
+                                    <h3 className="text-white font-bold text-xl mb-2">{step.t}</h3>
+                                    <p className="text-gray-400 text-xs leading-relaxed">{step.d}</p>
+                                </div>
+                            </div>
+                        ))}
+
+                        {/* Large Animated Arrow to Phone */}
+                        <div className="absolute right-[-80px] top-[18px] w-[50px] h-[50px] flex items-center justify-center animate-pulse">
+                            <i className="ph-bold ph-caret-right text-c-06 text-5xl"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="slide-element delay-450 shrink-0">
+                    <PhoneMockup activeAction={phoneAction} onActionSelect={setPhoneAction} />
+                </div>
+            </div>
+        );
+
+        // Slide 4: Key (Component Layer / Atomic Design)
+        const Slide4 = ({ active, phoneAction, setPhoneAction }) => (
+            <div className={`slide ${active ? 'active' : ''} flex items-center justify-between px-[140px]`}>
+                
+                <div className="flex gap-20 items-center w-full justify-between">
+                    <div className="slide-element delay-100 shrink-0">
+                        <PhoneMockup activeAction={phoneAction} onActionSelect={setPhoneAction} />
+                    </div>
+                    
+                    {/* KEY GRAPHIC & TEXT */}
+                    <div className="relative flex items-center h-[700px] flex-1 justify-between pl-6">
+                        
+                        {/* Dynamic connections from phone */}
+                        <div className="absolute left-[-110px] top-[210px] w-[90px] h-[4px] bg-gradient-to-r from-c-01 to-transparent opacity-60"></div>
+                        <div className="absolute left-[-110px] top-[340px] w-[90px] h-[4px] bg-gradient-to-r from-c-03 to-transparent opacity-60"></div>
+                        <div className="absolute left-[-110px] top-[470px] w-[90px] h-[4px] bg-gradient-to-r from-c-06 to-transparent opacity-60"></div>
+
+                        {/* Left Side: Elaborated architectural stack */}
+                        <div className="flex flex-col gap-[35px] text-left z-20 max-w-[480px] slide-element delay-300">
+                            <div>
+                                <div className="inline-flex items-center gap-2 bg-c-03/10 border border-c-03/20 px-3 py-1 rounded-full text-c-03 text-[10px] font-bold tracking-widest uppercase mb-2">
+                                    INJEÇÃO NO DEPLOY
+                                </div>
+                                <h3 className="text-white font-bold text-2xl mb-1">Secret Manager + --set-secrets (DATABASE_URL, PROMETEO, GEMINI, JWT, FIREBASE_*)</h3>
+                                <p className="text-gray-400 text-sm">Nenhum segredo no código. Chaves injetadas em Cloud Run via process.env e `--set-secrets`.</p>
+                            </div>
+                            <div>
+                                <div className="inline-flex items-center gap-2 bg-c-01/10 border border-c-01/20 px-3 py-1 rounded-full text-c-01 text-[10px] font-bold tracking-widest uppercase mb-2">
+                                    CONTROLE DE IA EXTREMO
+                                </div>
+                                <h3 className="text-white font-bold text-2xl mb-1">neural-core.service: blocklist + REGRA 1-4 systemInstruction + sanitizeForLlm + validateGeminiOutput + responseMimeType JSON</h3>
+                                <p className="text-gray-400 text-sm">Gemini atado a blocklists, REGRA 1-4, e payload de resposta forçado a JSON estruturado e sanitizado.</p>
+                            </div>
+                            <div>
+                                <div className="inline-flex items-center gap-2 bg-c-06/10 border border-c-06/20 px-3 py-1 rounded-full text-c-06 text-[10px] font-bold tracking-widest uppercase mb-2">
+                                    INFRA COMO SERVIÇO
+                                </div>
+                                <h3 className="text-white font-bold text-2xl mb-1">infra.service: GoogleAuth + direct run.googleapis.com PATCH scale (min/maxInstanceCount). Guard + claim check obrigatório.</h3>
+                                <p className="text-gray-400 text-sm">Controle de escalonamento dos serviços liberado apenas após match biométrico Liveness e validação de claims IAM.</p>
+                            </div>
+                        </div>
+
+                        {/* Right Side: Visual Isometric Key Stack Representing Layers */}
+                        <div className="relative w-[340px] h-[550px] flex flex-col justify-center items-center slide-element delay-450">
+                            {/* Layer 1: Organisms */}
+                            <div className="w-[280px] h-[95px] bg-gradient-to-br from-c-01/30 to-slate-900/90 border border-c-01/50 rounded-2xl shadow-xl flex items-center px-6 gap-4 transform rotate-[-12deg] skew-x-[15deg] hover:translate-y-[-5px] transition-all duration-300 relative z-30 mb-[-15px]">
+                                <div className="w-10 h-10 rounded-lg bg-c-01/20 flex items-center justify-center text-c-01"><i className="ph ph-app-window text-2xl"></i></div>
+                                <div>
+                                    <h4 className="text-white font-bold text-sm">Vite SPA (Frontend)</h4>
+                                    <p className="text-[10px] text-gray-300">Layout, UX e Hooks (Orval)</p>
+                                </div>
+                            </div>
+                            
+                            {/* Layer 2: Molecules */}
+                            <div className="w-[280px] h-[95px] bg-gradient-to-br from-c-03/30 to-slate-900/90 border border-c-03/50 rounded-2xl shadow-xl flex items-center px-6 gap-4 transform rotate-[-12deg] skew-x-[15deg] hover:translate-y-[-5px] transition-all duration-300 relative z-20 mb-[-15px]">
+                                <div className="w-10 h-10 rounded-lg bg-c-03/20 flex items-center justify-center text-c-03"><i className="ph ph-cubes text-2xl"></i></div>
+                                <div>
+                                    <h4 className="text-white font-bold text-sm">Wretch Client (API)</h4>
+                                    <p className="text-[10px] text-gray-300">Interceptor de Tokens</p>
+                                </div>
+                            </div>
+
+                            {/* Layer 3: Atoms */}
+                            <div className="w-[280px] h-[95px] bg-gradient-to-br from-c-05/30 to-slate-900/90 border border-c-05/50 rounded-2xl shadow-xl flex items-center px-6 gap-4 transform rotate-[-12deg] skew-x-[15deg] hover:translate-y-[-5px] transition-all duration-300 relative z-10 mb-[-15px]">
+                                <div className="w-10 h-10 rounded-lg bg-c-05/20 flex items-center justify-center text-c-05"><i className="ph ph-atom text-2xl"></i></div>
+                                <div>
+                                    <h4 className="text-white font-bold text-sm">Cloud Run (NestJS)</h4>
+                                    <p className="text-[10px] text-gray-300">Regras e Integrações</p>
+                                </div>
+                            </div>
+
+                            {/* Layer 4: Foundation (Tokens) */}
+                            <div className="w-[280px] h-[95px] bg-gradient-to-br from-c-06/30 to-slate-900/90 border border-c-06/50 rounded-2xl shadow-xl flex items-center px-6 gap-4 transform rotate-[-12deg] skew-x-[15deg] hover:translate-y-[-5px] transition-all duration-300 relative z-0">
+                                <div className="w-10 h-10 rounded-lg bg-c-06/20 flex items-center justify-center text-c-06"><i className="ph ph-palette text-2xl"></i></div>
+                                <div>
+                                    <h4 className="text-white font-bold text-sm">Data / Neon Postgres</h4>
+                                    <p className="text-[10px] text-gray-300">Ledger e Pub/Sub Base</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        );
+
+        // Slide 5: Trophy (Data Layer)
+        const Slide5 = ({ active }) => (
+            <div className={`slide bg-dots ${active ? 'active' : ''} flex flex-col justify-center px-[140px]`}>
+                
+                <div className="slide-element delay-100 text-center mb-16">
+                    <div className="inline-flex items-center gap-2 bg-c-03/10 border border-c-03/20 px-4 py-1.5 rounded-full text-c-03 text-xs font-bold tracking-widest uppercase mb-4">
+                        FONTE DA VERDADE (BACKEND)
+                    </div>
+                    <h1 className="text-[52px] font-black text-white leading-tight">O Cérebro: Backend e Ledger</h1>
+                    <p className="text-gray-400 text-xl font-light max-w-3xl mx-auto">Mutações atômicas, comunicação real-time delegada e frontend servindo estritamente como visualizador dos retornos.</p>
+                </div>
+                
+                <div className="relative w-full h-[520px] flex justify-center items-center slide-element delay-300">
+                    
+                    {/* SVG Flow Tunnel Connection */}
+                    <svg className="absolute inset-0 w-full h-full opacity-10" viewBox="0 0 1000 500" fill="none" stroke="#64748B" strokeWidth="1">
+                        <path d="M 150,120 L 500,20 L 850,120 L 500,480 Z" />
+                        <path d="M 220,190 L 500,40 L 780,190 L 500,450 Z" />
+                        <path d="M 290,260 L 500,60 L 710,260 L 500,420 Z" />
+                    </svg>
+
+                    {/* Content Stack Pyramid */}
+                    <div className="flex flex-col justify-between h-full relative z-10 w-[950px]">
+                        {[
+                            { col: "border-c-03 text-c-03 bg-c-03/10", t: "PixEventsGateway + Pub/Sub "pix-events" + Socket.io /pix-events "PIX_RECEIVED" -> App.tsx updateBalanceCents(Math.round(amount*100))", d: "Frontend escuta Socket.io (PIX_RECEIVED), enquanto o backend NestJS delega cargas assíncronas para Pub/Sub.", i: "ph-grid-nine" },
+                            { col: "border-c-04 text-c-04 bg-c-04/10", t: "core.service withAccountTransaction: dataSource.transaction + .setLock("pessimistic_write") + TransactionEntity imutável + idempotency pre-check", d: "TypeORM operando com Lock Pessimista no DB Postgres (Neon), bloqueando race conditions no débito.", i: "ph-hard-drive" },
+                            { col: "border-c-02 text-c-02 bg-c-02/10", t: "client.ts middleware: IdToken + X-Trace + explicit Idempotency-Key from View only. 401 auto refresh. Orval mutator idêntico.", d: "Arquivo client.ts age como funil isolando Wretch, inserindo os cabeçalhos cruciais e a Idempotency-Key.", i: "ph-activity" },
+                            { col: "border-c-06 text-c-06 bg-c-06/10", t: "Home/Pix/Invest: updateBalanceCents só de server response (newBalanceCents ou /core/dashboard). Nunca client guess. RQ staleTime 10s financial.", d: "Frontend jamais calcula o saldo final. Aguarda passivamente a resposta do server (newBalanceCents).", i: "ph-git-merge" }
+                        ].map((item, idx) => (
+                            <div key={idx} className="flex items-center w-full justify-center transition-transform hover:scale-[1.01] duration-300">
+                                {/* Text Left */}
+                                <div className="w-[400px] text-right pr-12">
+                                    <h3 className="text-white font-bold text-xl mb-1">{item.t}</h3>
+                                    <p className="text-gray-400 text-xs leading-relaxed">{item.d}</p>
+                                </div>
+                                {/* Divider Line with dynamic color indicator */}
+                                <div className="w-[120px] flex items-center justify-center relative">
+                                    <div className="w-full h-[1px] border-b border-dashed border-gray-700"></div>
+                                    <div className={`absolute w-3 h-3 rounded-full border ${item.col.split(' ')[0]} ${item.col.split(' ')[2]}`}></div>
+                                </div>
+                                {/* Center Icon Shield */}
+                                <div className={`w-[85px] h-[85px] ${item.col.split(' ')[2]} border ${item.col.split(' ')[0]} clip-pentagon flex items-center justify-center shadow-lg shrink-0`}>
+                                    <i className={`ph ${item.i} text-white text-3xl mt-3`}></i>
+                                </div>
+                                <div className="w-[400px]"></div> {/* Right Alignment Spacer */}
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </div>
+        );
+
+        // Slide 6: Hexagons & Blobs (Fluxo)
+        const Slide6 = ({ active, phoneAction, setPhoneAction }) => (
+            <div className={`slide ${active ? 'active' : ''} flex items-center justify-between px-[140px]`}>
+                
+                <div className="flex-1 h-full pt-[60px] flex flex-col relative">
+                    <div className="slide-element delay-100 mb-12">
+                        <div className="inline-flex items-center gap-2 bg-c-05/10 border border-c-05/20 px-4 py-1.5 rounded-full text-c-05 text-xs font-bold tracking-widest uppercase mb-4">
+                            LIGAÇÕES DE FLUXO REAL
+                        </div>
+                        <h1 className="text-[52px] font-black text-white leading-tight">Ciclo de Vida da Transação</h1>
+                        <p className="text-gray-400 text-lg font-light">As 5 barreiras intransponíveis desde o clique do botão até a consolidação do saldo no banco.</p>
+                    </div>
+
+                    <div className="flex gap-[60px] slide-element delay-300">
+                        {/* Elegant vertical flow line */}
+                        <div className="relative flex flex-col gap-8 flex-1">
+                            <div className="absolute left-[45px] top-4 bottom-4 w-1 bg-gradient-to-b from-c-05 via-c-03 to-c-01 rounded opacity-20"></div>
+                            
+                            {[
+                                { t: "01. PixPage: const txIdRef = useRef<string|null>(null); if(!txIdRef.current) txIdRef.current = crypto.randomUUID(); ... .headers({Idempotency-Key: txId})", d: "Frontend gera um UUID imutável (Idempotency-Key) ao montar a View de pagamento para evitar duplicatas.", col: "c-05", icon: "ph-shield-check" },
+                                { t: "02. client.ts: getIdToken() + on 401 getIdToken(true). customAxiosInstance faz o mesmo. X-Trace-Id + X-Neural-Sync-ID em todo call.", d: "Client.ts puxa o IdToken fresco do SDK do Firebase e anexa ao Bearer Header junto com Traces de Logging.", col: "c-04", icon: "ph-database" },
+                                { t: "03. auth.guard + firebase-admin.verifyIdToken. issueToken puxa customClaims.role. Neural JWT com claims para infra guards.", d: "NestJS no Cloud Run verifica assinatura com firebase-admin, recusa adulterações e inicia a pipeline interna.", col: "c-03", icon: "ph-plugs-connected" },
+                                { t: "04. executePixAtomic: pre-check tx by idempotencyKey (retorna saldo atual sem reprocessar) -> withAccountTransaction -> setLock(pessimistic_write) -> save immutable tx.", d: "TransactionEntity insere a Key do client; TypeORM trava as linhas da conta e processa a transferência em Cents.", col: "c-02", icon: "ph-spinner-gap" },
+                                { t: "05. mutation onSuccess: result.newBalanceCents -> updateBalanceCents(delta). txIdRef.current = null (só em business error). WS listener também atualiza authoritative.", d: "Resposta OK (200) devolve o 'newBalanceCents'. Estado do Zustand atualiza a interface passiva.", col: "c-01", icon: "ph-chart-polar" }
+                            ].map((b, i) => (
+                                <div key={i} className="flex items-center gap-8 group">
+                                    {/* Number Badge with Line attachment */}
+                                    <div className={`w-[90px] h-[75px] bg-${b.col}/10 border border-${b.col}/30 hover:border-${b.col}/80 rounded-2xl flex items-center justify-center shadow-lg shrink-0 relative z-10 transition-colors duration-300`}>
+                                        <i className={`ph ${b.icon} text-${b.col} text-3xl`}></i>
+                                    </div>
+                                    <div className="max-w-[520px]">
+                                        <h3 className="text-white font-bold text-xl mb-1 group-hover:text-white transition-colors">{b.t}</h3>
+                                        <p className="text-gray-400 text-sm leading-relaxed">{b.d}</p>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+
+                <div className="relative z-30 shrink-0 slide-element delay-450">
+                    <PhoneMockup activeAction={phoneAction} onActionSelect={setPhoneAction} />
+                </div>
+            </div>
+        );
+
+        // --- MAIN APP COMPONENT ---
+        const App = () => {
+            const [currentSlide, setCurrentSlide] = React.useState(0);
+            const [phoneAction, setPhoneAction] = React.useState("Pix");
+            const totalSlides = 6;
+            const [scale, setScale] = React.useState(1);
+
+            // Responsive scale lock for 1920x1080 viewport
+            React.useEffect(() => {
+                const handleResize = () => {
+                    const wrapper = document.getElementById('app-wrapper');
+                    if(wrapper) {
+                        const scaleX = wrapper.clientWidth / 1920;
+                        const scaleY = wrapper.clientHeight / 1080;
+                        setScale(Math.min(scaleX, scaleY));
+                    }
+                };
+                handleResize();
+                window.addEventListener('resize', handleResize);
+                return () => window.removeEventListener('resize', handleResize);
+            }, []);
+
+            // Keyboard binds
+            React.useEffect(() => {
+                const handleKeyDown = (e) => {
+                    if (e.key === 'ArrowRight' || e.key === 'Space') nextSlide();
+                    if (e.key === 'ArrowLeft') prevSlide();
+                };
+                window.addEventListener('keydown', handleKeyDown);
+                return () => window.removeEventListener('keydown', handleKeyDown);
+            }, [currentSlide]);
+
+            const nextSlide = () => setCurrentSlide(prev => (prev + 1) % totalSlides);
+            const prevSlide = () => setCurrentSlide(prev => (prev - 1 + totalSlides) % totalSlides);
+
+            return (
+                <div id="app-wrapper" className="relative select-none">
+                    {/* Visual Ambience */}
+                    <div className="neon-glow-1"></div>
+                    <div className="neon-glow-2"></div>
+
+                    {/* Scaled Slide Frame */}
+                    <div className="slide-frame" style={{ transform: `scale(${scale})` }}>
+                        <Slide1 active={currentSlide === 0} phoneAction={phoneAction} setPhoneAction={setPhoneAction} />
+                        <Slide2 active={currentSlide === 1} />
+                        <Slide3 active={currentSlide === 2} phoneAction={phoneAction} setPhoneAction={setPhoneAction} />
+                        <Slide4 active={currentSlide === 3} phoneAction={phoneAction} setPhoneAction={setPhoneAction} />
+                        <Slide5 active={currentSlide === 4} />
+                        <Slide6 active={currentSlide === 5} phoneAction={phoneAction} setPhoneAction={setPhoneAction} />
+                    </div>
+
+                    {/* Floating Controls with high contrast & premium active slide indicator dots */}
+                    <div className="nav-controls">
+                        <button onClick={prevSlide} className="nav-btn">
+                            <i className="ph-bold ph-arrow-left"></i> Anterior
+                        </button>
+                        
+                        <div className="flex gap-2">
+                            {Array.from({ length: totalSlides }).map((_, idx) => (
+                                <div 
+                                    key={idx} 
+                                    onClick={() => setCurrentSlide(idx)}
+                                    className={`w-2.5 h-2.5 rounded-full cursor-pointer transition-all duration-300 ${
+                                        idx === currentSlide 
+                                        ? 'bg-c-01 w-6 shadow-[0_0_8px_#3B82F6]' 
+                                        : 'bg-gray-600 hover:bg-gray-400'
+                                    }`}
+                                />
+                            ))}
+                        </div>
+
+                        <span className="text-gray-400 font-bold text-sm px-1 border-l border-r border-white/10">
+                            Slide {currentSlide + 1} de {totalSlides}
+                        </span>
+                        
+                        <button onClick={nextSlide} className="nav-btn">
+                            Próximo <i className="ph-bold ph-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>

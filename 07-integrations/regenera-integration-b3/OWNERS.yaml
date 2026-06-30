@@ -1,0 +1,6 @@
+owners:
+  primary: team-integration-b3
+  approvers:
+    - team-architecture
+    - team-security
+  on_call: b3-primary

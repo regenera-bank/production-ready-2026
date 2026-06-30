@@ -1,0 +1,3 @@
+# replay
+
+Cenário obrigatório. O release não passa sem evidência executável.

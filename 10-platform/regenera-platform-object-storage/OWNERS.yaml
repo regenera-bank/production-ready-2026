@@ -1,0 +1,6 @@
+owners:
+  primary: team-platform-object-storage
+  approvers:
+    - team-architecture
+    - team-security
+  on_call: object-storage-primary

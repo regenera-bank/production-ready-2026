@@ -1,0 +1,1 @@
+CREATE TABLE accounting_period (period_id UUID PRIMARY KEY, starts_on DATE NOT NULL, ends_on DATE NOT NULL, status VARCHAR(16) NOT NULL CHECK(status IN ('OPEN','CLOSING','CLOSED')), CHECK(ends_on >= starts_on), EXCLUDE USING gist (daterange(starts_on, ends_on, '[]') WITH &&));

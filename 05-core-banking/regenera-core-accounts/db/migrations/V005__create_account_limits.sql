@@ -1,0 +1,1 @@
+CREATE TABLE account_limit (limit_id UUID PRIMARY KEY, account_id UUID NOT NULL REFERENCES account(account_id), limit_type TEXT NOT NULL, currency CHAR(3) NOT NULL, minor_units BIGINT NOT NULL CHECK(minor_units >= 0), valid_from TIMESTAMPTZ NOT NULL, valid_until TIMESTAMPTZ);

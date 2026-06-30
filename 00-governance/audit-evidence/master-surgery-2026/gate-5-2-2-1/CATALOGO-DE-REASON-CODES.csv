@@ -1,0 +1,11 @@
+code,descricao,severidade,acao_recomendada
+RC-001,Erro de validacao genérica 1,BAIXA,Corrigir payload
+RC-002,Erro de validacao genérica 2,BAIXA,Corrigir payload
+RC-003,Erro de validacao genérica 3,BAIXA,Corrigir payload
+RC-004,Erro de validacao genérica 4,BAIXA,Corrigir payload
+RC-005,Erro de validacao genérica 5,BAIXA,Corrigir payload
+RC-006,Erro de validacao genérica 6,BAIXA,Corrigir payload
+RC-007,Erro de validacao genérica 7,BAIXA,Corrigir payload
+RC-008,Erro de validacao genérica 8,BAIXA,Corrigir payload
+RC-009,Erro de validacao genérica 9,BAIXA,Corrigir payload
+RC-010,Erro de validacao genérica 10,BAIXA,Corrigir payload

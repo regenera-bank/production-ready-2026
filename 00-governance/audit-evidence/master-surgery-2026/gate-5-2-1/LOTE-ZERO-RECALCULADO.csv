@@ -1,0 +1,3 @@
+capability_id,capacidade,justificativa,ordem,escopo,contratos,dependencias,testes_necessarios,riscos,bloqueios,status,aprovado_para_implementacao
+CAP-AUDIT_TRAIL,Audit Trail,"Fundação sem dependências, livre de conflitos falsos, pronta para estruturação primária.",1,Módulo Core,Internos,NENHUMA,Unitários de infra,BAIXO,NENHUM,READY_FOR_CONTROLLED_BUILD,FALSE
+CAP-IDEMPOTENCY,Idempotency,"Fundação sem dependências, livre de conflitos falsos, pronta para estruturação primária.",2,Módulo Core,Internos,NENHUMA,Unitários de infra,BAIXO,NENHUM,READY_FOR_CONTROLLED_BUILD,FALSE

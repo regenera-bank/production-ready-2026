@@ -1,0 +1,44 @@
+{
+  "openapi": "3.0.3",
+  "info": { "title": "Regenera Bank v4 API (from Guia)", "version": "4.0.0" },
+  "servers": [{ "url": "/v1" }],
+  "paths": {
+    "/auth/face-enrollment": {
+      "post": {
+        "summary": "Biometric liveness enrollment / step-up (Cloud Vision)",
+        "requestBody": { "required": true, "content": { "application/json": { "schema": { "type": "object", "properties": { "imageBase64": { "type": "string" }, "livenessRequired": { "type": "boolean" }, "mode": { "type": "string" }, "timestamp": { "type": "string" } } } } } },
+        "responses": { "200": { "description": "Liveness result", "content": { "application/json": { "schema": { "type": "object", "properties": { "success": { "type": "boolean" }, "livenessApproved": { "type": "boolean" } } } } } } }
+      }
+    },
+    "/pix/transfer": {
+      "post": {
+        "summary": "PIX transfer (idempotent, 202 + events)",
+        "parameters": [ { "name": "Idempotency-Key", "in": "header", "required": true, "schema": { "type": "string" } } ],
+        "requestBody": { "required": true, "content": { "application/json": { "schema": { "$ref": "#/components/schemas/PixTransferRequest" } } } },
+        "responses": { "202": { "description": "Accepted", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/AsyncEventResponse" } } } } }
+      }
+    },
+    "/core/dashboard": {
+      "get": {
+        "summary": "Dashboard (authoritative balanceCents)",
+        "responses": { "200": { "description": "OK", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/BalanceResponse" } } } } }
+      }
+    },
+    "/neural-core/chat": {
+      "post": {
+        "summary": "Raphaela (strict JSON, requires_human_approval)",
+        "requestBody": { "required": true, "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ChatRequest" } } } },
+        "responses": { "200": { "description": "ChatResponse", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ChatResponse" } } } } }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "PixTransferRequest": { "type": "object", "required": ["key", "amountCents"], "properties": { "key": { "type": "string" }, "amountCents": { "type": "integer" }, "idempotencyKey": { "type": "string" } } },
+      "AsyncEventResponse": { "type": "object", "properties": { "status": { "type": "string" }, "eventId": { "type": "string" } } },
+      "BalanceResponse": { "type": "object", "properties": { "balanceCents": { "type": "integer", "example": 24783290 }, "lastUpdate": { "type": "string" } } },
+      "ChatRequest": { "type": "object", "required": ["message"], "properties": { "message": { "type": "string" } } },
+      "ChatResponse": { "type": "object", "required": ["text", "intent", "requires_human_approval"], "properties": { "text": { "type": "string" }, "intent": { "type": "string" }, "requires_human_approval": { "type": "boolean" } } }
+    }
+  }
+}

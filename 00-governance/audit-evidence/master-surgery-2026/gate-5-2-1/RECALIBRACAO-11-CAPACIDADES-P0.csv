@@ -1,0 +1,12 @@
+capacidade,maturidade_anterior,maturidade_corrigida,motivo
+Audit Trail,BLOCKED_BY_CONFLICT,SKELETON_ONLY,Falsos conflitos removidos. Avaliado código físico.
+Idempotency,SKELETON_ONLY,FRAGMENT_ONLY,Falsos conflitos removidos. Avaliado código físico.
+Identity,BLOCKED_BY_CONFLICT,BLOCKED_BY_CONTRACT,Falsos conflitos removidos. Avaliado código físico.
+Authorization,BLOCKED_BY_CONTRACT,BLOCKED_BY_CONTRACT,Falsos conflitos removidos. Avaliado código físico.
+Customer/Party,BLOCKED_BY_CONFLICT,SKELETON_ONLY,Falsos conflitos removidos. Avaliado código físico.
+Accounts,BLOCKED_BY_CONFLICT,BLOCKED_BY_CONTRACT,Falsos conflitos removidos. Avaliado código físico.
+Ledger,BLOCKED_BY_CONFLICT,SKELETON_ONLY,Falsos conflitos removidos. Avaliado código físico.
+Transactions,BLOCKED_BY_CONFLICT,SKELETON_ONLY,Falsos conflitos removidos. Avaliado código físico.
+Payments,BLOCKED_BY_CONFLICT,FRAGMENT_ONLY,Falsos conflitos removidos. Avaliado código físico.
+Pix,BLOCKED_BY_CONFLICT,FRAGMENT_ONLY,Falsos conflitos removidos. Avaliado código físico.
+Reconciliation,BLOCKED_BY_CONFLICT,SKELETON_ONLY,Falsos conflitos removidos. Avaliado código físico.

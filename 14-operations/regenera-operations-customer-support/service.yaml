@@ -1,0 +1,12 @@
+name: regenera-operations-customer-support
+domain: customer-support
+owner: team-operations-customer-support
+criticality: high
+data_classification: banking-secret
+runtime: docs
+tier: 1
+rto: 4h
+rpo: 1h
+on_call: customer-support-primary
+dependencies:
+  []

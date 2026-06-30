@@ -1,0 +1,12 @@
+name: regenera-operations-accounting
+domain: accounting
+owner: team-operations-accounting
+criticality: critical
+data_classification: banking-secret
+runtime: docs
+tier: 1
+rto: 4h
+rpo: 1h
+on_call: accounting-primary
+dependencies:
+  []

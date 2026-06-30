@@ -1,0 +1,48 @@
+{
+  "domain": "core-bank",
+  "version": "0.0.1",
+  "generatedAt": "2026-06-30T20:19:16.091Z",
+  "gates": {
+    "G3_pr14_invariants": {
+      "required": 47,
+      "status": "SATISFEITO"
+    },
+    "G4_float": {
+      "status": "PENDENTE_EXECUCAO_JEST"
+    },
+    "G4_regenera_agent": {
+      "path": "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/regenera-agent.mjs",
+      "present": true
+    },
+    "G4_package_checksums": {
+      "files": 53,
+      "path": "evidence/PACKAGE-CHECKSUMS.sha256"
+    }
+  },
+  "load": {
+    "dailyTarget": 50000,
+    "canaryTrafficPercent": 1,
+    "slo": {
+      "maxFailureRate": 0.01,
+      "maxP95LatencyMs": 500
+    }
+  },
+  "notes": [
+    "Execute npm test e npm run build antes de publicar evidência.",
+    "Assine PACKAGE-CHECKSUMS.sha256 com GPG institucional antes de tag."
+  ],
+  "testResultsExcerpt": [
+    "Regenera Bank — Core Banking — TEST-RESULTS",
+    "Data: 2026-06-29",
+    "Ambiente: MacBook-Pro-de-Regenera (local)",
+    "PR: PR-00b → PR-15 — VERIFICADOS (DAG CORE COMPLETO)",
+    "",
+    "npm run lint            → PASS (tsc --noEmit)",
+    "npm test                → PASS — 19 suites, 184 passed, 1 skipped, 185 total",
+    "npm run build           → PASS (nest build)",
+    "npm run evidence:generate → PASS",
+    "  PACKAGE-CHECKSUMS.sha256 (5 artefatos dist/)",
+    "  VALIDATION-REPORT.json",
+    "  SBOM.cdx.json"
+  ]
+}

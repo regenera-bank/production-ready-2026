@@ -1,0 +1,26 @@
+{
+  "gerado_em": "2026-06-25T16:13:13.964Z",
+  "dir": "/mnt/data/regenera_channels_release/04-Regenera-Windows-Operations-Production",
+  "motor": "heuristic",
+  "aplicado": true,
+  "resumo": {
+    "reescrito": 0,
+    "ja_limpo": 1,
+    "rejeitado": 0
+  },
+  "arquivos": [
+    {
+      "caminho": "contracts/openapi.yaml",
+      "ext": ".yaml",
+      "motor": "heuristic",
+      "status": "já limpo",
+      "sinal_encontrado": [],
+      "hash_antes": "cf56d26d0a7a73c32b66fdca2e24825eabe26dd2966fa38fc4003487347cf94c",
+      "hash_depois": "cf56d26d0a7a73c32b66fdca2e24825eabe26dd2966fa38fc4003487347cf94c",
+      "tentativas": 0,
+      "comportamento": "inalterado (provado pelo portão: código idêntico byte a byte)",
+      "portao": "código preservado byte a byte; só comentário mudou"
+    }
+  ],
+  "prontidao_producao": []
+}

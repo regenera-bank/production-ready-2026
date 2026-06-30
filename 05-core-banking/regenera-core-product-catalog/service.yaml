@@ -1,0 +1,12 @@
+name: regenera-core-product-catalog
+domain: product-catalog
+owner: team-product-catalog
+criticality: high
+data_classification: banking-secret
+runtime: jvm
+tier: 1
+rto: 4h
+rpo: 1h
+on_call: product-catalog-primary
+dependencies:
+  []

@@ -1,0 +1,6 @@
+owners:
+  primary: team-platform-cache
+  approvers:
+    - team-architecture
+    - team-security
+  on_call: cache-primary

@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Money",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "currency",
+    "value"
+  ],
+  "properties": {
+    "currency": {
+      "const": "BRL"
+    },
+    "value": {
+      "type": "string",
+      "pattern": "^-?\\d{1,17}\\.\\d{2}$"
+    }
+  }
+}

@@ -1,0 +1,6 @@
+owners:
+  primary: team-investment-orders
+  approvers:
+    - team-architecture
+    - team-security
+  on_call: investment-orders-primary

@@ -1,0 +1,6 @@
+*.js linguist-language=TypeScript
+*.cjs linguist-language=TypeScript
+*.mjs linguist-language=TypeScript
+*.js linguist-detectable=false
+*.cjs linguist-detectable=false
+*.mjs linguist-detectable=false

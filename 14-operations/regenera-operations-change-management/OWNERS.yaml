@@ -1,0 +1,6 @@
+owners:
+  primary: team-operations-change-management
+  approvers:
+    - team-architecture
+    - team-security
+  on_call: change-management-primary

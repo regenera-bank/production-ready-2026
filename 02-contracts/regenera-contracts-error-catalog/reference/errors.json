@@ -1,0 +1,41 @@
+{
+  "version": "1.0.0",
+  "errors": [
+    {
+      "code": "AUTH_STEP_UP_REQUIRED",
+      "httpStatus": 401,
+      "retryable": false,
+      "userAction": "STEP_UP"
+    },
+    {
+      "code": "IDEMPOTENCY_CONFLICT",
+      "httpStatus": 409,
+      "retryable": false,
+      "userAction": "REVIEW_REQUEST"
+    },
+    {
+      "code": "INSUFFICIENT_AVAILABLE_BALANCE",
+      "httpStatus": 422,
+      "retryable": false,
+      "userAction": "CHANGE_AMOUNT"
+    },
+    {
+      "code": "PAYMENT_RISK_REVIEW",
+      "httpStatus": 202,
+      "retryable": false,
+      "userAction": "WAIT"
+    },
+    {
+      "code": "DEPENDENCY_TIMEOUT",
+      "httpStatus": 503,
+      "retryable": true,
+      "userAction": "WAIT"
+    },
+    {
+      "code": "PAYMENT_STATE_UNKNOWN",
+      "httpStatus": 202,
+      "retryable": false,
+      "userAction": "WAIT_RECONCILIATION"
+    }
+  ]
+}

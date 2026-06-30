@@ -1,0 +1,6 @@
+owners:
+  primary: team-architecture
+  approvers:
+    - team-architecture
+    - team-security
+  on_call: openapi-primary

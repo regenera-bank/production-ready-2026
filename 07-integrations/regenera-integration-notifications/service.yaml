@@ -1,0 +1,12 @@
+name: regenera-integration-notifications
+domain: notifications
+owner: team-integration-notifications
+criticality: high
+data_classification: banking-secret
+runtime: jvm
+tier: 1
+rto: 4h
+rpo: 1h
+on_call: notifications-primary
+dependencies:
+  []

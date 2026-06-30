@@ -1,0 +1,12 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: regenera-tool-contract-linter
+  description: Componente Regenera do domínio contract-linter.
+  annotations:
+    regenera.io/criticality: medium
+spec:
+  type: service
+  lifecycle: experimental
+  owner: team-developer-experience
+  system: regenera-bank

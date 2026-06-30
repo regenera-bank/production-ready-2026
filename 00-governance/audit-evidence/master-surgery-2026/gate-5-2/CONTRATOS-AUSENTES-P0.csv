@@ -1,0 +1,2 @@
+capacidade,consumidor,produtor,versao_esperada,schema_necessario,impacto
+Authorization,BFF/Core,Authorization,v1,OpenAPI / AsyncAPI,Impossibilita integração e testes de contrato

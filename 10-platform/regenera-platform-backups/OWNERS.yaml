@@ -1,0 +1,6 @@
+owners:
+  primary: team-platform-backups
+  approvers:
+    - team-architecture
+    - team-security
+  on_call: backups-primary

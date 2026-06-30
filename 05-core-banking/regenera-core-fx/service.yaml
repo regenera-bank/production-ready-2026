@@ -1,0 +1,12 @@
+name: regenera-core-fx
+domain: fx
+owner: team-fx
+criticality: high
+data_classification: banking-secret
+runtime: jvm
+tier: 1
+rto: 4h
+rpo: 1h
+on_call: fx-primary
+dependencies:
+  []

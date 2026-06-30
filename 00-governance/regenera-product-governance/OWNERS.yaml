@@ -1,0 +1,6 @@
+owners:
+  primary: team-product-governance
+  approvers:
+    - team-architecture
+    - team-security
+  on_call: product-governance-primary

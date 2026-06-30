@@ -1,0 +1,71 @@
+{
+    "expo": {
+        "name": "Regenera Bank",
+        "slug": "regenera-bank",
+        "scheme": "regenerabank",
+
+```
+"version": "1.0.0",
+        "runtimeVersion": {
+            "policy": "appVersion"
+        },
+        "orientation": "portrait",
+        "userInterfaceStyle": "dark",
+        "icon": "./assets/icon.png",
+        "newArchEnabled": true,
+        "plugins": [
+            [
+                "expo-secure-store",
+                {
+                    "faceIDPermission": "O Regenera Bank usa biometria para proteger a sessão local."
+                }
+            ]
+        ],
+        "splash": {
+            "image": "./assets/splash-icon.png",
+            "resizeMode": "contain",
+            "backgroundColor": "#0a0a0a"
+        },
+        "updates": {
+            "enabled": true,
+            "fallbackToCacheTimeout": 0
+        },
+        "ios": {
+            "bundleIdentifier": "com.regenerabank.mobile",
+            "supportsTablet": false,
+            "usesAppleSignIn": false,
+            "infoPlist": {
+                "NSFaceIDUsageDescription": "O Regenera Bank usa biometria para proteger a sessão local.",
+                "ITSAppUsesNonExemptEncryption": false
+            }
+        },
+        "android": {
+            "package": "com.regenerabank.mobile",
+            "versionCode": 1,
+            "permissions": [],
+            "blockedPermissions": [
+                "android.permission.CAMERA",
+                "android.permission.RECORD_AUDIO",
+                "android.permission.READ_CONTACTS",
+                "android.permission.ACCESS_FINE_LOCATION",
+                "android.permission.ACCESS_COARSE_LOCATION"
+            ],
+            "adaptiveIcon": {
+                "backgroundColor": "#0a0a0a",
+                "foregroundImage": "./assets/android-icon-foreground.png",
+                "backgroundImage": "./assets/android-icon-background.png",
+                "monochromeImage": "./assets/android-icon-monochrome.png"
+            },
+            "predictiveBackGestureEnabled": false
+        },
+        "web": {
+            "bundler": "metro",
+            "favicon": "./assets/favicon.png"
+        },
+        "extra": {
+            "serviceName": "regenera-bank-mobile",
+            "apiBaseUrl": "https://regenera-core-api-520859662036.southamerica-east1.run.app/v1"
+        }
+```
+    }
+}

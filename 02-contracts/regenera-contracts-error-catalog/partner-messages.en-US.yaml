@@ -1,0 +1,2 @@
+messages:
+  RG-TRANSACTION-UNKNOWN: Transaction pending confirmation. Do not resubmit.

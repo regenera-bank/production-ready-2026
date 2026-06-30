@@ -1,0 +1,6 @@
+owners:
+  primary: team-partners
+  approvers:
+    - team-architecture
+    - team-security
+  on_call: partner-api-primary

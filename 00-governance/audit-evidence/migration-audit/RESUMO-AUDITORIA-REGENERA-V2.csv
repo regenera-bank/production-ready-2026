@@ -1,0 +1,17 @@
+metrica,quantidade
+Diretórios totais,5165
+Arquivos totais,10598
+Arquivos relevantes sem .DS_Store,10596
+Arquivos não vazios,7295
+Arquivos zero bytes incluindo .gitkeep,3301
+Arquivos .gitkeep,2341
+Arquivos zero bytes excluindo .gitkeep,960
+Diretórios sem conteúdo efetivo,2948
+Arquivos funcionais/código analisáveis,1139
+Arquivos funcionais/código vazios,848
+Arquivos funcionais/código não vazios,291
+Arquivos funcionais/código >1 KB,133
+Módulos avaliados,177
+Módulos scaffold puro,53
+Módulos sem conteúdo customizado não vazio,96
+Caminhos inconsistentes entre os dois inventários,0

@@ -1,0 +1,14 @@
+{
+  "contracts_artifact": "REGENERA-02-CONTRACTS-10-10",
+  "required_semver": "^1.0.0",
+  "financial_commands": [
+    "payments.create",
+    "pix.create"
+  ],
+  "required_headers": [
+    "Authorization",
+    "X-Correlation-Id",
+    "Idempotency-Key"
+  ],
+  "unknown_state_policy": "BLOCK_BLIND_RETRY"
+}

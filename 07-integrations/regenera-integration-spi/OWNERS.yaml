@@ -1,0 +1,6 @@
+owners:
+  primary: team-integration-spi
+  approvers:
+    - team-architecture
+    - team-security
+  on_call: spi-primary

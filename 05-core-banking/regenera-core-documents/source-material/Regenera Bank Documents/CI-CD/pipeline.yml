@@ -1,0 +1,217 @@
+# [FILE] .github/workflows/main.yml
+# Implacable CI/CD Pipeline for Regenera Bank Monorepo
+# Authored by: Don Paulo Ricardo
+
+name: Implacable CI/CD
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+env:
+  AWS_REGION: us-east-1
+  ECR_PROJECT_NAME: regenera-bank
+
+jobs:
+  # Job 1: Identificar os microserviços que foram modificados.
+  # A Lei da Eficiência: Não agir sobre o que não mudou.
+  changes:
+    runs-on: ubuntu-latest
+    outputs:
+      # Exporta uma string JSON contendo a matriz de serviços modificados.
+      services: ${{ steps.filter.outputs.changes }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Identify changed services
+        id: filter
+        uses: dorny/paths-filter@v2
+        with:
+          filters: |
+            # Cada entrada corresponde a um microserviço. Se qualquer arquivo dentro do
+            # seu diretório em 'apps/services' for alterado, o serviço é marcado como modificado.
+            api-gateway: &service-def
+              - 'apps/services/api-gateway/**'
+              - '.github/workflows/main.yml'
+              - 'packages/**'
+            auth-service: *service-def
+            user-service: *service-def
+            account-service: *service-def
+            transaction-service: *service-def
+            pix-service: *service-def
+            card-service: *service-def
+            investment-service: *service-def
+            notification-service: *service-def
+            analytics-service: *service-def
+            ai-service: *service-def
+            compliance-service: *service-def
+            blockchain-service: *service-def
+
+  # Job 2: Executar testes de integração e build.
+  # Pré-requisito para toda a pipeline. Se isso falhar, nada mais prossegue.
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Setup Node.js and pnpm
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'pnpm'
+      - name: Install pnpm
+        run: npm install -g pnpm
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Run Lint
+        run: pnpm lint
+      - name: Run Type Check
+        run: pnpm --filter="./apps/services/*" tsc --noEmit
+      - name: Run Tests
+        run: pnpm test
+
+  # Job para executar Testes de Contrato (gRPC)
+  contract-tests:
+    needs: build-and-test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Setup Node.js and pnpm
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'pnpm'
+      - name: Install pnpm
+        run: npm install -g pnpm
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Run gRPC Contract Tests
+        run: pnpm --filter auth-service test:contract # Exemplo: 'test:contract' para o auth-service (consumidor)
+      - name: Generate Contract Test Report (conceptual)
+        run: echo "Contract test report generated and published as an artifact." # Publicaria o GRPC_CONTRACT_TEST_REPORT_CONCEITUAL.md como artefato
+
+  # Job 3: Construir e enviar imagens Docker para os serviços modificados.
+  # Executa uma matriz de builds, um para cada serviço identificado pelo job 'changes'.
+  build-and-push-docker:
+    needs: [changes, build-and-test, contract-tests]
+    if: fromJson(needs.changes.outputs.services)[0] != null
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        # Cria um job para cada serviço na matriz JSON de output do job 'changes'.
+        service: ${{ fromJson(needs.changes.outputs.services) }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+      - name: Build, tag, and push Docker image to ECR
+        id: build-image
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          SERVICE_NAME: ${{ matrix.service }}
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          SERVICE_PATH="apps/services/$SERVICE_NAME"
+          # Assume que um Dockerfile genérico ou específico existe em cada pasta de serviço.
+          if [ ! -f "$SERVICE_PATH/Dockerfile" ]; then
+            echo "Dockerfile not found for service $SERVICE_NAME. Skipping."
+            exit 0 # ou 'exit 1' se for um erro fatal
+          fi
+          
+          IMAGE_URI="$ECR_REGISTRY/$ECR_PROJECT_NAME/$SERVICE_NAME:$IMAGE_TAG"
+          
+          echo "Building Docker image for $SERVICE_NAME..."
+          docker build -t "$IMAGE_URI" -f "$SERVICE_PATH/Dockerfile" .
+          
+          echo "Pushing image to ECR: $IMAGE_URI"
+          docker push "$IMAGE_URI"
+          echo "::set-output name=image::$IMAGE_URI"
+
+  # Job 4: Implantar no ambiente de Staging.
+  # Executa uma matriz de deploys, um para cada serviço modificado.
+  deploy-staging:
+    needs: [build-and-push-docker, contract-tests]
+    runs-on: ubuntu-latest
+    environment: staging
+    strategy:
+      matrix:
+        service: ${{ fromJson(needs.changes.outputs.services) }}
+    steps:
+      - name: Configure AWS credentials and kubeconfig
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+      - name: Get Kubeconfig
+        uses: aws-actions/amazon-eks-get-kubeconfig@v1
+        with:
+          cluster-name: ${{ secrets.EKS_CLUSTER_NAME_STAGING }}
+      - name: Deploy to EKS Staging
+        env:
+          SERVICE_NAME: ${{ matrix.service }}
+          IMAGE_TAG: ${{ github.sha }}
+          ECR_REGISTRY: ${{ needs.build-and-push-docker.outputs.login-ecr.registry }}
+        run: |
+          IMAGE_URI="$ECR_REGISTRY/$ECR_PROJECT_NAME/$SERVICE_NAME:$IMAGE_TAG"
+          # O nome do deployment no Kubernetes deve seguir um padrão previsível.
+          DEPLOYMENT_NAME="${SERVICE_NAME}-deployment"
+          
+          echo "Updating Kubernetes deployment '$DEPLOYMENT_NAME' with image '$IMAGE_URI'"
+          kubectl set image deployment/$DEPLOYMENT_NAME $SERVICE_NAME="$IMAGE_URI" -n staging
+          kubectl rollout status deployment/$DEPLOYMENT_NAME -n staging
+
+  # Job 5: Implantar no ambiente de Produção, com aprovação manual.
+  # A guarda final. A produção é sagrada.
+  deploy-production:
+    needs: [deploy-staging]
+    runs-on: ubuntu-latest
+    environment: production
+    strategy:
+      matrix:
+        service: ${{ fromJson(needs.changes.outputs.services) }}
+    steps:
+      - name: Manual Approval for Production
+        if: github.ref == 'refs/heads/main'
+        uses: trstringer/manual-approval@v1
+        with:
+          secret: ${{ github.TOKEN }}
+          approvers: 'donpauloricardo' # Definir aprovadores reais
+          minimum-approvals: 1
+          issue-title: "Deploy ${{ matrix.service }} to Production"
+      - name: Configure AWS credentials and kubeconfig
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+      - name: Get Kubeconfig
+        uses: aws-actions/amazon-eks-get-kubeconfig@v1
+        with:
+          cluster-name: ${{ secrets.EKS_CLUSTER_NAME_PRODUCTION }}
+      - name: Deploy to EKS Production
+        env:
+          SERVICE_NAME: ${{ matrix.service }}
+          IMAGE_TAG: ${{ github.sha }}
+          ECR_REGISTRY: ${{ needs.build-and-push-docker.outputs.login-ecr.registry }}
+        run: |
+          IMAGE_URI="$ECR_REGISTRY/$ECR_PROJECT_NAME/$SERVICE_NAME:$IMAGE_TAG"
+          DEPLOYMENT_NAME="${SERVICE_NAME}-deployment"
+          
+          echo "Updating Kubernetes deployment '$DEPLOYMENT_NAME' with image '$IMAGE_URI'"
+          kubectl set image deployment/$DEPLOYMENT_NAME $SERVICE_NAME="$IMAGE_URI" -n production
+          kubectl rollout status deployment/$DEPLOYMENT_NAME -n production

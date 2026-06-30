@@ -1,0 +1,40 @@
+# |---------------------------------------------------------------------------------------|
+# |  --> REGENERA ENTERPRISE SYSTEM v4.0                                                  |
+# |---------------------------------------------------------------------------------------|
+#
+# PROJECT:       Regenera Bank
+# CEO:           Raphaela Cerveski
+# DEVELOPER:     Don Paulo Ricardo
+# ID:            2098233287
+# COPYRIGHT:     Copyright (c) 2026 Regenera Corporate
+#
+# LICENSE:       EULA (End-User License Agreement)
+# PROTECTION:    PROPRIEDADE INTELECTUAL RESTRITA
+#
+# WARNING:       TODOS OS DIREITOS RESERVADOS. Proibida a cópia, distribuição,
+#                engenharia reversa ou modificação não autorizada.
+#
+# |---------------------------------------------------------------------------------------|
+# |  --> CLASSIFICATION: PROPRIETARY // DEVELOPER MAINTAINED // REQUIRES SENIOR REVIEW          |
+# |---------------------------------------------------------------------------------------|
+
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: regenera-bank
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: 'https://github.com/regenera-corporate/regenera-bank-gitops.git'
+    targetRevision: HEAD
+    path: infra/kubernetes
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: regenera-prod
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

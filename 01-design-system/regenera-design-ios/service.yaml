@@ -1,0 +1,12 @@
+name: regenera-design-ios
+domain: design-ios
+owner: team-design-system
+criticality: medium
+data_classification: banking-secret
+runtime: swift
+tier: 2
+rto: 4h
+rpo: 1h
+on_call: design-ios-primary
+dependencies:
+  []

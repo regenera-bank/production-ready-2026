@@ -1,0 +1,4 @@
+cluster_id,conflict_id,caminho_candidato_a,caminho_candidato_b,destino_canonico,modulo_composicao,imports_exports,secrets_redigidos,status
+CLUS-1,3429,Desconhecido,Desconhecido,Desconhecido,Desconhecido,Desconhecido,SIM,BLOCKED_UNKNOWN_PATH
+CLUS-2,3433,Desconhecido,Desconhecido,Desconhecido,Desconhecido,Desconhecido,SIM,BLOCKED_UNKNOWN_PATH
+CLUS-3,3506,Desconhecido,Desconhecido,Desconhecido,Desconhecido,Desconhecido,SIM,BLOCKED_UNKNOWN_PATH

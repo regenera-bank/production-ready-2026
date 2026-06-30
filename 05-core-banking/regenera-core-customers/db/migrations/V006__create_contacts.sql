@@ -1,0 +1,1 @@
+CREATE TABLE party_contact (contact_id UUID PRIMARY KEY, party_id UUID NOT NULL REFERENCES party(party_id), contact_type VARCHAR(16) NOT NULL CHECK (contact_type IN ('EMAIL','PHONE')), value_hash TEXT NOT NULL, verified BOOLEAN NOT NULL DEFAULT false, valid_from TIMESTAMPTZ NOT NULL DEFAULT now(), valid_until TIMESTAMPTZ);

@@ -1,0 +1,74 @@
+{
+  "gerado_em": "2026-06-29T21:50:47.125Z",
+  "dir": "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/domains/core-bank/src",
+  "motor": "heuristic",
+  "aplicado": false,
+  "resumo": {
+    "reescrito": 0,
+    "ja_limpo": 5,
+    "rejeitado": 0
+  },
+  "arquivos": [
+    {
+      "caminho": "app.module.ts",
+      "ext": ".ts",
+      "motor": "heuristic",
+      "status": "já limpo",
+      "sinal_encontrado": [],
+      "hash_antes": "939e1663acd315eabf081815c7c3d24ac101f38c3f5a64d5dea16674f7e95f16",
+      "hash_depois": "939e1663acd315eabf081815c7c3d24ac101f38c3f5a64d5dea16674f7e95f16",
+      "tentativas": 0,
+      "comportamento": "inalterado (provado pelo portão: código idêntico byte a byte)",
+      "portao": "código preservado byte a byte; só comentário mudou"
+    },
+    {
+      "caminho": "core-bank-health.controller.ts",
+      "ext": ".ts",
+      "motor": "heuristic",
+      "status": "já limpo",
+      "sinal_encontrado": [],
+      "hash_antes": "bfde1b2698f4db1a0242a23c4a9854c8675904fbc5f45a27effdecc003c01ae2",
+      "hash_depois": "bfde1b2698f4db1a0242a23c4a9854c8675904fbc5f45a27effdecc003c01ae2",
+      "tentativas": 0,
+      "comportamento": "inalterado (provado pelo portão: código idêntico byte a byte)",
+      "portao": "código preservado byte a byte; só comentário mudou"
+    },
+    {
+      "caminho": "main.ts",
+      "ext": ".ts",
+      "motor": "heuristic",
+      "status": "já limpo",
+      "sinal_encontrado": [],
+      "hash_antes": "2c1fe61c5ef16e4c64dde4e67fd12aa7dbb4a45acf9d3f35a43f487a0003a7ad",
+      "hash_depois": "2c1fe61c5ef16e4c64dde4e67fd12aa7dbb4a45acf9d3f35a43f487a0003a7ad",
+      "tentativas": 0,
+      "comportamento": "inalterado (provado pelo portão: código idêntico byte a byte)",
+      "portao": "código preservado byte a byte; só comentário mudou"
+    },
+    {
+      "caminho": "money/money.value-object.spec.ts",
+      "ext": ".ts",
+      "motor": "heuristic",
+      "status": "já limpo",
+      "sinal_encontrado": [],
+      "hash_antes": "8069056e3f530fe274edf8ba9f1c4a405f8acf415c4c87716926a39afddd0117",
+      "hash_depois": "8069056e3f530fe274edf8ba9f1c4a405f8acf415c4c87716926a39afddd0117",
+      "tentativas": 0,
+      "comportamento": "inalterado (provado pelo portão: código idêntico byte a byte)",
+      "portao": "código preservado byte a byte; só comentário mudou"
+    },
+    {
+      "caminho": "money/money.value-object.ts",
+      "ext": ".ts",
+      "motor": "heuristic",
+      "status": "já limpo",
+      "sinal_encontrado": [],
+      "hash_antes": "bae9f3089114efb7d5361f3f9231c4c8f2681e5bb13da353ed1ef2d612c083f4",
+      "hash_depois": "bae9f3089114efb7d5361f3f9231c4c8f2681e5bb13da353ed1ef2d612c083f4",
+      "tentativas": 0,
+      "comportamento": "inalterado (provado pelo portão: código idêntico byte a byte)",
+      "portao": "código preservado byte a byte; só comentário mudou"
+    }
+  ],
+  "prontidao_producao": []
+}

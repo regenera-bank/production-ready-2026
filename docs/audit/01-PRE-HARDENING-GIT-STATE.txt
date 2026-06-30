@@ -1,0 +1,129 @@
+=== PHASE 0 BASELINE ===
+timestamp: 2026-06-30T20:17:54Z
+workspace: /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank
+git: NOT_A_REPOSITORY
+
+=== pwd ===
+/Volumes/PRINCIPAL/regenera-bank
+/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank
+
+=== file counts ===
+   12765
+
+=== key dirs mtime ===
+drwxr-xr-x  17 regeneracorporateltdacopyright  staff  544 30 jun 13:39 [34mapps/web-banking[39;49m[0m
+drwxr-xr-x  25 regeneracorporateltdacopyright  staff  800 30 jun 13:39 [34mbff/web-bff[39;49m[0m
+drwxr-xr-x  20 regeneracorporateltdacopyright  staff  640 30 jun 17:17 [34mdomains/core-bank[39;49m[0m
+-rw-r--r--   1 regeneracorporateltdacopyright  staff  372 30 jun 09:51 package.json
+
+=== PARALLEL WORKSPACE ===
+/Volumes/PRINCIPAL/regenera-bank
+/Volumes/PRINCIPAL/regenera-bank
+main
+26654e26f0ba67aa31414a65bf00d613200ebc54
+--- status short (first 100) ---
+D  .github/workflows/ci-bank-core-nest.yml
+D  .github/workflows/deploy-bank-core-nest.yml
+ m "0/VERSOES ANTERIORES ANALISAR CONTESTO /1-CoreBank 1/1.regenera-corebank com pipiline"
+ ? "0/VERSOES ANTERIORES ANALISAR CONTESTO /2-CoreBank 2/VERSAO APROVADA GITHUB/ORGANIZA\303\207\303\203O"
+ ? "0/VERSOES ANTERIORES ANALISAR CONTESTO /production-ready"
+M  0/docs/design/DESIGN-TASK-QUEUE-REDIS-001.md
+D  05-core-banking/regenera-bank-core-nest/.dockerignore
+D  05-core-banking/regenera-bank-core-nest/.env.example
+D  05-core-banking/regenera-bank-core-nest/.eslintrc.js
+D  05-core-banking/regenera-bank-core-nest/.gcloudignore
+D  05-core-banking/regenera-bank-core-nest/.prettierrc
+D  05-core-banking/regenera-bank-core-nest/DEPLOY_BACKEND.sh
+D  05-core-banking/regenera-bank-core-nest/Dockerfile
+D  05-core-banking/regenera-bank-core-nest/FIX_AND_DEPLOY.sh
+D  05-core-banking/regenera-bank-core-nest/OWNERS.yaml
+D  05-core-banking/regenera-bank-core-nest/README.md
+D  05-core-banking/regenera-bank-core-nest/V3_README_CIRURGIA.md
+D  05-core-banking/regenera-bank-core-nest/app.module.patch.ts
+D  05-core-banking/regenera-bank-core-nest/apps/regenera-task-worker/Dockerfile
+D  05-core-banking/regenera-bank-core-nest/catalog-info.yaml
+D  05-core-banking/regenera-bank-core-nest/docker-compose.observability.yml
+D  05-core-banking/regenera-bank-core-nest/jest.config.js
+D  05-core-banking/regenera-bank-core-nest/nest-cli.json
+D  05-core-banking/regenera-bank-core-nest/openapi.guia.json
+D  05-core-banking/regenera-bank-core-nest/package-lock.json
+D  05-core-banking/regenera-bank-core-nest/package.json
+D  05-core-banking/regenera-bank-core-nest/prometheus.yml
+D  05-core-banking/regenera-bank-core-nest/scripts/load-testing/k6-pix-stress.js
+D  05-core-banking/regenera-bank-core-nest/scripts/reconciliation_job.ts
+D  05-core-banking/regenera-bank-core-nest/scripts/run-neon-init.js
+D  05-core-banking/regenera-bank-core-nest/scripts/run-neon-init.ts
+D  05-core-banking/regenera-bank-core-nest/src/analytics/audit-trail/audit-context.middleware.ts
+D  05-core-banking/regenera-bank-core-nest/src/analytics/audit-trail/audit-sign.ts
+D  05-core-banking/regenera-bank-core-nest/src/analytics/audit-trail/security-audit.service.ts
+D  05-core-banking/regenera-bank-core-nest/src/analytics/bigquery-stream/bigquery.provider.ts
+D  05-core-banking/regenera-bank-core-nest/src/analytics/bigquery-stream/ledger.stream.ts
+D  05-core-banking/regenera-bank-core-nest/src/analytics/bigquery-stream/stream-buffer.manager.ts
+D  05-core-banking/regenera-bank-core-nest/src/analytics/looker-pipeline/report-exporter.ts
+D  05-core-banking/regenera-bank-core-nest/src/analytics/looker-pipeline/user-metrics.aggregation.ts
+D  05-core-banking/regenera-bank-core-nest/src/analytics/looker-pipeline/views-provision.sql
+D  05-core-banking/regenera-bank-core-nest/src/app.module.ts
+D  05-core-banking/regenera-bank-core-nest/src/auth/auth.controller.ts
+D  05-core-banking/regenera-bank-core-nest/src/auth/auth.guard.ts
+D  05-core-banking/regenera-bank-core-nest/src/auth/auth.module.ts
+D  05-core-banking/regenera-bank-core-nest/src/auth/auth.service.ts
+D  05-core-banking/regenera-bank-core-nest/src/common/filters/global-exception.filter.ts
+D  05-core-banking/regenera-bank-core-nest/src/common/logger.utils.ts
+D  05-core-banking/regenera-bank-core-nest/src/common/money.utils.ts
+D  05-core-banking/regenera-bank-core-nest/src/common/tenant/tenant.context.ts
+D  05-core-banking/regenera-bank-core-nest/src/common/tenant/tenant.module.ts
+D  05-core-banking/regenera-bank-core-nest/src/common/tenant/tenant.subscriber.ts
+D  05-core-banking/regenera-bank-core-nest/src/compliance/compliance.controller.ts
+D  05-core-banking/regenera-bank-core-nest/src/compliance/compliance.module.ts
+D  05-core-banking/regenera-bank-core-nest/src/compliance/compliance.service.spec.ts
+D  05-core-banking/regenera-bank-core-nest/src/compliance/compliance.service.ts
+D  05-core-banking/regenera-bank-core-nest/src/compliance/identity.service.ts
+D  05-core-banking/regenera-bank-core-nest/src/compliance/kyc-engine/datavalid.client.ts
+D  05-core-banking/regenera-bank-core-nest/src/compliance/kyc-engine/kyc.service.ts
+D  05-core-banking/regenera-bank-core-nest/src/compliance/providers/mock-pep.provider.ts
+D  05-core-banking/regenera-bank-core-nest/src/compliance/providers/pep.provider.ts
+D  05-core-banking/regenera-bank-core-nest/src/compliance/security.controller.ts
+D  05-core-banking/regenera-bank-core-nest/src/compliance/security.service.ts
+D  05-core-banking/regenera-bank-core-nest/src/core/core.controller.ts
+D  05-core-banking/regenera-bank-core-nest/src/core/core.module.ts
+D  05-core-banking/regenera-bank-core-nest/src/core/core.service.ts
+D  05-core-banking/regenera-bank-core-nest/src/core/entities/account.entity.ts
+D  05-core-banking/regenera-bank-core-nest/src/core/entities/idempotency-log.entity.ts
+D  05-core-banking/regenera-bank-core-nest/src/core/entities/ledger-entry.entity.ts
+D  05-core-banking/regenera-bank-core-nest/src/core/entities/outbox-event.entity.ts
+D  05-core-banking/regenera-bank-core-nest/src/core/entities/pix-key.entity.ts
+D  05-core-banking/regenera-bank-core-nest/src/core/entities/transaction.entity.ts
+D  05-core-banking/regenera-bank-core-nest/src/core/entities/user.entity.ts
+D  05-core-banking/regenera-bank-core-nest/src/core/idempotency.service.ts
+D  05-core-banking/regenera-bank-core-nest/src/core/payment-links.service.ts
+D  05-core-banking/regenera-bank-core-nest/src/core/pix.controller.ts
+D  05-core-banking/regenera-bank-core-nest/src/core/pix.gateway.ts
+D  05-core-banking/regenera-bank-core-nest/src/core/pix.service.spec.ts
+D  05-core-banking/regenera-bank-core-nest/src/core/pix.service.ts
+D  05-core-banking/regenera-bank-core-nest/src/data-source.ts
+D  05-core-banking/regenera-bank-core-nest/src/database/cloud-spanner/acid-global.config
+D  05-core-banking/regenera-bank-core-nest/src/database/cloud-spanner/spanner-schema.ddl
+D  05-core-banking/regenera-bank-core-nest/src/database/cloud-spanner/spanner.repository.ts
+D  05-core-banking/regenera-bank-core-nest/src/database/migrations/001-create-ledger.ts
+D  05-core-banking/regenera-bank-core-nest/src/database/migrations/002-create-idempotency.ts
+D  05-core-banking/regenera-bank-core-nest/src/database/migrations/003-create-kyc-aml.ts
+D  05-core-banking/regenera-bank-core-nest/src/database/neon-postgresql/connection-retry.ts
+D  05-core-banking/regenera-bank-core-nest/src/database/neon-postgresql/neon-branching.service.ts
+D  05-core-banking/regenera-bank-core-nest/src/database/neon-postgresql/neon-client.provider.ts
+D  05-core-banking/regenera-bank-core-nest/src/database/redis-cache/cache-eviction.policy
+D  05-core-banking/regenera-bank-core-nest/src/database/redis-cache/redis-cluster.config.ts
+D  05-core-banking/regenera-bank-core-nest/src/database/redis-cache/redis-sentinel.ts
+D  05-core-banking/regenera-bank-core-nest/src/developer-portal/developer-portal.module.ts
+D  05-core-banking/regenera-bank-core-nest/src/developer-portal/developer-portal.service.ts
+D  05-core-banking/regenera-bank-core-nest/src/developer-portal/entities/api-product.entity.ts
+D  05-core-banking/regenera-bank-core-nest/src/developer-portal/entities/api-subscription.entity.ts
+D  05-core-banking/regenera-bank-core-nest/src/ecosystem/ecosystem-event-bus.service.ts
+D  05-core-banking/regenera-bank-core-nest/src/ecosystem/ecosystem.module.ts
+D  05-core-banking/regenera-bank-core-nest/src/events/contracts/account/account.events.ts
+D  05-core-banking/regenera-bank-core-nest/src/events/contracts/domain-event.interface.ts
+D  05-core-banking/regenera-bank-core-nest/src/events/contracts/investment/investment.events.ts
+--- diff stat ---
+ .../1-CoreBank 1/1.regenera-corebank com pipiline                         | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+--- untracked count ---
+      46

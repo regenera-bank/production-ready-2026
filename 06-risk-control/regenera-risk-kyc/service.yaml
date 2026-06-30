@@ -1,0 +1,12 @@
+name: regenera-risk-kyc
+domain: kyc
+owner: team-kyc
+criticality: critical
+data_classification: banking-secret
+runtime: jvm
+tier: 0
+rto: 15m
+rpo: 0
+on_call: kyc-primary
+dependencies:
+  []

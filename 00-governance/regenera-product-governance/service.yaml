@@ -1,0 +1,12 @@
+name: regenera-product-governance
+domain: product-governance
+owner: team-product-governance
+criticality: high
+data_classification: banking-secret
+runtime: docs
+tier: 1
+rto: 4h
+rpo: 1h
+on_call: product-governance-primary
+dependencies:
+  []

@@ -1,0 +1,12 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: regenera-tool-secret-scanner
+  description: Componente Regenera do domínio secret-scanner.
+  annotations:
+    regenera.io/criticality: medium
+spec:
+  type: service
+  lifecycle: experimental
+  owner: team-developer-experience
+  system: regenera-bank

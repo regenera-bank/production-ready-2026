@@ -1,0 +1,12 @@
+name: regenera-operations-cards
+domain: cards
+owner: team-operations-cards
+criticality: high
+data_classification: banking-secret
+runtime: docs
+tier: 1
+rto: 4h
+rpo: 1h
+on_call: cards-primary
+dependencies:
+  []

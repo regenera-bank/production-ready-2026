@@ -1,0 +1,221 @@
+hash,caminho
+f92afc003b9cee2d4c8775a1bf40b8d4ceec0e2173f37308436535e7cdde45ce,Auditoria 2/ARQUIVOS USAR E LISTA/03-Regenera-Core-Risk-Control(1)/05-core-banking/regenera-core-identity/Dockerfile
+8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,03-channels/regenera-channel-partner-portal/Dockerfile
+8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,03-channels/regenera-channel-web-banking/Dockerfile
+8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,05-core-banking/regenera-core-ledger/Dockerfile
+8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,05-core-banking/regenera-core-credit/Dockerfile
+8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,05-core-banking/regenera-core-fees/Dockerfile
+8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,05-core-banking/regenera-core-pix/Dockerfile
+8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,05-core-banking/regenera-core-transactions/Dockerfile
+8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,05-core-banking/regenera-core-notifications/Dockerfile
+8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,05-core-banking/regenera-core-identity/Dockerfile
+8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,05-core-banking/regenera-core-payments/Dockerfile
+8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,05-core-banking/regenera-core-limits/Dockerfile
+8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,05-core-banking/regenera-core-customers/Dockerfile
+8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,05-core-banking/regenera-core-investments/Dockerfile
+8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,05-core-banking/regenera-core-cards/Dockerfile
+8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,05-core-banking/regenera-core-accounts/Dockerfile
+8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,06-risk-control/regenera-control-fraud/Dockerfile
+8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,06-risk-control/regenera-control-accounting/Dockerfile
+8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,06-risk-control/regenera-control-reconciliation/Dockerfile
+8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,06-risk-control/regenera-control-aml/Dockerfile
+8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/03-channels/regenera-channel-partner-portal/Dockerfile
+8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/03-channels/regenera-channel-web-banking/Dockerfile
+8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/05-core-banking/regenera-core-ledger/Dockerfile
+8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/05-core-banking/regenera-core-credit/Dockerfile
+8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/05-core-banking/regenera-core-fees/Dockerfile
+8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/05-core-banking/regenera-core-pix/Dockerfile
+8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/05-core-banking/regenera-core-transactions/Dockerfile
+8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/05-core-banking/regenera-core-notifications/Dockerfile
+8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/05-core-banking/regenera-core-identity/Dockerfile
+8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/05-core-banking/regenera-core-payments/Dockerfile
+8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/05-core-banking/regenera-core-limits/Dockerfile
+8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/05-core-banking/regenera-core-customers/Dockerfile
+8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/05-core-banking/regenera-core-investments/Dockerfile
+8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/05-core-banking/regenera-core-cards/Dockerfile
+8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/05-core-banking/regenera-core-accounts/Dockerfile
+8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/06-risk-control/regenera-control-fraud/Dockerfile
+8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/06-risk-control/regenera-control-accounting/Dockerfile
+8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/06-risk-control/regenera-control-reconciliation/Dockerfile
+8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/06-risk-control/regenera-control-aml/Dockerfile
+8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/04-bffs/regenera-bff-operations/Dockerfile
+8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/04-bffs/regenera-bff-web/Dockerfile
+8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/04-bffs/regenera-api-partners/Dockerfile
+8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/04-bffs/regenera-bff-mobile/Dockerfile
+8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/01-design-system/regenera-design-windows/Dockerfile
+8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,04-bffs/regenera-bff-operations/Dockerfile
+8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,04-bffs/regenera-bff-web/Dockerfile
+8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,04-bffs/regenera-bff-mobile/Dockerfile
+8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/03-channels/regenera-channel-partner-portal/Dockerfile
+8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/03-channels/regenera-channel-web-banking/Dockerfile
+8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/05-core-banking/regenera-core-ledger/Dockerfile
+8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/05-core-banking/regenera-core-credit/Dockerfile
+8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/05-core-banking/regenera-core-fees/Dockerfile
+8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/05-core-banking/regenera-core-pix/Dockerfile
+8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/05-core-banking/regenera-core-transactions/Dockerfile
+8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/05-core-banking/regenera-core-notifications/Dockerfile
+8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/05-core-banking/regenera-core-identity/Dockerfile
+8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/05-core-banking/regenera-core-payments/Dockerfile
+8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/05-core-banking/regenera-core-limits/Dockerfile
+8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/05-core-banking/regenera-core-customers/Dockerfile
+8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/05-core-banking/regenera-core-investments/Dockerfile
+8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/05-core-banking/regenera-core-cards/Dockerfile
+8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/05-core-banking/regenera-core-accounts/Dockerfile
+8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/06-risk-control/regenera-control-fraud/Dockerfile
+8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/06-risk-control/regenera-control-accounting/Dockerfile
+8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/06-risk-control/regenera-control-reconciliation/Dockerfile
+8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/06-risk-control/regenera-control-aml/Dockerfile
+8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/04-bffs/regenera-bff-operations/Dockerfile
+8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/04-bffs/regenera-bff-web/Dockerfile
+8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/04-bffs/regenera-bff-mobile/Dockerfile
+8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/01-design-system/regenera-design-windows/Dockerfile
+8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,01-design-system/regenera-design-windows/Dockerfile
+df969dec916b02c308e8dee37f06e52ff4ced9365dc72333db0351409d307862,Auditoria 2/ARQUIVOS USAR E LISTA/03-Regenera-Core-Risk-Control(1)/05-core-banking/regenera-core-identity/README.md
+853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,03-channels/regenera-channel-android/README.md
+853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,03-channels/regenera-channel-partner-portal/README.md
+853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,03-channels/regenera-channel-web-banking/README.md
+853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,03-channels/regenera-channel-ios/README.md
+853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,03-channels/regenera-channel-windows-operations/README.md
+853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,05-core-banking/regenera-core-ledger/README.md
+853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,05-core-banking/regenera-core-credit/README.md
+853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,05-core-banking/regenera-core-fees/README.md
+853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,05-core-banking/regenera-core-pix/README.md
+853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,05-core-banking/regenera-core-transactions/README.md
+853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,05-core-banking/regenera-core-notifications/README.md
+853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,05-core-banking/regenera-core-identity/README.md
+853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,05-core-banking/regenera-core-payments/README.md
+853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,05-core-banking/regenera-core-limits/README.md
+853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,05-core-banking/regenera-core-customers/README.md
+853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,05-core-banking/regenera-core-investments/README.md
+853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,05-core-banking/regenera-core-cards/README.md
+853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,05-core-banking/regenera-core-accounts/README.md
+853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,06-risk-control/regenera-control-fraud/README.md
+853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,06-risk-control/regenera-control-accounting/README.md
+853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,06-risk-control/regenera-control-reconciliation/README.md
+853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,06-risk-control/regenera-control-aml/README.md
+853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/03-channels/regenera-channel-android/README.md
+853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/03-channels/regenera-channel-partner-portal/README.md
+853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/03-channels/regenera-channel-web-banking/README.md
+853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/03-channels/regenera-channel-ios/README.md
+853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/03-channels/regenera-channel-windows-operations/README.md
+853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/05-core-banking/regenera-core-ledger/README.md
+853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/05-core-banking/regenera-core-credit/README.md
+853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/05-core-banking/regenera-core-fees/README.md
+853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/05-core-banking/regenera-core-pix/README.md
+853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/05-core-banking/regenera-core-transactions/README.md
+853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/05-core-banking/regenera-core-notifications/README.md
+853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/05-core-banking/regenera-core-identity/README.md
+853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/05-core-banking/regenera-core-payments/README.md
+853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/05-core-banking/regenera-core-limits/README.md
+853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/05-core-banking/regenera-core-customers/README.md
+853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/05-core-banking/regenera-core-investments/README.md
+853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/05-core-banking/regenera-core-cards/README.md
+853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/05-core-banking/regenera-core-accounts/README.md
+853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/06-risk-control/regenera-control-fraud/README.md
+853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/06-risk-control/regenera-control-accounting/README.md
+853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/06-risk-control/regenera-control-reconciliation/README.md
+853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/06-risk-control/regenera-control-aml/README.md
+853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/04-bffs/regenera-bff-operations/README.md
+853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/04-bffs/regenera-bff-web/README.md
+853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/04-bffs/regenera-api-partners/README.md
+853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/04-bffs/regenera-bff-mobile/README.md
+853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/01-design-system/regenera-design-windows/README.md
+853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,04-bffs/regenera-bff-operations/README.md
+853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,04-bffs/regenera-bff-web/README.md
+853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,04-bffs/regenera-api-partners/README.md
+853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,04-bffs/regenera-bff-mobile/README.md
+853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/03-channels/regenera-channel-android/README.md
+853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/03-channels/regenera-channel-partner-portal/README.md
+853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/03-channels/regenera-channel-web-banking/README.md
+853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/03-channels/regenera-channel-ios/README.md
+853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/03-channels/regenera-channel-windows-operations/README.md
+853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/05-core-banking/regenera-core-ledger/README.md
+853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/05-core-banking/regenera-core-credit/README.md
+853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/05-core-banking/regenera-core-fees/README.md
+853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/05-core-banking/regenera-core-pix/README.md
+853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/05-core-banking/regenera-core-transactions/README.md
+853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/05-core-banking/regenera-core-notifications/README.md
+853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/05-core-banking/regenera-core-identity/README.md
+853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/05-core-banking/regenera-core-payments/README.md
+853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/05-core-banking/regenera-core-limits/README.md
+853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/05-core-banking/regenera-core-customers/README.md
+853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/05-core-banking/regenera-core-investments/README.md
+853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/05-core-banking/regenera-core-cards/README.md
+853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/05-core-banking/regenera-core-accounts/README.md
+853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/06-risk-control/regenera-control-fraud/README.md
+853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/06-risk-control/regenera-control-accounting/README.md
+853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/06-risk-control/regenera-control-reconciliation/README.md
+853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/06-risk-control/regenera-control-aml/README.md
+853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/04-bffs/regenera-bff-operations/README.md
+853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/04-bffs/regenera-bff-web/README.md
+853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/04-bffs/regenera-api-partners/README.md
+853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/04-bffs/regenera-bff-mobile/README.md
+853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/01-design-system/regenera-design-windows/README.md
+853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,01-design-system/regenera-design-windows/README.md
+88a4d2b9c9a7035b5ce467702efabbd6bce687e4f451f46f11cb8bec646d52ba,Auditoria 2/ARQUIVOS USAR E LISTA/03-Regenera-Core-Risk-Control(1)/05-core-banking/regenera-core-identity/service.yaml
+98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,05-core-banking/regenera-core-ledger/service.yaml
+98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,05-core-banking/regenera-core-credit/service.yaml
+98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,05-core-banking/regenera-core-fees/service.yaml
+98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,05-core-banking/regenera-core-pix/service.yaml
+98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,05-core-banking/regenera-core-transactions/service.yaml
+98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,05-core-banking/regenera-core-notifications/service.yaml
+98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,05-core-banking/regenera-core-identity/service.yaml
+98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,05-core-banking/regenera-core-payments/service.yaml
+98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,05-core-banking/regenera-core-limits/service.yaml
+98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,05-core-banking/regenera-core-customers/service.yaml
+98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,05-core-banking/regenera-core-investments/service.yaml
+98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,05-core-banking/regenera-core-cards/service.yaml
+98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,05-core-banking/regenera-core-accounts/service.yaml
+98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,06-risk-control/regenera-control-fraud/service.yaml
+98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,06-risk-control/regenera-control-accounting/service.yaml
+98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,06-risk-control/regenera-control-reconciliation/service.yaml
+98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,06-risk-control/regenera-control-aml/service.yaml
+98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/05-core-banking/regenera-core-ledger/service.yaml
+98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/05-core-banking/regenera-core-credit/service.yaml
+98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/05-core-banking/regenera-core-fees/service.yaml
+98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/05-core-banking/regenera-core-pix/service.yaml
+98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/05-core-banking/regenera-core-transactions/service.yaml
+98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/05-core-banking/regenera-core-notifications/service.yaml
+98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/05-core-banking/regenera-core-identity/service.yaml
+98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/05-core-banking/regenera-core-payments/service.yaml
+98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/05-core-banking/regenera-core-limits/service.yaml
+98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/05-core-banking/regenera-core-customers/service.yaml
+98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/05-core-banking/regenera-core-investments/service.yaml
+98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/05-core-banking/regenera-core-cards/service.yaml
+98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/05-core-banking/regenera-core-accounts/service.yaml
+98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/06-risk-control/regenera-control-fraud/service.yaml
+98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/06-risk-control/regenera-control-accounting/service.yaml
+98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/06-risk-control/regenera-control-reconciliation/service.yaml
+98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/06-risk-control/regenera-control-aml/service.yaml
+98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/04-bffs/regenera-bff-operations/service.yaml
+98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/04-bffs/regenera-bff-web/service.yaml
+98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/04-bffs/regenera-api-partners/service.yaml
+98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/04-bffs/regenera-bff-mobile/service.yaml
+98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,Auditoria 2/ARQUIVOS USAR E LISTA/regenera-bank 3/01-design-system/regenera-design-windows/service.yaml
+98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,04-bffs/regenera-bff-operations/service.yaml
+98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,04-bffs/regenera-bff-web/service.yaml
+98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,04-bffs/regenera-api-partners/service.yaml
+98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,04-bffs/regenera-bff-mobile/service.yaml
+98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/05-core-banking/regenera-core-ledger/service.yaml
+98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/05-core-banking/regenera-core-credit/service.yaml
+98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/05-core-banking/regenera-core-fees/service.yaml
+98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/05-core-banking/regenera-core-pix/service.yaml
+98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/05-core-banking/regenera-core-transactions/service.yaml
+98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/05-core-banking/regenera-core-notifications/service.yaml
+98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/05-core-banking/regenera-core-identity/service.yaml
+98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/05-core-banking/regenera-core-payments/service.yaml
+98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/05-core-banking/regenera-core-limits/service.yaml
+98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/05-core-banking/regenera-core-customers/service.yaml
+98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/05-core-banking/regenera-core-investments/service.yaml
+98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/05-core-banking/regenera-core-cards/service.yaml
+98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/05-core-banking/regenera-core-accounts/service.yaml
+98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/06-risk-control/regenera-control-fraud/service.yaml
+98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/06-risk-control/regenera-control-accounting/service.yaml
+98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/06-risk-control/regenera-control-reconciliation/service.yaml
+98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/06-risk-control/regenera-control-aml/service.yaml
+98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/04-bffs/regenera-bff-operations/service.yaml
+98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/04-bffs/regenera-bff-web/service.yaml
+98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/04-bffs/regenera-api-partners/service.yaml
+98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/04-bffs/regenera-bff-mobile/service.yaml
+98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,17-releases/deployment-evidence/master-surgery-2026/raw/regenera-bank/regenera-bank/01-design-system/regenera-design-windows/service.yaml
+98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,01-design-system/regenera-design-windows/service.yaml

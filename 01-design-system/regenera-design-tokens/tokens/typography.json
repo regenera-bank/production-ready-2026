@@ -1,0 +1,15 @@
+{
+  "fontFamily": {
+    "sans": "Manrope",
+    "serif": "Playfair Display"
+  },
+  "scale": [
+    12,
+    14,
+    16,
+    20,
+    24,
+    32,
+    40
+  ]
+}

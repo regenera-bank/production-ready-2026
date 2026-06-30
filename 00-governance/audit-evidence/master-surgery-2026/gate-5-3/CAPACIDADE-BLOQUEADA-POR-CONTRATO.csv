@@ -1,0 +1,2 @@
+capacidade,contrato_ausente,produtor,consumidores,versao,schema_necessario,decisao_necessaria
+Authorization,OpenAPI / AsyncAPI interface,Authorization,"BFFs, Integrations",v1,Definido no dominio,Criar e aprovar schema de contrato

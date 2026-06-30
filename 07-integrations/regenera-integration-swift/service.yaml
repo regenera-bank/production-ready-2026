@@ -1,0 +1,12 @@
+name: regenera-integration-swift
+domain: swift
+owner: team-integration-swift
+criticality: high
+data_classification: banking-secret
+runtime: jvm
+tier: 1
+rto: 4h
+rpo: 1h
+on_call: swift-primary
+dependencies:
+  []

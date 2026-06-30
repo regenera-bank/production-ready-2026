@@ -1,0 +1,6 @@
+owners:
+  primary: team-operations-business-continuity
+  approvers:
+    - team-architecture
+    - team-security
+  on_call: business-continuity-primary

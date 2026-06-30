@@ -1,0 +1,1 @@
+CREATE TABLE ledger_reversal (reversal_id UUID PRIMARY KEY, original_entry_id UUID NOT NULL UNIQUE REFERENCES journal_entry(journal_entry_id), reversal_entry_id UUID NOT NULL UNIQUE REFERENCES journal_entry(journal_entry_id), reason_code TEXT NOT NULL, created_at TIMESTAMPTZ NOT NULL);

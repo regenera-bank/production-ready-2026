@@ -1,0 +1,45 @@
+{
+  "_comment": "@regenera/bank-core Cloud DNS Routing Policy - High Availability",
+  "routingPolicy": {
+    "geo": {
+      "items": [
+        {
+          "location": "southamerica-east1",
+          "rrdatas": [
+            "34.120.x.x"
+          ],
+          "healthCheckedTargets": {
+            "internalLoadBalancers": [
+              {
+                "loadBalancerType": "regionalL4ilb",
+                "ipAddress": "10.0.0.50",
+                "port": "80",
+                "ipProtocol": "tcp",
+                "networkUrl": "projects/MY_PROJECT/global/networks/bank-vpc",
+                "project": "MY_PROJECT"
+              }
+            ]
+          }
+        },
+        {
+          "location": "us-east1",
+          "rrdatas": [
+            "34.130.y.y"
+          ],
+          "healthCheckedTargets": {
+            "internalLoadBalancers": [
+              {
+                "loadBalancerType": "regionalL4ilb",
+                "ipAddress": "10.1.0.50",
+                "port": "80",
+                "ipProtocol": "tcp",
+                "networkUrl": "projects/MY_PROJECT/global/networks/bank-vpc",
+                "project": "MY_PROJECT"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

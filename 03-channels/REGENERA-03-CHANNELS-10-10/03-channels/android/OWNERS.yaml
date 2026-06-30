@@ -1,0 +1,6 @@
+owners:
+  primary: team-android
+  approvers:
+    - team-architecture
+    - team-security
+  on_call: android-primary

@@ -1,0 +1,178 @@
+module,files_total,custom_files,custom_nonzero,custom_zero,custom_over_500,custom_bytes,maturity
+00-governance/regenera-engineering-governance,52,6,6,0,0,512,CUSTOMIZAÇÃO MÍNIMA / NÃO COMPROVADA
+00-governance/regenera-enterprise-architecture,65,19,19,0,0,2041,CUSTOMIZAÇÃO MÍNIMA / NÃO COMPROVADA
+00-governance/regenera-product-governance,346,300,300,0,0,34649,CUSTOMIZAÇÃO MÍNIMA / NÃO COMPROVADA
+01-design-system/regenera-design-android,46,0,0,0,0,0,SCAFFOLD PURO
+01-design-system/regenera-design-documentation,47,1,1,0,1,238592,CONTEÚDO PRESENTE — REQUER VALIDAÇÃO
+01-design-system/regenera-design-ios,46,0,0,0,0,0,SCAFFOLD PURO
+01-design-system/regenera-design-tokens,60,14,14,0,0,1657,CUSTOMIZAÇÃO MÍNIMA / NÃO COMPROVADA
+01-design-system/regenera-design-web,92,46,46,0,24,354816,CONTEÚDO PRESENTE — REQUER VALIDAÇÃO
+01-design-system/regenera-design-windows,46,0,0,0,0,0,SCAFFOLD PURO
+02-contracts/regenera-contracts-asyncapi,53,7,7,0,7,3959,CONTEÚDO PRESENTE — REQUER VALIDAÇÃO
+02-contracts/regenera-contracts-error-catalog,51,5,5,0,1,1416,CONTEÚDO PRESENTE — REQUER VALIDAÇÃO
+02-contracts/regenera-contracts-events,49,3,3,0,0,279,CUSTOMIZAÇÃO MÍNIMA / NÃO COMPROVADA
+02-contracts/regenera-contracts-json-schema,53,7,7,0,1,2642,CONTEÚDO PRESENTE — REQUER VALIDAÇÃO
+02-contracts/regenera-contracts-openapi,59,13,13,0,13,14011,CONTEÚDO PRESENTE — REQUER VALIDAÇÃO
+02-contracts/regenera-contracts-sdk,46,0,0,0,0,0,SCAFFOLD PURO
+03-channels/regenera-channel-android,271,225,46,179,17,77063,IMPLEMENTAÇÃO PARCIAL
+03-channels/regenera-channel-ios,255,209,31,178,23,79477,IMPLEMENTAÇÃO PARCIAL
+03-channels/regenera-channel-partner-portal,79,33,2,31,0,669,CUSTOMIZAÇÃO MÍNIMA / NÃO COMPROVADA
+03-channels/regenera-channel-web-banking,225,179,56,123,50,376127,IMPLEMENTAÇÃO PARCIAL
+03-channels/regenera-channel-windows-operations,166,120,27,93,21,68969,IMPLEMENTAÇÃO PARCIAL
+04-bffs/regenera-api-open-finance,46,0,0,0,0,0,SCAFFOLD PURO
+04-bffs/regenera-api-partners,92,46,26,20,23,140899,IMPLEMENTAÇÃO PARCIAL
+04-bffs/regenera-bff-mobile,68,22,5,17,1,2315,IMPLEMENTAÇÃO PARCIAL
+04-bffs/regenera-bff-operations,70,24,5,19,1,2323,IMPLEMENTAÇÃO PARCIAL
+04-bffs/regenera-bff-web,70,24,5,19,1,2309,IMPLEMENTAÇÃO PARCIAL
+05-core-banking/regenera-core-accounts,79,33,19,14,2,7274,IMPLEMENTAÇÃO PARCIAL
+05-core-banking/regenera-core-balance,46,0,0,0,0,0,SCAFFOLD PURO
+05-core-banking/regenera-core-card-authorization,46,0,0,0,0,0,SCAFFOLD PURO
+05-core-banking/regenera-core-card-clearing,46,0,0,0,0,0,SCAFFOLD PURO
+05-core-banking/regenera-core-cards,71,25,2,23,0,697,CUSTOMIZAÇÃO MÍNIMA / NÃO COMPROVADA
+05-core-banking/regenera-core-consents,46,0,0,0,0,0,SCAFFOLD PURO
+05-core-banking/regenera-core-credit,22,18,2,16,0,697,CUSTOMIZAÇÃO MÍNIMA / NÃO COMPROVADA
+05-core-banking/regenera-core-credit-decision,46,0,0,0,0,0,SCAFFOLD PURO
+05-core-banking/regenera-core-credit-origination,46,0,0,0,0,0,SCAFFOLD PURO
+05-core-banking/regenera-core-custody-positions,46,0,0,0,0,0,SCAFFOLD PURO
+05-core-banking/regenera-core-customer-support,46,0,0,0,0,0,SCAFFOLD PURO
+05-core-banking/regenera-core-customers,85,39,26,13,1,8649,IMPLEMENTAÇÃO PARCIAL
+05-core-banking/regenera-core-device-trust,46,0,0,0,0,0,SCAFFOLD PURO
+05-core-banking/regenera-core-disputes,46,0,0,0,0,0,SCAFFOLD PURO
+05-core-banking/regenera-core-documents,46,0,0,0,0,0,SCAFFOLD PURO
+05-core-banking/regenera-core-fees,59,13,2,11,0,697,CUSTOMIZAÇÃO MÍNIMA / NÃO COMPROVADA
+05-core-banking/regenera-core-fx,46,0,0,0,0,0,SCAFFOLD PURO
+05-core-banking/regenera-core-identity,67,21,2,19,0,697,CUSTOMIZAÇÃO MÍNIMA / NÃO COMPROVADA
+05-core-banking/regenera-core-investment-orders,46,0,0,0,0,0,SCAFFOLD PURO
+05-core-banking/regenera-core-investments,20,16,2,14,0,697,CUSTOMIZAÇÃO MÍNIMA / NÃO COMPROVADA
+05-core-banking/regenera-core-invoices,46,0,0,0,0,0,SCAFFOLD PURO
+05-core-banking/regenera-core-ledger,110,64,44,20,10,29203,IMPLEMENTAÇÃO PARCIAL
+05-core-banking/regenera-core-limits,59,13,2,11,0,697,CUSTOMIZAÇÃO MÍNIMA / NÃO COMPROVADA
+05-core-banking/regenera-core-loan-servicing,46,0,0,0,0,0,SCAFFOLD PURO
+05-core-banking/regenera-core-notifications,64,18,2,16,0,697,CUSTOMIZAÇÃO MÍNIMA / NÃO COMPROVADA
+05-core-banking/regenera-core-onboarding,46,0,0,0,0,0,SCAFFOLD PURO
+05-core-banking/regenera-core-payment-orchestrator,49,3,3,0,3,8601,CONTEÚDO PRESENTE — REQUER VALIDAÇÃO
+05-core-banking/regenera-core-payments,23,19,2,17,0,697,CUSTOMIZAÇÃO MÍNIMA / NÃO COMPROVADA
+05-core-banking/regenera-core-pix,76,30,5,25,3,2262,IMPLEMENTAÇÃO PARCIAL
+05-core-banking/regenera-core-product-catalog,46,0,0,0,0,0,SCAFFOLD PURO
+05-core-banking/regenera-core-session,47,1,1,0,1,6451,CONTEÚDO PRESENTE — REQUER VALIDAÇÃO
+05-core-banking/regenera-core-statements,46,0,0,0,0,0,SCAFFOLD PURO
+05-core-banking/regenera-core-transactions,73,27,12,15,1,5332,IMPLEMENTAÇÃO PARCIAL
+06-risk-control/regenera-control-accounting,60,14,3,11,0,1026,CUSTOMIZAÇÃO MÍNIMA / NÃO COMPROVADA
+06-risk-control/regenera-control-aml,19,15,2,13,0,697,CUSTOMIZAÇÃO MÍNIMA / NÃO COMPROVADA
+06-risk-control/regenera-control-audit,48,2,2,0,2,3583,CONTEÚDO PRESENTE — REQUER VALIDAÇÃO
+06-risk-control/regenera-control-case-management,46,0,0,0,0,0,SCAFFOLD PURO
+06-risk-control/regenera-control-cosif,46,0,0,0,0,0,SCAFFOLD PURO
+06-risk-control/regenera-control-fraud,18,14,2,12,0,697,CUSTOMIZAÇÃO MÍNIMA / NÃO COMPROVADA
+06-risk-control/regenera-control-reconciliation,72,26,4,12,2,7708,IMPLEMENTAÇÃO PARCIAL
+06-risk-control/regenera-control-regulatory-reporting,46,0,0,0,0,0,SCAFFOLD PURO
+06-risk-control/regenera-risk-aml,58,12,5,0,0,767,CUSTOMIZAÇÃO MÍNIMA / NÃO COMPROVADA
+06-risk-control/regenera-risk-credit,46,0,0,0,0,0,SCAFFOLD PURO
+06-risk-control/regenera-risk-fraud,54,8,0,0,0,0,CUSTOMIZAÇÃO MÍNIMA / NÃO COMPROVADA
+06-risk-control/regenera-risk-kyc,49,3,3,0,2,17769,CONTEÚDO PRESENTE — REQUER VALIDAÇÃO
+06-risk-control/regenera-risk-sanctions,46,0,0,0,0,0,SCAFFOLD PURO
+07-integrations/regenera-integration-b3,62,16,1,0,0,131,CUSTOMIZAÇÃO MÍNIMA / NÃO COMPROVADA
+07-integrations/regenera-integration-bacen,62,16,1,0,0,131,CUSTOMIZAÇÃO MÍNIMA / NÃO COMPROVADA
+07-integrations/regenera-integration-bureaus,62,16,1,0,0,131,CUSTOMIZAÇÃO MÍNIMA / NÃO COMPROVADA
+07-integrations/regenera-integration-card-networks,62,16,1,0,0,131,CUSTOMIZAÇÃO MÍNIMA / NÃO COMPROVADA
+07-integrations/regenera-integration-card-processor,62,16,1,0,0,131,CUSTOMIZAÇÃO MÍNIMA / NÃO COMPROVADA
+07-integrations/regenera-integration-correspondents,62,16,1,0,0,131,CUSTOMIZAÇÃO MÍNIMA / NÃO COMPROVADA
+07-integrations/regenera-integration-custody,62,16,1,0,0,131,CUSTOMIZAÇÃO MÍNIMA / NÃO COMPROVADA
+07-integrations/regenera-integration-dict,62,16,1,0,0,131,CUSTOMIZAÇÃO MÍNIMA / NÃO COMPROVADA
+07-integrations/regenera-integration-kyc-providers,63,17,2,0,0,382,CUSTOMIZAÇÃO MÍNIMA / NÃO COMPROVADA
+07-integrations/regenera-integration-notifications,62,16,1,0,0,131,CUSTOMIZAÇÃO MÍNIMA / NÃO COMPROVADA
+07-integrations/regenera-integration-open-finance,62,16,1,0,0,131,CUSTOMIZAÇÃO MÍNIMA / NÃO COMPROVADA
+07-integrations/regenera-integration-spi,62,16,1,0,0,131,CUSTOMIZAÇÃO MÍNIMA / NÃO COMPROVADA
+07-integrations/regenera-integration-susep,62,16,1,0,0,131,CUSTOMIZAÇÃO MÍNIMA / NÃO COMPROVADA
+07-integrations/regenera-integration-swift,62,16,1,0,0,131,CUSTOMIZAÇÃO MÍNIMA / NÃO COMPROVADA
+08-iso20022/regenera-iso20022-adapters,49,3,0,0,0,0,CUSTOMIZAÇÃO MÍNIMA / NÃO COMPROVADA
+08-iso20022/regenera-iso20022-mappings,49,3,0,0,0,0,CUSTOMIZAÇÃO MÍNIMA / NÃO COMPROVADA
+08-iso20022/regenera-iso20022-messages,50,4,0,0,0,0,CUSTOMIZAÇÃO MÍNIMA / NÃO COMPROVADA
+08-iso20022/regenera-iso20022-schemas,54,8,1,0,0,130,CUSTOMIZAÇÃO MÍNIMA / NÃO COMPROVADA
+08-iso20022/regenera-iso20022-tests,51,5,0,0,0,0,CUSTOMIZAÇÃO MÍNIMA / NÃO COMPROVADA
+08-iso20022/regenera-iso20022-validation,50,4,0,0,0,0,CUSTOMIZAÇÃO MÍNIMA / NÃO COMPROVADA
+09-data-platform/regenera-data-analytics,55,9,0,0,0,0,CUSTOMIZAÇÃO MÍNIMA / NÃO COMPROVADA
+09-data-platform/regenera-data-finance-reporting,55,9,0,0,0,0,CUSTOMIZAÇÃO MÍNIMA / NÃO COMPROVADA
+09-data-platform/regenera-data-governance,55,9,0,0,0,0,CUSTOMIZAÇÃO MÍNIMA / NÃO COMPROVADA
+09-data-platform/regenera-data-ingestion,55,9,0,0,0,0,CUSTOMIZAÇÃO MÍNIMA / NÃO COMPROVADA
+09-data-platform/regenera-data-lake,55,9,0,0,0,0,CUSTOMIZAÇÃO MÍNIMA / NÃO COMPROVADA
+09-data-platform/regenera-data-lineage,55,9,0,0,0,0,CUSTOMIZAÇÃO MÍNIMA / NÃO COMPROVADA
+09-data-platform/regenera-data-privacy,55,9,0,0,0,0,CUSTOMIZAÇÃO MÍNIMA / NÃO COMPROVADA
+09-data-platform/regenera-data-quality,55,9,0,0,0,0,CUSTOMIZAÇÃO MÍNIMA / NÃO COMPROVADA
+09-data-platform/regenera-data-risk-models,55,9,0,0,0,0,CUSTOMIZAÇÃO MÍNIMA / NÃO COMPROVADA
+09-data-platform/regenera-data-streaming,55,9,0,0,0,0,CUSTOMIZAÇÃO MÍNIMA / NÃO COMPROVADA
+09-data-platform/regenera-data-warehouse,55,9,0,0,0,0,CUSTOMIZAÇÃO MÍNIMA / NÃO COMPROVADA
+10-platform/regenera-platform-backups,46,0,0,0,0,0,SCAFFOLD PURO
+10-platform/regenera-platform-cache,46,0,0,0,0,0,SCAFFOLD PURO
+10-platform/regenera-platform-ci-cd,46,0,0,0,0,0,SCAFFOLD PURO
+10-platform/regenera-platform-databases,46,0,0,0,0,0,SCAFFOLD PURO
+10-platform/regenera-platform-developer-portal,46,0,0,0,0,0,SCAFFOLD PURO
+10-platform/regenera-platform-disaster-recovery,46,0,0,0,0,0,SCAFFOLD PURO
+10-platform/regenera-platform-event-bus,47,1,1,0,1,2048,CONTEÚDO PRESENTE — REQUER VALIDAÇÃO
+10-platform/regenera-platform-kms-hsm,46,0,0,0,0,0,SCAFFOLD PURO
+10-platform/regenera-platform-kubernetes,60,14,7,0,6,10039,CONTEÚDO PRESENTE — REQUER VALIDAÇÃO
+10-platform/regenera-platform-object-storage,46,0,0,0,0,0,SCAFFOLD PURO
+10-platform/regenera-platform-observability,48,2,2,0,2,5733,CONTEÚDO PRESENTE — REQUER VALIDAÇÃO
+10-platform/regenera-platform-secrets,46,0,0,0,0,0,SCAFFOLD PURO
+10-platform/regenera-platform-siem,46,0,0,0,0,0,SCAFFOLD PURO
+10-platform/regenera-platform-terraform,67,21,21,0,0,2484,CUSTOMIZAÇÃO MÍNIMA / NÃO COMPROVADA
+11-security/regenera-security-appsec,57,11,0,0,0,0,CUSTOMIZAÇÃO MÍNIMA / NÃO COMPROVADA
+11-security/regenera-security-cloud,57,11,0,0,0,0,CUSTOMIZAÇÃO MÍNIMA / NÃO COMPROVADA
+11-security/regenera-security-detection,57,11,0,0,0,0,CUSTOMIZAÇÃO MÍNIMA / NÃO COMPROVADA
+11-security/regenera-security-iam,57,11,0,0,0,0,CUSTOMIZAÇÃO MÍNIMA / NÃO COMPROVADA
+11-security/regenera-security-incident-response,57,11,0,0,0,0,CUSTOMIZAÇÃO MÍNIMA / NÃO COMPROVADA
+11-security/regenera-security-kms-hsm,57,11,0,0,0,0,CUSTOMIZAÇÃO MÍNIMA / NÃO COMPROVADA
+11-security/regenera-security-mobile,57,11,0,0,0,0,CUSTOMIZAÇÃO MÍNIMA / NÃO COMPROVADA
+11-security/regenera-security-pam,57,11,0,0,0,0,CUSTOMIZAÇÃO MÍNIMA / NÃO COMPROVADA
+11-security/regenera-security-pki,57,11,0,0,0,0,CUSTOMIZAÇÃO MÍNIMA / NÃO COMPROVADA
+11-security/regenera-security-red-team,57,11,0,0,0,0,CUSTOMIZAÇÃO MÍNIMA / NÃO COMPROVADA
+11-security/regenera-security-threat-intelligence,57,11,0,0,0,0,CUSTOMIZAÇÃO MÍNIMA / NÃO COMPROVADA
+11-security/regenera-security-vulnerability-management,57,11,0,0,0,0,CUSTOMIZAÇÃO MÍNIMA / NÃO COMPROVADA
+12-regulatory/regenera-regulatory-aml,56,10,1,0,0,120,CUSTOMIZAÇÃO MÍNIMA / NÃO COMPROVADA
+12-regulatory/regenera-regulatory-card-pci,56,10,1,0,0,125,CUSTOMIZAÇÃO MÍNIMA / NÃO COMPROVADA
+12-regulatory/regenera-regulatory-cloud-outsourcing,56,10,1,0,0,134,CUSTOMIZAÇÃO MÍNIMA / NÃO COMPROVADA
+12-regulatory/regenera-regulatory-cosif,56,10,1,0,0,122,CUSTOMIZAÇÃO MÍNIMA / NÃO COMPROVADA
+12-regulatory/regenera-regulatory-cvm,56,10,1,0,0,120,CUSTOMIZAÇÃO MÍNIMA / NÃO COMPROVADA
+12-regulatory/regenera-regulatory-cybersecurity,56,10,1,0,0,130,CUSTOMIZAÇÃO MÍNIMA / NÃO COMPROVADA
+12-regulatory/regenera-regulatory-lgpd,56,10,1,0,0,121,CUSTOMIZAÇÃO MÍNIMA / NÃO COMPROVADA
+12-regulatory/regenera-regulatory-open-finance,56,10,1,0,0,129,CUSTOMIZAÇÃO MÍNIMA / NÃO COMPROVADA
+12-regulatory/regenera-regulatory-pix,56,10,1,0,0,120,CUSTOMIZAÇÃO MÍNIMA / NÃO COMPROVADA
+12-regulatory/regenera-regulatory-reporting,56,10,1,0,0,126,CUSTOMIZAÇÃO MÍNIMA / NÃO COMPROVADA
+12-regulatory/regenera-regulatory-sisbacen,56,10,1,0,0,125,CUSTOMIZAÇÃO MÍNIMA / NÃO COMPROVADA
+12-regulatory/regenera-regulatory-sisorf,56,10,1,0,0,123,CUSTOMIZAÇÃO MÍNIMA / NÃO COMPROVADA
+12-regulatory/regenera-regulatory-susep,56,10,1,0,0,122,CUSTOMIZAÇÃO MÍNIMA / NÃO COMPROVADA
+12-regulatory/regenera-regulatory-unicad,56,10,1,0,0,123,CUSTOMIZAÇÃO MÍNIMA / NÃO COMPROVADA
+13-quality/regenera-quality-chaos,46,0,0,0,0,0,SCAFFOLD PURO
+13-quality/regenera-quality-contract,46,0,0,0,0,0,SCAFFOLD PURO
+13-quality/regenera-quality-e2e,46,0,0,0,0,0,SCAFFOLD PURO
+13-quality/regenera-quality-financial-invariants,61,15,15,0,0,1632,CUSTOMIZAÇÃO MÍNIMA / NÃO COMPROVADA
+13-quality/regenera-quality-integration,46,0,0,0,0,0,SCAFFOLD PURO
+13-quality/regenera-quality-performance,46,0,0,0,0,0,SCAFFOLD PURO
+13-quality/regenera-quality-regulatory,46,0,0,0,0,0,SCAFFOLD PURO
+13-quality/regenera-quality-resilience,46,0,0,0,0,0,SCAFFOLD PURO
+13-quality/regenera-quality-security,46,0,0,0,0,0,SCAFFOLD PURO
+13-quality/regenera-quality-test-data,46,0,0,0,0,0,SCAFFOLD PURO
+13-quality/regenera-quality-unit,46,0,0,0,0,0,SCAFFOLD PURO
+14-operations/regenera-operations-accounting,56,10,0,0,0,0,CUSTOMIZAÇÃO MÍNIMA / NÃO COMPROVADA
+14-operations/regenera-operations-aml,56,10,0,0,0,0,CUSTOMIZAÇÃO MÍNIMA / NÃO COMPROVADA
+14-operations/regenera-operations-business-continuity,56,10,0,0,0,0,CUSTOMIZAÇÃO MÍNIMA / NÃO COMPROVADA
+14-operations/regenera-operations-cards,56,10,0,0,0,0,CUSTOMIZAÇÃO MÍNIMA / NÃO COMPROVADA
+14-operations/regenera-operations-change-management,56,10,0,0,0,0,CUSTOMIZAÇÃO MÍNIMA / NÃO COMPROVADA
+14-operations/regenera-operations-customer-support,56,10,0,0,0,0,CUSTOMIZAÇÃO MÍNIMA / NÃO COMPROVADA
+14-operations/regenera-operations-fraud,56,10,0,0,0,0,CUSTOMIZAÇÃO MÍNIMA / NÃO COMPROVADA
+14-operations/regenera-operations-incident-management,56,10,0,0,0,0,CUSTOMIZAÇÃO MÍNIMA / NÃO COMPROVADA
+14-operations/regenera-operations-noc,56,10,0,0,0,0,CUSTOMIZAÇÃO MÍNIMA / NÃO COMPROVADA
+14-operations/regenera-operations-payment,56,10,0,0,0,0,CUSTOMIZAÇÃO MÍNIMA / NÃO COMPROVADA
+14-operations/regenera-operations-pix,56,10,0,0,0,0,CUSTOMIZAÇÃO MÍNIMA / NÃO COMPROVADA
+14-operations/regenera-operations-reconciliation,56,10,0,0,0,0,CUSTOMIZAÇÃO MÍNIMA / NÃO COMPROVADA
+14-operations/regenera-operations-soc,56,10,0,0,0,0,CUSTOMIZAÇÃO MÍNIMA / NÃO COMPROVADA
+14-operations/regenera-operations-treasury,56,10,0,0,0,0,CUSTOMIZAÇÃO MÍNIMA / NÃO COMPROVADA
+15-tools/regenera-tool-comment-gate,47,1,1,0,0,121,CUSTOMIZAÇÃO MÍNIMA / NÃO COMPROVADA
+15-tools/regenera-tool-contract-linter,47,1,1,0,0,237,CUSTOMIZAÇÃO MÍNIMA / NÃO COMPROVADA
+15-tools/regenera-tool-developer-cli,47,1,1,0,1,1740,CONTEÚDO PRESENTE — REQUER VALIDAÇÃO
+15-tools/regenera-tool-local-environment,46,0,0,0,0,0,SCAFFOLD PURO
+15-tools/regenera-tool-migration-validator,47,1,1,0,0,444,CUSTOMIZAÇÃO MÍNIMA / NÃO COMPROVADA
+15-tools/regenera-tool-release-manifest,46,0,0,0,0,0,SCAFFOLD PURO
+15-tools/regenera-tool-sbom,46,0,0,0,0,0,SCAFFOLD PURO
+15-tools/regenera-tool-schema-validator,46,0,0,0,0,0,SCAFFOLD PURO
+15-tools/regenera-tool-secret-scanner,47,1,1,0,1,1740,CONTEÚDO PRESENTE — REQUER VALIDAÇÃO
+15-tools/regenera-tool-test-data,46,0,0,0,0,0,SCAFFOLD PURO

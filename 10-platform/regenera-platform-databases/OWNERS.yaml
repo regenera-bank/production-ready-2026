@@ -1,0 +1,6 @@
+owners:
+  primary: team-platform-databases
+  approvers:
+    - team-architecture
+    - team-security
+  on_call: databases-primary

@@ -1,0 +1,6 @@
+owners:
+  primary: team-security-pki
+  approvers:
+    - team-architecture
+    - team-security
+  on_call: pki-primary

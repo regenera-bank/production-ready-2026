@@ -1,0 +1,26 @@
+Regenera Bank — Core Banking — TEST-RESULTS
+Data: 2026-06-29
+Ambiente: MacBook-Pro-de-Regenera (local)
+PR: PR-00b → PR-15 — VERIFICADOS (DAG CORE COMPLETO)
+
+npm run lint            → PASS (tsc --noEmit)
+npm test                → PASS — 19 suites, 184 passed, 1 skipped, 185 total
+npm run build           → PASS (nest build)
+npm run evidence:generate → PASS
+  PACKAGE-CHECKSUMS.sha256 (5 artefatos dist/)
+  VALIDATION-REPORT.json
+  SBOM.cdx.json
+
+Gate G3 (PR-14): SATISFEITO — 47 invariantes T01–T47
+Gate G4 (PR-15): SATISFEITO — float guard + canário 1% + evidência gerada
+
+Suites PR-15:
+  load/daily-load.spec.ts
+  load/canary-router.spec.ts
+  load/float-guard.spec.ts
+  load/release-gate.spec.ts
+
+Skipped: carga nominal 50k (LOAD_TEST_OPS=50000) — opcional via npm run load:50k
+
+Verificado por: regeneracorporateltdacopyright@MacBook-Pro-de-Regenera
+Comando: npm run gate:release

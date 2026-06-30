@@ -1,0 +1,12 @@
+name: regenera-regulatory-unicad
+domain: unicad
+owner: team-regulatory-unicad
+criticality: critical
+data_classification: banking-secret
+runtime: docs
+tier: 0
+rto: 15m
+rpo: 0
+on_call: unicad-primary
+dependencies:
+  []

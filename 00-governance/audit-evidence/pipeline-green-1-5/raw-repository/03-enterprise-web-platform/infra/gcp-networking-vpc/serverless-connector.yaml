@@ -1,0 +1,32 @@
+# |---------------------------------------------------------------------------------------|
+# |  --> REGENERA ENTERPRISE SYSTEM v4.0                                                  |
+# |---------------------------------------------------------------------------------------|
+#
+# PROJECT:       Regenera Bank
+# CEO:           Raphaela Cerveski
+# DEVELOPER:     Don Paulo Ricardo
+# ID:            2098233287
+# COPYRIGHT:     Copyright (c) 2026 Regenera Corporate
+#
+# LICENSE:       EULA (End-User License Agreement)
+# PROTECTION:    PROPRIEDADE INTELECTUAL RESTRITA
+#
+# WARNING:       TODOS OS DIREITOS RESERVADOS. Proibida a cópia, distribuição,
+#                engenharia reversa ou modificação não autorizada.
+#
+# |---------------------------------------------------------------------------------------|
+# |  --> CLASSIFICATION: PROPRIETARY // DEVELOPER MAINTAINED // REQUIRES SENIOR REVIEW          |
+# |---------------------------------------------------------------------------------------|
+
+# @regenera/bank-core
+# Senior Serverless VPC Access Connector Configuration
+# Ensures Cloud Run/Functions can securely access internal VPC resources (DBs, Redis) without public IPs.
+name: projects/MY_PROJECT/locations/southamerica-east1/connectors/bank-vpc-con
+network: projects/MY_PROJECT/global/networks/bank-vpc
+subnet:
+  name: serverless-subnet
+  projectId: MY_PROJECT
+machineType: e2-micro
+minInstances: 2
+maxInstances: 10
+# Cloud Router/NAT must be configured on the VPC to allow external egress from this connector

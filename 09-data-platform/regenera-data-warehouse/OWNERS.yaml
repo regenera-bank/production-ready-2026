@@ -1,0 +1,6 @@
+owners:
+  primary: team-data-warehouse
+  approvers:
+    - team-architecture
+    - team-security
+  on_call: warehouse-primary

@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "accountId",
+    "status"
+  ],
+  "properties": {
+    "accountId": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "status": {
+      "enum": [
+        "PENDING_KYC",
+        "ACTIVE",
+        "RESTRICTED",
+        "BLOCKED",
+        "DORMANT",
+        "CLOSING",
+        "CLOSED"
+      ]
+    }
+  }
+}

@@ -1,0 +1,29 @@
+# [FILE] /Users/admin/Desktop/Regenera Bank Documents/IaC & Security/kubernetes/service-mesh/user-service-destination-rule.yaml
+# Istio DestinationRule for user-service
+# Desenvolvedor: Don Paulo Ricardo
+# Configura Circuit Breakers e outras políticas de tráfego para o user-service
+
+apiVersion: networking.istio.io/v1beta1
+kind: DestinationRule
+metadata:
+  name: user-service-destination-rule
+  namespace: default # Ajustar o namespace conforme a implantação
+spec:
+  host: user-service.default.svc.cluster.local # FQDN do serviço Kubernetes
+  trafficPolicy:
+    loadBalancer:
+      simple: ROUND_ROBIN # Política de balanceamento de carga
+    connectionPool:
+      tcp:
+        maxConnections: 100 # Número máximo de conexões TCP para o host
+        connectTimeout: 5s  # Timeout para estabelecer uma conexão TCP
+      http:
+        http1MaxPendingRequests: 10 # Número máximo de requisições HTTP/1.1 pendentes
+        http2MaxRequests: 100       # Número máximo de requisições HTTP/2
+        maxRequestsPerConnection: 10 # Número máximo de requisições por conexão
+        idleTimeout: 30s            # Tempo máximo que uma conexão ociosa pode ser mantida
+    outlierDetection: # Configuração de Circuit Breakers (Detecção de Outliers)
+      consecutiveErrors: 5      # Número de erros consecutivos antes de ejetar um host
+      interval: 10s             # Intervalo entre as varreduras de detecção de outliers
+      baseEjectionTime: 30s     # Duração mínima para a qual um host é ejetado
+      maxEjectionPercent: 100   # Porcentagem máxima de hosts que podem ser ejetados

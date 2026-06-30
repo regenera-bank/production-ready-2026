@@ -1,0 +1,6 @@
+owners:
+  primary: team-accounts
+  approvers:
+    - team-architecture
+    - team-security
+  on_call: accounts-primary

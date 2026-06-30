@@ -1,0 +1,1 @@
+CREATE TABLE account_holder (account_id UUID NOT NULL REFERENCES account(account_id), party_id UUID NOT NULL, holder_role VARCHAR(32) NOT NULL, valid_from TIMESTAMPTZ NOT NULL, valid_until TIMESTAMPTZ, PRIMARY KEY(account_id, party_id, valid_from));

@@ -1,0 +1,68 @@
+{
+  "_comment": "@regenera/bank-core Cloud Armor DDoS & Rate Limiting Policy",
+  "name": "regenera-rate-limit-policy",
+  "description": "Layer 7 Rate limiting to protect endpoints against brute force, credential stuffing, and volumetric DDoS",
+  "rules": [
+    {
+      "action": "rate_based_ban",
+      "priority": 100,
+      "match": {
+        "expr": {
+          "expression": "request.path.matches('/api/v1/auth/login') || request.path.matches('/api/v1/pix/transfer')"
+        }
+      },
+      "rateLimitOptions": {
+        "rateLimitThreshold": {
+          "count": 5,
+          "intervalSec": 60
+        },
+        "conformAction": "allow",
+        "exceedAction": "deny(429)",
+        "enforceOnKey": "IP",
+        "banDurationSec": 300
+      },
+      "description": "Rate limit critical auth/transaction endpoints to 5 req/min per IP to prevent brute force"
+    },
+    {
+      "action": "rate_based_ban",
+      "priority": 150,
+      "match": {
+        "expr": {
+          "expression": "request.path.matches('/api/v1/public/rates')"
+        }
+      },
+      "rateLimitOptions": {
+        "rateLimitThreshold": {
+          "count": 60,
+          "intervalSec": 60
+        },
+        "conformAction": "allow",
+        "exceedAction": "deny(429)",
+        "enforceOnKey": "IP",
+        "banDurationSec": 60
+      },
+      "description": "Rate limit public data endpoints (60 req/min)"
+    },
+    {
+      "action": "rate_based_ban",
+      "priority": 200,
+      "match": {
+        "versionedExpr": "SRC_IPS_V1",
+        "config": {
+          "srcIpRanges": ["*"]
+        }
+      },
+      "rateLimitOptions": {
+        "rateLimitThreshold": {
+          "count": 500,
+          "intervalSec": 60
+        },
+        "conformAction": "allow",
+        "exceedAction": "deny(429)",
+        "enforceOnKey": "IP",
+        "banDurationSec": 3600
+      },
+      "description": "Global Layer 7 rate limit to mitigate volumetric HTTP floods (500 req/min overall)"
+    }
+  ]
+}

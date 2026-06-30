@@ -1,0 +1,189 @@
+conflict_id,pacote_origem,arquivo_origem,sha256,tamanho
+3,1. PRODUCAO REGENERA CORE 5(5).zip,1. PRODUCAO REGENERA CORE/08.RegeneraBank-main/.gitattributes,26c40b2d8dc7b839c4aa42caf4a219fdb82ade0c7a928ccc6543b73818e5cca2,199
+3,regenera-bank.zip,regenera-bank/.gitattributes,8ef88897bb1bbb7fe3db5d057d078f9cd2b93ca85c6aa86d97aef6327091526d,25
+12,1. PRODUCAO REGENERA CORE 5(5).zip,1. PRODUCAO REGENERA CORE/08.RegeneraBank-main/.gitignore,7504c983c7147de5d6e88bdada5894136185fa719b5aefc0bd1ae7a6e90036ec,631
+12,regenera-bank.zip,regenera-bank/.gitignore,8ef88897bb1bbb7fe3db5d057d078f9cd2b93ca85c6aa86d97aef6327091526d,25
+19,1. PRODUCAO REGENERA CORE 5(5).zip,1. PRODUCAO REGENERA CORE/08.RegeneraBank-main/README.md,1cdcc5a883b4b3c6880e785a48d32995e7851044548fad8bc1ada666c7fac429,32139
+19,regenera-bank.zip,regenera-bank/README.md,8ef88897bb1bbb7fe3db5d057d078f9cd2b93ca85c6aa86d97aef6327091526d,25
+33,02-Regenera-Channels-BFFs(1).zip,03-channels/regenera-channel-android/.gitignore,91df085ba72bd38a7548da5d57836de91314e4e5dfb0ec0d086c4107834bf900,56
+33,Arquivo(5).zip,2.Mapa-Mestre-Executado/02-Regenera-Android-Production/.gitignore,91df085ba72bd38a7548da5d57836de91314e4e5dfb0ec0d086c4107834bf900,56
+33,regenera-bank.zip,regenera-bank/03-channels/regenera-channel-android/.gitignore,3e34cb9708ba86ef631992b99be4b0ddac57e42272c212e7371a993ebf46a75a,123
+45,02-Regenera-Channels-BFFs(1).zip,03-channels/regenera-channel-android/README.md,b0391ac1016261efbfd26b1133b605329ed29eb9e71dda5ffe7c81fb26b2b54f,679
+45,Arquivo(5).zip,2.Mapa-Mestre-Executado/02-Regenera-Android-Production/README.md,b0391ac1016261efbfd26b1133b605329ed29eb9e71dda5ffe7c81fb26b2b54f,679
+45,regenera-bank.zip,regenera-bank/03-channels/regenera-channel-android/README.md,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,527
+47,02-Regenera-Channels-BFFs(1).zip,03-channels/regenera-channel-android/app/build.gradle.kts,4ce5db2aba953542b8d8acdb4a3a02101a9aa8b27986f87990d24bb0bc25a779,2782
+47,Arquivo(5).zip,2.Mapa-Mestre-Executado/02-Regenera-Android-Production/app/build.gradle.kts,4ce5db2aba953542b8d8acdb4a3a02101a9aa8b27986f87990d24bb0bc25a779,2782
+47,regenera-bank.zip,regenera-bank/03-channels/regenera-channel-android/app/build.gradle.kts,caa97f26eb7146454a417a28844e915437740f21e2cac739cc037e1f2a1445ad,346
+72,02-Regenera-Channels-BFFs(1).zip,03-channels/regenera-channel-android/core-design/build.gradle.kts,ee2b24fb105b9c9b03f78d9a8d421c3d89943e276bbf31792bec7f03f42d2a28,310
+72,Arquivo(5).zip,2.Mapa-Mestre-Executado/02-Regenera-Android-Production/core-design/build.gradle.kts,ee2b24fb105b9c9b03f78d9a8d421c3d89943e276bbf31792bec7f03f42d2a28,310
+72,regenera-bank.zip,regenera-bank/03-channels/regenera-channel-android/core-design/build.gradle.kts,caa97f26eb7146454a417a28844e915437740f21e2cac739cc037e1f2a1445ad,346
+91,02-Regenera-Channels-BFFs(1).zip,03-channels/regenera-channel-android/core-network/build.gradle.kts,feab7afea9fa300a4ceb841c189a872cc90b6d5b45daebb8c198989826109572,426
+91,Arquivo(5).zip,2.Mapa-Mestre-Executado/02-Regenera-Android-Production/core-network/build.gradle.kts,feab7afea9fa300a4ceb841c189a872cc90b6d5b45daebb8c198989826109572,426
+91,regenera-bank.zip,regenera-bank/03-channels/regenera-channel-android/core-network/build.gradle.kts,caa97f26eb7146454a417a28844e915437740f21e2cac739cc037e1f2a1445ad,346
+106,02-Regenera-Channels-BFFs(1).zip,03-channels/regenera-channel-android/core-observability/build.gradle.kts,1ff62b6f7bee7dfc0e7d8a949b64f699327b67b85d2393df69a9e23b3560cda8,167
+106,Arquivo(5).zip,2.Mapa-Mestre-Executado/02-Regenera-Android-Production/core-observability/build.gradle.kts,1ff62b6f7bee7dfc0e7d8a949b64f699327b67b85d2393df69a9e23b3560cda8,167
+106,regenera-bank.zip,regenera-bank/03-channels/regenera-channel-android/core-observability/build.gradle.kts,caa97f26eb7146454a417a28844e915437740f21e2cac739cc037e1f2a1445ad,346
+117,02-Regenera-Channels-BFFs(1).zip,03-channels/regenera-channel-android/core-security/build.gradle.kts,d1d6d4e69bad77fb7e1c381b85982670dec7677ce0cce1e111674b1e493d8d36,372
+117,Arquivo(5).zip,2.Mapa-Mestre-Executado/02-Regenera-Android-Production/core-security/build.gradle.kts,d1d6d4e69bad77fb7e1c381b85982670dec7677ce0cce1e111674b1e493d8d36,372
+117,regenera-bank.zip,regenera-bank/03-channels/regenera-channel-android/core-security/build.gradle.kts,caa97f26eb7146454a417a28844e915437740f21e2cac739cc037e1f2a1445ad,346
+550,02-Regenera-Channels-BFFs(1).zip,03-channels/regenera-channel-ios/README.md,3690f695776058287d5e664d2621818e00dab0a362873460326dd6448816b74b,525
+550,Arquivo(5).zip,2.Mapa-Mestre-Executado/03-Regenera-iOS-Production/README.md,3690f695776058287d5e664d2621818e00dab0a362873460326dd6448816b74b,525
+550,regenera-bank.zip,regenera-bank/03-channels/regenera-channel-ios/README.md,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,527
+593,02-Regenera-Channels-BFFs(1).zip,03-channels/regenera-channel-partner-portal/.env.example,29af5118a356d86a749b4631cf5206cc2966bcd3b7f5ff4f2e60ec43503d5e30,84
+593,regenera-bank.zip,regenera-bank/03-channels/regenera-channel-partner-portal/.env.example,8ef88897bb1bbb7fe3db5d057d078f9cd2b93ca85c6aa86d97aef6327091526d,25
+607,02-Regenera-Channels-BFFs(1).zip,03-channels/regenera-channel-partner-portal/Dockerfile,c480b86a3891d964710a0a472539e04c396a1f06f4238cbecb024b2f9f80c485,142
+607,regenera-bank.zip,regenera-bank/03-channels/regenera-channel-partner-portal/Dockerfile,8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,156
+611,02-Regenera-Channels-BFFs(1).zip,03-channels/regenera-channel-partner-portal/README.md,57cd00622a1d4d28b3334a84fa8aa55a30b8a87ad72dcbf35be9113193d38d22,530
+611,regenera-bank.zip,regenera-bank/03-channels/regenera-channel-partner-portal/README.md,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,527
+667,02-Regenera-Channels-BFFs(1).zip,03-channels/regenera-channel-web-banking/.env.example,29af5118a356d86a749b4631cf5206cc2966bcd3b7f5ff4f2e60ec43503d5e30,84
+667,1. PRODUCAO REGENERA CORE 5(5).zip,1. PRODUCAO REGENERA CORE/03-enterprise-web-platform/.env.example,a7994d607e6c952e7f0e8c780a21639268dddcf76924023fbdee1f7d6f4340d2,486
+667,Arquivo(5).zip,2.Mapa-Mestre-Executado/01-Regenera-Web-Production/.env.example,5ab5e71007321acc507f8f74d84a61e81c4cf580752d16037ebcb8d0415c4718,427
+667,regenera-bank.zip,regenera-bank/03-channels/regenera-channel-web-banking/.env.example,8ef88897bb1bbb7fe3db5d057d078f9cd2b93ca85c6aa86d97aef6327091526d,25
+668,1. PRODUCAO REGENERA CORE 5(5).zip,1. PRODUCAO REGENERA CORE/03-enterprise-web-platform/.eslintrc.cjs,44e27e84591e181fe3480d08af6ef2690e8e9f32639db9dc00b5c26085c4f565,471
+668,regenera-bank.zip,regenera-bank/03-channels/regenera-channel-web-banking/.eslintrc.cjs,8ef88897bb1bbb7fe3db5d057d078f9cd2b93ca85c6aa86d97aef6327091526d,25
+677,02-Regenera-Channels-BFFs(1).zip,03-channels/regenera-channel-web-banking/.gitignore,ac3dd62c3973e4891c66ee3aa10c57d6a958041ce5ac009b6a085ced2c26920c,159
+677,1. PRODUCAO REGENERA CORE 5(5).zip,1. PRODUCAO REGENERA CORE/03-enterprise-web-platform/.gitignore,6fe16e5e5dad9408c6a9082604c816d8067641ae1b5e59aceb90eb51c1088c63,14
+677,Arquivo(5).zip,2.Mapa-Mestre-Executado/01-Regenera-Web-Production/.gitignore,6e450739a80d6d61792545f0c2206d542c4063d4a5ac6673b6263703c42f5c6e,63
+677,regenera-bank.zip,regenera-bank/03-channels/regenera-channel-web-banking/.gitignore,ac3dd62c3973e4891c66ee3aa10c57d6a958041ce5ac009b6a085ced2c26920c,159
+687,02-Regenera-Channels-BFFs(1).zip,03-channels/regenera-channel-web-banking/Dockerfile,2e10e920f8a25ba0ffc0f49d923b7f42332a503374d421bbc5df1a6ea5036cd0,139
+687,regenera-bank.zip,regenera-bank/03-channels/regenera-channel-web-banking/Dockerfile,8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,156
+691,02-Regenera-Channels-BFFs(1).zip,03-channels/regenera-channel-web-banking/README.md,2fa5a6fd84b2f0b5425f05098dd280570837f86b4116c9c230e0ffed5dbbcff8,517
+691,Arquivo(5).zip,2.Mapa-Mestre-Executado/01-Regenera-Web-Production/README.md,d9cd48043661c7365705d3e95f3e54e279c1cd2aafed1047ebe6f273cb8cff60,724
+691,regenera-bank.zip,regenera-bank/03-channels/regenera-channel-web-banking/README.md,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,527
+701,02-Regenera-Channels-BFFs(1).zip,03-channels/regenera-channel-web-banking/docs/ARCHITECTURE.md,70eaaa765e34f4528b22c583b0a6a7ceda1fc79feb18f0efc24dc1e03faa8d7f,438
+701,Arquivo(5).zip,2.Mapa-Mestre-Executado/01-Regenera-Web-Production/docs/ARCHITECTURE.md,23583aafb94af953e02576ea7e32bbc2d257aef37afcfa178e2a4383bc73b672,734
+701,regenera-bank.zip,regenera-bank/03-channels/regenera-channel-web-banking/docs/ARCHITECTURE.md,70eaaa765e34f4528b22c583b0a6a7ceda1fc79feb18f0efc24dc1e03faa8d7f,438
+708,02-Regenera-Channels-BFFs(1).zip,03-channels/regenera-channel-web-banking/docs/RUNBOOK.md,4bdd2ee70bf56fbbb7a784623bd23ce68e60b30cff1a2e994591c7f4b4340d95,434
+708,Arquivo(5).zip,2.Mapa-Mestre-Executado/01-Regenera-Web-Production/docs/RUNBOOK.md,d1426f7e59b3e63175f2de77bff350dd5b2ad85f7ce4fd95a0679d9bb2bebede,623
+708,regenera-bank.zip,regenera-bank/03-channels/regenera-channel-web-banking/docs/RUNBOOK.md,4bdd2ee70bf56fbbb7a784623bd23ce68e60b30cff1a2e994591c7f4b4340d95,434
+765,Arquivo(5).zip,2.Mapa-Mestre-Executado/01-Regenera-Web-Production/next.config.mjs,a0d754f79f955ad9768300246c086c5805a70c6b0ca5ddffa3915b820c0dce44,731
+765,regenera-bank.zip,regenera-bank/03-channels/regenera-channel-web-banking/next.config.mjs,450f0af4f4c1ecc4c7180f2e364c8a59bfed69dd350fb6b47bce8641c2a37786,19
+768,1. PRODUCAO REGENERA CORE 5(5).zip,1. PRODUCAO REGENERA CORE/03-enterprise-web-platform/package-lock.json,6901b939b12e5c0a7017993d32bbb4075aad3dbfd000118ce85dae7ecc4b99cf,574662
+768,Arquivo(5).zip,2.Mapa-Mestre-Executado/01-Regenera-Web-Production/package-lock.json,d1ca73f7bc0f452f444e843a6414595ce23da4d8b894b45a9d8bab0490f8c859,84142
+769,1. PRODUCAO REGENERA CORE 5(5).zip,1. PRODUCAO REGENERA CORE/03-enterprise-web-platform/package.json,4833d0895f451f40e60b7ef25b070db5eb5e2c53bfad484fd16dbb34a71e6541,2486
+769,Arquivo(5).zip,2.Mapa-Mestre-Executado/01-Regenera-Web-Production/package.json,4c83b7e14c15654ec11951b032d69210b03e3984a490675d7cd228fd3e2f0228,609
+769,regenera-bank.zip,regenera-bank/03-channels/regenera-channel-web-banking/package.json,a8b4807b7fb84cf0b9c92fc4746ff83845a0d5ab6113c7d8cc67e5c2ac0c1770,447
+890,Arquivo(5).zip,2.Mapa-Mestre-Executado/01-Regenera-Web-Production/src/app/error.tsx,915cc913fc584aba92a6b46733f1602064c5132181cf7d86f7d946e8dd84985a,386
+890,regenera-bank.zip,regenera-bank/03-channels/regenera-channel-web-banking/src/app/error.tsx,f3a2386722f30ea3291ba497c518a694fdfecb5e102981b107f369dab3ea6c2a,120
+893,Arquivo(5).zip,2.Mapa-Mestre-Executado/01-Regenera-Web-Production/src/app/layout.tsx,d6916e11d788bc28ba035f15d26f4c4505c128962bb0ba8e7a52d9f582deeec0,260
+893,regenera-bank.zip,regenera-bank/03-channels/regenera-channel-web-banking/src/app/layout.tsx,d1f57ce9f792d7444c16974dedf7a4dfa2bb3a1dd72061828f242b87e12cb142,123
+897,Arquivo(5).zip,2.Mapa-Mestre-Executado/01-Regenera-Web-Production/src/app/page.tsx,96d9a4ed9fa990f2358d2fffa895b4e3fe0d2ca6d6670b3351307b455b96935b,100
+897,regenera-bank.zip,regenera-bank/03-channels/regenera-channel-web-banking/src/app/page.tsx,a4466bd7cf254d85e514232ea5e5dfbaceafac53f939df0cb8d5d22a46994974,117
+1130,1. PRODUCAO REGENERA CORE 5(5).zip,1. PRODUCAO REGENERA CORE/03-enterprise-web-platform/tsconfig.json,53b9980efd2cfb3e787bd1d252a084d0f4e10f9b6ce2af030078e84dc80d96e7,1144
+1130,Arquivo(5).zip,2.Mapa-Mestre-Executado/01-Regenera-Web-Production/tsconfig.json,a41471328dd208398ea583dbfc94673d34650a47bffb0f7b32c1f31e90a17a1a,748
+1130,regenera-bank.zip,regenera-bank/03-channels/regenera-channel-web-banking/tsconfig.json,686e7b42c5f557e903aaa2a7a4f61286191577294c93b076c4e5d1d6708fc410,222
+1132,1. PRODUCAO REGENERA CORE 5(5).zip,1. PRODUCAO REGENERA CORE/03-enterprise-web-platform/vercel.json,b0bf3e07bd3149367e285fc70db5a80b64246c9b26571f0dc5a69849227d0449,199
+1132,Arquivo(5).zip,2.Mapa-Mestre-Executado/01-Regenera-Web-Production/vercel.json,f625a99e3da8eed7f7fb19fb67eca8ebd7ceeed68e61be49c8014dfce4c6b358,151
+1164,02-Regenera-Channels-BFFs(1).zip,03-channels/regenera-channel-windows-operations/README.md,279ba8fa36fcee3e54136d191c424d98b12d8b7193c8a096945f55270bd44118,492
+1164,Arquivo(5).zip,2.Mapa-Mestre-Executado/04-Regenera-Windows-Operations-Production/README.md,279ba8fa36fcee3e54136d191c424d98b12d8b7193c8a096945f55270bd44118,492
+1164,regenera-bank.zip,regenera-bank/03-channels/regenera-channel-windows-operations/README.md,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,527
+1310,02-Regenera-Channels-BFFs(1).zip,04-bffs/regenera-bff-mobile/Dockerfile,9a2c27e06ad60c9bf22c0ce4771db331b67c66b28dd2d10b2de1b710f241ad47,130
+1310,regenera-bank.zip,regenera-bank/04-bffs/regenera-bff-mobile/Dockerfile,8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,156
+1314,02-Regenera-Channels-BFFs(1).zip,04-bffs/regenera-bff-mobile/README.md,b2a07d2cebdffcaffa14ea267b69717d31e453ea0f20e35ddee3111c9fb82e77,510
+1314,regenera-bank.zip,regenera-bank/04-bffs/regenera-bff-mobile/README.md,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,527
+1333,02-Regenera-Channels-BFFs(1).zip,04-bffs/regenera-bff-mobile/service.yaml,eb4f38c3b8d10954af0ef61f1466faada38aa77062f4d7933e701318586a9f5f,203
+1333,regenera-bank.zip,regenera-bank/04-bffs/regenera-bff-mobile/service.yaml,98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,226
+1406,02-Regenera-Channels-BFFs(1).zip,04-bffs/regenera-bff-operations/Dockerfile,6a0e4da801526f2ccf7f805528a43eb9724c073e55a4350aa42542266fec0dd9,134
+1406,regenera-bank.zip,regenera-bank/04-bffs/regenera-bff-operations/Dockerfile,8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,156
+1410,02-Regenera-Channels-BFFs(1).zip,04-bffs/regenera-bff-operations/README.md,f439407f4dcb4ddfb629e1e8f2b9b10ea94ab237ca76b807cec26b1aaa01b408,526
+1410,regenera-bank.zip,regenera-bank/04-bffs/regenera-bff-operations/README.md,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,527
+1429,02-Regenera-Channels-BFFs(1).zip,04-bffs/regenera-bff-operations/service.yaml,e88d4acb73eea2762a9e29677237fb6b84da1d22f0b612e6554f4678f71c2745,223
+1429,regenera-bank.zip,regenera-bank/04-bffs/regenera-bff-operations/service.yaml,98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,226
+1470,02-Regenera-Channels-BFFs(1).zip,04-bffs/regenera-api-partners/Dockerfile,52bd2b39e4b5d154f5d1aba8cd748c451699f0f98d47dbc8e272e2a0ace98c43,348
+1470,Arquivo(5).zip,2.Mapa-Mestre-Executado/05-Regenera-Partner-APIs-Production/Dockerfile,52bd2b39e4b5d154f5d1aba8cd748c451699f0f98d47dbc8e272e2a0ace98c43,348
+1470,regenera-bank.zip,regenera-bank/04-bffs/regenera-api-partners/Dockerfile,8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,156
+1474,02-Regenera-Channels-BFFs(1).zip,04-bffs/regenera-api-partners/README.md,ee5c045e1bf83ea9226211d491dd8aafd498adac1977dfa17d76479b8530f1dc,490
+1474,Arquivo(5).zip,2.Mapa-Mestre-Executado/05-Regenera-Partner-APIs-Production/README.md,ee5c045e1bf83ea9226211d491dd8aafd498adac1977dfa17d76479b8530f1dc,490
+1474,regenera-bank.zip,regenera-bank/04-bffs/regenera-api-partners/README.md,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,527
+1505,02-Regenera-Channels-BFFs(1).zip,04-bffs/regenera-api-partners/service.yaml,49afc0a641d7fa7d893abe744bce49509eac40d98ac1c3deb3a036e87f533108,209
+1505,regenera-bank.zip,regenera-bank/04-bffs/regenera-api-partners/service.yaml,98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,226
+1559,02-Regenera-Channels-BFFs(1).zip,04-bffs/regenera-bff-web/Dockerfile,2581cf97b11f7e61ae92698b29541134c27db4adf53586ba95a634964eae0b04,127
+1559,regenera-bank.zip,regenera-bank/04-bffs/regenera-bff-web/Dockerfile,8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,156
+1563,02-Regenera-Channels-BFFs(1).zip,04-bffs/regenera-bff-web/README.md,4226d9c125caea4d9804869eb3be71743cd89fcb7474bcfd383a5f5748269ed6,501
+1563,regenera-bank.zip,regenera-bank/04-bffs/regenera-bff-web/README.md,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,527
+1582,02-Regenera-Channels-BFFs(1).zip,04-bffs/regenera-bff-web/service.yaml,16cbcfb3b755e6c44000f21d0f7fa0aa0e5333ce6a7187d4af7ea3cc69b07625,191
+1582,regenera-bank.zip,regenera-bank/04-bffs/regenera-bff-web/service.yaml,98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,226
+2386,03-Regenera-Core-Risk-Control(1).zip,06-risk-control/regenera-control-accounting/Dockerfile,989579c296898f745a224bba4514a9cc81ce2bc286362debc17050da6542e390,153
+2386,regenera-bank.zip,regenera-bank/06-risk-control/regenera-control-accounting/Dockerfile,8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,156
+2390,03-Regenera-Core-Risk-Control(1).zip,06-risk-control/regenera-control-accounting/README.md,7841bb116f0fb019235145bb249701847a6a5b3961191711c1cc1628838c6409,526
+2390,regenera-bank.zip,regenera-bank/06-risk-control/regenera-control-accounting/README.md,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,527
+2445,03-Regenera-Core-Risk-Control(1).zip,06-risk-control/regenera-control-accounting/service.yaml,0ff18b973cea3c8bf4b86572191595f270573624b480674d37b35811f59d86e3,218
+2445,regenera-bank.zip,regenera-bank/06-risk-control/regenera-control-accounting/service.yaml,98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,226
+2474,03-Regenera-Core-Risk-Control(1).zip,05-core-banking/regenera-core-accounts/Dockerfile,d624a3c6237adf9c55920bb04f488f93f16b89c088fd9f7cf05ffbebcfdfc43f,148
+2474,regenera-bank.zip,regenera-bank/05-core-banking/regenera-core-accounts/Dockerfile,8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,156
+2478,03-Regenera-Core-Risk-Control(1).zip,05-core-banking/regenera-core-accounts/README.md,ae3fbb87893242a53970ca9770a5ff7f5aaa22df529991af5c5656c8a7485ff0,517
+2478,regenera-bank.zip,regenera-bank/05-core-banking/regenera-core-accounts/README.md,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,527
+2503,03-Regenera-Core-Risk-Control(1).zip,05-core-banking/regenera-core-accounts/service.yaml,e20ca5217e52973a7fae3a2837afd5a9bfc1dfa0d14dc8e051db4d3b24a23655,207
+2503,regenera-bank.zip,regenera-bank/05-core-banking/regenera-core-accounts/service.yaml,98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,226
+2757,03-Regenera-Core-Risk-Control(1).zip,05-core-banking/regenera-core-cards/Dockerfile,3780830faf61f21849f0d8dc0d36a99b772bbf879bd0a360d4488a0e342b9715,145
+2757,regenera-bank.zip,regenera-bank/05-core-banking/regenera-core-cards/Dockerfile,8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,156
+2761,03-Regenera-Core-Risk-Control(1).zip,05-core-banking/regenera-core-cards/README.md,e4cc95e1a1491d03df648ffe4a519f82b0b0c17e68ee601f89e21012ae99f7fe,508
+2761,regenera-bank.zip,regenera-bank/05-core-banking/regenera-core-cards/README.md,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,527
+2779,03-Regenera-Core-Risk-Control(1).zip,05-core-banking/regenera-core-cards/service.yaml,87032af1497e792c03ee38be019dba6feae51bd76a0bc21ec00796a8570faa74,195
+2779,regenera-bank.zip,regenera-bank/05-core-banking/regenera-core-cards/service.yaml,98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,226
+3100,03-Regenera-Core-Risk-Control(1).zip,05-core-banking/regenera-core-customers/Dockerfile,ea5feb9663f9a08e0cebeec3592ddfea6cf6dde243447d49fb4403dc2dbce1b3,149
+3100,regenera-bank.zip,regenera-bank/05-core-banking/regenera-core-customers/Dockerfile,8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,156
+3104,03-Regenera-Core-Risk-Control(1).zip,05-core-banking/regenera-core-customers/README.md,3554c8b42793b311736f98d5ed940eebe900735b3fc8da5ad20f385fca54461f,520
+3104,regenera-bank.zip,regenera-bank/05-core-banking/regenera-core-customers/README.md,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,527
+3133,03-Regenera-Core-Risk-Control(1).zip,05-core-banking/regenera-core-customers/service.yaml,3f1be6b3529d55dda760e15009da00bdfcdd13736be960a04683ec1dd7f883d1,211
+3133,regenera-bank.zip,regenera-bank/05-core-banking/regenera-core-customers/service.yaml,98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,226
+3287,03-Regenera-Core-Risk-Control(1).zip,05-core-banking/regenera-core-fees/Dockerfile,7d43bea7f7ef15f9fa9f12e52807b1a67db2be24259eb1ae522dab120df49fa3,144
+3287,regenera-bank.zip,regenera-bank/05-core-banking/regenera-core-fees/Dockerfile,8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,156
+3291,03-Regenera-Core-Risk-Control(1).zip,05-core-banking/regenera-core-fees/README.md,c6e18ee208ff69531291bcd3ee40d83745d0c5a237358020a83de8c6c8044156,501
+3291,regenera-bank.zip,regenera-bank/05-core-banking/regenera-core-fees/README.md,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,527
+3309,03-Regenera-Core-Risk-Control(1).zip,05-core-banking/regenera-core-fees/service.yaml,0b62bf438cf93936a5e17359d15ed299610440b4c683055194f31377532ed9bb,187
+3309,regenera-bank.zip,regenera-bank/05-core-banking/regenera-core-fees/service.yaml,98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,226
+3429,03-Regenera-Core-Risk-Control(1).zip,05-core-banking/regenera-core-identity/Dockerfile,f92afc003b9cee2d4c8775a1bf40b8d4ceec0e2173f37308436535e7cdde45ce,148
+3429,regenera-bank.zip,regenera-bank/05-core-banking/regenera-core-identity/Dockerfile,8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,156
+3433,03-Regenera-Core-Risk-Control(1).zip,05-core-banking/regenera-core-identity/README.md,df969dec916b02c308e8dee37f06e52ff4ced9365dc72333db0351409d307862,517
+3433,regenera-bank.zip,regenera-bank/05-core-banking/regenera-core-identity/README.md,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,527
+3506,03-Regenera-Core-Risk-Control(1).zip,05-core-banking/regenera-core-identity/service.yaml,88a4d2b9c9a7035b5ce467702efabbd6bce687e4f451f46f11cb8bec646d52ba,207
+3506,regenera-bank.zip,regenera-bank/05-core-banking/regenera-core-identity/service.yaml,98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,226
+3512,ARQUIVOS 2(1).zip,ARQUIVOS 2/2 PARTE /session.service.ts,ae421d19eb11a33e224d6b9ba223575b9a55b2cb25a3ba5a29d718244ecdd4cb,11538
+3512,ARQUIVOS 2(1).zip,ARQUIVOS 2/CLAUDE FABLE 5/session.service.ts,ae421d19eb11a33e224d6b9ba223575b9a55b2cb25a3ba5a29d718244ecdd4cb,11538
+3512,ARQUIVOS 2(1).zip,ARQUIVOS 2/session.service.ts,0a8fab7faab87963638583faf879f59aa0169d796ce5361314f3f28a3f87c423,13101
+3654,03-Regenera-Core-Risk-Control(1).zip,05-core-banking/regenera-core-ledger/Dockerfile,c24065b6ee8c0efc75120f9fdb4db2f7c7910cf61733200b56c77163bc4ed155,146
+3654,regenera-bank.zip,regenera-bank/05-core-banking/regenera-core-ledger/Dockerfile,8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,156
+3658,03-Regenera-Core-Risk-Control(1).zip,05-core-banking/regenera-core-ledger/README.md,32c7b8082d50b5009446147a341abbf7a9816ccfbb2b2f15e23b3c042d5375e1,511
+3658,regenera-bank.zip,regenera-bank/05-core-banking/regenera-core-ledger/README.md,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,527
+3691,03-Regenera-Core-Risk-Control(1).zip,05-core-banking/regenera-core-ledger/service.yaml,f53d38ade1257c62c026db9e8e7b2ce1fdae52de3c1e021e89eac8088ad43da6,199
+3691,regenera-bank.zip,regenera-bank/05-core-banking/regenera-core-ledger/service.yaml,98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,226
+3693,ARQUIVOS 2(1).zip,ARQUIVOS 2/2 PARTE /ledger-posting.service.ts,e77ab119350d812a1bcd27d88b0a573eb33d204ff77ca7c24e6b6a2af4d58994,6652
+3693,ARQUIVOS 2(1).zip,ARQUIVOS 2/CLAUDE FABLE 5/ledger-posting.service.ts,e77ab119350d812a1bcd27d88b0a573eb33d204ff77ca7c24e6b6a2af4d58994,6652
+3693,ARQUIVOS 2(1).zip,ARQUIVOS 2/ledger-posting.service.ts,8eaa01c49b9eaf1eaf6cd3f210f56a350801bd7cbbd6d23dcb3e865b587fd330,10944
+3694,ARQUIVOS 2(1).zip,ARQUIVOS 2/2 PARTE /money.value-object.ts,bad3af362e545ca26bd0275ac261eabbea90e74abf3bfd1ed1c775d6e5dce757,6702
+3694,ARQUIVOS 2(1).zip,ARQUIVOS 2/CLAUDE FABLE 5/money.value-object.ts,bad3af362e545ca26bd0275ac261eabbea90e74abf3bfd1ed1c775d6e5dce757,6702
+3694,ARQUIVOS 2(1).zip,ARQUIVOS 2/money.value-object.ts,06129cc548ffa352bddc94af10d9680b38af24b64f5f24f96fd143d331f8d3b0,6203
+3765,03-Regenera-Core-Risk-Control(1).zip,05-core-banking/regenera-core-limits/Dockerfile,63bbce184df08d117e724df08802234dd4c083c2dbdf8293c576c1296605abd1,146
+3765,regenera-bank.zip,regenera-bank/05-core-banking/regenera-core-limits/Dockerfile,8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,156
+3769,03-Regenera-Core-Risk-Control(1).zip,05-core-banking/regenera-core-limits/README.md,f9eadbfe8b9f048fe79e0f6099b122434d72c9e5241078625b36a43e24e688af,507
+3769,regenera-bank.zip,regenera-bank/05-core-banking/regenera-core-limits/README.md,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,527
+3787,03-Regenera-Core-Risk-Control(1).zip,05-core-banking/regenera-core-limits/service.yaml,1650c3789bf22cd50335c5bc35b451049f78de782ebe8d54b06b82c9a4945346,195
+3787,regenera-bank.zip,regenera-bank/05-core-banking/regenera-core-limits/service.yaml,98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,226
+3852,03-Regenera-Core-Risk-Control(1).zip,05-core-banking/regenera-core-notifications/Dockerfile,cc6bfd90711e1ea57a6fc249b1c4847433acd476791c45debfd0ea8b2a5e7e88,153
+3852,regenera-bank.zip,regenera-bank/05-core-banking/regenera-core-notifications/Dockerfile,8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,156
+3856,03-Regenera-Core-Risk-Control(1).zip,05-core-banking/regenera-core-notifications/README.md,6484f5ad81919a38a4cc62495fd3d0ac8d125a04453e5692a292ea14773557d8,528
+3856,regenera-bank.zip,regenera-bank/05-core-banking/regenera-core-notifications/README.md,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,527
+3874,03-Regenera-Core-Risk-Control(1).zip,05-core-banking/regenera-core-notifications/service.yaml,f0d3078271b123aa76c904a62a8856fcceb34db8045fcf2487a9c6def48a254a,223
+3874,regenera-bank.zip,regenera-bank/05-core-banking/regenera-core-notifications/service.yaml,98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,226
+3983,ARQUIVOS 2(1).zip,ARQUIVOS 2/2 PARTE /state-machines.ts,47f7799feb6cb36618e13d8afd3d31d5a6059e84409cd49ed4f760e2cf8aa807,4938
+3983,ARQUIVOS 2(1).zip,ARQUIVOS 2/CLAUDE FABLE 5/state-machines.ts,47f7799feb6cb36618e13d8afd3d31d5a6059e84409cd49ed4f760e2cf8aa807,4938
+3983,ARQUIVOS 2(1).zip,ARQUIVOS 2/state-machines.ts,8a1ba4712370eb9e92cf81683262caa8bd0ebd030951380d48088d59a54c6276,8819
+4016,03-Regenera-Core-Risk-Control(1).zip,05-core-banking/regenera-core-pix/Dockerfile,5b8a22975f1dd7f4ff0beabf2e0d429c1aa95b890aa24655afc232cd6763e7e3,143
+4016,regenera-bank.zip,regenera-bank/05-core-banking/regenera-core-pix/Dockerfile,8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,156
+4020,03-Regenera-Core-Risk-Control(1).zip,05-core-banking/regenera-core-pix/README.md,ee67a43b3e55fad921e7b48bde44a61c02fb3435ab04ed32ce529286a04fa541,502
+4020,regenera-bank.zip,regenera-bank/05-core-banking/regenera-core-pix/README.md,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,527
+4038,03-Regenera-Core-Risk-Control(1).zip,05-core-banking/regenera-core-pix/service.yaml,b24bd495d76e2792fdaf7cfa6cde6ead9a0c08ce010f5b9e7df1d0cdffa7d216,187
+4038,regenera-bank.zip,regenera-bank/05-core-banking/regenera-core-pix/service.yaml,98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,226
+4129,03-Regenera-Core-Risk-Control(1).zip,06-risk-control/regenera-control-reconciliation/Dockerfile,9a951998a2fc07767fe03c9de87463b9e8eacd85451bfb5f7929ace702f2e83b,157
+4129,regenera-bank.zip,regenera-bank/06-risk-control/regenera-control-reconciliation/Dockerfile,8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,156
+4133,03-Regenera-Core-Risk-Control(1).zip,06-risk-control/regenera-control-reconciliation/README.md,9f77fea3be31b21a2aa0d489d728e1a12c54e2d0ebf95165def0c78eec95879e,538
+4133,regenera-bank.zip,regenera-bank/06-risk-control/regenera-control-reconciliation/README.md,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,527
+4153,03-Regenera-Core-Risk-Control(1).zip,06-risk-control/regenera-control-reconciliation/service.yaml,3d832513f80baee3ff412c4ca62516b2750a65dc64359b388272c8f5c7be1707,234
+4153,regenera-bank.zip,regenera-bank/06-risk-control/regenera-control-reconciliation/service.yaml,98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,226
+4336,03-Regenera-Core-Risk-Control(1).zip,05-core-banking/regenera-core-transactions/Dockerfile,378699dbe3d244a3626f6ba6d73b02b9d68ead279636fcdff96cc3ce91777dcd,152
+4336,regenera-bank.zip,regenera-bank/05-core-banking/regenera-core-transactions/Dockerfile,8cca466669df64368d1c1cf442f58f2fe4f29ce7152618050ec7d97232fe01b6,156
+4340,03-Regenera-Core-Risk-Control(1).zip,05-core-banking/regenera-core-transactions/README.md,5dbc12a3e81fa6cdb77dd5a3dd94f0dfcaa16f6e3404606fa6e807e69ecbcd28,529
+4340,regenera-bank.zip,regenera-bank/05-core-banking/regenera-core-transactions/README.md,853d884214a65d5694efd688cb6cbb84c22b1c2ae80ae83bea3bc5716eb977b3,527
+4358,03-Regenera-Core-Risk-Control(1).zip,05-core-banking/regenera-core-transactions/service.yaml,6dfdb89e9d8448e9bb2ec213efcf759dc33d14e62b3af22a5f846e86e5767eca,223
+4358,regenera-bank.zip,regenera-bank/05-core-banking/regenera-core-transactions/service.yaml,98919c541203ca1af74cbb630d4ff63db5ea8b37a88a60c09d25618f6427dccd,226

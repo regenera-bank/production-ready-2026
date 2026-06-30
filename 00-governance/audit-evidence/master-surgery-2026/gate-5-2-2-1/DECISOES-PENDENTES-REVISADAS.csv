@@ -1,0 +1,3 @@
+decision_id,capacidade,tema,decisão_necessária,alternativas,recomendacao,evidência,risco,owner_necessário,bloqueia_implementação,bloqueia_integração,bloqueia_produção,momento_resolucao,status
+D-01,Idempotency,Locking,Row-lock ou Redis,PG SELECT FOR UPDATE vs REDIS SETNX,PG SELECT FOR UPDATE,Evita brain-split infra,Gargalo no banco,Arquitetura,SIM,SIM,SIM,Antes do Design Tecnico,PENDENTE
+D-02,Audit,Retenção Legal,Prazo de expurgo,1 ano / 5 anos / 10 anos,10 anos offline,Regra Bacen Circular X,Multa regulatoria,Juridico,NAO,NAO,SIM,Antes do Go-Live,PENDENTE

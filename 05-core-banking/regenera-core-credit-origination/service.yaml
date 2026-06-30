@@ -1,0 +1,12 @@
+name: regenera-core-credit-origination
+domain: credit-origination
+owner: team-credit-origination
+criticality: high
+data_classification: banking-secret
+runtime: jvm
+tier: 1
+rto: 4h
+rpo: 1h
+on_call: credit-origination-primary
+dependencies:
+  []

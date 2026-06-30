@@ -1,0 +1,12 @@
+name: regenera-tool-contract-linter
+domain: contract-linter
+owner: team-developer-experience
+criticality: medium
+data_classification: banking-secret
+runtime: python
+tier: 2
+rto: 4h
+rpo: 1h
+on_call: contract-linter-primary
+dependencies:
+  []

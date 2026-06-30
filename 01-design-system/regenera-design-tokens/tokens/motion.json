@@ -1,0 +1,8 @@
+{
+  "motion": {
+    "fast": "150ms",
+    "normal": "250ms",
+    "slow": "420ms",
+    "reduced": "0ms"
+  }
+}

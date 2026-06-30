@@ -1,0 +1,220 @@
+Relatório Técnico: Arquitetura de Microsserviços do Regenera Bank
+
+1.0 Introdução à Arquitetura do Regenera Bank
+
+Este relatório fornece uma análise técnica detalhada da arquitetura de backend do Regenera Bank. A adoção de uma arquitetura de microsserviços representa um pilar estratégico fundamental, projetado para suportar os objetivos de negócio da instituição, que incluem agilidade para inovação, escalabilidade para o crescimento e resiliência operacional. Embora esta abordagem introduza uma maior complexidade operacional e a necessidade de uma observabilidade robusta — desafios que serão abordados posteriormente neste relatório — os benefícios estratégicos superam largamente estas considerações, permitindo que a tecnologia atue como um facilitador direto da visão de negócio.
+
+A filosofia arquitetural central do Regenera Bank é baseada no princípio do desacoplamento e da autonomia de serviços. Utilizando a analogia de uma "federação de pequenas nações independentes", cada microsserviço opera como uma entidade autônoma, especialista em um domínio de negócio específico — como contas, PIX ou cartões. Embora independentes em sua operação e implantação, esses serviços são projetados para colaborar de forma coesa, comunicando-se através de interfaces bem definidas para compor funcionalidades complexas.
+
+A relevância estratégica desta abordagem é multifacetada. Primeiramente, ela confere agilidade, permitindo que equipes distintas trabalhem em paralelo, desenvolvendo e implantando novas funcionalidades de forma independente e acelerada. Em segundo lugar, promove a resiliência; a falha de um serviço específico não compromete o funcionamento do ecossistema como um todo, isolando o impacto e garantindo a continuidade das operações críticas. Por fim, a arquitetura é intrinsecamente escalável, possibilitando que cada serviço seja dimensionado individualmente para atender a picos de demanda específicos, otimizando o uso de recursos e garantindo a performance.
+
+Com essa base conceitual estabelecida, este relatório procederá com uma visão geral do ecossistema, detalhando como esses serviços autônomos se integram para formar uma plataforma bancária robusta e coesa.
+
+2.0 Visão Geral do Ecossistema de Backend
+
+Para compreender a eficácia da arquitetura do Regenera Bank, é essencial ter uma visão holística de como os diversos componentes interagem. Desde a primeira solicitação do cliente até a persistência final dos dados, cada camada do sistema foi projetada para desempenhar uma função específica, contribuindo para a funcionalidade, segurança e robustez do conjunto. O fluxo de uma requisição típica através do ecossistema demonstra essa orquestração de responsabilidades.
+
+O percurso de uma interação do usuário com o banco segue uma sequência bem definida de etapas, cada uma gerenciada por um componente especializado:
+
+1. Clientes (Frontend/Mobile): O ponto de partida de toda interação. As aplicações cliente, seja o dashboard web (apps/frontend) ou o aplicativo móvel (apps/mobile-app), são responsáveis por apresentar a interface ao usuário e iniciar as requisições para o backend.
+2. Infraestrutura de Borda (AWS CloudFront): A primeira camada de contato da infraestrutura. O AWS CloudFront atua como a rede de distribuição de conteúdo (CDN), acelerando a entrega de ativos estáticos e funcionando como um primeiro nível de segurança, integrado ao AWS WAF (Web Application Firewall) para mitigar ameaças comuns.
+3. Gateway de API (api-gateway): O ponto de entrada unificado para todos os serviços de backend. Este microsserviço centraliza a gestão das requisições externas, sendo responsável pelo roteamento para os serviços internos apropriados, pela implementação de rate limiting para proteção contra abusos e pela agregação de respostas de múltiplos serviços quando necessário.
+4. Camada de Serviços (Microsserviços): O coração do sistema, onde a lógica de negócio é executada. Esta camada é composta por múltiplos serviços independentes (ex: account-service, pix-service), cada um focado em um domínio específico do negócio bancário.
+5. Camada de Comunicação e Mensageria (HTTP, gRPC, RabbitMQ): Os mecanismos que permitem a interação entre os microsserviços. A comunicação pode ser síncrona, utilizando REST/HTTP para APIs externas e gRPC para chamadas internas de alta performance, ou assíncrona, utilizando RabbitMQ para desacoplar serviços e processar tarefas em segundo plano.
+6. Camada de Persistência (PostgreSQL, MongoDB, Redis, Elasticsearch): A base do sistema, responsável por armazenar o estado. A arquitetura adota uma abordagem de persistência poliglota, utilizando PostgreSQL como banco de dados relacional para a maioria dos serviços, MongoDB para dados não estruturados de analytics, Redis, utilizado especificamente pelo api-gateway para implementar rate limiting, e Elasticsearch para capacidades de busca e logging centralizado.
+
+A seguir, este relatório aprofundará a análise de cada microsserviço individual, detalhando suas responsabilidades e interações dentro deste ecossistema coeso.
+
+3.0 Análise Detalhada dos Microsserviços
+
+Esta seção apresenta a análise central da arquitetura, detalhando cada microsserviço que compõe o backend do Regenera Bank. Cada serviço foi projetado seguindo o Princípio da Responsabilidade Única (Single Responsibility Principle), o que resulta em componentes com alta coesão interna e baixo acoplamento externo. Essa separação clara de responsabilidades é o que permite a manutenibilidade, a escalabilidade e a autonomia das equipes de desenvolvimento.
+
+3.1 Microsserviços do Domínio Central (Core Banking)
+
+Estes serviços constituem o núcleo das operações bancárias, gerenciando as funcionalidades essenciais para os clientes.
+
+3.1.1 auth-service (Serviço de Autenticação)
+
+* Finalidade Principal: Gerenciar a autenticação e autorização de usuários, atuando como o guardião de acesso ao ecossistema.
+* Responsabilidades-Chave: Validar credenciais de login, gerenciar o registro de novos usuários e emitir/verificar JSON Web Tokens (JWTs) para proteger as APIs.
+* Tecnologias e Persistência: Este serviço é stateless, uma característica arquitetural crucial que permite que ele seja escalado horizontalmente com facilidade. Qualquer instância do serviço pode processar uma requisição de autenticação sem depender de um estado de sessão armazenado localmente; ele delega a persistência de dados do usuário para o user-service.
+* Interações e Dependências: Comunica-se com o user-service via gRPC para validar e recuperar informações do usuário durante os processos de login e registro.
+
+3.1.2 user-service (Serviço de Usuário)
+
+* Finalidade Principal: Atuar como o repositório central para todas as informações de perfil dos usuários.
+* Responsabilidades-Chave: Fornecer operações de CRUD (Criação, Leitura, Atualização, Exclusão) para os dados dos usuários, como nome, e-mail e hash de senha.
+* Tecnologias e Persistência: Utiliza PostgreSQL para persistir os dados dos usuários.
+* Interações e Dependências: Expõe uma interface gRPC para ser consumida pelo auth-service, garantindo uma comunicação interna de baixa latência para validação de credenciais.
+
+3.1.3 account-service (Serviço de Conta)
+
+* Finalidade Principal: Gerenciar as contas bancárias e os saldos dos clientes.
+* Responsabilidades-Chave: Executar operações financeiras críticas como débito, crédito e consulta de saldo. Garante a integridade financeira das contas.
+* Tecnologias e Persistência: Utiliza PostgreSQL para armazenar os dados das contas e saldos, aproveitando a consistência transacional do banco de dados relacional.
+* Interações e Dependências: Expõe tanto APIs públicas para os clientes quanto endpoints internos seguros (e.g., /internal/...) para operações críticas de débito e crédito, que são consumidos por serviços como o pix-service.
+
+3.1.4 pix-service (Serviço de PIX)
+
+* Finalidade Principal: Orquestrar o fluxo de transferências PIX, gerenciando a comunicação entre diferentes partes do sistema e sistemas externos.
+* Responsabilidades-Chave: Iniciar e gerenciar transações PIX, utilizando o padrão Saga para garantir a consistência entre múltiplos serviços.
+* Tecnologias e Persistência: Utiliza PostgreSQL para armazenar o histórico de transações PIX.
+* Interações e Dependências: Interage com o account-service via HTTP para debitar a conta de origem e creditar a conta de destino. Publica eventos de transação no RabbitMQ para serem consumidos por outros serviços.
+
+3.1.5 card-service (Serviço de Cartões)
+
+* Finalidade Principal: Gerenciar o ciclo de vida de cartões de pagamento, tanto físicos quanto virtuais.
+* Responsabilidades-Chave: Processar a criação de novos cartões, consulta de dados e atualização de status (ativo, bloqueado, etc.).
+* Tecnologias e Persistência: Utiliza PostgreSQL para armazenar as informações dos cartões.
+* Interações e Dependências: É consumido pelo api-gateway para expor suas funcionalidades aos clientes.
+
+3.1.6 investment-service (Serviço de Investimentos)
+
+* Finalidade Principal: Gerenciar os portfólios de investimento dos clientes.
+* Responsabilidades-Chave: Permitir a criação de portfólios e a execução de ordens de compra de ativos.
+* Tecnologias e Persistência: Utiliza PostgreSQL para persistir os dados de portfólios e investimentos.
+* Interações e Dependências: Comunica-se com o account-service via HTTP para debitar o valor do investimento da conta do cliente.
+
+3.2 Microsserviços de Suporte e Auxiliares
+
+Estes serviços fornecem capacidades transversais que suportam as operações do banco, mas não fazem parte do domínio central do cliente.
+
+3.2.1 notification-service (Serviço de Notificações)
+
+* Finalidade Principal: Gerenciar o envio de comunicações aos usuários, como e-mails, SMS ou notificações push.
+* Responsabilidades-Chave: Consumir eventos da fila de mensageria e acionar o envio de notificações através de provedores externos (como Twilio ou AWS SES).
+* Tecnologias e Persistência: É um serviço primariamente de processamento, sem um banco de dados próprio para armazenamento de estado a longo prazo.
+* Interações e Dependências: Consome eventos publicados por outros serviços, como o pix-service, via RabbitMQ.
+
+3.2.2 analytics-service (Serviço de Analytics)
+
+* Finalidade Principal: Coletar e armazenar eventos de todo o ecossistema para fins de análise de dados e inteligência de negócio.
+* Responsabilidades-Chave: Consumir eventos e persistir logs de forma estruturada para consultas futuras.
+* Tecnologias e Persistência: Utiliza MongoDB (via Amazon DocumentDB) como banco de dados, ideal para armazenar grandes volumes de dados de eventos semi-estruturados.
+* Interações e Dependências: Consome eventos publicados por serviços como o pix-service via RabbitMQ.
+
+3.2.3 compliance-service (Serviço de Conformidade)
+
+* Finalidade Principal: Executar verificações de conformidade regulatória, como Anti-Money Laundering (AML) e Know Your Customer (KYC).
+* Responsabilidades-Chave: Analisar transações e usuários em busca de atividades suspeitas e verificar identidades em listas de sanções.
+* Tecnologias e Persistência: Não possui persistência própria, atuando como um serviço de validação que interage com APIs externas.
+* Interações e Dependências: Consumido por outros serviços para validar a conformidade de operações e usuários.
+
+3.2.4 transaction-service (Serviço de Transações)
+
+* Finalidade Principal: Atuar como um repositório centralizado e unificado para o histórico de todas as transações financeiras (PIX, TED, DOC, etc.).
+* Responsabilidades-Chave: Consolidar dados de diferentes tipos de transações para fins de extrato, reconciliação e auditoria.
+* Tecnologias e Persistência: Utiliza PostgreSQL para armazenar o registro histórico das transações.
+* Interações e Dependências: Inscreve-se em eventos transaction.completed no barramento de mensagens (RabbitMQ) para consolidar os dados e manter um registro unificado.
+
+3.2.5 ai-service (Serviço de IA)
+
+* Finalidade Principal: Fornecer funcionalidades baseadas em inteligência artificial, como assistentes de chat ou análise preditiva.
+* Responsabilidades-Chave: Processar consultas em linguagem natural e retornar insights, integrando-se a modelos de IA como o Gemini.
+* Tecnologias e Persistência: Serviço de processamento sem banco de dados próprio.
+* Interações e Dependências: É exposto através do api-gateway para ser consumido pelas aplicações cliente.
+
+3.2.6 blockchain-service (Serviço de Blockchain)
+
+* Finalidade Principal: Projetado para futuras integrações com tecnologias de registro distribuído, visando aumentar a imutabilidade e auditabilidade das transações críticas. (Nota: Serviço em estágio inicial de desenvolvimento).
+* Responsabilidades-Chave: Em seu estado atual, o serviço é um placeholder para futuras funcionalidades de registro de transações em uma blockchain.
+* Tecnologias e Persistência: A definir.
+* Interações e Dependências: Previsto para consumir eventos de transações do RabbitMQ e interagir com uma rede de blockchain externa ou privada.
+
+Para que essa federação de serviços colabore de maneira eficaz, a definição de padrões de comunicação claros é essencial, um tópico que será detalhado na próxima seção.
+
+4.0 Padrões de Comunicação e Integração
+
+Em uma arquitetura distribuída como a do Regenera Bank, a escolha dos padrões de comunicação é uma decisão estratégica que impacta diretamente o desempenho, o acoplamento entre serviços e a resiliência geral do sistema. A plataforma emprega uma combinação de abordagens síncronas e assíncronas para otimizar diferentes tipos de interação.
+
+4.1 Comunicação Síncrona
+
+A comunicação síncrona é utilizada para interações que exigem uma resposta imediata.
+
+* REST/HTTP: Este é o padrão primário para a comunicação entre os clientes (web/mobile) e o backend, exposto através do api-gateway. A familiaridade e o vasto suporte do ecossistema HTTP o tornam ideal para APIs públicas. Internamente, ele também é utilizado para algumas interações entre serviços que podem tolerar uma latência ligeiramente maior, como a chamada do pix-service para o account-service para realizar um débito.
+* gRPC: Para comunicação interna que exige alta performance e baixa latência, o Regenera Bank utiliza gRPC. Um exemplo notável é a interação entre o auth-service e o user-service. Quando um usuário tenta fazer login, o auth-service precisa validar as credenciais consultando o user-service rapidamente. A utilização de gRPC, com sua serialização binária eficiente via Protocol Buffers, não apenas otimiza essa comunicação crítica, mas também impõe contratos de serviço fortemente tipados (através do arquivo .proto). Esta abordagem reduz significativamente a probabilidade de erros de integração em comparação com JSON sem esquema sobre HTTP.
+
+4.2 Comunicação Assíncrona via Mensageria
+
+Para operações que não requerem uma resposta imediata, a comunicação assíncrona é empregada para desacoplar os serviços e aumentar a resiliência do sistema.
+
+* RabbitMQ: Atua como o message broker central do ecossistema. Quando um serviço precisa notificar outros sobre uma mudança de estado sem precisar esperar por uma resposta, ele publica uma mensagem em uma fila do RabbitMQ. Isso garante que, mesmo se um serviço consumidor estiver temporariamente indisponível, a mensagem permanecerá na fila e será processada assim que o serviço se recuperar.
+  * pix-service: Publica eventos após a conclusão de uma transferência PIX.
+  * notification-service: Consome esses eventos para enviar notificações (e-mail, SMS) ao usuário sobre a transação.
+  * analytics-service: Consome os mesmos eventos para persistir logs de transações no MongoDB para análise posterior.
+
+4.3 Orquestração de Processos com o Padrão Saga
+
+Para gerenciar transações que abrangem múltiplos microsserviços, como uma transferência PIX, o sistema utiliza uma Saga baseada em Orquestração. Este padrão se diferencia da abordagem baseada em Coreografia, onde os serviços reagem a eventos uns dos outros sem um coordenador central. A escolha da orquestração, com o pix-service atuando como coordenador central, simplifica a lógica de transações de compensação e fornece um ponto de controle claro para o fluxo transacional complexo.
+
+* Implementação no pix-service: O arquivo pix-saga.service.ts detalha a implementação da saga, que envolve uma sequência de etapas distribuídas:
+  1. Iniciação com o Banco Central: Uma chamada a um serviço externo para registrar a intenção de transferência.
+  2. Débito na Conta de Origem: Uma chamada síncrona (HTTP) ao account-service.
+  3. Crédito na Conta de Destino: Uma chamada síncrona (HTTP) ao account-service.
+  4. Persistência Local: O registro da transação no banco de dados do próprio pix-service.
+* Transações de Compensação: A principal vantagem do padrão Saga é sua capacidade de lidar com falhas. Se qualquer uma das etapas falhar (por exemplo, o crédito na conta de destino), a saga aciona transações de compensação para reverter as etapas anteriores que já foram concluídas (por exemplo, estornando o débito da conta de origem). Isso garante a consistência dos dados em todo o sistema, mesmo na ausência de uma transação distribuída ACID tradicional.
+
+Esses padrões de comunicação são sustentados por uma infraestrutura de projeto e pilares tecnológicos que garantem consistência e robustez, os quais serão explorados na seção seguinte.
+
+5.0 Estrutura do Projeto e Pilares Tecnológicos
+
+A eficácia de uma arquitetura de microsserviços não depende apenas do design dos serviços individuais, mas também de uma base tecnológica sólida e de uma organização de código que promova a manutenibilidade, a consistência e a colaboração entre as equipes. O Regenera Bank adota uma estrutura de monorepo e pilares de engenharia focados em resiliência e observabilidade.
+
+5.1 Estrutura de Monorepo
+
+O projeto é organizado como um monorepo gerenciado pela ferramenta pnpm workspaces. Esta abordagem centraliza todo o código-fonte em um único repositório, o que oferece vantagens significativas em coesão e compartilhamento de código, ao mesmo tempo em que mantém a separação lógica entre as aplicações. A estrutura de diretórios principal é organizada da seguinte forma:
+
+Diretório	Finalidade
+apps/	Contém as aplicações executáveis, incluindo todos os microsserviços (apps/services/) e as aplicações cliente (apps/frontend, apps/mobile-app). Cada item neste diretório é uma unidade de implantação independente.
+packages/	Contém pacotes de código compartilhado, projetados para serem consumidos pelas aplicações em apps/. Isso evita a duplicação de código e garante consistência em todo o ecossistema. Exemplos incluem @repo/core (tipos e value objects), @repo/resilience (implementação de Circuit Breaker) e @repo/config (configuração centralizada).
+infrastructure/	Contém todas as definições de Infraestrutura como Código (IaC). Os arquivos do Terraform para provisionamento de recursos na AWS e os manifestos do Kubernetes para a implantação dos serviços residem aqui.
+
+5.2 Pilares de Resiliência e Observabilidade
+
+Para operar de forma confiável em um ambiente distribuído, a arquitetura é sustentada por pilares fundamentais de resiliência e observabilidade, implementados como pacotes compartilhados.
+
+* Resiliência (Circuit Breaker): O pacote @repo/resilience implementa o padrão Circuit Breaker utilizando a biblioteca opossum. Este mecanismo monitora as chamadas entre microsserviços. Se um serviço começa a falhar repetidamente, o "circuito se abre", e as chamadas subsequentes para o serviço falho são interrompidas por um período, evitando falhas em cascata e permitindo que o serviço problemático se recupere.
+* Rastreamento Distribuído (Tracing): Em um sistema de microsserviços, uma única requisição de usuário pode atravessar múltiplos serviços. Para depurar problemas e analisar a performance, o pacote @repo/tracing integra OpenTelemetry com um exportador para Jaeger. Isso permite rastrear o ciclo de vida completo de uma requisição, visualizando a latência em cada serviço e identificando gargalos.
+* Logging Estruturado: O pacote @repo/logging implementa um módulo de logging centralizado baseado em winston. Ele produz logs em formato JSON, que é facilmente parsável por sistemas de coleta de logs. Crucialmente, cada entrada de log é automaticamente enriquecida com o par chave-valor { 'service': serviceName } através de um formatador customizado, o que simplifica drasticamente a filtragem e a análise em uma plataforma de logging centralizada como o Elasticsearch.
+
+Com esta base tecnológica estabelecida, a próxima seção abordará como essa arquitetura é provisionada, implantada e gerenciada no ambiente de produção.
+
+6.0 Implantação (CI/CD) e Infraestrutura como Código (IaC)
+
+A automação é um pilar essencial para gerenciar a complexidade inerente a uma arquitetura de microsserviços. No Regenera Bank, a implantação consistente e confiável é garantida através de uma combinação de Infraestrutura como Código (IaC) para o provisionamento de recursos e um pipeline robusto de Integração e Implantação Contínua (CI/CD).
+
+6.1 Provisionamento de Infraestrutura na AWS com Terraform
+
+Toda a infraestrutura de nuvem é definida e gerenciada de forma declarativa utilizando Terraform, cujos arquivos de configuração residem no diretório infrastructure/aws/. Esta abordagem de IaC garante que os ambientes (desenvolvimento, homologação e produção) sejam replicáveis, consistentes e auditáveis. Os principais recursos da AWS gerenciados via Terraform incluem:
+
+* Amazon EKS (Elastic Kubernetes Service): O cluster Kubernetes gerenciado que serve como orquestrador para todos os contêineres dos microsserviços, gerenciando seu ciclo de vida, escalabilidade e rede.
+* Amazon RDS (PostgreSQL Multi-AZ): O banco de dados relacional gerenciado, configurado em modo Multi-AZ (múltiplas zonas de disponibilidade) para alta disponibilidade, utilizado pela maioria dos serviços de core banking.
+* Amazon DocumentDB: O banco de dados compatível com a API do MongoDB, utilizado pelo analytics-service para armazenar dados de eventos de forma escalável.
+* Application Load Balancer (ALB): Responsável por distribuir o tráfego de entrada do usuário para os serviços que rodam no cluster EKS, como o api-gateway.
+* Security Groups: Define as regras de firewall virtual para controlar o tráfego de rede entre os diferentes componentes da arquitetura, garantindo que os serviços só possam se comunicar através das portas e protocolos permitidos.
+* CloudFront e WAF: A rede de distribuição de conteúdo (CDN) para acelerar a entrega do frontend e o Web Application Firewall para proteção contra ameaças na camada de borda da aplicação.
+
+6.2 Pipeline de Integração e Implantação Contínua (CI/CD)
+
+O processo de CI/CD é automatizado utilizando GitHub Actions, conforme definido no arquivo .github/workflows/main.yml. É importante notar que os comentários no arquivo main.yml marcam as etapas de implantação como 'conceptuais', estabelecendo este repositório como um 'Gold Master' ou um modelo de referência para a implementação real do pipeline. As etapas são as seguintes:
+
+1. Build and Test: A primeira etapa verifica a qualidade do código. Ela executa linting para garantir a conformidade com os padrões de estilo, checagem de tipos com TypeScript (tsc --noEmit) e executa a suíte de testes automatizados com cobertura de código (pnpm test:cov).
+2. Build and Push Docker Images: Após a aprovação nos testes, cada microsserviço é empacotado em uma imagem Docker. Essas imagens são então enviadas para o Amazon ECR (Elastic Container Registry), o registro de contêineres privado do banco.
+3. Deploy to Staging: As novas imagens Docker são implantadas automaticamente no ambiente de homologação (Staging). O processo utiliza kubectl para aplicar os manifestos Kubernetes, atualizando os serviços para a nova versão.
+4. Manual Approval for Production: Antes de prosseguir para o ambiente produtivo, o pipeline exige uma aprovação manual de um responsável. Esta etapa serve como um ponto de controle final para validar as mudanças em um ambiente seguro antes do impacto nos clientes.
+5. Deploy to Production: Após a aprovação, a etapa final é acionada, realizando a implantação das novas versões dos serviços no cluster Kubernetes de produção, concluindo o ciclo de entrega.
+
+A combinação de IaC e um pipeline de CI/CD maduro permite que a arquitetura e os processos de automação trabalhem em conjunto para entregar valor de forma rápida e segura.
+
+7.0 Conclusão
+
+Este relatório teve como objetivo fornecer uma análise técnica da arquitetura de backend do Regenera Bank, demonstrando como a escolha estratégica por microsserviços, aliada a práticas modernas de engenharia de software, posiciona a instituição para o sucesso. A análise revela uma arquitetura bem fundamentada, projetada para atender aos requisitos de um banco digital moderno: agilidade, escalabilidade e resiliência.
+
+Os pontos fortes da arquitetura do Regenera Bank podem ser resumidos da seguinte forma:
+
+* Escalabilidade e Resiliência: A combinação de microsserviços independentes, orquestração com Kubernetes e sua capacidade de autoescalonamento (com o Horizontal Pod Autoscaler configurado para escalar quando a utilização de CPU excede 70%, conforme definido em user-service.yaml) e a implementação de padrões de resiliência como o Circuit Breaker cria um sistema robusto. Ele é capaz de se adaptar a picos de demanda e isolar falhas, garantindo a continuidade das operações críticas.
+* Agilidade e Inovação Acelerada: A autonomia das equipes, o escopo bem definido de cada serviço e um pipeline de CI/CD totalmente automatizado permitem que o banco entregue novas funcionalidades ao mercado de forma rápida e segura, reduzindo o time-to-market e fomentando uma cultura de inovação contínua.
+* Manutenibilidade e Coesão: A estrutura de monorepo gerenciada com pnpm workspaces, juntamente com o uso de pacotes compartilhados para código transversal (como configuração, logging e tipos de domínio), promove a consistência em todo o ecossistema, reduz a duplicação de código e simplifica a manutenção a longo prazo.
+* Segurança e Integridade: A arquitetura é construída sobre uma base de nuvem segura (AWS), com controle de acesso granular entre os componentes via Security Groups, processos de autenticação centralizados no auth-service e uma abordagem de Infraestrutura como Código que torna as configurações de segurança auditáveis e replicáveis.
+
+Em suma, a arquitetura de microsserviços do Regenera Bank está solidamente fundamentada e alinhada com as melhores práticas da indústria de tecnologia. O design modular, os processos automatizados e os pilares de resiliência e observabilidade criam uma plataforma tecnológica robusta, preparada para suportar o crescimento sustentável e a inovação contínua da instituição no competitivo cenário financeiro.

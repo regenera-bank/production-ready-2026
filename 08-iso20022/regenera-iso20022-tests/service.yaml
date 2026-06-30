@@ -1,0 +1,12 @@
+name: regenera-iso20022-tests
+domain: iso20022-tests
+owner: team-quality
+criticality: critical
+data_classification: banking-secret
+runtime: jvm
+tier: 0
+rto: 15m
+rpo: 0
+on_call: iso20022-tests-primary
+dependencies:
+  []

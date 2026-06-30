@@ -1,0 +1,12 @@
+name: regenera-regulatory-cloud-outsourcing
+domain: cloud-outsourcing
+owner: team-regulatory-cloud-outsourcing
+criticality: critical
+data_classification: banking-secret
+runtime: docs
+tier: 0
+rto: 15m
+rpo: 0
+on_call: cloud-outsourcing-primary
+dependencies:
+  []

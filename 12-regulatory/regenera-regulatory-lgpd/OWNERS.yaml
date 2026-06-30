@@ -1,0 +1,6 @@
+owners:
+  primary: team-regulatory-lgpd
+  approvers:
+    - team-architecture
+    - team-security
+  on_call: lgpd-primary

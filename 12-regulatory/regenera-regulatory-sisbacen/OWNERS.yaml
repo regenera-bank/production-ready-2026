@@ -1,0 +1,6 @@
+owners:
+  primary: team-regulatory-sisbacen
+  approvers:
+    - team-architecture
+    - team-security
+  on_call: sisbacen-primary

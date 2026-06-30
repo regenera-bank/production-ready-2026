@@ -1,0 +1,12 @@
+name: regenera-platform-object-storage
+domain: object-storage
+owner: team-platform-object-storage
+criticality: high
+data_classification: banking-secret
+runtime: docs
+tier: 1
+rto: 4h
+rpo: 1h
+on_call: object-storage-primary
+dependencies:
+  []

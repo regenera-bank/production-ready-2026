@@ -1,0 +1,22 @@
+{
+  "_comment": "@regenera/bank-core IAM Conditional Policy - Least Privilege",
+  "bindings": [
+    {
+      "role": "roles/compute.networkAdmin",
+      "members": [
+        "group:network-admins@regenerabank.app"
+      ],
+      "condition": {
+        "title": "Temporary Elevated Access (JIT)",
+        "description": "Network Admins only have access during working hours on weekdays",
+        "expression": "request.time < timestamp('2025-12-31T23:59:59Z') && request.time.getDayOfWeek() >= 1 && request.time.getDayOfWeek() <= 5 && request.time.getHours() >= 9 && request.time.getHours() <= 18"
+      }
+    },
+    {
+      "role": "roles/browser",
+      "members": [
+        "domain:regenerabank.app"
+      ]
+    }
+  ]
+}

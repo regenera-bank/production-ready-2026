@@ -1,0 +1,12 @@
+name: regenera-api-open-finance
+domain: open-finance-api
+owner: team-open-finance
+criticality: critical
+data_classification: banking-secret
+runtime: node
+tier: 0
+rto: 15m
+rpo: 0
+on_call: open-finance-api-primary
+dependencies:
+  []

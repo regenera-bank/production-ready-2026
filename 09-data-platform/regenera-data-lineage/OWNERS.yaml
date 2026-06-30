@@ -1,0 +1,6 @@
+owners:
+  primary: team-data-lineage
+  approvers:
+    - team-architecture
+    - team-security
+  on_call: lineage-primary

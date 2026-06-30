@@ -1,0 +1,6 @@
+owners:
+  primary: team-platform-kms-hsm
+  approvers:
+    - team-architecture
+    - team-security
+  on_call: kms-hsm-primary

@@ -1,0 +1,6 @@
+owners:
+  primary: team-regulatory-sisorf
+  approvers:
+    - team-architecture
+    - team-security
+  on_call: sisorf-primary

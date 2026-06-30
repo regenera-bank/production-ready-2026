@@ -1,0 +1,6 @@
+owners:
+  primary: team-credit-origination
+  approvers:
+    - team-architecture
+    - team-security
+  on_call: credit-origination-primary

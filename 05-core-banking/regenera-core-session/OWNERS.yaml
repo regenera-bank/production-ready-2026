@@ -1,0 +1,6 @@
+owners:
+  primary: team-session
+  approvers:
+    - team-architecture
+    - team-security
+  on_call: session-primary

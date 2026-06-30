@@ -1,0 +1,75 @@
+/*
+|---------------------------------------------------------------------------------------|
+|  --> REGENERA ENTERPRISE SYSTEM v4.0                                                  |
+|---------------------------------------------------------------------------------------|
+
+PROJECT:       Regenera Bank
+CEO:           Raphaela Cerveski
+DEVELOPER:     Don Paulo Ricardo
+ID:            2098233287
+COPYRIGHT:     Copyright (c) 2026 Regenera Corporate
+
+LICENSE:       EULA (End-User License Agreement)
+PROTECTION:    PROPRIEDADE INTELECTUAL RESTRITA
+
+WARNING:       TODOS OS DIREITOS RESERVADOS. Proibida a cópia, distribuição,
+               engenharia reversa ou modificação não autorizada.
+
+|---------------------------------------------------------------------------------------|
+|  --> CLASSIFICATION: PROPRIETARY // DEVELOPER MAINTAINED // REQUIRES SENIOR REVIEW          |
+|---------------------------------------------------------------------------------------|
+*/
+
+// |---------------------------------------------------------------------------------------|
+// |  --> REGENERA ENTERPRISE SYSTEM v4.0                                                  |
+// |---------------------------------------------------------------------------------------|
+//
+// PROJECT:       Regenera Bank
+// CEO:           Raphaela Cerveski
+// DEVELOPER:     Don Paulo Ricardo
+// ID:            2098233287
+// COPYRIGHT:     Copyright (c) 2026 Regenera Corporate
+//
+// LICENSE:       EULA (End-User License Agreement)
+// PROTECTION:    PROPRIEDADE INTELECTUAL RESTRITA
+//
+// WARNING:       TODOS OS DIREITOS RESERVADOS. Proibida a cópia, distribuição,
+//                engenharia reversa ou modificação não autorizada.
+//
+// |---------------------------------------------------------------------------------------|
+// |  --> CLASSIFICATION: PROPRIETARY // DEVELOPER MAINTAINED // REQUIRES SENIOR REVIEW          |
+// |---------------------------------------------------------------------------------------|
+
+import { z } from 'zod';
+
+export const PrometeoLoginRequestSchema = z.object({
+  provider: z.string(),
+  username: z.string(),
+  password: z.string(),
+  type: z.string().optional()
+});
+
+export const PrometeoLoginResponseSchema = z.object({
+  status: z.enum(['logged_in', 'interaction_required', 'wrong_credentials', 'max_sessions_reached']),
+  key: z.string().optional(),
+  message: z.string().optional()
+});
+
+export const PrometeoAccountSchema = z.object({
+  id: z.string(),
+  name: z.string(),
+  number: z.string(),
+  branch: z.string(),
+  currency: z.string(),
+  balance: z.number()
+});
+
+export const PrometeoAccountsResponseSchema = z.object({
+  status: z.string(),
+  accounts: z.array(PrometeoAccountSchema).optional()
+});
+
+export type PrometeoLoginRequest = z.infer<typeof PrometeoLoginRequestSchema>;
+export type PrometeoLoginResponse = z.infer<typeof PrometeoLoginResponseSchema>;
+export type PrometeoAccount = z.infer<typeof PrometeoAccountSchema>;
+export type PrometeoAccountsResponse = z.infer<typeof PrometeoAccountsResponseSchema>;

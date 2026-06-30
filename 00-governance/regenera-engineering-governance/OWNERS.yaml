@@ -1,0 +1,6 @@
+owners:
+  primary: team-engineering-governance
+  approvers:
+    - team-architecture
+    - team-security
+  on_call: engineering-governance-primary

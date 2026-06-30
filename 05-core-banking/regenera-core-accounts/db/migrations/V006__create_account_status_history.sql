@@ -1,0 +1,1 @@
+CREATE TABLE account_status_history (history_id UUID PRIMARY KEY, account_id UUID NOT NULL REFERENCES account(account_id), previous_status VARCHAR(32), new_status VARCHAR(32) NOT NULL, reason_code TEXT NOT NULL, changed_at TIMESTAMPTZ NOT NULL, actor_id TEXT NOT NULL, correlation_id UUID NOT NULL);

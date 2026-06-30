@@ -1,0 +1,12 @@
+name: regenera-regulatory-card-pci
+domain: card-pci
+owner: team-regulatory-card-pci
+criticality: critical
+data_classification: banking-secret
+runtime: docs
+tier: 0
+rto: 15m
+rpo: 0
+on_call: card-pci-primary
+dependencies:
+  []

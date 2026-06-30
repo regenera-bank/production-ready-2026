@@ -1,0 +1,3 @@
+CREATE TABLE customer_history (history_id UUID PRIMARY KEY, customer_id UUID NOT NULL, version BIGINT NOT NULL, event_type TEXT NOT NULL, event_payload JSONB NOT NULL, occurred_at TIMESTAMPTZ NOT NULL, actor_id TEXT NOT NULL, correlation_id UUID NOT NULL, UNIQUE(customer_id, version));
+CREATE OR REPLACE FUNCTION deny_customer_history_mutation() RETURNS trigger LANGUAGE plpgsql AS $$ BEGIN RAISE EXCEPTION 'customer_history is append-only'; END $$;
+CREATE TRIGGER customer_history_no_update BEFORE UPDATE OR DELETE ON customer_history FOR EACH ROW EXECUTE FUNCTION deny_customer_history_mutation();

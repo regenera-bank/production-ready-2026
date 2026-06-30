@@ -1,0 +1,6 @@
+owners:
+  primary: team-operations
+  approvers:
+    - team-architecture
+    - team-security
+  on_call: operations-bff-primary

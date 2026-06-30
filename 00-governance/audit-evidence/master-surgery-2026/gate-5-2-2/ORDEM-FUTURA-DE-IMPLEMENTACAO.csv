@@ -1,0 +1,11 @@
+passo,acao
+1,Aprovação dos contratos transversais
+2,Provisionamento e Migrations da persistência Idempotency
+3,Implementação da State Machine de Idempotency
+4,Integração local controlada em Payments (Mock)
+5,Design do Envelope de Audit Trail
+6,Desenvolvimento Outbox Pattern durável
+7,Sink e armazenamento de Auditoria
+8,Integração Idempotency + Audit Trail
+9,Bateria E2E
+10,Build controlado e implantação Canary

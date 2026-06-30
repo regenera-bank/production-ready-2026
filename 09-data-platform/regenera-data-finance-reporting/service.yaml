@@ -1,0 +1,12 @@
+name: regenera-data-finance-reporting
+domain: finance-reporting
+owner: team-data-finance-reporting
+criticality: high
+data_classification: banking-secret
+runtime: python
+tier: 1
+rto: 4h
+rpo: 1h
+on_call: finance-reporting-primary
+dependencies:
+  []

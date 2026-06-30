@@ -1,0 +1,6 @@
+owners:
+  primary: team-card-authorization
+  approvers:
+    - team-architecture
+    - team-security
+  on_call: card-authorization-primary

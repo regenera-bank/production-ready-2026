@@ -1,0 +1,6 @@
+owners:
+  primary: team-security-cloud
+  approvers:
+    - team-architecture
+    - team-security
+  on_call: cloud-primary

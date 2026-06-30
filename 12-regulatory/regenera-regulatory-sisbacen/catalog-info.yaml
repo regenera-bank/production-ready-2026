@@ -1,0 +1,12 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: regenera-regulatory-sisbacen
+  description: Componente Regenera do domínio sisbacen.
+  annotations:
+    regenera.io/criticality: critical
+spec:
+  type: service
+  lifecycle: experimental
+  owner: team-regulatory-sisbacen
+  system: regenera-bank

@@ -1,0 +1,6 @@
+owners:
+  primary: team-platform-terraform
+  approvers:
+    - team-architecture
+    - team-security
+  on_call: terraform-primary

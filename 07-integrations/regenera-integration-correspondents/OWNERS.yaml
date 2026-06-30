@@ -1,0 +1,6 @@
+owners:
+  primary: team-integration-correspondents
+  approvers:
+    - team-architecture
+    - team-security
+  on_call: correspondents-primary

@@ -1,0 +1,6 @@
+owners:
+  primary: team-data-finance-reporting
+  approvers:
+    - team-architecture
+    - team-security
+  on_call: finance-reporting-primary

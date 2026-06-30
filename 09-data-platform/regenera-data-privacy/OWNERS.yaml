@@ -1,0 +1,6 @@
+owners:
+  primary: team-data-privacy
+  approvers:
+    - team-architecture
+    - team-security
+  on_call: privacy-primary

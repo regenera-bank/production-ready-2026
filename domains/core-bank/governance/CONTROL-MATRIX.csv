@@ -1,0 +1,18 @@
+control_id,domain,control_description,implementation,test_ref,owner,status
+CTRL-001,Core Banking,Money usa BigInt sem float,money.value-object.ts,T01-T05,core-bank,IMPLEMENTADO
+CTRL-001b,Core Banking,Exceções tipadas com code+domain,core-banking.errors.ts,PR-02-spec,core-bank,IMPLEMENTADO
+CTRL-011,Core Banking,Lifecycle conta OPEN/BLOCKED/CLOSED,account-registry.service.ts,PR-03-spec,core-bank,IMPLEMENTADO
+CTRL-002,Core Banking,Ledger append-only com triggers,V001 migration,T25-T32,core-bank,IMPLEMENTADO_SQL
+CTRL-012,Core Banking,Saldo via view (não coluna),V002 views,PR-04b-spec,core-bank,IMPLEMENTADO_SQL
+CTRL-003,Core Banking,Idempotência com payloadHash,idempotency.service.ts,T33-T37,core-bank,IMPLEMENTADO
+CTRL-004,Core Banking,UNKNOWN bloqueia retry,payment-engine.service.ts,PR-10-spec,core-bank,IMPLEMENTADO
+CTRL-005,Core Banking,Partidas duplas D=C,ledger.service.ts,PR-09-spec,core-bank,IMPLEMENTADO
+CTRL-006,Core Banking,Audit chain SHA-256,audit-chain.service.ts,T43,core-bank,IMPLEMENTADO
+CTRL-007,Core Banking,Outbox publishedAt null inicial,outbox.service.ts,T44-T45,core-bank,IMPLEMENTADO
+CTRL-007b,Core Banking,Hold reduz disponível e expira/libera,hold-book.service.ts,PR-08-spec,core-bank,IMPLEMENTADO
+CTRL-008,Core Banking,Maker-checker reconciliação,reconciliation.service.ts,PR-12-spec,core-bank,IMPLEMENTADO
+CTRL-009,Security,Sigilo bancário em logs,logging policy,REG-002,security,IMPLEMENTADO
+CTRL-010,Governance,Sem vestígio IA em comentários,regenera-agent.mjs,gate-release,platform,IMPLEMENTADO
+CTRL-013,Core Banking,Carga 50k/dia com SLO,daily-load-simulator.ts,PR-15-load-spec,core-bank,IMPLEMENTADO
+CTRL-014,Core Banking,Canário 1% determinístico,canary-router.ts,PR-15-canary-spec,core-bank,IMPLEMENTADO
+CTRL-015,Governance,Gate G4 float+evidência,release-gate.ts,PR-15-release-spec,platform,IMPLEMENTADO

@@ -1,0 +1,1 @@
+export class AuditEvent { event_id: string; }

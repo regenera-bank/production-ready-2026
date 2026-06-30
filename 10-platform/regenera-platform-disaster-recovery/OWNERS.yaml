@@ -1,0 +1,6 @@
+owners:
+  primary: team-platform-disaster-recovery
+  approvers:
+    - team-architecture
+    - team-security
+  on_call: disaster-recovery-primary

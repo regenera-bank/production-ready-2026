@@ -1,0 +1,4 @@
+capacidade,requisito
+Audit Trail,Proteger contra Log Injection (Sanitização de entrada)
+Audit Trail,Campos de senha e CVV nunca devem ser registrados (Redaction)
+Idempotency,Chaves não podem ser adivinháveis ou sequenciais

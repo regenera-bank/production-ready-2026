@@ -1,0 +1,6 @@
+owners:
+  primary: team-open-finance
+  approvers:
+    - team-architecture
+    - team-security
+  on_call: open-finance-api-primary

@@ -1,0 +1,18 @@
+{
+  "states": [
+    "default",
+    "loading",
+    "partial-loading",
+    "empty",
+    "offline",
+    "timeout",
+    "business-error",
+    "technical-error",
+    "unknown",
+    "manual-review",
+    "maintenance",
+    "settled",
+    "reconciled",
+    "reversed"
+  ]
+}

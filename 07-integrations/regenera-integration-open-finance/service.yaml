@@ -1,0 +1,12 @@
+name: regenera-integration-open-finance
+domain: open-finance
+owner: team-integration-open-finance
+criticality: critical
+data_classification: banking-secret
+runtime: jvm
+tier: 1
+rto: 4h
+rpo: 1h
+on_call: open-finance-primary
+dependencies:
+  []

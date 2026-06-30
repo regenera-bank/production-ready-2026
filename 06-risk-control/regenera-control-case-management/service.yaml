@@ -1,0 +1,12 @@
+name: regenera-control-case-management
+domain: case-management
+owner: team-case-management
+criticality: critical
+data_classification: banking-secret
+runtime: jvm
+tier: 0
+rto: 15m
+rpo: 0
+on_call: case-management-primary
+dependencies:
+  []

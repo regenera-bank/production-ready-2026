@@ -1,0 +1,24 @@
+{
+    "files.exclude": {
+        "**/.git": true,
+        "**/.DS_Store": true,
+        "**/*.zip": true,
+        "_archive": true,
+        "REGENERA GEMINI CLI ARQUIVOS": true,
+        "REGENERA GEMINI CLI ARQUIVOS - cópia": true,
+        "Regenera - Desenvolvimento ": true,
+        "Regenera Desenvolvimento": true,
+        "auditoria leaia": true,
+        "regenera deploy 1": true,
+        "seu local": true
+    },
+    "python.testing.unittestArgs": [
+        "-v",
+        "-s",
+        "./REGENERA GEMINI CLI ARQUIVOS",
+        "-p",
+        "*_test.py"
+    ],
+    "python.testing.pytestEnabled": false,
+    "python.testing.unittestEnabled": true
+}

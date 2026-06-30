@@ -1,0 +1,7 @@
+campo,status,observacao
+request_id,Divergente,"Alguns serviços usam x-request-id, outros requestId no body."
+correlation_id,Ausente,Não propaga entre BFF e Core.
+trace_id,Divergente,"Depende do framework de APM instanciado, sem interface comum."
+customer_id,Presente,Extraível do payload JWT (sub).
+timestamps,Divergente,ISO8601 vs Epoch Unix identificados nos DTOs.
+persistência_disponivel,Confirmado,PostgreSQL para relacional; EventStore/Kafka ausente na stack ativa.

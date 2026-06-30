@@ -1,0 +1,6 @@
+[versions]
+compose = "1.5.0"
+kotlin = "1.9.0"
+
+[libraries]
+compose-ui = { module = "androidx.compose.ui:ui", version.ref = "compose" }

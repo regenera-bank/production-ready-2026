@@ -1,0 +1,1 @@
+CREATE TABLE party (party_id UUID PRIMARY KEY, party_type VARCHAR(32) NOT NULL CHECK (party_type IN ('PERSON','LEGAL_ENTITY')), created_at TIMESTAMPTZ NOT NULL DEFAULT now(), version BIGINT NOT NULL DEFAULT 1 CHECK (version > 0));

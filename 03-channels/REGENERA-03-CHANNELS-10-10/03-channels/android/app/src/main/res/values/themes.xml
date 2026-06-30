@@ -1,0 +1,4 @@
+<resources>
+    <style name="Theme.RegeneraBank" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    </style>
+</resources>

@@ -1,0 +1,16 @@
+# [FILE] .prettierrc
+# Prettier Configuration for Regenera Bank Monorepo
+# Desenvolvedor: Don Paulo Ricardo
+# Regra 3.1: Padrões de Codificação
+
+# Documentação: https://prettier.io/docs/en/options.html
+
+printWidth: 100        # Quebra a linha se ultrapassar 100 caracteres.
+tabWidth: 2           # Usa 2 espaços por nível de indentação.
+singleQuote: true     # Usa aspas simples ao invés de duplas.
+trailingComma: "all"  # Adiciona vírgulas pendentes (trailing commas) em objetos, arrays, etc. (ES5)
+semi: true            # Adiciona ponto e vírgula no final das declarações.
+arrowParens: "always" # Sempre inclui parênteses em arrow functions de um único argumento.
+bracketSpacing: true  # Adiciona espaços entre colchetes de objetos literais.
+jsxSingleQuote: false # Usa aspas duplas em JSX.
+endOfLine: "lf"       # Garante a consistência dos finais de linha para "Line Feed" (Unix).

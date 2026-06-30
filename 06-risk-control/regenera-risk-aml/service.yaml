@@ -1,0 +1,12 @@
+name: regenera-risk-aml
+domain: aml
+owner: team-aml
+criticality: critical
+data_classification: banking-secret
+runtime: jvm
+tier: 0
+rto: 15m
+rpo: 0
+on_call: aml-primary
+dependencies:
+  []

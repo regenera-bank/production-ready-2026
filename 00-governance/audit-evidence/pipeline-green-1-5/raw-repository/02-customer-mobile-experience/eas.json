@@ -1,0 +1,30 @@
+{
+  "cli": {
+    "version": ">= 7.0.0",
+    "requireCommit": true,
+    "appVersionSource": "remote"
+  },
+  "build": {
+    "development": {
+      "developmentClient": true,
+      "distribution": "internal",
+      "env": {
+        "EXPO_PUBLIC_API_URL": "https://regenera-core-api-520859662036.southamerica-east1.run.app"
+      }
+    },
+    "preview": {
+      "distribution": "internal",
+      "env": {
+        "EXPO_PUBLIC_API_URL": "https://regenera-core-api-520859662036.southamerica-east1.run.app"
+      }
+    },
+    "production": {
+      "env": {
+        "EXPO_PUBLIC_API_URL": "https://regenera-core-api-520859662036.southamerica-east1.run.app"
+      }
+    }
+  },
+  "submit": {
+    "production": {}
+  }
+}

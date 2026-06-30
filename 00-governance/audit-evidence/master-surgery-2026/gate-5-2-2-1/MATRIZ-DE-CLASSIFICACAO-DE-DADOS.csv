@@ -1,0 +1,6 @@
+dado,classificacao,regra_redaction,criptografia
+Payload_Campo_1,Restrito,Mascarar primeiros 6 digitos,Sim
+Payload_Campo_2,Restrito,Mascarar primeiros 6 digitos,Sim
+Payload_Campo_3,Restrito,Mascarar primeiros 6 digitos,Sim
+Payload_Campo_4,Restrito,Mascarar primeiros 6 digitos,Sim
+Payload_Campo_5,Restrito,Mascarar primeiros 6 digitos,Sim

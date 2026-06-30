@@ -1,0 +1,36 @@
+criterion_id,capacidade,requisito,cenário,entrada,resultado_esperado,persistência_esperada,evento_esperado,métricas_esperadas,evidência_objetiva,tipo_de_teste,bloqueador,aprovado
+CA-IDEM-1,Idempotency,Req,Cenario Idemp 1,API Call,Comportamento X,Insert DB,Nenhum,Latency,Log HTTP,E2E,SIM,FALSE
+CA-IDEM-2,Idempotency,Req,Cenario Idemp 2,API Call,Comportamento X,Insert DB,Nenhum,Latency,Log HTTP,E2E,SIM,FALSE
+CA-IDEM-3,Idempotency,Req,Cenario Idemp 3,API Call,Comportamento X,Insert DB,Nenhum,Latency,Log HTTP,E2E,SIM,FALSE
+CA-IDEM-4,Idempotency,Req,Cenario Idemp 4,API Call,Comportamento X,Insert DB,Nenhum,Latency,Log HTTP,E2E,SIM,FALSE
+CA-IDEM-5,Idempotency,Req,Cenario Idemp 5,API Call,Comportamento X,Insert DB,Nenhum,Latency,Log HTTP,E2E,SIM,FALSE
+CA-IDEM-6,Idempotency,Req,Cenario Idemp 6,API Call,Comportamento X,Insert DB,Nenhum,Latency,Log HTTP,E2E,SIM,FALSE
+CA-IDEM-7,Idempotency,Req,Cenario Idemp 7,API Call,Comportamento X,Insert DB,Nenhum,Latency,Log HTTP,E2E,SIM,FALSE
+CA-IDEM-8,Idempotency,Req,Cenario Idemp 8,API Call,Comportamento X,Insert DB,Nenhum,Latency,Log HTTP,E2E,SIM,FALSE
+CA-IDEM-9,Idempotency,Req,Cenario Idemp 9,API Call,Comportamento X,Insert DB,Nenhum,Latency,Log HTTP,E2E,SIM,FALSE
+CA-IDEM-10,Idempotency,Req,Cenario Idemp 10,API Call,Comportamento X,Insert DB,Nenhum,Latency,Log HTTP,E2E,SIM,FALSE
+CA-IDEM-11,Idempotency,Req,Cenario Idemp 11,API Call,Comportamento X,Insert DB,Nenhum,Latency,Log HTTP,E2E,SIM,FALSE
+CA-IDEM-12,Idempotency,Req,Cenario Idemp 12,API Call,Comportamento X,Insert DB,Nenhum,Latency,Log HTTP,E2E,SIM,FALSE
+CA-IDEM-13,Idempotency,Req,Cenario Idemp 13,API Call,Comportamento X,Insert DB,Nenhum,Latency,Log HTTP,E2E,SIM,FALSE
+CA-IDEM-14,Idempotency,Req,Cenario Idemp 14,API Call,Comportamento X,Insert DB,Nenhum,Latency,Log HTTP,E2E,SIM,FALSE
+CA-IDEM-15,Idempotency,Req,Cenario Idemp 15,API Call,Comportamento X,Insert DB,Nenhum,Latency,Log HTTP,E2E,SIM,FALSE
+CA-AUD-1,Audit Trail,Req,Cenario Audit 1,Event Publish,Armazenamento imutavel,Insert Outbox,Evento enviado,Queue size,DB Outbox,Integration,SIM,FALSE
+CA-AUD-2,Audit Trail,Req,Cenario Audit 2,Event Publish,Armazenamento imutavel,Insert Outbox,Evento enviado,Queue size,DB Outbox,Integration,SIM,FALSE
+CA-AUD-3,Audit Trail,Req,Cenario Audit 3,Event Publish,Armazenamento imutavel,Insert Outbox,Evento enviado,Queue size,DB Outbox,Integration,SIM,FALSE
+CA-AUD-4,Audit Trail,Req,Cenario Audit 4,Event Publish,Armazenamento imutavel,Insert Outbox,Evento enviado,Queue size,DB Outbox,Integration,SIM,FALSE
+CA-AUD-5,Audit Trail,Req,Cenario Audit 5,Event Publish,Armazenamento imutavel,Insert Outbox,Evento enviado,Queue size,DB Outbox,Integration,SIM,FALSE
+CA-AUD-6,Audit Trail,Req,Cenario Audit 6,Event Publish,Armazenamento imutavel,Insert Outbox,Evento enviado,Queue size,DB Outbox,Integration,SIM,FALSE
+CA-AUD-7,Audit Trail,Req,Cenario Audit 7,Event Publish,Armazenamento imutavel,Insert Outbox,Evento enviado,Queue size,DB Outbox,Integration,SIM,FALSE
+CA-AUD-8,Audit Trail,Req,Cenario Audit 8,Event Publish,Armazenamento imutavel,Insert Outbox,Evento enviado,Queue size,DB Outbox,Integration,SIM,FALSE
+CA-AUD-9,Audit Trail,Req,Cenario Audit 9,Event Publish,Armazenamento imutavel,Insert Outbox,Evento enviado,Queue size,DB Outbox,Integration,SIM,FALSE
+CA-AUD-10,Audit Trail,Req,Cenario Audit 10,Event Publish,Armazenamento imutavel,Insert Outbox,Evento enviado,Queue size,DB Outbox,Integration,SIM,FALSE
+CA-AUD-11,Audit Trail,Req,Cenario Audit 11,Event Publish,Armazenamento imutavel,Insert Outbox,Evento enviado,Queue size,DB Outbox,Integration,SIM,FALSE
+CA-AUD-12,Audit Trail,Req,Cenario Audit 12,Event Publish,Armazenamento imutavel,Insert Outbox,Evento enviado,Queue size,DB Outbox,Integration,SIM,FALSE
+CA-AUD-13,Audit Trail,Req,Cenario Audit 13,Event Publish,Armazenamento imutavel,Insert Outbox,Evento enviado,Queue size,DB Outbox,Integration,SIM,FALSE
+CA-AUD-14,Audit Trail,Req,Cenario Audit 14,Event Publish,Armazenamento imutavel,Insert Outbox,Evento enviado,Queue size,DB Outbox,Integration,SIM,FALSE
+CA-AUD-15,Audit Trail,Req,Cenario Audit 15,Event Publish,Armazenamento imutavel,Insert Outbox,Evento enviado,Queue size,DB Outbox,Integration,SIM,FALSE
+CA-INT-1,Integração,Req,Integração 1,API Call,Idempotencia garante nao-duplicacao do Audit,"1 Row Lock, 1 Row Outbox",1 Evento publicado,Tx time,Logs E2E,E2E,SIM,FALSE
+CA-INT-2,Integração,Req,Integração 2,API Call,Idempotencia garante nao-duplicacao do Audit,"1 Row Lock, 1 Row Outbox",1 Evento publicado,Tx time,Logs E2E,E2E,SIM,FALSE
+CA-INT-3,Integração,Req,Integração 3,API Call,Idempotencia garante nao-duplicacao do Audit,"1 Row Lock, 1 Row Outbox",1 Evento publicado,Tx time,Logs E2E,E2E,SIM,FALSE
+CA-INT-4,Integração,Req,Integração 4,API Call,Idempotencia garante nao-duplicacao do Audit,"1 Row Lock, 1 Row Outbox",1 Evento publicado,Tx time,Logs E2E,E2E,SIM,FALSE
+CA-INT-5,Integração,Req,Integração 5,API Call,Idempotencia garante nao-duplicacao do Audit,"1 Row Lock, 1 Row Outbox",1 Evento publicado,Tx time,Logs E2E,E2E,SIM,FALSE

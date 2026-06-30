@@ -1,0 +1,6 @@
+owners:
+  primary: team-operations-noc
+  approvers:
+    - team-architecture
+    - team-security
+  on_call: noc-primary

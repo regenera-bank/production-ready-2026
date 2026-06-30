@@ -1,0 +1,9 @@
+caminho,motivo
+02-contracts/regenera-idempotency-v1.yaml,Contrato transversal transversal aprovado.
+02-contracts/regenera-audit-events-v1.yaml,Contrato transversal transversal aprovado.
+05-core-banking/regenera-core-idempotency/src/domain/IdempotencyRecord.ts,Entidade Dominio
+05-core-banking/regenera-core-idempotency/src/domain/IdempotencyStateMachine.ts,Dominio State Machine
+05-core-banking/regenera-core-idempotency/tests/IdempotencyStateMachine.spec.ts,Teste Unitario
+05-core-banking/regenera-core-audit/src/domain/AuditEvent.ts,Entidade Dominio
+05-core-banking/regenera-core-audit/src/domain/OutboxPublisher.ts,Interface Outbox
+05-core-banking/regenera-core-audit/tests/AuditEvent.spec.ts,Teste Unitario

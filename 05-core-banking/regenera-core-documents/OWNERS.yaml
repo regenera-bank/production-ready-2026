@@ -1,0 +1,6 @@
+owners:
+  primary: team-documents
+  approvers:
+    - team-architecture
+    - team-security
+  on_call: documents-primary

@@ -1,0 +1,22 @@
+{
+  "timestamp": "2026-06-26T07:48:00.970106",
+  "total_processados": 316,
+  "por_tipo": {
+    "A": 4,
+    "B": 10,
+    "C": 302,
+    "D": 0
+  },
+  "por_prioridade": {
+    "P0": 56,
+    "P1": 119,
+    "P2": 39,
+    "P3": 102
+  },
+  "total_p0": 56,
+  "intencionalmente_minimos": 188,
+  "nao_placeholder": 0,
+  "bloqueados_contexto": 0,
+  "relacionados_conflitos": 0,
+  "relacionados_source": 0
+}

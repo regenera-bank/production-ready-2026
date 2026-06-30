@@ -1,0 +1,6 @@
+owners:
+  primary: team-balance
+  approvers:
+    - team-architecture
+    - team-security
+  on_call: balance-primary

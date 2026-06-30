@@ -1,0 +1,1 @@
+CREATE TABLE idempotency_registry (scope TEXT NOT NULL, idempotency_key TEXT NOT NULL, request_hash TEXT NOT NULL, state VARCHAR(32) NOT NULL CHECK(state IN ('IN_PROGRESS','COMPLETED','FAILED_RETRYABLE','UNKNOWN')), response_code INTEGER, response_body JSONB, created_at TIMESTAMPTZ NOT NULL DEFAULT now(), expires_at TIMESTAMPTZ NOT NULL, PRIMARY KEY(scope, idempotency_key));

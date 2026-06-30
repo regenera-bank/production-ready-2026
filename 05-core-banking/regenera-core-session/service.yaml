@@ -1,0 +1,12 @@
+name: regenera-core-session
+domain: session
+owner: team-session
+criticality: high
+data_classification: banking-secret
+runtime: jvm
+tier: 1
+rto: 4h
+rpo: 1h
+on_call: session-primary
+dependencies:
+  []

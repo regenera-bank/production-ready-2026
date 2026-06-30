@@ -1,0 +1,12 @@
+name: regenera-integration-b3
+domain: b3
+owner: team-integration-b3
+criticality: high
+data_classification: banking-secret
+runtime: jvm
+tier: 1
+rto: 4h
+rpo: 1h
+on_call: b3-primary
+dependencies:
+  []

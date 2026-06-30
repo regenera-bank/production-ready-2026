@@ -1,0 +1,14 @@
+schema_version: 1
+artifact: REGENERA-03-CHANNELS-10-10
+scope: channel-boundaries-and-reference-implementations
+release_state: candidate_pending_external_signature
+required_gates:
+  - validate
+  - test
+  - security
+  - build
+  - verify-release
+prohibited_claims:
+  - regulatory_authorization
+  - external_integration_homologation
+  - independent_security_approval

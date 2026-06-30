@@ -1,0 +1,6 @@
+owners:
+  primary: team-operations-aml
+  approvers:
+    - team-architecture
+    - team-security
+  on_call: aml-primary

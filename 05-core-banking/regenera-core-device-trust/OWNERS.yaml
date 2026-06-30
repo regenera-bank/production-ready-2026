@@ -1,0 +1,6 @@
+owners:
+  primary: team-device-trust
+  approvers:
+    - team-architecture
+    - team-security
+  on_call: device-trust-primary

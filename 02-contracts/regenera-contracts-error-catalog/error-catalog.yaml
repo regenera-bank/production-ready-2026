@@ -1,0 +1,9 @@
+errors:
+  RG-TRANSACTION-UNKNOWN:
+    http_status: 202
+    customer_message: Operação em confirmação. Não repita o envio.
+    remediation: reconcile
+  RG-IDEMPOTENCY-CONFLICT:
+    http_status: 409
+    customer_message: A chave já foi usada com conteúdo diferente.
+    remediation: reject

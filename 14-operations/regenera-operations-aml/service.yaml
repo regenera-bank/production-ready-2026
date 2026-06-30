@@ -1,0 +1,12 @@
+name: regenera-operations-aml
+domain: aml
+owner: team-operations-aml
+criticality: high
+data_classification: banking-secret
+runtime: docs
+tier: 1
+rto: 4h
+rpo: 1h
+on_call: aml-primary
+dependencies:
+  []

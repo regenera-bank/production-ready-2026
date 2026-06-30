@@ -1,0 +1,17 @@
+{
+  "timestamp": "2026-06-26T07:42:00.428688",
+  "total_conflitos": 82,
+  "por_classificacao": {
+    "SEMANTIC_CONFLICT": 62,
+    "GENERATED_ARTIFACT": 1,
+    "CONFIG_MERGE": 19
+  },
+  "por_recomendacao": {
+    "MESCLAR_MANUALMENTE": 81,
+    "DESCARTAR_ARTEFATO_GERADO": 1
+  },
+  "bloqueados": 0,
+  "merge_manual": 81,
+  "reimplementacao": 0,
+  "duplicados_identicos": 0
+}

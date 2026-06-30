@@ -1,0 +1,1 @@
+export class IdempotencyRecord { id: string; status: string; }

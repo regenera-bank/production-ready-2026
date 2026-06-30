@@ -1,0 +1,12 @@
+name: regenera-contracts-sdk
+domain: sdk
+owner: team-developer-experience
+criticality: medium
+data_classification: banking-secret
+runtime: node
+tier: 2
+rto: 4h
+rpo: 1h
+on_call: sdk-primary
+dependencies:
+  []

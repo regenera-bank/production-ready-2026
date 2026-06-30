@@ -1,0 +1,4 @@
+package_id,cluster_id,capacidades_desbloqueadas,conflict_ids,candidatos,recomendacao_nao_vinculante,alternativas,testes_pos_decisao,riscos,bloqueios,pronto_para_decisao_humana,decisao_aprovada
+PKG-1.1,CLUS-1,Identity,3429,2,"Avaliar arquivo mais recente, mas confirmar com regras",Fazer merge manual,Unitários e de Contrato,Sobrescrita de codigo ativo,Nenhum,SIM,FALSE
+PKG-1.2,CLUS-2,Identity,3433,2,"Avaliar arquivo mais recente, mas confirmar com regras",Fazer merge manual,Unitários e de Contrato,Sobrescrita de codigo ativo,Nenhum,SIM,FALSE
+PKG-1.3,CLUS-3,Identity,3506,2,"Avaliar arquivo mais recente, mas confirmar com regras",Fazer merge manual,Unitários e de Contrato,Sobrescrita de codigo ativo,Nenhum,SIM,FALSE

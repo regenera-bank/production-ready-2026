@@ -1,0 +1,136 @@
+{
+  "sessao": "2026-06-29-grok-orquestracao-regenera-bank",
+  "workspace": "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank",
+  "pasta_entrega": "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/Versão atualizada Grok",
+  "autoridade": {
+    "nome": "Don Paulo Ricardo de Leão",
+    "email": "finance@regenerabank.world",
+    "gpg": "730834AB4126C341A70F6B969826A3AC0BF6A90C"
+  },
+  "referencias_imutaveis": [
+    {
+      "arquivo": "desing-final-escolhido-geral-index.html",
+      "linhas": 4251,
+      "papel": "protótipo UX — 23 módulos, estado em memória"
+    },
+    {
+      "arquivo": "MAPA_MESTRE_DESENVOLVIMENTO_CANAIS_REGENERA_BANK(1).md",
+      "linhas": 1225,
+      "papel": "plano 90 dias, ondas A–E"
+    },
+    {
+      "arquivo": "money.value-object.ts",
+      "linhas": 234,
+      "papel": "Money canônico BigInt — importar, não reescrever"
+    },
+    {
+      "arquivo": "STYLE.pt-BR.md",
+      "linhas": 125,
+      "papel": "tom comentários — porquê e risco"
+    },
+    {
+      "arquivo": "regenera-agent.mjs",
+      "papel": "portão byte-a-byte comentários"
+    }
+  ],
+  "artefatos_criados_sessao": [
+    { "pr": "mandato", "path": "AGENTS.md", "linhas": 562, "status": "CONCLUIDO" },
+    { "pr": "alias", "path": "STYLE_pt-BR.md", "status": "CONCLUIDO" },
+    { "pr": "PR-00", "path": "domains/core-bank/docs/adr/ADR-001-LEDGER-APPEND-ONLY.md", "status": "CONCLUIDO" },
+    { "pr": "PR-00", "path": "domains/core-bank/docs/adr/ADR-002-IDEMPOTENCIA-HASH-PAYLOAD.md", "status": "CONCLUIDO" },
+    { "pr": "PR-00", "path": "domains/core-bank/docs/adr/ADR-003-ESTADO-UNKNOWN.md", "status": "CONCLUIDO" },
+    { "pr": "PR-00", "path": "domains/core-bank/docs/adr/ADR-004-ENQUADRAMENTO-BACEN.md", "status": "CONCLUIDO" },
+    { "pr": "PR-00", "path": "domains/core-bank/docs/EXTERNAL-BLOCKERS.md", "status": "CONCLUIDO" },
+    { "pr": "PR-00", "path": "domains/core-bank/docs/runbooks/RUNBOOK-CORE-001-UNKNOWN.md", "status": "CONCLUIDO" },
+    { "pr": "PR-00", "path": "domains/core-bank/docs/runbooks/RUNBOOK-CORE-002-LEDGER-IMBALANCE.md", "status": "CONCLUIDO" },
+    { "pr": "PR-00", "path": "domains/core-bank/docs/runbooks/RUNBOOK-CORE-003-DR-RESTORE.md", "status": "CONCLUIDO" },
+    { "pr": "PR-00", "path": "domains/core-bank/governance/CONTROL-MATRIX.csv", "status": "CONCLUIDO" },
+    { "pr": "PR-00", "path": "domains/core-bank/governance/OWNERS.json", "status": "CONCLUIDO" },
+    { "pr": "PR-00", "path": "domains/core-bank/governance/REGULATORY-TRACEABILITY.csv", "status": "CONCLUIDO" },
+    { "pr": "PR-00", "path": "domains/core-bank/docs/DESIGN-CORE-BANKING-001.md", "status": "CONCLUIDO_PRE_EXISTENTE" },
+    { "pr": "PR-00b", "path": "domains/core-bank/package.json", "status": "CONCLUIDO_NAO_VERIFICADO" },
+    { "pr": "PR-00b", "path": "domains/core-bank/tsconfig.json", "status": "CONCLUIDO" },
+    { "pr": "PR-00b", "path": "domains/core-bank/nest-cli.json", "status": "CONCLUIDO" },
+    { "pr": "PR-00b", "path": "domains/core-bank/jest.config.js", "status": "CONCLUIDO" },
+    { "pr": "PR-00b", "path": "domains/core-bank/src/main.ts", "status": "CONCLUIDO" },
+    { "pr": "PR-00b", "path": "domains/core-bank/src/app.module.ts", "status": "CONCLUIDO" },
+    { "pr": "PR-00b", "path": "domains/core-bank/src/core-bank-health.controller.ts", "status": "CONCLUIDO" },
+    { "pr": "PR-00b", "path": ".github/workflows/core-bank-ci.yml", "status": "CONCLUIDO" },
+    { "pr": "PR-01", "path": "domains/core-bank/src/money/money.value-object.ts", "status": "SINCRONIZADO_DA_RAIZ" },
+    { "pr": "PR-01", "path": "domains/core-bank/src/money/money.value-object.spec.ts", "status": "VERIFICADO_16_TESTES" },
+    { "pr": "PR-02", "path": "domains/core-bank/src/errors/core-banking.errors.ts", "status": "CONCLUIDO_NAO_VERIFICADO" },
+    { "pr": "PR-02", "path": "domains/core-bank/src/errors/core-banking.errors.spec.ts", "status": "CONCLUIDO_NAO_VERIFICADO" },
+    { "pr": "PR-08", "path": "domains/core-bank/src/holds/hold.entity.ts", "status": "IMPLEMENTADO" },
+    { "pr": "PR-08", "path": "domains/core-bank/src/holds/hold.repository.ts", "status": "IMPLEMENTADO" },
+    { "pr": "PR-08", "path": "domains/core-bank/src/holds/in-memory-hold.repository.ts", "status": "IMPLEMENTADO" },
+    { "pr": "PR-08", "path": "domains/core-bank/src/holds/signed-balance.provider.ts", "status": "IMPLEMENTADO" },
+    { "pr": "PR-08", "path": "domains/core-bank/src/holds/in-memory-signed-balance.provider.ts", "status": "IMPLEMENTADO" },
+    { "pr": "PR-08", "path": "domains/core-bank/src/holds/hold-book.service.ts", "status": "IMPLEMENTADO" },
+    { "pr": "PR-08", "path": "domains/core-bank/src/holds/hold-book.spec.ts", "status": "IMPLEMENTADO_6_TESTES" },
+    { "pr": "PR-09", "path": "domains/core-bank/src/ledger/ledger.entity.ts", "status": "IMPLEMENTADO" },
+    { "pr": "PR-09", "path": "domains/core-bank/src/ledger/ledger.repository.ts", "status": "IMPLEMENTADO" },
+    { "pr": "PR-09", "path": "domains/core-bank/src/ledger/in-memory-ledger.repository.ts", "status": "IMPLEMENTADO" },
+    { "pr": "PR-09", "path": "domains/core-bank/src/ledger/ledger.service.ts", "status": "IMPLEMENTADO" },
+    { "pr": "PR-09", "path": "domains/core-bank/src/ledger/ledger.spec.ts", "status": "IMPLEMENTADO_12_TESTES" },
+    { "pr": "PR-10", "path": "domains/core-bank/src/payments/payment.entity.ts", "status": "IMPLEMENTADO" },
+    { "pr": "PR-10", "path": "domains/core-bank/src/payments/payment-engine.service.ts", "status": "IMPLEMENTADO" },
+    { "pr": "PR-10", "path": "domains/core-bank/src/payments/payment-engine.spec.ts", "status": "IMPLEMENTADO_15_TESTES" },
+    { "pr": "PR-10", "path": "domains/core-bank/src/holds/ledger-signed-balance.provider.ts", "status": "IMPLEMENTADO" },
+    { "pr": "PR-11", "path": "domains/core-bank/src/pix/pix.entity.ts", "status": "IMPLEMENTADO" },
+    { "pr": "PR-11", "path": "domains/core-bank/src/pix/pix-engine.service.ts", "status": "IMPLEMENTADO" },
+    { "pr": "PR-11", "path": "domains/core-bank/src/pix/pix-engine.spec.ts", "status": "IMPLEMENTADO_9_TESTES" },
+    { "pr": "PR-12", "path": "domains/core-bank/src/reconciliation/reconciliation.service.ts", "status": "IMPLEMENTADO" },
+    { "pr": "PR-12", "path": "domains/core-bank/src/reconciliation/reconciliation.spec.ts", "status": "IMPLEMENTADO_8_TESTES" },
+    { "pr": "PR-13", "path": "domains/core-bank/src/core-bank.module.ts", "status": "IMPLEMENTADO" },
+    { "pr": "PR-13", "path": "domains/core-bank/src/core-bank.service.ts", "status": "IMPLEMENTADO" },
+    { "pr": "PR-13", "path": "domains/core-bank/src/core-bank.module.spec.ts", "status": "IMPLEMENTADO_4_TESTES" },
+    { "pr": "PR-14", "path": "domains/core-bank/src/integration/invariant-registry.ts", "status": "VERIFICADO_47_INVARIANTES" },
+    { "pr": "PR-14", "path": "domains/core-bank/src/integration/core-banking-invariants.integration.spec.ts", "status": "VERIFICADO_47_TESTES" },
+    { "pr": "PR-15", "path": "domains/core-bank/src/load/canary-router.ts", "status": "IMPLEMENTADO" },
+    { "pr": "PR-15", "path": "domains/core-bank/src/load/daily-load-simulator.ts", "status": "IMPLEMENTADO" },
+    { "pr": "PR-15", "path": "domains/core-bank/src/load/release-gate.ts", "status": "IMPLEMENTADO" },
+    { "pr": "PR-15", "path": "domains/core-bank/scripts/generate-evidence.mjs", "status": "IMPLEMENTADO" }
+  ],
+  "dag_progresso": {
+    "PR-00": "CONCLUIDO",
+    "PR-00b": "VERIFICADO_VERDE_2026-06-29",
+    "PR-01": "VERIFICADO_VERDE_2026-06-29_16_TESTES",
+    "PR-02": "VERIFICADO_VERDE_2026-06-29_22_TESTES",
+    "PR-03": "VERIFICADO_VERDE_2026-06-29_33_TESTES",
+    "PR-04a": "VERIFICADO_VERDE_2026-06-29_42_TESTES",
+    "PR-04b": "VERIFICADO_VERDE_2026-06-29_52_TESTES",
+    "PR-05": "VERIFICADO_VERDE_2026-06-29_59_TESTES",
+    "PR-06": "VERIFICADO_VERDE_2026-06-29_66_TESTES",
+    "PR-07": "VERIFICADO_VERDE_2026-06-29_75_TESTES",
+    "PR-08": "VERIFICADO_VERDE_2026-06-29_81_TESTES",
+    "PR-09": "VERIFICADO_VERDE_2026-06-29_93_TESTES",
+    "PR-10": "VERIFICADO_VERDE_2026-06-29_108_TESTES",
+    "PR-11": "VERIFICADO_VERDE_2026-06-29_117_TESTES",
+    "PR-12": "VERIFICADO_VERDE_2026-06-29_125_TESTES",
+    "PR-13": "VERIFICADO_VERDE_2026-06-29_129_TESTES",
+    "PR-14": "VERIFICADO_VERDE_2026-06-29_176_TESTES",
+    "PR-15": "VERIFICADO_VERDE_2026-06-29_184_TESTES_GATE_RELEASE"
+  },
+  "bloqueios_sessao": [
+    "shell_agente_indisponivel_no_cursor",
+    "home_claude_agents_md_nao_criado"
+  ],
+  "verificacao_local_2026_06_29": {
+    "lint": "PASS",
+    "test_suites": 19,
+    "test_total": 185,
+    "test_passed": 184,
+    "test_skipped": 1,
+    "test_failed": 0,
+    "build": "PASS",
+    "gate_g3_pr14": "SATISFEITO",
+    "gate_g4_pr15": "SATISFEITO",
+    "gate_release": "PASS",
+    "evidence": [
+      "PACKAGE-CHECKSUMS.sha256",
+      "VALIDATION-REPORT.json",
+      "SBOM.cdx.json"
+    ],
+    "regenera_agent": "5_limpos_0_rejeitados"
+  }
+}

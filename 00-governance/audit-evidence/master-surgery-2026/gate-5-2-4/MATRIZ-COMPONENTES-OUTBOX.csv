@@ -1,0 +1,6 @@
+componente,classificacao
+Interface Outbox,INTERFACE_ONLY
+Modelo de Domínio,INTERFACE_ONLY
+Persistência,BLOCKED_BY_PERSISTENCE
+Dispatcher,NOT_IMPLEMENTED
+Sink,BLOCKED_BY_SINK

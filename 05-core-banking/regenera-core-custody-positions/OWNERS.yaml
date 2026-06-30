@@ -1,0 +1,6 @@
+owners:
+  primary: team-custody-positions
+  approvers:
+    - team-architecture
+    - team-security
+  on_call: custody-positions-primary

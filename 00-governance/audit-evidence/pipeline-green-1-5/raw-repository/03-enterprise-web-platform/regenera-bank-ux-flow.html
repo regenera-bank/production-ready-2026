@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UX Flow — Regenera Bank Enterprise v4.0</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #f4f5f7;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    color: #1a1a2e;
+    min-height: 100vh;
+  }
+
+  /* ── Header ── */
+  .header {
+    background: #0a0a1a;
+    color: #fff;
+    padding: 24px 48px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    border-bottom: 2px solid #00ffff30;
+  }
+  .header-logo {
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: #00ffff;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+  .header-title {
+    font-size: 22px;
+    font-weight: 300;
+    letter-spacing: 0.05em;
+  }
+  .header-badge {
+    margin-left: auto;
+    background: #00ffff15;
+    border: 1px solid #00ffff40;
+    color: #00ffff;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    padding: 4px 12px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+
+  /* ── Legend ── */
+  .legend {
+    background: #fff;
+    border-bottom: 1px solid #e0e0e0;
+    padding: 12px 48px;
+    display: flex;
+    gap: 24px;
+    align-items: center;
+    font-size: 11px;
+    flex-wrap: wrap;
+  }
+  .legend-item { display: flex; align-items: center; gap: 6px; }
+  .legend-dot {
+    width: 10px; height: 10px; border-radius: 50%;
+  }
+  .legend-line {
+    width: 24px; height: 3px; border-radius: 2px;
+  }
+
+  /* ── Canvas ── */
+  .canvas {
+    padding: 40px 48px 80px;
+    overflow-x: auto;
+  }
+
+  /* ── Flow diagram SVG wrapper ── */
+  .flow-svg {
+    display: block;
+    margin: 0 auto;
+  }
+
+  /* ── Phone wireframe styles ── */
+  .phone-body { fill: #1a1a2e; stroke: #2a2a4a; stroke-width: 2; rx: 12; }
+  .phone-screen { fill: #0d0d1f; }
+  .phone-notch { fill: #0a0a15; }
+
+  /* Colors */
+  .c-cyan { color: #00ffff; }
+  .c-green { color: #00ff88; }
+  .c-amber { color: #ffaa00; }
+  .c-red { color: #ff4455; }
+
+  /* screen number circle */
+  .step-num {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: 700; color: #fff;
+    flex-shrink: 0;
+  }
+
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div>
+    <div class="header-logo">Regenera Bank · Enterprise v4.0</div>
+    <div class="header-title">UX Flow — Jornada do Usuário Completa</div>
+  </div>
+  <div class="header-badge">Design System</div>
+</div>
+
+<div class="legend">
+  <strong style="font-size:11px;color:#555;">LEGENDA:</strong>
+  <div class="legend-item">
+    <div class="legend-dot" style="background:#e53935;"></div>
+    <span>Fluxo principal</span>
+  </div>
+  <div class="legend-item">
+    <div class="legend-dot" style="background:#fb8c00;"></div>
+    <span>Ação secundária / Erro</span>
+  </div>
+  <div class="legend-item">
+    <div class="legend-dot" style="background:#43a047;"></div>
+    <span>Estado de sucesso</span>
+  </div>
+  <div class="legend-item">
+    <div class="legend-dot" style="background:#1e88e5;"></div>
+    <span>Ação do usuário</span>
+  </div>
+  <div class="legend-item">
+    <div class="legend-dot" style="background:#8e24aa;"></div>
+    <span>Estado especial</span>
+  </div>
+  <div class="legend-item" style="margin-left:auto;">
+    <span style="color:#999;font-size:10px;">regenerabank.app · 2026</span>
+  </div>
+</div>
+
+<div class="canvas">
+<svg class="flow-svg" width="1600" height="6000" viewBox="0 0 1600 6000" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Arrow markers -->
+    <marker id="arr-red" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#e53935"/>
+    </marker>
+    <marker id="arr-orange" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#fb8c00"/>
+    </marker>
+    <marker id="arr-green" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#43a047"/>
+    </marker>
+    <marker id="arr-blue" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#1e88e5"/>
+    </marker>
+    <marker id="arr-purple" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#8e24aa"/>
+    </marker>
+    <!-- Gradients -->
+    <linearGradient id="grad-phone" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1e2a3a"/>
+      <stop offset="100%" stop-color="#0d1520"/>
+    </linearGradient>
+    <linearGradient id="grad-cyan-screen" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#001824"/>
+      <stop offset="100%" stop-color="#000c12"/>
+    </linearGradient>
+    <linearGradient id="grad-green-screen" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#001a0d"/>
+      <stop offset="100%" stop-color="#000d06"/>
+    </linearGradient>
+    <linearGradient id="grad-amber-screen" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1a1000"/>
+      <stop offset="100%" stop-color="#0d0800"/>
+    </linearGradient>
+    <linearGradient id="grad-dash-screen" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0a0d1a"/>
+      <stop offset="100%" stop-color="#050810"/>
+    </linearGradient>
+    <!-- Glow filters -->
+    <filter id="glow-cyan" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glow-green" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <!-- Shadow for cards -->
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#00000030"/>
+    </filter>
+    <filter id="shadow-light" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#00000020"/>
+    </filter>
+  </defs>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       BACKGROUND COLUMN LABELS
+  ═══════════════════════════════════════════════════════════ -->
+  <rect x="0" y="0" width="1600" height="6000" fill="#f0f2f5"/>
+
+  <!-- Column section backgrounds -->
+  <rect x="0" y="60" width="1600" height="50" fill="#e8eaf0" rx="0"/>
+  <text x="800" y="92" text-anchor="middle" font-size="11" fill="#888" font-family="sans-serif" letter-spacing="3" font-weight="600">FLUXO COMPLETO DE JORNADA DO USUÁRIO · REGENERA BANK ENTERPRISE v4.0</text>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       SCREEN 1 — LANDING PAGE  (y=140)
+  ═══════════════════════════════════════════════════════════ -->
+
+  <circle cx="800" cy="145" r="18" fill="#e53935" filter="url(#shadow-light)"/>
+  <text x="800" y="150" text-anchor="middle" font-size="13" fill="white" font-weight="700" font-family="sans-serif">1</text>
+  <text x="800" y="175" text-anchor="middle" font-size="13" fill="#555" font-family="sans-serif" letter-spacing="1" font-weight="600">PÁGINA DE DESTINO (LANDING PAGE)</text>
+
+  <g transform="translate(694, 202)" filter="url(#shadow)">
+    <rect x="0" y="0" width="212" height="380" rx="20" fill="url(#grad-phone)" stroke="#2a3a5a" stroke-width="2"/>
+    <rect x="8" y="12" width="196" height="356" rx="14" fill="url(#grad-cyan-screen)"/>
+    <rect x="76" y="12" width="60" height="14" rx="7" fill="#0a0d1a"/>
+    <text x="106" y="55" text-anchor="middle" font-size="7" fill="#00ffff80" font-family="sans-serif" letter-spacing="3">REGENERA</text>
+    <polygon points="106,78 120,86 120,102 106,110 92,102 92,86" fill="none" stroke="#00ffff" stroke-width="1.5"/>
+    <text x="106" y="96" text-anchor="middle" font-size="8" fill="#00ffff" font-weight="700" font-family="sans-serif">R</text>
+    <text x="106" y="122" text-anchor="middle" font-size="9" fill="white" font-weight="300" font-family="sans-serif">Regenera Bank</text>
+    <rect x="36" y="230" width="140" height="24" rx="12" fill="#00ffff" filter="url(#glow-cyan)"/>
+    <text x="106" y="246" text-anchor="middle" font-size="8" fill="#001824" font-weight="700" font-family="sans-serif">ACESSAR CONTA ▶</text>
+  </g>
+
+  <!-- Arrow down to T0 -->
+  <line x1="800" y1="582" x2="800" y2="630" stroke="#e53935" stroke-width="2.5" marker-end="url(#arr-red)"/>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       T0 — DEVICE SECURITY (y=640)
+  ═══════════════════════════════════════════════════════════ -->
+
+  <circle cx="800" cy="640" r="18" fill="#8e24aa" filter="url(#shadow-light)"/>
+  <text x="800" y="645" text-anchor="middle" font-size="13" fill="white" font-weight="700" font-family="sans-serif">T0</text>
+  <text x="800" y="670" text-anchor="middle" font-size="13" fill="#555" font-family="sans-serif" letter-spacing="1" font-weight="600">DEVICE SECURITY ENGINE (FINGERPRINTING)</text>
+
+  <g transform="translate(694, 690)" filter="url(#shadow)">
+    <rect x="0" y="0" width="212" height="380" rx="20" fill="#0a0a1a" stroke="#8e24aa50" stroke-width="2"/>
+    <rect x="8" y="12" width="196" height="356" rx="14" fill="#050510"/>
+    <circle cx="106" cy="130" r="60" fill="none" stroke="#8e24aa30" stroke-width="1" stroke-dasharray="5,3"/>
+    <path d="M 80,100 Q 106,70 132,100" fill="none" stroke="#8e24aa" stroke-width="2" opacity="0.6"/>
+    <text x="106" y="220" text-anchor="middle" font-size="8" fill="#8e24aa" font-weight="700">VERIFYING DEVICE...</text>
+    <text x="106" y="235" text-anchor="middle" font-size="6" fill="#8e24aa80">OS: iOS 17.4 · model: iPhone 15 Pro</text>
+    <text x="106" y="245" text-anchor="middle" font-size="5" fill="#8e24aa40">FINGERPRINT: 0x82a...f39c</text>
+    <rect x="50" y="260" width="112" height="4" rx="2" fill="#8e24aa20"/>
+    <rect x="50" y="260" width="80" height="4" rx="2" fill="#8e24aa"/>
+  </g>
+
+  <line x1="800" y1="1070" x2="800" y2="1120" stroke="#e53935" stroke-width="2.5" marker-end="url(#arr-red)"/>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       T1a — FIRST ACCESS SPLIT (y=1130)
+  ═══════════════════════════════════════════════════════════ -->
+
+  <circle cx="800" cy="1130" r="18" fill="#e53935" filter="url(#shadow-light)"/>
+  <text x="800" y="1135" text-anchor="middle" font-size="13" fill="white" font-weight="700" font-family="sans-serif">T1a</text>
+  <text x="800" y="1160" text-anchor="middle" font-size="13" fill="#555" font-family="sans-serif" letter-spacing="1" font-weight="600">SELEÇÃO DE ACESSO (LOGIN vs ONBOARDING)</text>
+
+  <g transform="translate(694, 1180)" filter="url(#shadow)">
+    <rect x="0" y="0" width="212" height="380" rx="20" fill="url(#grad-phone)" stroke="#2a3a5a" stroke-width="2"/>
+    <rect x="8" y="12" width="196" height="356" rx="14" fill="url(#grad-cyan-screen)"/>
+    <text x="106" y="60" text-anchor="middle" font-size="10" fill="white" font-weight="300">Bem-vindo ao</text>
+    <text x="106" y="75" text-anchor="middle" font-size="12" fill="white" font-weight="700">Regenera Bank</text>
+    
+    <rect x="26" y="140" width="160" height="40" rx="12" fill="#00ffff15" stroke="#00ffff" stroke-width="1"/>
+    <text x="106" y="160" text-anchor="middle" font-size="8" fill="#00ffff" font-weight="700">JÁ SOU CLIENTE</text>
+    <text x="106" y="170" text-anchor="middle" font-size="6" fill="#00ffff80">ACESSAR CONTA</text>
+
+    <rect x="26" y="200" width="160" height="40" rx="12" fill="white"/>
+    <text x="106" y="220" text-anchor="middle" font-size="8" fill="#0a0d1a" font-weight="700">QUERO SER REGENERA</text>
+    <text x="106" y="230" text-anchor="middle" font-size="6" fill="#0a0d1a80">ABRIR CONTA EM 3 MIN</text>
+  </g>
+
+  <!-- Login Path -->
+  <line x1="750" y1="1560" x2="600" y2="1650" stroke="#e53935" stroke-width="2.5" marker-end="url(#arr-red)"/>
+  <text x="630" y="1610" font-size="10" fill="#e53935" font-weight="700" transform="rotate(-30, 630, 1610)">LOGIN</text>
+
+  <!-- Onboarding Path -->
+  <line x1="850" y1="1560" x2="1000" y2="1650" stroke="#fb8c00" stroke-width="2.5" marker-end="url(#arr-orange)"/>
+  <text x="930" y="1610" font-size="10" fill="#fb8c00" font-weight="700" transform="rotate(30, 930, 1610)">ABRIR CONTA</text>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       T2a-T2f — AUTH HUB TABS (y=1660)
+  ═══════════════════════════════════════════════════════════ -->
+
+  <circle cx="500" cy="1660" r="18" fill="#e53935" filter="url(#shadow-light)"/>
+  <text x="500" y="1665" text-anchor="middle" font-size="13" fill="white" font-weight="700" font-family="sans-serif">T2</text>
+  <text x="500" y="1690" text-anchor="middle" font-size="13" fill="#555" font-family="sans-serif" letter-spacing="1" font-weight="600">HUB DE AUTENTICAÇÃO (MULTI-FACTOR)</text>
+
+  <g transform="translate(394, 1710)" filter="url(#shadow)">
+    <rect x="0" y="0" width="212" height="420" rx="20" fill="url(#grad-phone)" stroke="#2a3a5a" stroke-width="2"/>
+    <rect x="8" y="12" width="196" height="396" rx="14" fill="#0a0d1a"/>
+    
+    <!-- Tabs Header -->
+    <rect x="8" y="26" width="196" height="30" fill="#ffffff08"/>
+    <text x="25" y="45" font-size="5" fill="#00ffff" font-weight="700">CPF</text>
+    <text x="55" y="45" font-size="5" fill="#ffffff40">SENHA</text>
+    <text x="95" y="45" font-size="5" fill="#ffffff40">BIO</text>
+    <text x="125" y="45" font-size="5" fill="#ffffff40">TOKEN</text>
+    <text x="165" y="45" font-size="5" fill="#ffffff40">DISP</text>
+    <line x1="20" y1="50" x2="40" y2="50" stroke="#00ffff" stroke-width="1.5"/>
+
+    <text x="20" y="80" font-size="10" fill="white" font-weight="700">Identificação</text>
+    <text x="20" y="95" font-size="6" fill="#ffffff60">Informe seu CPF para continuar</text>
+    
+    <rect x="20" y="110" width="172" height="40" rx="10" fill="#ffffff05" stroke="#ffffff10"/>
+    <text x="35" y="135" font-size="12" fill="white" font-family="monospace">123.456.789-00</text>
+    
+    <rect x="20" y="170" width="172" height="40" rx="10" fill="#00ffff" filter="url(#glow-cyan)"/>
+    <text x="106" y="195" text-anchor="middle" font-size="10" fill="#0a0d1a" font-weight="700">CONTINUAR</text>
+  </g>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       CPF PROMETEO API VALIDATION (y=2150)
+  ═══════════════════════════════════════════════════════════ -->
+
+  <rect x="400" y="2150" width="200" height="80" rx="10" fill="#f0f9ff" stroke="#1e88e5" stroke-width="1.5"/>
+  <text x="420" y="2175" font-size="10" fill="#1e88e5" font-weight="700">⚙️ API PROMETEO</text>
+  <text x="420" y="2195" font-size="9" fill="#333">Validation CPF: 123.456.789-00</text>
+  <text x="420" y="2210" font-size="9" fill="#43a047">Status: ACTIVE / NO RESTRICTIONS</text>
+
+  <line x1="500" y1="2130" x2="500" y2="2150" stroke="#1e88e5" stroke-width="1.5" stroke-dasharray="4,2"/>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       T2c — FACE ID / IRIS SCAN (OLD SCREEN 2) (y=2300)
+  ═══════════════════════════════════════════════════════════ -->
+
+  <circle cx="500" cy="2280" r="18" fill="#e53935" filter="url(#shadow-light)"/>
+  <text x="500" y="2285" text-anchor="middle" font-size="13" fill="white" font-weight="700" font-family="sans-serif">T2c</text>
+  <text x="500" y="2310" text-anchor="middle" font-size="13" fill="#555" font-family="sans-serif" letter-spacing="1" font-weight="600">VALIDAÇÃO BIOMÉTRICA (FACE ID)</text>
+
+  <g transform="translate(394, 2330)" filter="url(#shadow)">
+    <rect x="0" y="0" width="212" height="380" rx="20" fill="url(#grad-phone)" stroke="#2a3a5a" stroke-width="2"/>
+    <rect x="8" y="12" width="196" height="356" rx="14" fill="url(#grad-cyan-screen)"/>
+    <circle cx="106" cy="135" r="50" fill="none" stroke="#00ffff40" stroke-width="1.5" stroke-dasharray="4,4"/>
+    <path d="M 80,100 L 80,85 L 95,85" fill="none" stroke="#00ffff" stroke-width="2"/>
+    <path d="M 132,100 L 132,85 L 117,85" fill="none" stroke="#00ffff" stroke-width="2"/>
+    <circle cx="106" cy="135" r="25" fill="#001830" stroke="#00ffff" stroke-width="1.5"/>
+    <text x="106" y="210" text-anchor="middle" font-size="8" fill="#00ffff">AUTENTICANDO...</text>
+  </g>
+
+  <!-- Error Path: ACESSO NEGADO -->
+  <line x1="390" y1="2500" x2="250" y2="2600" stroke="#ff4455" stroke-width="2.5" marker-end="url(#arr-red)"/>
+  
+  <!-- ═══════════════════════════════════════════════════════════
+       ACESSO NEGADO (y=2650)
+  ═══════════════════════════════════════════════════════════ -->
+
+  <g transform="translate(100, 2650)" filter="url(#shadow)">
+    <rect x="0" y="0" width="212" height="380" rx="20" fill="#1a0000" stroke="#ff445550" stroke-width="2"/>
+    <rect x="8" y="12" width="196" height="356" rx="14" fill="#100000"/>
+    <text x="106" y="120" text-anchor="middle" font-size="30">🚫</text>
+    <text x="106" y="170" text-anchor="middle" font-size="12" fill="#ff4455" font-weight="700">ACESSO NEGADO</text>
+    <text x="106" y="190" text-anchor="middle" font-size="8" fill="#ff445580">Credenciais inválidas ou dispositivo não reconhecido.</text>
+    <rect x="36" y="250" width="140" height="30" rx="15" fill="#ff445520" stroke="#ff4455"/>
+    <text x="106" y="270" text-anchor="middle" font-size="8" fill="#ff4455">TENTAR NOVAMENTE</text>
+  </g>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       T_ENROLL — FACE ENROLLMENT (y=1710 - Right Column)
+  ═══════════════════════════════════════════════════════════ -->
+
+  <circle cx="1100" cy="1660" r="18" fill="#fb8c00" filter="url(#shadow-light)"/>
+  <text x="1100" y="1665" text-anchor="middle" font-size="13" fill="white" font-weight="700" font-family="sans-serif">T_E</text>
+  <text x="1100" y="1690" text-anchor="middle" font-size="13" fill="#555" font-family="sans-serif" letter-spacing="1" font-weight="600">ENROLLMENT BIOMÉTRICO (ONBOARDING)</text>
+
+  <g transform="translate(994, 1710)" filter="url(#shadow)">
+    <rect x="0" y="0" width="212" height="420" rx="20" fill="url(#grad-phone)" stroke="#fb8c0050" stroke-width="2"/>
+    <rect x="8" y="12" width="196" height="396" rx="14" fill="#0d0800"/>
+    
+    <text x="106" y="50" text-anchor="middle" font-size="10" fill="white" font-weight="700">Cadastro Facial</text>
+    <text x="106" y="65" text-anchor="middle" font-size="6" fill="#ffffff60">Posicione seu rosto no centro</text>
+
+    <circle cx="106" cy="150" r="60" fill="none" stroke="#fb8c0040" stroke-width="1" stroke-dasharray="10,5"/>
+    <path d="M 106,100 C 120,100 135,120 135,150 C 135,180 120,200 106,200 C 92,200 77,180 77,150 C 77,120 92,100 106,100" fill="none" stroke="#fb8c00" stroke-width="2"/>
+    
+    <text x="106" y="235" text-anchor="middle" font-size="8" fill="#fb8c00" font-weight="700">Gire a cabeça lentamente</text>
+    
+    <rect x="30" y="300" width="152" height="8" rx="4" fill="#fb8c0020"/>
+    <rect x="30" y="300" width="110" height="8" rx="4" fill="#fb8c00"/>
+    <text x="106" y="325" text-anchor="middle" font-size="10" fill="#fb8c00" font-weight="700">72%</text>
+  </g>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       SUCCESS — SCREEN 3 (OLD) (y=3200)
+  ═══════════════════════════════════════════════════════════ -->
+
+  <circle cx="800" cy="3200" r="18" fill="#43a047" filter="url(#shadow-light)"/>
+  <text x="800" y="3205" text-anchor="middle" font-size="13" fill="white" font-weight="700" font-family="sans-serif">3</text>
+  <text x="800" y="3230" text-anchor="middle" font-size="13" fill="#555" font-family="sans-serif" letter-spacing="1" font-weight="600">AUTENTICAÇÃO BEM-SUCEDIDA</text>
+
+  <g transform="translate(694, 3260)" filter="url(#shadow)">
+    <rect x="0" y="0" width="212" height="380" rx="20" fill="url(#grad-phone)" stroke="#1b5e20" stroke-width="2"/>
+    <rect x="8" y="12" width="196" height="356" rx="14" fill="url(#grad-green-screen)"/>
+    <circle cx="124" cy="136" r="8" fill="#00ff88"/>
+    <text x="124" y="140" text-anchor="middle" font-size="8" fill="#001a00" font-weight="700">✓</text>
+    <text x="106" y="175" text-anchor="middle" font-size="9" fill="#00ff88" font-weight="700">✓ ACESSO AUTORIZADO</text>
+  </g>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       DASHBOARD — SCREEN 4 (OLD) (y=3800)
+  ═══════════════════════════════════════════════════════════ -->
+
+  <circle cx="800" cy="3800" r="18" fill="#e53935" filter="url(#shadow-light)"/>
+  <text x="800" y="3805" text-anchor="middle" font-size="13" fill="white" font-weight="700" font-family="sans-serif">4</text>
+  <text x="800" y="3830" text-anchor="middle" font-size="13" fill="#555" font-family="sans-serif" letter-spacing="1" font-weight="600">PAINEL PRINCIPAL (DASHBOARD)</text>
+
+  <g transform="translate(694, 3860)" filter="url(#shadow)">
+    <rect x="0" y="0" width="212" height="420" rx="20" fill="url(#grad-phone)" stroke="#2a3a5a" stroke-width="2"/>
+    <rect x="8" y="12" width="196" height="396" rx="14" fill="url(#grad-dash-screen)"/>
+    <text x="106" y="43" text-anchor="middle" font-size="7" fill="white" font-weight="700">REGENERA</text>
+    <rect x="18" y="56" width="176" height="76" rx="10" fill="#001824"/>
+    <text x="32" y="100" font-size="11" fill="white" font-weight="300">R$ 247.832,90</text>
+  </g>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       SIDEBAR — SCREEN 5 (OLD) (y=4400)
+  ═══════════════════════════════════════════════════════════ -->
+
+  <circle cx="800" cy="4400" r="18" fill="#e53935" filter="url(#shadow-light)"/>
+  <text x="800" y="4405" text-anchor="middle" font-size="13" fill="white" font-weight="700" font-family="sans-serif">5</text>
+  <text x="800" y="4430" text-anchor="middle" font-size="13" fill="#555" font-family="sans-serif" letter-spacing="1" font-weight="600">MENU GLOBAL LATERAL (SIDEBAR)</text>
+
+  <g transform="translate(660, 4460)" filter="url(#shadow)">
+    <rect x="0" y="0" width="280" height="640" rx="20" fill="url(#grad-phone)" stroke="#2a3a5a" stroke-width="2"/>
+    <rect x="8" y="12" width="264" height="616" rx="14" fill="#0d1020"/>
+    <text x="30" y="35" font-size="8" fill="#00ffff" font-weight="700">REGENERA</text>
+    <text x="24" y="132" font-size="6.5" fill="white">🏠  Visão Geral</text>
+    <text x="24" y="144" font-size="6.5" fill="white">📋  Extrato &amp; Fluxo</text>
+    <text x="24" y="156" font-size="6.5" fill="white">⚡  Área Pix</text>
+  </g>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       BOTTOM SUMMARY CARD (y=5800)
+  ═══════════════════════════════════════════════════════════ -->
+
+  <rect x="240" y="5800" width="1120" height="130" rx="16" fill="#0a0d1f" stroke="#00ffff20" stroke-width="1" filter="url(#shadow)"/>
+  <text x="800" y="5828" text-anchor="middle" font-size="13" fill="#00ffff" font-family="sans-serif" letter-spacing="2" font-weight="700">REGENERA BANK ENTERPRISE v4.0 — RESUMO DO FLUXO COMPLETO</text>
+  <line x1="260" y1="5835" x2="1340" y2="5835" stroke="#00ffff15" stroke-width="0.5"/>
+  <text x="800" y="5880" text-anchor="middle" font-size="22" fill="#00ffff" font-family="sans-serif" font-weight="700">13+ TELAS</text>
+  <text x="800" y="5910" text-anchor="middle" font-size="9" fill="#ffffff30" font-family="sans-serif" letter-spacing="1">React + NestJS + GCP · Vertex AI Vision · Prometeo API · Cloud Spanner · Pub/Sub</text>
+
+</svg>
+</div>
+
+</body>
+</html>

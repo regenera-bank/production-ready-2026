@@ -1,0 +1,6 @@
+owners:
+  primary: team-integration-card-networks
+  approvers:
+    - team-architecture
+    - team-security
+  on_call: card-networks-primary

@@ -1,0 +1,8 @@
+{
+  "timestamp": "2026-06-26T08:11:44.385703",
+  "clusters_analisados": 0,
+  "clusters_bloqueados_por_desconhecimento_origem": 3,
+  "plano_merge_manual_produzido": true,
+  "plano_compatibilidade_produzido": true,
+  "plano_testes_produzido": true
+}

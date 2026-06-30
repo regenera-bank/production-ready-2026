@@ -1,0 +1,25 @@
+openapi: 3.1.0
+info:
+  title: Regenera investments API
+  version: 1.0.0
+servers:
+  - url: https://api.regenera.example/v1
+paths:
+  /investments/health:
+    get:
+      operationId: getInvestmentsHealth
+      responses:
+        '200':
+          description: available
+components:
+  parameters:
+    CorrelationId:
+      in: header
+      name: X-Correlation-ID
+      required: true
+      schema: { type: string, format: uuid }
+    IdempotencyKey:
+      in: header
+      name: Idempotency-Key
+      required: true
+      schema: { type: string, minLength: 16, maxLength: 128 }

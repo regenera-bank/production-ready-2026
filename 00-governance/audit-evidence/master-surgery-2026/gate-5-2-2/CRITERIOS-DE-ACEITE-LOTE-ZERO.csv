@@ -1,0 +1,3 @@
+criterion_id,capacidade,requisito,cenário,entrada,resultado_esperado,evidência_esperada,tipo_de_teste,bloqueador,aprovado
+CA-01,Idempotency,Repetição Idêntica,Envio do mesmo payload com mesma chave,POST /transfer com Idempotency-Key X (2x),Apenas um commit financeiro. Segunda chamada retorna replay da primeira.,Log de Request e Tabela Ledger,E2E,SIM,FALSE
+CA-02,Audit Trail,Integridade,Falha na escrita do Audit,Sink de log indisponível,"Utilizar outbox durável, não derrubar a transação financeira caso não seja crítica de authz.",Métricas Prometheus e DB Outbox,Integration (Chaos),SIM,FALSE

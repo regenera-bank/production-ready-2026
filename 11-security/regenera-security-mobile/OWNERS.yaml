@@ -1,0 +1,6 @@
+owners:
+  primary: team-security-mobile
+  approvers:
+    - team-architecture
+    - team-security
+  on_call: mobile-primary

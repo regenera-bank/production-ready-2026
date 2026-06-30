@@ -1,0 +1,12 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: regenera-integration-kyc-providers
+  description: Componente Regenera do domínio kyc-providers.
+  annotations:
+    regenera.io/criticality: high
+spec:
+  type: service
+  lifecycle: experimental
+  owner: team-integration-kyc-providers
+  system: regenera-bank

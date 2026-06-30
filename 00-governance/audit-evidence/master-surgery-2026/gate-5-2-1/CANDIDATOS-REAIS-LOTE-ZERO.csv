@@ -1,0 +1,12 @@
+capacidade,elegivel,motivo
+Audit Trail,SIM,Fundacional sem dependencias e sem bloqueio de contrato
+Idempotency,SIM,Fundacional sem dependencias e sem bloqueio de contrato
+Identity,NAO,Maturidade inferior ou bloqueio de contrato/dependencia
+Authorization,NAO,Maturidade inferior ou bloqueio de contrato/dependencia
+Customer/Party,NAO,Maturidade inferior ou bloqueio de contrato/dependencia
+Accounts,NAO,Maturidade inferior ou bloqueio de contrato/dependencia
+Ledger,NAO,Maturidade inferior ou bloqueio de contrato/dependencia
+Transactions,NAO,Maturidade inferior ou bloqueio de contrato/dependencia
+Payments,NAO,Maturidade inferior ou bloqueio de contrato/dependencia
+Pix,NAO,Maturidade inferior ou bloqueio de contrato/dependencia
+Reconciliation,NAO,Maturidade inferior ou bloqueio de contrato/dependencia

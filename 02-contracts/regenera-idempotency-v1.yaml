@@ -1,0 +1,12 @@
+openapi: 3.0.0
+info:
+  title: Idempotency Header Contract
+  version: 1.0.0
+components:
+  headers:
+    Idempotency-Key:
+      description: UUIDv4 unico por client para garantir idempotencia.
+      required: true
+      schema:
+        type: string
+        format: uuid

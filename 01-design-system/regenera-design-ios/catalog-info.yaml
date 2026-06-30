@@ -1,0 +1,12 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: regenera-design-ios
+  description: Componente Regenera do domínio design-ios.
+  annotations:
+    regenera.io/criticality: medium
+spec:
+  type: service
+  lifecycle: experimental
+  owner: team-design-system
+  system: regenera-bank

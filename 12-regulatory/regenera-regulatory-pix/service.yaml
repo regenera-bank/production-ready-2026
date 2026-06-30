@@ -1,0 +1,12 @@
+name: regenera-regulatory-pix
+domain: pix
+owner: team-regulatory-pix
+criticality: critical
+data_classification: banking-secret
+runtime: docs
+tier: 0
+rto: 15m
+rpo: 0
+on_call: pix-primary
+dependencies:
+  []

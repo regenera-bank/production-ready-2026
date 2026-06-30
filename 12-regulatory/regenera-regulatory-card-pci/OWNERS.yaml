@@ -1,0 +1,6 @@
+owners:
+  primary: team-regulatory-card-pci
+  approvers:
+    - team-architecture
+    - team-security
+  on_call: card-pci-primary

@@ -1,0 +1,12 @@
+name: regenera-design-android
+domain: design-android
+owner: team-design-system
+criticality: medium
+data_classification: banking-secret
+runtime: android
+tier: 2
+rto: 4h
+rpo: 1h
+on_call: design-android-primary
+dependencies:
+  []

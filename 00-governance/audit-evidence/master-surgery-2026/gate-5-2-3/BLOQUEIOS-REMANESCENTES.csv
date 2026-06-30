@@ -1,0 +1,3 @@
+bloqueio,motivo
+BLOCKED_PERSISTENCE_ENGINE_UNCONFIRMED,Postgres nao verificado nativamente
+BLOCKED_PRODUCTION_AUDIT_SINK,Sink nao integrado

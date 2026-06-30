@@ -1,0 +1,21 @@
+asyncapi: 3.0.0
+info:
+  title: Regenera account events
+  version: 1.0.0
+channels:
+  accountEvents:
+    address: regenera.account.events.v1
+    messages:
+      changed:
+        $ref: '#/components/messages/Changed'
+components:
+  messages:
+    Changed:
+      name: regenera.account.entity.changed.v1
+      payload:
+        type: object
+        required: [eventId, occurredAt, correlationId]
+        properties:
+          eventId: { type: string, format: uuid }
+          occurredAt: { type: string, format: date-time }
+          correlationId: { type: string, format: uuid }

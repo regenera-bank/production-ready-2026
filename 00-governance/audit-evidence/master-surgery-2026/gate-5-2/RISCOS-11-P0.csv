@@ -1,0 +1,12 @@
+capacidade,risco
+Identity,Alta fragmentação. Ausência de testes operacionais integrados.
+Customer/Party,Alta fragmentação. Ausência de testes operacionais integrados.
+Accounts,Alta fragmentação. Ausência de testes operacionais integrados.
+Ledger,Alta fragmentação. Ausência de testes operacionais integrados.
+Transactions,Alta fragmentação. Ausência de testes operacionais integrados.
+Idempotency,Alta fragmentação. Ausência de testes operacionais integrados.
+Reconciliation,Alta fragmentação. Ausência de testes operacionais integrados.
+Payments,Alta fragmentação. Ausência de testes operacionais integrados.
+Pix,Alta fragmentação. Ausência de testes operacionais integrados.
+Audit Trail,Alta fragmentação. Ausência de testes operacionais integrados.
+Authorization,Alta fragmentação. Ausência de testes operacionais integrados.

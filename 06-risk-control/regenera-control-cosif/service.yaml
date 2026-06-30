@@ -1,0 +1,12 @@
+name: regenera-control-cosif
+domain: cosif
+owner: team-cosif
+criticality: critical
+data_classification: banking-secret
+runtime: jvm
+tier: 0
+rto: 15m
+rpo: 0
+on_call: cosif-primary
+dependencies:
+  []

@@ -1,0 +1,88 @@
+Visão Geral do Projeto: Regenera Bank
+
+Introdução
+
+Seja bem-vindo(a) à equipe! Este documento foi criado para servir como seu guia inicial ao ecossistema do Regenera Bank. Nosso objetivo é desmistificar a estrutura do projeto, explicando seus componentes principais de forma simples e focando não apenas no "o quê", mas principalmente no "porquê" de cada escolha arquitetural. Ao final desta leitura, você não apenas conhecerá as peças do nosso quebra-cabeça, mas entenderá o raciocínio arquitetural que nos permite construir o futuro dos serviços financeiros com confiança e agilidade.
+
+--------------------------------------------------------------------------------
+
+1. O Que é o Ecossistema Regenera Bank?
+
+O Regenera Bank é projetado como um "ecossistema complexo, mas harmonioso". Em vez de uma única aplicação gigante, ele é uma coleção de sistemas especializados que colaboram para entregar uma experiência bancária completa, segura e eficiente. A implementação rigorosa dessa arquitetura visa garantir quatro resultados principais:
+
+* Segurança Inexpugnável: Resiliência contra ameaças cibernéticas e integridade total dos dados dos nossos clientes.
+* Performance Superior: Agilidade nas transações e um tempo de resposta otimizado para o usuário em todas as interações.
+* Escalabilidade Dinâmica: A capacidade de adaptar nossa infraestrutura para suportar crescimentos exponenciais na demanda sem degradar o serviço.
+* Inovação Acelerada: Agilidade para integrar novas funcionalidades e responder rapidamente às mudanças do mercado.
+
+Essa estrutura, especialmente a nossa abordagem de microsserviços e automação, é a alavanca que nos permite alcançar simultaneamente a Escalabilidade Dinâmica e a Inovação Acelerada, enquanto os padrões de segurança e os testes rigorosos garantem a Segurança Inexpugnável.
+
+Para alcançar esses resultados, nosso ecossistema é fundamentalmente dividido em duas partes: o que o cliente vê e interage (o Frontend) e tudo o que acontece nos bastidores para que as operações funcionem (o Backend).
+
+
+--------------------------------------------------------------------------------
+
+
+2. Os Dois Mundos: Frontend e Backend
+
+Frontend: A Fachada do Banco
+
+O Frontend é a "fachada" do Regenera Bank: o aplicativo no celular do cliente ou o site no computador. É a camada visual e interativa, tudo o que o usuário vê, toca e clica. Sua importância estratégica é imensa, pois ele serve como a "ponte direta entre o cliente e os serviços financeiros". Uma experiência de usuário intuitiva, rápida e agradável é crucial para o sucesso do banco. No nosso projeto, isso se materializa em aplicações como:
+
+* apps/frontend: O Dashboard em React SPA, o cliente web principal.
+* apps/next-frontend: O cliente web Next.js (em desenvolvimento).
+* apps/mobile-app: O cliente mobile em React Native (em desenvolvimento).
+
+Backend: Os Bastidores da Operação
+
+O Backend representa os "bastidores" do Regenera Bank. Pense na sala do cofre, nos escritórios dos contadores e na central de processamento do PIX. É aqui que todas as operações financeiras reais e complexas acontecem, longe dos olhos do público. Sua importância estratégica é ser o "'motor' que faz o banco funcionar", processando transações, gerenciando contas e garantindo a segurança e a lógica de negócio por trás de tudo o que o cliente vê no Frontend.
+
+Componente	Analogia	Principal Objetivo	Exemplos Concretos / Tecnologias
+Frontend	A "Fachada" do Banco	Oferecer uma experiência de usuário excelente e intuitiva.	React SPA, Next.js, React Native
+Backend	Os "Bastidores" da Operação	Processar todas as operações de forma segura, eficiente e confiável.	NestJS, PostgreSQL, RabbitMQ, gRPC
+
+Agora que entendemos essa divisão fundamental, vamos explorar como os "bastidores" (o backend) são organizados de forma inteligente.
+
+
+--------------------------------------------------------------------------------
+
+
+3. A Organização do Backend: Microsserviços
+
+Para organizar a complexidade do backend, adotamos uma arquitetura de microsserviços. A melhor forma de entender isso é através da analogia de uma "'federação de pequenas nações independentes'". Cada "nação" (microsserviço) é especialista em uma única área de negócio (contas, PIX, autenticação) e opera de forma autônoma, comunicando-se com as outras quando necessário.
+
+A relevância estratégica dessa "federação" é que ela nos concede agilidade, resiliência e escalabilidade. Se um serviço apresentar uma falha, os outros podem continuar operando de forma independente. Isso também nos permite atualizar ou escalar um serviço específico sem impactar o resto do sistema.
+
+Aqui estão alguns dos nossos microsserviços essenciais:
+
+* auth-service: Gerencia a autenticação de usuários (registro, login, JWTs) e se comunica com o user-service via gRPC para validar e obter dados do usuário.
+* user-service: Gerencia os dados cadastrais dos usuários, persistindo-os em PostgreSQL e expondo uma interface gRPC para ser consumida por outros serviços internos.
+* account-service: Gerencia contas bancárias e saldos, incluindo operações de débito e crédito, persistindo todas as informações em PostgreSQL.
+* pix-service: Orquestra as transferências PIX, interagindo com o account-service via HTTP, publicando eventos de transação no RabbitMQ e persistindo os dados em PostgreSQL.
+
+Com tantas partes móveis, como garantimos que tudo funcione perfeitamente em conjunto? A resposta está em nossa cultura de testes.
+
+
+--------------------------------------------------------------------------------
+
+
+4. Garantindo a Qualidade: O Papel dos Testes
+
+Os testes automatizados são a "'espinha dorsal da qualidade e segurança do Regenera Bank'". Podemos imaginá-los como "'inspetores robôs que verificam automaticamente cada peça'", cada conexão e cada funcionalidade do banco, garantindo que tudo funcione como esperado. Eles nos permitem adicionar novas funcionalidades e fazer atualizações com a confiança de que não estamos quebrando algo que já funcionava.
+
+Uma das principais estratégias de teste que utilizamos são os Testes de ponta a ponta (End-to-End - E2E) com a ferramenta Cypress. Esses testes simulam a interação de um usuário real com o frontend, verificando fluxos completos. Por exemplo, o arquivo auth.cy.ts contém testes que simulam o fluxo completo de registro e login de um usuário, garantindo que esta funcionalidade crítica nunca seja comprometida.
+
+Com essa base sobre nossa espinha dorsal de qualidade, estamos prontos para recapitular os pilares que sustentam todo o ecossistema.
+
+
+--------------------------------------------------------------------------------
+
+
+5. Resumo: Seus Primeiros Passos no Entendimento do Regenera Bank
+
+Ao longo deste documento, você foi apresentado aos pilares arquiteturais do Regenera Bank. Para consolidar seu aprendizado, aqui estão os quatro conceitos-chave:
+
+1. Frontend (A Fachada): É a interface com o cliente. Seu propósito é oferecer uma experiência de usuário excelente e intuitiva.
+2. Backend (Os Bastidores): É o motor do banco. Seu propósito é processar todas as operações de forma segura e eficiente.
+3. Microsserviços (Nações Independentes): É como o backend é organizado. Seu propósito é tornar o banco mais ágil para crescer e resiliente a falhas.
+4. Testes (Inspetores Robôs): É como garantimos a qualidade. Seu propósito é assegurar que tudo funcione corretamente, permitindo inovações com segurança.

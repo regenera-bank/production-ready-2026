@@ -1,0 +1,6 @@
+owners:
+  primary: team-regulatory-reporting
+  approvers:
+    - team-architecture
+    - team-security
+  on_call: regulatory-reporting-primary

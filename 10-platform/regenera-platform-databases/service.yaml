@@ -1,0 +1,12 @@
+name: regenera-platform-databases
+domain: databases
+owner: team-platform-databases
+criticality: critical
+data_classification: banking-secret
+runtime: docs
+tier: 0
+rto: 15m
+rpo: 0
+on_call: databases-primary
+dependencies:
+  []

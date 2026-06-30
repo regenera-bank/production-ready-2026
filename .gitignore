@@ -1,0 +1,65 @@
+# Dependency directories
+node_modules/
+**/node_modules/
+
+# Build outputs
+dist/
+**/dist/
+build/
+**/build/
+.next/
+.nuxt/
+.expo/
+.turbo/
+.cache/
+
+# Testing coverage
+coverage/
+**/coverage/
+htmlcov/
+.coverage
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Environment configurations
+.env
+.env.*
+!.env.example
+.local-credentials/
+credentials/
+*.pem
+*.key
+.data/
+
+# Logs
+*.log
+.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# OS and Editor metadata
+.DS_Store
+**/.DS_Store
+__MACOSX/
+._*
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/settings.json
+
+# Python cache
+pycache/
+*.py[cod]
+*.pyo
+
+# Databases
+*.sqlite
+**/*.sqlite
+coverage/
+3. FrontEnd/coverage/
+
+# Large release packages and presentations
+*.zip
+*.pdf

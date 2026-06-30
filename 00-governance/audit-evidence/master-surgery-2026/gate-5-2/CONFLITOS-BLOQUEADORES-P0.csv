@@ -1,0 +1,10 @@
+capacidade,conflict_id,decisao_humana,impacto
+Identity,3429 | 3433 | 3506 | 3512,Escolher versão canônica,Risco de sobrescrita destrutiva
+Customer/Party,3100 | 3104 | 3133,Escolher versão canônica,Risco de sobrescrita destrutiva
+Accounts,2386 | 2390 | 2445 | 2474 | 2478 | 2503,Escolher versão canônica,Risco de sobrescrita destrutiva
+Ledger,3654 | 3658 | 3691 | 3693 | 3694,Escolher versão canônica,Risco de sobrescrita destrutiva
+Transactions,4336 | 4340 | 4358,Escolher versão canônica,Risco de sobrescrita destrutiva
+Reconciliation,4129 | 4133 | 4153,Escolher versão canônica,Risco de sobrescrita destrutiva
+Payments,607 | 687 | 701 | 708 | 1310 | 1406 | 1470 | 1559 | 2386 | 2474 | 2757 | 3100 | 3287 | 3429 | 3654 | 3765 | 3852 | 3983 | 4016 | 4129 | 4336,Escolher versão canônica,Risco de sobrescrita destrutiva
+Pix,4016 | 4020 | 4038,Escolher versão canônica,Risco de sobrescrita destrutiva
+Audit Trail,3 | 12 | 19,Escolher versão canônica,Risco de sobrescrita destrutiva

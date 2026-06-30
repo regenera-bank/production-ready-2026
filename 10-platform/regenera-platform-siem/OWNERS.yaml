@@ -1,0 +1,6 @@
+owners:
+  primary: team-platform-siem
+  approvers:
+    - team-architecture
+    - team-security
+  on_call: siem-primary

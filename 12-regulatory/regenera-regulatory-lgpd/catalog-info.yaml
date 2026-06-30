@@ -1,0 +1,12 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: regenera-regulatory-lgpd
+  description: Componente Regenera do domínio lgpd.
+  annotations:
+    regenera.io/criticality: critical
+spec:
+  type: service
+  lifecycle: experimental
+  owner: team-regulatory-lgpd
+  system: regenera-bank

@@ -1,0 +1,12 @@
+name: regenera-contracts-asyncapi
+domain: asyncapi
+owner: team-architecture
+criticality: high
+data_classification: banking-secret
+runtime: node
+tier: 1
+rto: 4h
+rpo: 1h
+on_call: asyncapi-primary
+dependencies:
+  []

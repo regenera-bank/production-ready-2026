@@ -1,0 +1,57 @@
+id,caminho,dominio,tipo_corrigido,relacao_conflito,relacao_source
+20,governance/release/repository-root/SECURITY.md,FUNDAÇÃO DO WORKSPACE,C,NAO,NAO
+2382,domains/accounting/.tool-versions,CONTROLE E CONFIABILIDADE,B,NAO,NAO
+2384,domains/accounting/CODEOWNERS,CONTROLE E CONFIABILIDADE,B,NAO,NAO
+2470,domains/accounts/.tool-versions,SERVIÇOS DE DOMÍNIO,B,NAO,NAO
+2472,domains/accounts/CODEOWNERS,SERVIÇOS DE DOMÍNIO,B,NAO,NAO
+2679,domains/card-authorization/.tool-versions,SERVIÇOS DE DOMÍNIO,B,NAO,NAO
+2681,domains/card-authorization/CODEOWNERS,SERVIÇOS DE DOMÍNIO,B,NAO,NAO
+3059,domains/customer-support/.tool-versions,SERVIÇOS DE DOMÍNIO,B,NAO,NAO
+3061,domains/customer-support/CODEOWNERS,SERVIÇOS DE DOMÍNIO,B,NAO,NAO
+3096,domains/customers/.tool-versions,SERVIÇOS DE DOMÍNIO,B,NAO,NAO
+3098,domains/customers/CODEOWNERS,SERVIÇOS DE DOMÍNIO,B,NAO,NAO
+3425,domains/identity/.tool-versions,SERVIÇOS DE DOMÍNIO,B,NAO,NAO
+3427,domains/identity/CODEOWNERS,SERVIÇOS DE DOMÍNIO,B,NAO,NAO
+3650,domains/ledger/.tool-versions,SERVIÇOS DE DOMÍNIO,B,NAO,NAO
+3652,domains/ledger/CODEOWNERS,SERVIÇOS DE DOMÍNIO,B,NAO,NAO
+3940,domains/payment-orchestrator/.tool-versions,SERVIÇOS DE DOMÍNIO,B,NAO,NAO
+4012,domains/pix/.tool-versions,SERVIÇOS DE DOMÍNIO,B,NAO,NAO
+4014,domains/pix/CODEOWNERS,SERVIÇOS DE DOMÍNIO,B,NAO,NAO
+4125,domains/reconciliation/.tool-versions,CONTROLE E CONFIABILIDADE,B,NAO,NAO
+4127,domains/reconciliation/CODEOWNERS,CONTROLE E CONFIABILIDADE,B,NAO,NAO
+4332,domains/transactions/.tool-versions,SERVIÇOS DE DOMÍNIO,B,NAO,NAO
+4334,domains/transactions/CODEOWNERS,SERVIÇOS DE DOMÍNIO,B,NAO,NAO
+5662,governance/regulatory/cybersecurity/.tool-versions,GOVERNANÇA REGULATÓRIA,B,NAO,NAO
+5778,governance/regulatory/pix/.tool-versions,GOVERNANÇA REGULATÓRIA,B,NAO,NAO
+5780,governance/regulatory/pix/CODEOWNERS,GOVERNANÇA REGULATÓRIA,B,NAO,NAO
+6021,governance/runbooks/operations/accounting/.tool-versions,OPERAÇÃO 24×7,B,NAO,NAO
+6206,governance/runbooks/operations/customer-support/.tool-versions,OPERAÇÃO 24×7,B,NAO,NAO
+6354,governance/runbooks/operations/payment/.tool-versions,OPERAÇÃO 24×7,B,NAO,NAO
+6356,governance/runbooks/operations/payment/CODEOWNERS,OPERAÇÃO 24×7,B,NAO,NAO
+6391,governance/runbooks/operations/pix/.tool-versions,OPERAÇÃO 24×7,B,NAO,NAO
+6393,governance/runbooks/operations/pix/CODEOWNERS,OPERAÇÃO 24×7,B,NAO,NAO
+6428,governance/runbooks/operations/reconciliation/.tool-versions,OPERAÇÃO 24×7,B,NAO,NAO
+7979,platform/security/appsec/.tool-versions,SEGURANÇA TRANSVERSAL,B,NAO,NAO
+7981,platform/security/appsec/CODEOWNERS,SEGURANÇA TRANSVERSAL,B,NAO,NAO
+8016,platform/security/cloud/.tool-versions,SEGURANÇA TRANSVERSAL,B,NAO,NAO
+8018,platform/security/cloud/CODEOWNERS,SEGURANÇA TRANSVERSAL,B,NAO,NAO
+8053,platform/security/detection/.tool-versions,SEGURANÇA TRANSVERSAL,B,NAO,NAO
+8055,platform/security/detection/CODEOWNERS,SEGURANÇA TRANSVERSAL,B,NAO,NAO
+8090,platform/security/iam/.tool-versions,SEGURANÇA TRANSVERSAL,B,NAO,NAO
+8092,platform/security/iam/CODEOWNERS,SEGURANÇA TRANSVERSAL,B,NAO,NAO
+8127,platform/security/incident-response/.tool-versions,SEGURANÇA TRANSVERSAL,B,NAO,NAO
+8164,platform/security/kms-hsm/.tool-versions,SEGURANÇA TRANSVERSAL,B,NAO,NAO
+8166,platform/security/kms-hsm/CODEOWNERS,SEGURANÇA TRANSVERSAL,B,NAO,NAO
+8201,platform/security/mobile/.tool-versions,SEGURANÇA TRANSVERSAL,B,NAO,NAO
+8203,platform/security/mobile/CODEOWNERS,SEGURANÇA TRANSVERSAL,B,NAO,NAO
+8238,platform/security/pam/.tool-versions,SEGURANÇA TRANSVERSAL,B,NAO,NAO
+8240,platform/security/pam/CODEOWNERS,SEGURANÇA TRANSVERSAL,B,NAO,NAO
+8275,platform/security/pki/.tool-versions,SEGURANÇA TRANSVERSAL,B,NAO,NAO
+8277,platform/security/pki/CODEOWNERS,SEGURANÇA TRANSVERSAL,B,NAO,NAO
+8312,platform/security/red-team/.tool-versions,SEGURANÇA TRANSVERSAL,B,NAO,NAO
+8314,platform/security/red-team/CODEOWNERS,SEGURANÇA TRANSVERSAL,B,NAO,NAO
+8349,platform/security/threat-intelligence/.tool-versions,SEGURANÇA TRANSVERSAL,B,NAO,NAO
+8386,platform/security/vulnerability-management/.tool-versions,SEGURANÇA TRANSVERSAL,B,NAO,NAO
+8675,platform/tools/migration-validator/.tool-versions,FERRAMENTAS DE ENGENHARIA,B,NAO,NAO
+9226,quality/security/.tool-versions,QUALIDADE E HOMOLOGAÇÃO,B,NAO,NAO
+9228,quality/security/CODEOWNERS,QUALIDADE E HOMOLOGAÇÃO,B,NAO,NAO

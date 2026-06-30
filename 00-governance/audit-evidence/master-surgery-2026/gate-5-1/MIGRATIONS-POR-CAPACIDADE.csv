@@ -1,0 +1,11 @@
+capacidade,qtd
+Identity,2
+Customer/Party,11
+Accounts,13
+Ledger,13
+Payments,1
+Idempotency,1
+Accounting,1
+Fraud,1
+Audit Trail,2
+Limits,1

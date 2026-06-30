@@ -1,0 +1,6 @@
+owners:
+  primary: team-operations-treasury
+  approvers:
+    - team-architecture
+    - team-security
+  on_call: treasury-primary

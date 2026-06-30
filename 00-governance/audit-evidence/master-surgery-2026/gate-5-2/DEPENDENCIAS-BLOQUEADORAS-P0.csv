@@ -1,0 +1,17 @@
+capacidade_dependente,componente_ausente,ciclo
+Identity,Audit Trail,NAO
+Customer/Party,Identity,NAO
+Customer/Party,Authorization,NAO
+Accounts,Customer/Party,NAO
+Accounts,Audit Trail,NAO
+Ledger,Audit Trail,NAO
+Transactions,Accounts,NAO
+Transactions,Ledger,NAO
+Transactions,Idempotency,NAO
+Reconciliation,Ledger,NAO
+Reconciliation,Transactions,NAO
+Reconciliation,Payments,NAO
+Reconciliation,Pix,NAO
+Payments,Transactions,NAO
+Pix,Transactions,NAO
+Authorization,Identity,NAO

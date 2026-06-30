@@ -1,0 +1,6 @@
+owners:
+  primary: team-web
+  approvers:
+    - team-architecture
+    - team-security
+  on_call: web-bff-primary

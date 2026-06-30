@@ -1,0 +1,31 @@
+{
+  "_comment": "@regenera/bank-core IAM Policy for Secret Manager - Zero Trust Implementation",
+  "bindings": [
+    {
+      "role": "roles/secretmanager.secretAccessor",
+      "members": [
+        "serviceAccount:backend-sa@${PROJECT_ID}.iam.gserviceaccount.com",
+        "serviceAccount:cloud-run-sa@${PROJECT_ID}.iam.gserviceaccount.com",
+        "serviceAccount:ledger-service-sa@${PROJECT_ID}.iam.gserviceaccount.com"
+      ],
+      "condition": {
+        "title": "Access from Authorized Networks Only",
+        "description": "Ensure secrets are only accessed from the bank-vpc",
+        "expression": "request.auth.access_levels.exists(level, level == 'accessPolicies/${ORG_ID}/accessLevels/bank_vpc_only')"
+      }
+    },
+    {
+      "role": "roles/secretmanager.secretVersionManager",
+      "members": [
+        "group:security-admins@regenerabank.app",
+        "serviceAccount:ci-cd-sa@${PROJECT_ID}.iam.gserviceaccount.com"
+      ]
+    },
+    {
+      "role": "roles/secretmanager.viewer",
+      "members": [
+        "group:auditors@regenerabank.app"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+name: regenera-core-credit-decision
+domain: credit-decision
+owner: team-credit-decision
+criticality: high
+data_classification: banking-secret
+runtime: jvm
+tier: 1
+rto: 4h
+rpo: 1h
+on_call: credit-decision-primary
+dependencies:
+  []

@@ -1,0 +1,6 @@
+owners:
+  primary: team-fx
+  approvers:
+    - team-architecture
+    - team-security
+  on_call: fx-primary

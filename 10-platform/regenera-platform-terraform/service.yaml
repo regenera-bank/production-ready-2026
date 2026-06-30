@@ -1,0 +1,12 @@
+name: regenera-platform-terraform
+domain: terraform
+owner: team-platform-terraform
+criticality: high
+data_classification: banking-secret
+runtime: terraform
+tier: 1
+rto: 4h
+rpo: 1h
+on_call: terraform-primary
+dependencies:
+  []

@@ -1,0 +1,6 @@
+owners:
+  primary: team-integration-notifications
+  approvers:
+    - team-architecture
+    - team-security
+  on_call: notifications-primary

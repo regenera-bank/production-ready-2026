@@ -1,0 +1,12 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: regenera-tool-comment-gate
+  description: Componente Regenera do domínio comment-gate.
+  annotations:
+    regenera.io/criticality: medium
+spec:
+  type: service
+  lifecycle: experimental
+  owner: team-developer-experience
+  system: regenera-bank

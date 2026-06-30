@@ -1,0 +1,12 @@
+name: regenera-core-custody-positions
+domain: custody-positions
+owner: team-custody-positions
+criticality: high
+data_classification: banking-secret
+runtime: jvm
+tier: 1
+rto: 4h
+rpo: 1h
+on_call: custody-positions-primary
+dependencies:
+  []

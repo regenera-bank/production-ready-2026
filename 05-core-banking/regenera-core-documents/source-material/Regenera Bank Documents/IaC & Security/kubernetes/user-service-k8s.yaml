@@ -1,0 +1,92 @@
+# [FILE] /Users/admin/Desktop/pipiline/Infraestrutura como Código/kubernetes/user-service-k8s.yaml
+# Kubernetes Manifests for user-service
+# Desenvolvedor: Don Paulo Ricardo
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-service-deployment
+  labels:
+    app: user-service
+spec:
+  replicas: 3 # Alta disponibilidade para um serviço crítico
+  selector:
+    matchLabels:
+      app: user-service
+  template:
+    metadata:
+      labels:
+        app: user-service
+    spec:
+      serviceAccountName: user-service-sa # Associa o pod a uma Service Account específica
+      containers:
+        - name: user-service
+          image: "AWS_ECR_REGISTRY/regenera-bank/user-service:latest" # Placeholder, será atualizado pela CI/CD com o SHA do commit
+          ports:
+            - containerPort: 3002
+          resources: # Resource Limits - Garantindo alocação e prevenindo esgotamento
+            requests:
+              cpu: "200m"
+              memory: "256Mi"
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
+          livenessProbe: # Probes de Liveness - Para detectar e reiniciar contêineres falhos
+            httpGet:
+              path: /health # Exige um endpoint /health no microserviço
+              port: 3002
+            initialDelaySeconds: 15
+            periodSeconds: 20
+            timeoutSeconds: 5
+            failureThreshold: 3
+          readinessProbe: # Probes de Readiness - Para direcionar tráfego apenas para pods prontos
+            httpGet:
+              path: /health
+              port: 3002
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            timeoutSeconds: 3
+            failureThreshold: 2
+          volumeMounts: # Monta o volume de segredos para injeção via CSI Driver
+            - name: secrets-store-vol
+              mountPath: "/mnt/secrets-store"
+              readOnly: true
+      volumes: # Define o volume que será injetado pelo CSI Secrets Store Driver
+        - name: secrets-store-vol
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: "aws-secrets-user-service" # Referencia a classe de provedor de segredos
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: user-service
+  labels:
+    app: user-service
+spec:
+  selector:
+    app: user-service
+  ports:
+    - protocol: TCP
+      port: 80 # Porta padrão para o serviço
+      targetPort: 3002 # Porta onde o contêiner do user-service está escutando
+  type: ClusterIP # Serviço acessível apenas dentro do cluster
+
+---
+apiVersion: secrets-store.csi.k8s.io/v1
+kind: SecretProviderClass
+metadata:
+  name: aws-secrets-user-service
+spec:
+  provider: aws # Provedor AWS Secrets Manager
+  parameters:
+    objects: |
+      - objectName: "user-service-db-credentials" # Nome do segredo no AWS Secrets Manager
+        itemPath: "db_password" # Campo específico do segredo a ser injetado (opcional)
+        # Mais objetos/itens podem ser definidos aqui, por exemplo:
+        # - objectName: "user-service-api-key"
+        #   itemPath: "api_key"

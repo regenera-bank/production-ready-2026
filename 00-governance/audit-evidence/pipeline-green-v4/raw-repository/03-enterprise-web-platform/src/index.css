@@ -1,0 +1,110 @@
+/* |---------------------------------------------------------------------------------------|
+|  --> REGENERA ENTERPRISE SYSTEM v4.0                                                  |
+|---------------------------------------------------------------------------------------|
+|
+| PROJECT:       Regenera Bank
+| CEO:           Raphaela Cerveski
+| DEVELOPER:     Don Paulo Ricardo
+| ID:            2098233287
+| COPYRIGHT:     Copyright (c) 2026 Regenera Corporate
+|
+| LICENSE:       EULA (End-User License Agreement)
+| PROTECTION:    PROPRIEDADE INTELECTUAL RESTRITA
+|
+| WARNING:       TODOS OS DIREITOS RESERVADOS. Proibida a cópia, distribuição,
+|                engenharia reversa ou modificação não autorizada.
+|
+|---------------------------------------------------------------------------------------|
+|  --> CLASSIFICATION: PROPRIETARY // DEVELOPER MAINTAINED // REQUIRES SENIOR REVIEW          |
+|---------------------------------------------------------------------------------------| */
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-bg-deep text-white antialiased selection:bg-neural-cyan/30 selection:text-white;
+    background-image: radial-gradient(at 40% 20%, rgba(112, 0, 255, 0.05) 0px, transparent 50%), 
+                      radial-gradient(at 80% 0%, rgba(0, 240, 255, 0.05) 0px, transparent 50%), 
+                      radial-gradient(at 0% 50%, rgba(0, 255, 136, 0.02) 0px, transparent 50%);
+    background-attachment: fixed;
+  }
+}
+
+@layer utilities {
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+  .backface-hidden {
+    backface-visibility: hidden;
+  }
+  .rotate-y-180 {
+    transform: rotateY(180deg);
+  }
+
+  /* Glassmorphism primitives */
+  .glass-panel {
+    @apply bg-bg-glass backdrop-blur-xl border border-white/5 shadow-glass;
+  }
+  
+  .glass-panel-neural {
+    @apply bg-bg-glass backdrop-blur-xl border border-neural-cyan/20 shadow-neon-cyan;
+  }
+
+  /* Typography mastery */
+  .text-gradient-neural {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-neural-cyan via-neural-purple to-neural-emerald;
+  }
+
+  /* Starry Background */
+  .stars-bg {
+    background-image: 
+        radial-gradient(1px 1px at 25px 5px, white, transparent),
+        radial-gradient(1px 1px at 50px 25px, rgba(255,255,255,0.5), transparent),
+        radial-gradient(1px 1px at 125px 20px, rgba(255,255,255,0.8), transparent),
+        radial-gradient(1.5px 1.5px at 75px 80px, white, transparent),
+        radial-gradient(2px 2px at 200px 150px, rgba(255,255,255,0.4), transparent),
+        radial-gradient(1px 1px at 150px 200px, white, transparent);
+    background-size: 350px 350px;
+    opacity: 0.3;
+    z-index: 0;
+  }
+
+  @keyframes twinkle {
+    0% { opacity: 0.3; transform: scale(0.8); }
+    50% { opacity: 1; transform: scale(1.2); }
+    100% { opacity: 0.3; transform: scale(0.8); }
+  }
+
+  .animate-twinkle {
+    animation: twinkle 4s infinite ease-in-out;
+  }
+
+  @keyframes music {
+    0%, 100% { height: 10%; opacity: 0.5; }
+    50% { height: 100%; opacity: 1; }
+  }
+
+  @keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+  }
+
+  @keyframes orbit {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+}

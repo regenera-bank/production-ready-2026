@@ -1,0 +1,32 @@
+Regenera Bank — Core Banking — TEST-RESULTS
+Data: 2026-06-29
+Ambiente: MacBook-Pro-de-Regenera (local)
+PR: PR-08 — AGUARDANDO VERIFICAÇÃO LOCAL
+
+Implementado pelo agente:
+  src/holds/hold-book.service.ts (corrigido)
+  src/holds/hold-book.spec.ts (6 testes — 4 invariantes §6 + 2 extras)
+  src/holds/hold.repository.ts (+ findAllActive)
+  src/holds/in-memory-hold.repository.ts (+ findAllActive)
+
+Comando de validação:
+  cd "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/domains/core-bank"
+  npm run lint && npm test && npm run build
+
+Esperado após verificação:
+  npm run lint   → PASS
+  npm test       → PASS — 9 suites, 81 tests, 0 failed
+  npm run build  → PASS
+
+Suites esperadas (PR-00b → PR-08):
+  src/money/money.value-object.spec.ts              — 16 tests
+  src/errors/core-banking.errors.spec.ts            — 6 tests
+  src/accounts/account.spec.ts                      — 11 tests
+  src/db/v001-foundation.migration.spec.ts          — 9 tests
+  src/db/v002-operational-views.migration.spec.ts   — 10 tests
+  src/audit/audit-chain.spec.ts                     — 7 tests
+  src/outbox/outbox.spec.ts                         — 7 tests
+  src/idempotency/idempotency.spec.ts               — 9 tests
+  src/holds/hold-book.spec.ts                       — 6 tests
+
+Verificado por: (pendente — colar output do Mac)

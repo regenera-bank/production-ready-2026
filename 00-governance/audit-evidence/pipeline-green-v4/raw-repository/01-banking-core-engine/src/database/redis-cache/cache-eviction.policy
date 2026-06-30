@@ -1,0 +1,21 @@
+/*
+{
+  "name": "@regenera/bank-core",
+  "version": "7.0.0",
+  "description": "TTL and LRU eviction policies for the cache layer",
+  "author": "Paulo Ricardo de Leão (RG-2098233287)"
+}
+*/
+
+# Redis Eviction & Expiry Policy
+maxmemory 2gb
+maxmemory-policy allkeys-lru
+
+# Default TTLs
+SESSION_TTL=3600
+API_CACHE_TTL=300
+KYC_VERIFICATION_TTL=86400
+PIX_IDEMPOTENCY_TTL=600
+
+# Monitoring
+notify-keyspace-events Ex

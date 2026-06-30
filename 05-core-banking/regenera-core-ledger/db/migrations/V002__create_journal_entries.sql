@@ -1,0 +1,1 @@
+CREATE TABLE journal_entry (journal_entry_id UUID PRIMARY KEY, idempotency_key TEXT NOT NULL UNIQUE, business_event TEXT NOT NULL, occurred_at TIMESTAMPTZ NOT NULL, reversal_of UUID REFERENCES journal_entry(journal_entry_id), correlation_id UUID NOT NULL, created_at TIMESTAMPTZ NOT NULL DEFAULT now());

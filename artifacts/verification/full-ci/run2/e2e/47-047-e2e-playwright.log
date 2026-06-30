@@ -1,0 +1,158 @@
+=== GATE: e2e-playwright ===
+timestamp_utc: 2026-06-30T21:38:33Z
+cwd: /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/quality/e2e-web
+command: env CI=1 npm run test:ci
+node: v26.0.0
+npm: 11.12.1
+DATABASE_URL: postgresql://localhost:5432/regenera_core_test
+REDIS_URL: redis://localhost:6379
+CI_RUN_ID: 2 CI_CLEAN_DB: 0
+--- stdout/stderr ---
+
+> @regenera/e2e-web@0.0.1 test:ci
+> playwright test --reporter=line
+
+
+> @regenera/core-bank@0.0.1 prebuild
+> node scripts/clean-artifacts.mjs
+
+Artefatos compilados removidos de dist/ e src/
+
+> @regenera/core-bank@0.0.1 build
+> nest build
+
+
+> @regenera/core-bank@0.0.1 postbuild
+> node -e "const fs=require('fs');const req=['dist/public-api.js','dist/core-bank.module.js','dist/main.js'];const miss=req.filter(f=>!fs.existsSync(f));if(miss.length){console.error('dist incompleto:',miss.join(', '));if(fs.existsSync('dist'))console.error('dist contém:',fs.readdirSync('dist').slice(0,20).join(', '));process.exit(1)}"
+
+
+> @regenera/web-bff@0.0.1 prebuild
+> node scripts/clean-artifacts.mjs && npm run build --prefix ../../domains/core-bank
+
+web-bff: artefatos compilados removidos
+
+> @regenera/core-bank@0.0.1 prebuild
+> node scripts/clean-artifacts.mjs
+
+Artefatos compilados removidos de dist/ e src/
+
+> @regenera/core-bank@0.0.1 build
+> nest build
+
+
+> @regenera/core-bank@0.0.1 postbuild
+> node -e "const fs=require('fs');const req=['dist/public-api.js','dist/core-bank.module.js','dist/main.js'];const miss=req.filter(f=>!fs.existsSync(f));if(miss.length){console.error('dist incompleto:',miss.join(', '));if(fs.existsSync('dist'))console.error('dist contém:',fs.readdirSync('dist').slice(0,20).join(', '));process.exit(1)}"
+
+
+> @regenera/web-bff@0.0.1 build
+> nest build
+
+
+> @regenera/web-bff@0.0.1 postbuild
+> node -e "const fs=require('fs');if(!fs.existsSync('dist/main.js')){console.error('missing dist/main.js — build não emitiu');process.exit(1)}"
+
+
+Running 4 tests using 1 worker
+
+
+(node:80751) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[1/4] tests/login.spec.ts:5:3 › BFF auth — login › cadastra e autentica via POST /auth/session
+[2/4] tests/login.spec.ts:19:3 › BFF auth — login › rejeita credenciais inválidas
+[3/4] tests/pix-flow.spec.ts:10:3 › BFF banking — pix flow › envia Pix interno com crédito homolog de R$1
+
+(node:80776) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[4/4] (retries) tests/pix-flow.spec.ts:10:3 › BFF banking — pix flow › envia Pix interno com crédito homolog de R$1 (retry #1)
+  1) tests/pix-flow.spec.ts:10:3 › BFF banking — pix flow › envia Pix interno com crédito homolog de R$1 
+
+    Error: kyc/document failed: 400 {"message":"Envie o documento somente após a etapa cadastral","error":"Bad Request","statusCode":400}
+
+       at helpers/bff-api.ts:81
+
+      79 |   });
+      80 |   if (!document.ok()) {
+    > 81 |     throw new Error(`kyc/document failed: ${document.status()} ${await document.text()}`);
+         |           ^
+      82 |   }
+      83 |
+      84 |   const selfie = await request.post('onboarding/kyc/selfie', {
+        at completeKycAndOpenAccount (/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/quality/e2e-web/tests/helpers/bff-api.ts:81:11)
+        at /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/quality/e2e-web/tests/pix-flow.spec.ts:17:5
+
+    Error Context: test-results/pix-flow-BFF-banking-—-pix-7b742--com-crédito-homolog-de-R-1/error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: register 11144477735 failed: 409 {"message":"CPF já cadastrado","error":"Conflict","statusCode":409}
+
+       at helpers/bff-api.ts:47
+
+      45 |   });
+      46 |   if (!response.ok()) {
+    > 47 |     throw new Error(`register ${document} failed: ${response.status()} ${await response.text()}`);
+         |           ^
+      48 |   }
+      49 |   return response.json() as Promise<SessionDto>;
+      50 | }
+        at registerUser (/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/quality/e2e-web/tests/helpers/bff-api.ts:47:11)
+        at /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/quality/e2e-web/tests/pix-flow.spec.ts:14:20
+
+    Error Context: test-results/pix-flow-BFF-banking-—-pix-7b742--com-crédito-homolog-de-R-1-retry1/error-context.md
+
+
+
+(node:80778) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[5/4] tests/transfer-flow.spec.ts:10:3 › BFF banking — transfer flow › transfere entre contas homolog via POST /banking/transfers
+
+(node:80809) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[6/4] (retries) tests/transfer-flow.spec.ts:10:3 › BFF banking — transfer flow › transfere entre contas homolog via POST /banking/transfers (retry #1)
+  2) tests/transfer-flow.spec.ts:10:3 › BFF banking — transfer flow › transfere entre contas homolog via POST /banking/transfers 
+
+    Error: kyc/document failed: 400 {"message":"Envie o documento somente após a etapa cadastral","error":"Bad Request","statusCode":400}
+
+       at helpers/bff-api.ts:81
+
+      79 |   });
+      80 |   if (!document.ok()) {
+    > 81 |     throw new Error(`kyc/document failed: ${document.status()} ${await document.text()}`);
+         |           ^
+      82 |   }
+      83 |
+      84 |   const selfie = await request.post('onboarding/kyc/selfie', {
+        at completeKycAndOpenAccount (/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/quality/e2e-web/tests/helpers/bff-api.ts:81:11)
+        at /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/quality/e2e-web/tests/transfer-flow.spec.ts:17:5
+
+    Error Context: test-results/transfer-flow-BFF-banking--b2d7b--via-POST-banking-transfers/error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: register 60746948030 failed: 409 {"message":"CPF já cadastrado","error":"Conflict","statusCode":409}
+
+       at helpers/bff-api.ts:47
+
+      45 |   });
+      46 |   if (!response.ok()) {
+    > 47 |     throw new Error(`register ${document} failed: ${response.status()} ${await response.text()}`);
+         |           ^
+      48 |   }
+      49 |   return response.json() as Promise<SessionDto>;
+      50 | }
+        at registerUser (/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/quality/e2e-web/tests/helpers/bff-api.ts:47:11)
+        at /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/quality/e2e-web/tests/transfer-flow.spec.ts:14:20
+
+    Error Context: test-results/transfer-flow-BFF-banking--b2d7b--via-POST-banking-transfers-retry1/error-context.md
+
+
+  2 failed
+    tests/pix-flow.spec.ts:10:3 › BFF banking — pix flow › envia Pix interno com crédito homolog de R$1 
+    tests/transfer-flow.spec.ts:10:3 › BFF banking — transfer flow › transfere entre contas homolog via POST /banking/transfers 
+  2 passed (22.4s)
+--- end ---
+exit_code: 1

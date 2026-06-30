@@ -1,0 +1,9 @@
+CI_CLEAN_DB=1
+target_database=regenera_core_test
+ pg_terminate_backend 
+----------------------
+(0 linha)
+
+DROP DATABASE
+CREATE DATABASE
+action=drop_recreate_database

@@ -1,0 +1,66 @@
+
+> @regenera/web-bff@0.0.1 pretest
+> npm run build --prefix ../../domains/core-bank
+
+
+> @regenera/core-bank@0.0.1 prebuild
+> node scripts/clean-artifacts.mjs
+
+Artefatos compilados removidos de dist/ e src/
+
+> @regenera/core-bank@0.0.1 build
+> nest build
+
+
+> @regenera/core-bank@0.0.1 postbuild
+> node -e "const fs=require('fs');const req=['dist/public-api.js','dist/core-bank.module.js','dist/main.js'];const miss=req.filter(f=>!fs.existsSync(f));if(miss.length){console.error('dist incompleto:',miss.join(', '));if(fs.existsSync('dist'))console.error('dist contém:',fs.readdirSync('dist').slice(0,20).join(', '));process.exit(1)}"
+
+
+> @regenera/web-bff@0.0.1 test
+> jest --passWithNoTests --testPathPattern=auth|production-kyc|pii-redaction
+
+PASS src/common/pii-redaction.spec.ts
+PASS src/config/production-kyc-guard.spec.ts
+  ● Console
+
+    console.warn
+      ⚠ KYC_PROVIDER=homolog (homolog) ativo — defina ALLOW_HOMOLOG_KYC=true para confirmar ambiente não-produtivo.
+
+      32 |   if (!isProductionNode()) {
+      33 |     if (isHomologKycProvider(provider) && !allowHomologKycFlag()) {
+    > 34 |       console.warn(
+         |               ^
+      35 |         `⚠ KYC_PROVIDER=${provider} (homolog) ativo — defina ALLOW_HOMOLOG_KYC=true para confirmar ambiente não-produtivo.`,
+      36 |       );
+      37 |     }
+
+      at assertProductionKycSafe (config/production-kyc-guard.ts:34:15)
+      at config/production-kyc-guard.spec.ts:25:41
+      at Object.<anonymous> (../node_modules/expect/build/toThrowMatchers.js:74:11)
+      at Object.throwingMatcher [as toThrow] (../node_modules/expect/build/index.js:320:21)
+      at Object.<anonymous> (config/production-kyc-guard.spec.ts:25:49)
+
+    console.warn
+      ⚠ KYC_PROVIDER=firebase (homolog) ativo — defina ALLOW_HOMOLOG_KYC=true para confirmar ambiente não-produtivo.
+
+      32 |   if (!isProductionNode()) {
+      33 |     if (isHomologKycProvider(provider) && !allowHomologKycFlag()) {
+    > 34 |       console.warn(
+         |               ^
+      35 |         `⚠ KYC_PROVIDER=${provider} (homolog) ativo — defina ALLOW_HOMOLOG_KYC=true para confirmar ambiente não-produtivo.`,
+      36 |       );
+      37 |     }
+
+      at assertProductionKycSafe (config/production-kyc-guard.ts:34:15)
+      at config/production-kyc-guard.spec.ts:31:41
+      at Object.<anonymous> (../node_modules/expect/build/toThrowMatchers.js:74:11)
+      at Object.throwingMatcher [as toThrow] (../node_modules/expect/build/index.js:320:21)
+      at Object.<anonymous> (config/production-kyc-guard.spec.ts:31:49)
+
+PASS src/auth/auth.service.spec.ts
+
+Test Suites: 3 passed, 3 total
+Tests:       18 passed, 18 total
+Snapshots:   0 total
+Time:        1.692 s, estimated 4 s
+Ran all test suites matching /auth|production-kyc|pii-redaction/i.

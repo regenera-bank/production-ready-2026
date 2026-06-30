@@ -1,0 +1,6 @@
+Playwright/Cypress scan in apps/web-banking
+playwright=not_configured
+cypress=not_configured
+npm_script_e2e=absent
+RESULT: SKIP — E2E not configured in web-banking
+exit_policy=skip_not_failure

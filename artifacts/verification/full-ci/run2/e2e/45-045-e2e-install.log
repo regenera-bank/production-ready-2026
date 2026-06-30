@@ -1,0 +1,16 @@
+=== GATE: e2e-install ===
+timestamp_utc: 2026-06-30T21:38:32Z
+cwd: /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/quality/e2e-web
+command: npm install
+node: v26.0.0
+npm: 11.12.1
+DATABASE_URL: postgresql://localhost:5432/regenera_core_test
+REDIS_URL: redis://localhost:6379
+CI_RUN_ID: 2 CI_CLEAN_DB: 0
+--- stdout/stderr ---
+
+changed 3 packages, and audited 7 packages in 96ms
+
+found 0 vulnerabilities
+--- end ---
+exit_code: 0

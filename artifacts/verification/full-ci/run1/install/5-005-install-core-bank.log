@@ -1,0 +1,19 @@
+=== GATE: install-core-bank ===
+timestamp_utc: 2026-06-30T21:35:41Z
+cwd: /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/domains/core-bank
+command: npm install
+node: v26.0.0
+npm: 11.12.1
+DATABASE_URL: postgresql://localhost:5432/regenera_core_test
+REDIS_URL: redis://localhost:6379
+CI_RUN_ID: 1 CI_CLEAN_DB: 1
+--- stdout/stderr ---
+
+up to date, audited 564 packages in 554ms
+
+100 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+--- end ---
+exit_code: 0

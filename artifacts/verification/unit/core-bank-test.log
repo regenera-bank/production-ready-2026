@@ -1,0 +1,29 @@
+
+> @regenera/core-bank@0.0.1 test
+> jest --passWithNoTests
+
+PASS src/pix/pix-engine.spec.ts
+PASS src/idempotency/idempotency.spec.ts
+PASS src/audit/audit-chain.spec.ts
+PASS src/ledger/ledger.spec.ts
+PASS src/holds/hold-book.spec.ts
+PASS src/accounts/account.spec.ts
+PASS src/errors/core-banking.errors.spec.ts
+PASS src/load/release-gate.spec.ts
+PASS src/money/money.value-object.spec.ts
+PASS src/payments/payment-engine.spec.ts
+PASS src/load/float-guard.spec.ts
+PASS src/db/v001-foundation.migration.spec.ts
+PASS src/outbox/outbox.spec.ts
+PASS src/core-bank.module.spec.ts
+PASS src/db/v002-operational-views.migration.spec.ts
+PASS src/load/canary-router.spec.ts
+PASS src/reconciliation/reconciliation.spec.ts
+PASS src/load/daily-load.spec.ts
+PASS src/integration/core-banking-invariants.integration.spec.ts
+
+Test Suites: 19 passed, 19 total
+Tests:       1 skipped, 184 passed, 185 total
+Snapshots:   0 total
+Time:        2.83 s
+Ran all test suites.

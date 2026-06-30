@@ -1,0 +1,91 @@
+
+> @regenera/web-bff@0.0.1 pretest
+> npm run build --prefix ../../domains/core-bank
+
+
+> @regenera/core-bank@0.0.1 prebuild
+> node scripts/clean-artifacts.mjs
+
+Artefatos compilados removidos de dist/ e src/
+
+> @regenera/core-bank@0.0.1 build
+> nest build
+
+
+> @regenera/core-bank@0.0.1 postbuild
+> node -e "const fs=require('fs');const req=['dist/public-api.js','dist/core-bank.module.js','dist/main.js'];const miss=req.filter(f=>!fs.existsSync(f));if(miss.length){console.error('dist incompleto:',miss.join(', '));if(fs.existsSync('dist'))console.error('dist contém:',fs.readdirSync('dist').slice(0,20).join(', '));process.exit(1)}"
+
+
+> @regenera/web-bff@0.0.1 test
+> jest --passWithNoTests --testPathPattern=auth.service|production-kyc-guard|health.controller|pii-redaction
+
+PASS src/config/production-kyc-guard.spec.ts
+  ● Console
+
+    console.warn
+      ⚠ KYC_PROVIDER=homolog (homolog) ativo — defina ALLOW_HOMOLOG_KYC=true para confirmar ambiente não-produtivo.
+
+      32 |   if (!isProductionNode()) {
+      33 |     if (isHomologKycProvider(provider) && !allowHomologKycFlag()) {
+    > 34 |       console.warn(
+         |               ^
+      35 |         `⚠ KYC_PROVIDER=${provider} (homolog) ativo — defina ALLOW_HOMOLOG_KYC=true para confirmar ambiente não-produtivo.`,
+      36 |       );
+      37 |     }
+
+      at assertProductionKycSafe (config/production-kyc-guard.ts:34:15)
+      at config/production-kyc-guard.spec.ts:25:41
+      at Object.<anonymous> (../node_modules/expect/build/toThrowMatchers.js:74:11)
+      at Object.throwingMatcher [as toThrow] (../node_modules/expect/build/index.js:320:21)
+      at Object.<anonymous> (config/production-kyc-guard.spec.ts:25:49)
+
+    console.warn
+      ⚠ KYC_PROVIDER=firebase (homolog) ativo — defina ALLOW_HOMOLOG_KYC=true para confirmar ambiente não-produtivo.
+
+      32 |   if (!isProductionNode()) {
+      33 |     if (isHomologKycProvider(provider) && !allowHomologKycFlag()) {
+    > 34 |       console.warn(
+         |               ^
+      35 |         `⚠ KYC_PROVIDER=${provider} (homolog) ativo — defina ALLOW_HOMOLOG_KYC=true para confirmar ambiente não-produtivo.`,
+      36 |       );
+      37 |     }
+
+      at assertProductionKycSafe (config/production-kyc-guard.ts:34:15)
+      at config/production-kyc-guard.spec.ts:31:41
+      at Object.<anonymous> (../node_modules/expect/build/toThrowMatchers.js:74:11)
+      at Object.throwingMatcher [as toThrow] (../node_modules/expect/build/index.js:320:21)
+      at Object.<anonymous> (config/production-kyc-guard.spec.ts:31:49)
+
+PASS src/common/pii-redaction.spec.ts
+PASS src/health.controller.spec.ts
+PASS src/auth/auth.service.spec.ts
+
+Test Suites: 4 passed, 4 total
+Tests:       21 passed, 21 total
+Snapshots:   0 total
+Time:        1.779 s, estimated 2 s
+Ran all test suites matching /auth.service|production-kyc-guard|health.controller|pii-redaction/i.
+
+> @regenera/web-bff@0.0.1 lint
+> tsc --noEmit
+
+RangeError: Maximum call stack size exceeded
+    at Object.get [as Scope] (/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/bff/web-bff/node_modules/@nestjs/common/index.js:17:75)
+    at InstanceWrapper.getInstanceByContextId (/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/bff/web-bff/node_modules/@nestjs/core/injector/instance-wrapper.js:45:37)
+    at InstanceWrapper.cloneStaticInstance (/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/bff/web-bff/node_modules/@nestjs/core/injector/instance-wrapper.js:180:37)
+    at InstanceWrapper.getInstanceByContextId (/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/bff/web-bff/node_modules/@nestjs/core/injector/instance-wrapper.js:51:20)
+    ... collapsed 96 duplicate lines matching above 2 lines 48 times...
+
+Node.js v26.0.0
+FAIL src/banking/banking.service.spec.ts
+  ● Test suite failed to run
+
+    Jest worker encountered 4 child process exceptions, exceeding retry limit
+
+      at ChildProcessWorker.initialize (../node_modules/jest-worker/build/workers/ChildProcessWorker.js:181:21)
+
+Test Suites: 1 failed, 7 passed, 8 total
+Tests:       30 passed, 30 total
+Snapshots:   0 total
+Time:        7.335 s
+Ran all test suites.

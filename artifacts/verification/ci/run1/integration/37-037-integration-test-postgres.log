@@ -1,0 +1,35 @@
+=== GATE: integration-test-postgres ===
+timestamp_utc: 2026-06-30T20:47:01Z
+cwd: /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/domains/core-bank
+command: env CORE_BANK_STORAGE=postgres npx jest --runInBand --forceExit src/integration/postgres.integration.spec.ts
+node: v26.0.0
+npm: 11.12.1
+DATABASE_URL: postgresql://localhost:5432/regenera_core_test
+REDIS_URL: redis://localhost:6379
+CI_RUN_ID: 1 CI_CLEAN_DB: 1
+--- stdout/stderr ---
+PASS src/integration/postgres.integration.spec.ts
+  Postgres adapter integration
+    ✓ applies V001 and V002 on empty database (11 ms)
+    ✓ safe reapply skips already applied migrations (13 ms)
+    ✓ creates ledger accounts in Postgres (12 ms)
+    ✓ posts balanced journal entry via DRAFT → postings → POSTED (13 ms)
+    ✓ rolls back uncommitted transaction — no durable writes (9 ms)
+    ✓ replays idempotent payment create with same key (17 ms)
+    ✓ handles concurrent idempotency begins — single winner (12 ms)
+    ✓ rejects payment with insufficient available balance (11 ms)
+    ✓ persists outbox events and marks published (9 ms)
+    ✓ runs reconciliation flow for UNKNOWN payment (20 ms)
+    ✓ simulates restart — data survives pool recycle (16 ms)
+    ✓ rejects imbalanced journal at DB trigger (constraint violation) (15 ms)
+    ✓ enforces referential integrity on ledger postings (8 ms)
+    ✓ manifest reports postgres persistence (9 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       14 passed, 14 total
+Snapshots:   0 total
+Time:        0.865 s, estimated 3 s
+Ran all test suites matching /src\/integration\/postgres.integration.spec.ts/i.
+Force exiting Jest: Have you considered using `--detectOpenHandles` to detect async operations that kept running after all tests finished?
+--- end ---
+exit_code: 0

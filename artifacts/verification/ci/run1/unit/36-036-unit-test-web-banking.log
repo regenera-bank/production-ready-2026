@@ -1,0 +1,27 @@
+=== GATE: unit-test-web-banking ===
+timestamp_utc: 2026-06-30T20:47:00Z
+cwd: /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/apps/web-banking
+command: npm test
+node: v26.0.0
+npm: 11.12.1
+DATABASE_URL: postgresql://localhost:5432/regenera_core_test
+REDIS_URL: redis://localhost:6379
+CI_RUN_ID: 1 CI_CLEAN_DB: 1
+--- stdout/stderr ---
+
+> @regenera/web-banking@0.0.1 test
+> vitest run --passWithNoTests
+
+
+ RUN  v2.1.9 /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/apps/web-banking
+
+ ✓ src/platform/money.spec.ts (5 tests) 2ms
+ ✓ src/platform/bff-client.money.spec.ts (3 tests) 8ms
+
+ Test Files  2 passed (2)
+      Tests  8 passed (8)
+   Start at  17:47:00
+   Duration  354ms (transform 44ms, setup 45ms, collect 35ms, tests 10ms, environment 232ms, prepare 86ms)
+
+--- end ---
+exit_code: 0

@@ -1,0 +1,13 @@
+=== GATE: audit-npm-web-banking ===
+timestamp_utc: 2026-06-30T21:36:25Z
+cwd: /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/apps/web-banking
+command: bash /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/scripts/npm-audit-runtime.sh
+node: v26.0.0
+npm: 11.12.1
+DATABASE_URL: postgresql://localhost:5432/regenera_core_test
+REDIS_URL: redis://localhost:6379
+CI_RUN_ID: 1 CI_CLEAN_DB: 1
+--- stdout/stderr ---
+{"critical":0,"high":0,"moderate":0,"low":0,"total":0}
+--- end ---
+exit_code: 0

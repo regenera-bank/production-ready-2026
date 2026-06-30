@@ -1,0 +1,12 @@
+=== GATE: e2e-browsers ===
+timestamp_utc: 2026-06-30T21:37:04Z
+cwd: /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/quality/e2e-web
+command: npx playwright install chromium
+node: v26.0.0
+npm: 11.12.1
+DATABASE_URL: postgresql://localhost:5432/regenera_core_test
+REDIS_URL: redis://localhost:6379
+CI_RUN_ID: 1 CI_CLEAN_DB: 1
+--- stdout/stderr ---
+--- end ---
+exit_code: 0

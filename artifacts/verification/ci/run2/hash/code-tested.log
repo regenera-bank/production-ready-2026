@@ -1,0 +1,6 @@
+timestamp_utc: 2026-06-30T21:40:10Z
+git_head: b6c99b2c9108efe44bb2ff8e2c9b01a70e2306a6
+git_tree: f0badfe62e194c10cd6a09c25acde9f9f7e61604
+implantable_manifest: artifacts/verification/ci/run2/hash/implantable-sources.sha256
+implantable_manifest_sha256: 7378f3bb734f99274b4f87682b8590e2372fb9433130e99722bd2c811d903133
+line_count: 223

@@ -1,0 +1,16 @@
+=== GATE: lint-web-bff ===
+timestamp_utc: 2026-06-30T21:36:28Z
+cwd: /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/bff/web-bff
+command: npm run lint
+node: v26.0.0
+npm: 11.12.1
+DATABASE_URL: postgresql://localhost:5432/regenera_core_test
+REDIS_URL: redis://localhost:6379
+CI_RUN_ID: 1 CI_CLEAN_DB: 1
+--- stdout/stderr ---
+
+> @regenera/web-bff@0.0.1 lint
+> tsc --noEmit
+
+--- end ---
+exit_code: 0

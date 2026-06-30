@@ -1,0 +1,57 @@
+=== GATE: security-test-web-bff ===
+timestamp_utc: 2026-06-30T21:36:54Z
+cwd: /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/bff/web-bff
+command: npx jest --runInBand --testPathPattern=production-kyc-guard|pii-redaction|auth.service
+node: v26.0.0
+npm: 11.12.1
+DATABASE_URL: postgresql://localhost:5432/regenera_core_test
+REDIS_URL: redis://localhost:6379
+CI_RUN_ID: 1 CI_CLEAN_DB: 1
+--- stdout/stderr ---
+PASS src/auth/auth.service.spec.ts
+PASS src/config/production-kyc-guard.spec.ts
+  ● Console
+
+    console.warn
+      ⚠ KYC_PROVIDER=homolog (homolog) ativo — defina ALLOW_HOMOLOG_KYC=true para confirmar ambiente não-produtivo.
+
+      32 |   if (!isProductionNode()) {
+      33 |     if (isHomologKycProvider(provider) && !allowHomologKycFlag()) {
+    > 34 |       console.warn(
+         |               ^
+      35 |         `⚠ KYC_PROVIDER=${provider} (homolog) ativo — defina ALLOW_HOMOLOG_KYC=true para confirmar ambiente não-produtivo.`,
+      36 |       );
+      37 |     }
+
+      at assertProductionKycSafe (config/production-kyc-guard.ts:34:15)
+      at config/production-kyc-guard.spec.ts:25:41
+      at Object.<anonymous> (../node_modules/expect/build/toThrowMatchers.js:74:11)
+      at Object.throwingMatcher [as toThrow] (../node_modules/expect/build/index.js:320:21)
+      at Object.<anonymous> (config/production-kyc-guard.spec.ts:25:49)
+
+    console.warn
+      ⚠ KYC_PROVIDER=firebase (homolog) ativo — defina ALLOW_HOMOLOG_KYC=true para confirmar ambiente não-produtivo.
+
+      32 |   if (!isProductionNode()) {
+      33 |     if (isHomologKycProvider(provider) && !allowHomologKycFlag()) {
+    > 34 |       console.warn(
+         |               ^
+      35 |         `⚠ KYC_PROVIDER=${provider} (homolog) ativo — defina ALLOW_HOMOLOG_KYC=true para confirmar ambiente não-produtivo.`,
+      36 |       );
+      37 |     }
+
+      at assertProductionKycSafe (config/production-kyc-guard.ts:34:15)
+      at config/production-kyc-guard.spec.ts:31:41
+      at Object.<anonymous> (../node_modules/expect/build/toThrowMatchers.js:74:11)
+      at Object.throwingMatcher [as toThrow] (../node_modules/expect/build/index.js:320:21)
+      at Object.<anonymous> (config/production-kyc-guard.spec.ts:31:49)
+
+PASS src/common/pii-redaction.spec.ts
+
+Test Suites: 3 passed, 3 total
+Tests:       18 passed, 18 total
+Snapshots:   0 total
+Time:        0.997 s, estimated 7 s
+Ran all test suites matching /production-kyc-guard|pii-redaction|auth.service/i.
+--- end ---
+exit_code: 0

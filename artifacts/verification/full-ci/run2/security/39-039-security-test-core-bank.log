@@ -1,0 +1,20 @@
+=== GATE: security-test-core-bank ===
+timestamp_utc: 2026-06-30T21:38:21Z
+cwd: /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/domains/core-bank
+command: npx jest --runInBand --testPathPattern=float-guard|money.value-object|ledger-invariants
+node: v26.0.0
+npm: 11.12.1
+DATABASE_URL: postgresql://localhost:5432/regenera_core_test
+REDIS_URL: redis://localhost:6379
+CI_RUN_ID: 2 CI_CLEAN_DB: 0
+--- stdout/stderr ---
+PASS src/money/money.value-object.spec.ts
+PASS src/load/float-guard.spec.ts
+
+Test Suites: 2 passed, 2 total
+Tests:       17 passed, 17 total
+Snapshots:   0 total
+Time:        0.563 s, estimated 1 s
+Ran all test suites matching /float-guard|money.value-object|ledger-invariants/i.
+--- end ---
+exit_code: 0

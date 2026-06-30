@@ -1,0 +1,38 @@
+=== GATE: build-web-bff ===
+timestamp_utc: 2026-06-30T21:41:24Z
+cwd: /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/bff/web-bff
+command: npm run build
+node: v26.0.0
+npm: 11.12.1
+DATABASE_URL: postgresql://localhost:5432/regenera_core_test
+REDIS_URL: redis://localhost:6379
+CI_RUN_ID: 2 CI_CLEAN_DB: 0
+--- stdout/stderr ---
+
+> @regenera/web-bff@0.0.1 prebuild
+> node scripts/clean-artifacts.mjs && npm run build --prefix ../../domains/core-bank
+
+web-bff: artefatos compilados removidos
+
+> @regenera/core-bank@0.0.1 prebuild
+> node scripts/clean-artifacts.mjs
+
+Artefatos compilados removidos de dist/ e src/
+
+> @regenera/core-bank@0.0.1 build
+> nest build
+
+
+> @regenera/core-bank@0.0.1 postbuild
+> node -e "const fs=require('fs');const req=['dist/public-api.js','dist/core-bank.module.js','dist/main.js'];const miss=req.filter(f=>!fs.existsSync(f));if(miss.length){console.error('dist incompleto:',miss.join(', '));if(fs.existsSync('dist'))console.error('dist contém:',fs.readdirSync('dist').slice(0,20).join(', '));process.exit(1)}"
+
+
+> @regenera/web-bff@0.0.1 build
+> nest build
+
+
+> @regenera/web-bff@0.0.1 postbuild
+> node -e "const fs=require('fs');if(!fs.existsSync('dist/main.js')){console.error('missing dist/main.js — build não emitiu');process.exit(1)}"
+
+--- end ---
+exit_code: 0

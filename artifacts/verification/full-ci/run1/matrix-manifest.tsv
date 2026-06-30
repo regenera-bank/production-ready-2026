@@ -3,5 +3,5 @@ run	stage	gates	pass	fail	result
 1	backend	6	6	0	PASS
 1	web	9	9	0	PASS
 1	worker	2	2	0	PASS
-1	security	18	17	1	FAIL
+1	security	18	18	0	PASS
 1	e2e	3	3	0	PASS

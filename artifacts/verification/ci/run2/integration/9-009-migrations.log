@@ -1,0 +1,28 @@
+=== GATE: migrations ===
+timestamp_utc: 2026-06-30T21:40:17Z
+cwd: /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/domains/core-bank
+command: npx ts-node scripts/run-migrations-ci.ts
+node: v26.0.0
+npm: 11.12.1
+DATABASE_URL: postgresql://localhost:5432/regenera_core_test
+REDIS_URL: redis://localhost:6379
+CI_RUN_ID: 2 CI_CLEAN_DB: 0
+--- stdout/stderr ---
+{
+  "database": "postgresql://localhost:5432/regenera_core_test",
+  "results": [
+    {
+      "version": "V001",
+      "applied": false,
+      "skipped": true
+    },
+    {
+      "version": "V002",
+      "applied": false,
+      "skipped": true
+    }
+  ]
+}
+MIGRATION_SUMMARY applied=[] skipped=[V001,V002]
+--- end ---
+exit_code: 0

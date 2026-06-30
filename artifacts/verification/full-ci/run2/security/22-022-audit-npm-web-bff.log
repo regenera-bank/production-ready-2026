@@ -1,0 +1,13 @@
+=== GATE: audit-npm-web-bff ===
+timestamp_utc: 2026-06-30T21:37:52Z
+cwd: /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/bff/web-bff
+command: bash /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/scripts/npm-audit-runtime.sh
+node: v26.0.0
+npm: 11.12.1
+DATABASE_URL: postgresql://localhost:5432/regenera_core_test
+REDIS_URL: redis://localhost:6379
+CI_RUN_ID: 2 CI_CLEAN_DB: 0
+--- stdout/stderr ---
+{"critical":0,"high":0,"moderate":8,"low":0,"total":8}
+--- end ---
+exit_code: 0

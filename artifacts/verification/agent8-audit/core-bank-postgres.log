@@ -1,0 +1,27 @@
+
+> @regenera/core-bank@0.0.1 test:postgres
+> node -e "if(!process.env.DATABASE_URL){console.error('DATABASE_URL required for test:postgres');process.exit(1)}" && CORE_BANK_STORAGE=postgres jest --runInBand src/integration/postgres.integration.spec.ts --forceExit
+
+PASS src/integration/postgres.integration.spec.ts
+  Postgres adapter integration
+    ✓ applies V001 and V002 on empty database (10 ms)
+    ✓ safe reapply skips already applied migrations (12 ms)
+    ✓ creates ledger accounts in Postgres (9 ms)
+    ✓ posts balanced journal entry via DRAFT → postings → POSTED (12 ms)
+    ✓ rolls back uncommitted transaction — no durable writes (9 ms)
+    ✓ replays idempotent payment create with same key (17 ms)
+    ✓ handles concurrent idempotency begins — single winner (13 ms)
+    ✓ rejects payment with insufficient available balance (13 ms)
+    ✓ persists outbox events and marks published (10 ms)
+    ✓ runs reconciliation flow for UNKNOWN payment (22 ms)
+    ✓ simulates restart — data survives pool recycle (19 ms)
+    ✓ rejects imbalanced journal at DB trigger (constraint violation) (17 ms)
+    ✓ enforces referential integrity on ledger postings (9 ms)
+    ✓ manifest reports postgres persistence (10 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       14 passed, 14 total
+Snapshots:   0 total
+Time:        0.991 s, estimated 1 s
+Ran all test suites matching /src\/integration\/postgres.integration.spec.ts/i.
+Force exiting Jest: Have you considered using `--detectOpenHandles` to detect async operations that kept running after all tests finished?

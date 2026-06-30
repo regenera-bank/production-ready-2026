@@ -1,0 +1,12 @@
+=== GATE: typecheck-web-banking ===
+timestamp_utc: 2026-06-30T21:41:01Z
+cwd: /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/apps/web-banking
+command: npx tsc --noEmit -p tsconfig.json
+node: v26.0.0
+npm: 11.12.1
+DATABASE_URL: postgresql://localhost:5432/regenera_core_test
+REDIS_URL: redis://localhost:6379
+CI_RUN_ID: 2 CI_CLEAN_DB: 0
+--- stdout/stderr ---
+--- end ---
+exit_code: 0

@@ -1,0 +1,15 @@
+
+> @regenera/web-banking@0.0.1 test
+> vitest run --passWithNoTests
+
+
+ RUN  v2.1.9 /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/apps/web-banking
+
+ ✓ src/platform/money.spec.ts (5 tests) 4ms
+ ✓ src/platform/bff-client.money.spec.ts (3 tests) 22ms
+
+ Test Files  2 passed (2)
+      Tests  8 passed (8)
+   Start at  17:41:14
+   Duration  737ms (transform 96ms, setup 100ms, collect 91ms, tests 27ms, environment 532ms, prepare 129ms)
+

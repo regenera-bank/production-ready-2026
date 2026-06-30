@@ -1,0 +1,27 @@
+=== GATE: install-web-bff ===
+timestamp_utc: 2026-06-30T20:46:14Z
+cwd: /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/bff/web-bff
+command: npm install
+node: v26.0.0
+npm: 11.12.1
+DATABASE_URL: postgresql://localhost:5432/regenera_core_test
+REDIS_URL: redis://localhost:6379
+CI_RUN_ID: 1 CI_CLEAN_DB: 1
+--- stdout/stderr ---
+
+up to date, audited 753 packages in 1s
+
+113 packages are looking for funding
+  run `npm fund` for details
+
+29 vulnerabilities (3 low, 20 moderate, 6 high)
+
+To address issues that do not require attention, run:
+  npm audit fix
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+
+Run `npm audit` for details.
+--- end ---
+exit_code: 0

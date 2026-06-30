@@ -1,0 +1,4 @@
+
+> @regenera/web-bff@0.0.1 lint
+> tsc --noEmit
+

@@ -1,0 +1,16 @@
+=== GATE: lint-core-bank ===
+timestamp_utc: 2026-06-30T21:37:58Z
+cwd: /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/domains/core-bank
+command: npm run lint
+node: v26.0.0
+npm: 11.12.1
+DATABASE_URL: postgresql://localhost:5432/regenera_core_test
+REDIS_URL: redis://localhost:6379
+CI_RUN_ID: 2 CI_CLEAN_DB: 0
+--- stdout/stderr ---
+
+> @regenera/core-bank@0.0.1 lint
+> tsc --noEmit
+
+--- end ---
+exit_code: 0

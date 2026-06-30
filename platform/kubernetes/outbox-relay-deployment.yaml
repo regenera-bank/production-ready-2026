@@ -1,0 +1,89 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: outbox-relay
+  namespace: regenera-bank
+  labels:
+    app: outbox-relay
+    tier: worker
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: outbox-relay
+  template:
+    metadata:
+      labels:
+        app: outbox-relay
+        tier: worker
+    spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1001
+        runAsGroup: 1001
+        fsGroup: 1001
+      containers:
+        - name: outbox-relay
+          image: regenera/outbox-relay:latest
+          ports:
+            - name: health
+              containerPort: 3109
+          env:
+            - name: NODE_ENV
+              value: production
+            - name: OUTBOX_RELAY_HEALTH_PORT
+              value: "3109"
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: regenera-database
+                  key: url
+            - name: REDIS_URL
+              valueFrom:
+                secretKeyRef:
+                  name: regenera-redis
+                  key: url
+          resources:
+            requests:
+              cpu: 100m
+              memory: 256Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: health
+            initialDelaySeconds: 25
+            periodSeconds: 20
+            timeoutSeconds: 5
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: health
+            initialDelaySeconds: 15
+            periodSeconds: 10
+            timeoutSeconds: 3
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop: ["ALL"]
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: outbox-relay
+  namespace: regenera-bank
+  labels:
+    app: outbox-relay
+spec:
+  selector:
+    app: outbox-relay
+  ports:
+    - name: health
+      port: 3109
+      targetPort: health
+  type: ClusterIP

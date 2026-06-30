@@ -1,0 +1,602 @@
+{
+  "builtTestProducts" : [
+    {
+      "binaryPath" : "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/RegeneraDesignPackageTests.xctest/Contents/MacOS/RegeneraDesignPackageTests",
+      "packagePath" : "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios",
+      "productName" : "RegeneraDesignPackageTests"
+    }
+  ],
+  "copyCommands" : {
+
+  },
+  "explicitTargetDependencyImportCheckingMode" : {
+    "none" : {
+
+    }
+  },
+  "generatedSourceTargetSet" : [
+
+  ],
+  "pluginDescriptions" : [
+
+  ],
+  "swiftCommands" : {
+    "C.RegeneraDesign-arm64-apple-macosx-debug.module" : {
+      "executable" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "fileList" : "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/RegeneraDesign.build/sources",
+      "importPath" : "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/Modules",
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/Sources/RegeneraDesign/Color+Regenera.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/RegeneraDesign.build/sources"
+        }
+      ],
+      "isLibrary" : true,
+      "moduleName" : "RegeneraDesign",
+      "moduleOutputPath" : "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/Modules/RegeneraDesign.swiftmodule",
+      "objects" : [
+        "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/RegeneraDesign.build/Color+Regenera.swift.o"
+      ],
+      "otherArguments" : [
+        "-target",
+        "arm64-apple-macosx14.0",
+        "-incremental",
+        "-enable-batch-mode",
+        "-serialize-diagnostics",
+        "-index-store-path",
+        "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/index/store",
+        "-Onone",
+        "-enable-testing",
+        "-j10",
+        "-DSWIFT_PACKAGE",
+        "-DDEBUG",
+        "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+        "-module-cache-path",
+        "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/ModuleCache",
+        "-parseable-output",
+        "-parse-as-library",
+        "-emit-objc-header",
+        "-emit-objc-header-path",
+        "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/RegeneraDesign.build/include/RegeneraDesign-Swift.h",
+        "-swift-version",
+        "5",
+        "-plugin-path",
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+        "-sdk",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.5.sdk",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-I",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-L",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-g",
+        "-Xcc",
+        "-isysroot",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.5.sdk",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-Xcc",
+        "-fPIC",
+        "-Xcc",
+        "-g",
+        "-package-name",
+        "ios"
+      ],
+      "outputFileMapPath" : "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/RegeneraDesign.build/output-file-map.json",
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/RegeneraDesign.build/Color+Regenera.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/Modules/RegeneraDesign.swiftmodule"
+        }
+      ],
+      "prepareForIndexing" : false,
+      "sources" : [
+        "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/Sources/RegeneraDesign/Color+Regenera.swift"
+      ],
+      "tempsPath" : "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/RegeneraDesign.build",
+      "wholeModuleOptimization" : false
+    },
+    "C.RegeneraDesignPackageTests-arm64-apple-macosx-debug.module" : {
+      "executable" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "fileList" : "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/RegeneraDesignPackageTests.build/sources",
+      "importPath" : "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/Modules",
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/RegeneraDesignPackageTests.derived/runner.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/Modules/RegeneraDesignTests.swiftmodule"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/RegeneraDesignPackageTests.build/sources"
+        }
+      ],
+      "isLibrary" : true,
+      "moduleName" : "RegeneraDesignPackageTests",
+      "moduleOutputPath" : "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/Modules/RegeneraDesignPackageTests.swiftmodule",
+      "objects" : [
+        "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/RegeneraDesignPackageTests.build/runner.swift.o"
+      ],
+      "otherArguments" : [
+        "-target",
+        "arm64-apple-macosx14.0",
+        "-incremental",
+        "-enable-batch-mode",
+        "-serialize-diagnostics",
+        "-index-store-path",
+        "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/index/store",
+        "-Onone",
+        "-enable-testing",
+        "-Xfrontend",
+        "-enable-cross-import-overlays",
+        "-j10",
+        "-DSWIFT_PACKAGE",
+        "-DDEBUG",
+        "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+        "-module-cache-path",
+        "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/ModuleCache",
+        "-parseable-output",
+        "-parse-as-library",
+        "-emit-objc-header",
+        "-emit-objc-header-path",
+        "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/RegeneraDesignPackageTests.build/include/RegeneraDesignPackageTests-Swift.h",
+        "-plugin-path",
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+        "-sdk",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.5.sdk",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-I",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-L",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-g",
+        "-Xcc",
+        "-isysroot",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.5.sdk",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-Xcc",
+        "-fPIC",
+        "-Xcc",
+        "-g",
+        "-package-name",
+        "ios"
+      ],
+      "outputFileMapPath" : "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/RegeneraDesignPackageTests.build/output-file-map.json",
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/RegeneraDesignPackageTests.build/runner.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/Modules/RegeneraDesignPackageTests.swiftmodule"
+        }
+      ],
+      "prepareForIndexing" : false,
+      "sources" : [
+        "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/RegeneraDesignPackageTests.derived/runner.swift"
+      ],
+      "tempsPath" : "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/RegeneraDesignPackageTests.build",
+      "wholeModuleOptimization" : false
+    },
+    "C.RegeneraDesignTests-arm64-apple-macosx-debug.module" : {
+      "executable" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "fileList" : "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/RegeneraDesignTests.build/sources",
+      "importPath" : "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/Modules",
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/Tests/RegeneraDesignTests/ColorRegeneraTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/Modules/RegeneraDesign.swiftmodule"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/RegeneraDesignTests.build/sources"
+        }
+      ],
+      "isLibrary" : true,
+      "moduleName" : "RegeneraDesignTests",
+      "moduleOutputPath" : "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/Modules/RegeneraDesignTests.swiftmodule",
+      "objects" : [
+        "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/RegeneraDesignTests.build/ColorRegeneraTests.swift.o"
+      ],
+      "otherArguments" : [
+        "-target",
+        "arm64-apple-macosx14.0",
+        "-incremental",
+        "-enable-batch-mode",
+        "-serialize-diagnostics",
+        "-index-store-path",
+        "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/index/store",
+        "-Onone",
+        "-enable-testing",
+        "-Xfrontend",
+        "-enable-cross-import-overlays",
+        "-j10",
+        "-DSWIFT_PACKAGE",
+        "-DDEBUG",
+        "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+        "-module-cache-path",
+        "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/ModuleCache",
+        "-parseable-output",
+        "-parse-as-library",
+        "-swift-version",
+        "5",
+        "-plugin-path",
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+        "-sdk",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.5.sdk",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-I",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-L",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-g",
+        "-Xcc",
+        "-isysroot",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.5.sdk",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-Xcc",
+        "-fPIC",
+        "-Xcc",
+        "-g",
+        "-package-name",
+        "ios"
+      ],
+      "outputFileMapPath" : "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/RegeneraDesignTests.build/output-file-map.json",
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/RegeneraDesignTests.build/ColorRegeneraTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/Modules/RegeneraDesignTests.swiftmodule"
+        }
+      ],
+      "prepareForIndexing" : false,
+      "sources" : [
+        "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/Tests/RegeneraDesignTests/ColorRegeneraTests.swift"
+      ],
+      "tempsPath" : "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/RegeneraDesignTests.build",
+      "wholeModuleOptimization" : false
+    }
+  },
+  "swiftFrontendCommands" : {
+
+  },
+  "swiftTargetScanArgs" : {
+    "RegeneraDesign" : [
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "-module-name",
+      "RegeneraDesign",
+      "-package-name",
+      "ios",
+      "-c",
+      "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/Sources/RegeneraDesign/Color+Regenera.swift",
+      "-I",
+      "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/Modules",
+      "-target",
+      "arm64-apple-macosx14.0",
+      "-incremental",
+      "-enable-batch-mode",
+      "-serialize-diagnostics",
+      "-index-store-path",
+      "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/index/store",
+      "-Onone",
+      "-enable-testing",
+      "-j10",
+      "-DSWIFT_PACKAGE",
+      "-DDEBUG",
+      "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+      "-module-cache-path",
+      "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/ModuleCache",
+      "-parseable-output",
+      "-parse-as-library",
+      "-emit-objc-header",
+      "-emit-objc-header-path",
+      "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/RegeneraDesign.build/include/RegeneraDesign-Swift.h",
+      "-swift-version",
+      "5",
+      "-plugin-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+      "-sdk",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.5.sdk",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-I",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-L",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-g",
+      "-Xcc",
+      "-isysroot",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.5.sdk",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-Xcc",
+      "-fPIC",
+      "-Xcc",
+      "-g",
+      "-package-name",
+      "ios",
+      "-driver-use-frontend-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+    ],
+    "RegeneraDesignPackageTests" : [
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "-module-name",
+      "RegeneraDesignPackageTests",
+      "-package-name",
+      "ios",
+      "-c",
+      "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/RegeneraDesignPackageTests.derived/runner.swift",
+      "-I",
+      "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/Modules",
+      "-target",
+      "arm64-apple-macosx14.0",
+      "-incremental",
+      "-enable-batch-mode",
+      "-serialize-diagnostics",
+      "-index-store-path",
+      "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/index/store",
+      "-Onone",
+      "-enable-testing",
+      "-Xfrontend",
+      "-enable-cross-import-overlays",
+      "-j10",
+      "-DSWIFT_PACKAGE",
+      "-DDEBUG",
+      "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+      "-module-cache-path",
+      "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/ModuleCache",
+      "-parseable-output",
+      "-parse-as-library",
+      "-emit-objc-header",
+      "-emit-objc-header-path",
+      "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/RegeneraDesignPackageTests.build/include/RegeneraDesignPackageTests-Swift.h",
+      "-plugin-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+      "-sdk",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.5.sdk",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-I",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-L",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-g",
+      "-Xcc",
+      "-isysroot",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.5.sdk",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-Xcc",
+      "-fPIC",
+      "-Xcc",
+      "-g",
+      "-package-name",
+      "ios",
+      "-driver-use-frontend-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+    ],
+    "RegeneraDesignTests" : [
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "-module-name",
+      "RegeneraDesignTests",
+      "-package-name",
+      "ios",
+      "-c",
+      "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/Tests/RegeneraDesignTests/ColorRegeneraTests.swift",
+      "-I",
+      "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/Modules",
+      "-target",
+      "arm64-apple-macosx14.0",
+      "-incremental",
+      "-enable-batch-mode",
+      "-serialize-diagnostics",
+      "-index-store-path",
+      "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/index/store",
+      "-Onone",
+      "-enable-testing",
+      "-Xfrontend",
+      "-enable-cross-import-overlays",
+      "-j10",
+      "-DSWIFT_PACKAGE",
+      "-DDEBUG",
+      "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+      "-module-cache-path",
+      "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/ModuleCache",
+      "-parseable-output",
+      "-parse-as-library",
+      "-swift-version",
+      "5",
+      "-plugin-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+      "-sdk",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.5.sdk",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-I",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-L",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-g",
+      "-Xcc",
+      "-isysroot",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.5.sdk",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-Xcc",
+      "-fPIC",
+      "-Xcc",
+      "-g",
+      "-package-name",
+      "ios",
+      "-driver-use-frontend-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+    ]
+  },
+  "targetDependencyMap" : {
+    "RegeneraDesign" : [
+
+    ],
+    "RegeneraDesignPackageTests" : [
+      "RegeneraDesignTests",
+      "RegeneraDesign"
+    ],
+    "RegeneraDesignTests" : [
+      "RegeneraDesign"
+    ]
+  },
+  "testDiscoveryCommands" : {
+
+  },
+  "testEntryPointCommands" : {
+    "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/RegeneraDesignPackageTests.derived/runner.swift" : {
+      "inputs" : [
+
+      ],
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/RegeneraDesignPackageTests.derived/runner.swift"
+        }
+      ]
+    }
+  },
+  "traitConfiguration" : {
+    "default" : {
+
+    }
+  },
+  "writeCommands" : {
+    "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/RegeneraDesign.build/sources" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<sources-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/Sources/RegeneraDesign/Color+Regenera.swift"
+        }
+      ],
+      "outputFilePath" : "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/RegeneraDesign.build/sources"
+    },
+    "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/RegeneraDesignPackageTests.build/sources" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<sources-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/RegeneraDesignPackageTests.derived/runner.swift"
+        }
+      ],
+      "outputFilePath" : "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/RegeneraDesignPackageTests.build/sources"
+    },
+    "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/RegeneraDesignPackageTests.product/Objects.LinkFileList" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<link-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/RegeneraDesign.build/Color+Regenera.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/RegeneraDesignPackageTests.build/runner.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/RegeneraDesignTests.build/ColorRegeneraTests.swift.o"
+        }
+      ],
+      "outputFilePath" : "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/RegeneraDesignPackageTests.product/Objects.LinkFileList"
+    },
+    "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/RegeneraDesignTests.build/sources" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<sources-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/Tests/RegeneraDesignTests/ColorRegeneraTests.swift"
+        }
+      ],
+      "outputFilePath" : "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/RegeneraDesignTests.build/sources"
+    },
+    "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt" : {
+      "alwaysOutOfDate" : true,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<swift-get-version>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+        }
+      ],
+      "outputFilePath" : "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "name": "@regenera/e2e-web",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "playwright test",
+    "test:ci": "playwright test --reporter=line",
+    "install:browsers": "playwright install chromium"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.52.0",
+    "@types/node": "^20.17.10",
+    "typescript": "^5.7.2"
+  }
+}

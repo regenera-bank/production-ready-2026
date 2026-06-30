@@ -1,0 +1,31 @@
+# syntax=docker/dockerfile:1
+# Frente 16 — core-bank (NestJS, non-root)
+# Build: docker build -f platform/docker/Dockerfile.core-bank -t regenera/core-bank:local .
+
+FROM node:20-alpine AS base
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+RUN corepack enable && corepack prepare pnpm@9.15.0 --activate
+
+FROM base AS builder
+WORKDIR /app
+COPY package.json pnpm-workspace.yaml pnpm-lock.yaml ./
+COPY domains/core-bank/package.json domains/core-bank/
+RUN pnpm install --frozen-lockfile --filter @regenera/core-bank
+COPY domains/core-bank domains/core-bank
+RUN pnpm --filter @regenera/core-bank build
+
+FROM base AS runner
+RUN apk add --no-cache wget
+RUN addgroup -g 1001 -S regenera && adduser -u 1001 -S regenera -G regenera
+WORKDIR /app
+ENV NODE_ENV=production
+ENV PORT=3100
+COPY --from=builder --chown=regenera:regenera /app/domains/core-bank/package.json ./
+COPY --from=builder --chown=regenera:regenera /app/domains/core-bank/dist ./dist
+COPY --from=builder --chown=regenera:regenera /app/domains/core-bank/node_modules ./node_modules
+USER regenera
+EXPOSE 3100
+HEALTHCHECK --interval=15s --timeout=5s --start-period=20s --retries=3 \
+  CMD wget -qO- http://127.0.0.1:3100/v1/health || exit 1
+CMD ["node", "dist/main.js"]

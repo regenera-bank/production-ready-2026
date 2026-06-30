@@ -1,6 +1,6 @@
 import { OutboxEventSnapshot, OutboxStore } from './outbox-store';
 
-/** Store em memória para bootstrap/dev — produção usa adapter Postgres */
+/** Store em memória — apenas com CORE_BANK_STORAGE=memory (testes) */
 export class InMemoryOutboxStore implements OutboxStore {
   private readonly events = new Map<string, OutboxEventSnapshot>();
 

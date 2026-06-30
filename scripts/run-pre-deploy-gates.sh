@@ -7,6 +7,8 @@ CORE="$ROOT/domains/core-bank"
 BFF="$ROOT/bff/web-bff"
 WORKER="$ROOT/workers/outbox-relay"
 WEB="$ROOT/apps/web-banking"
+E2E="$ROOT/quality/e2e-web"
+GITLEAKS_CONFIG="$ROOT/.gitleaks.toml"
 
 DATABASE_URL="${DATABASE_URL:-postgresql://localhost:5432/regenera_core_test}"
 REDIS_URL="${REDIS_URL:-redis://localhost:6379}"
@@ -272,7 +274,7 @@ run_secret_scans() {
   for scope in "${scopes[@]}"; do
     if command -v gitleaks >/dev/null 2>&1; then
       run_gate "secret-scan-gitleaks-${scope//\//-}" "$ROOT" \
-        gitleaks detect --source "$ROOT/$scope" --no-git --redact --verbose
+        gitleaks detect --config "$GITLEAKS_CONFIG" --source "$ROOT/$scope" --no-git --redact --verbose
     else
       local ts log_path
       ts="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
@@ -300,9 +302,9 @@ run_audits_and_sbom() {
       worker) dir="$WORKER"; name="outbox-relay" ;;
       web) dir="$WEB"; name="web-banking" ;;
     esac
-    run_gate "audit-npm-${name}" "$dir" npm audit --json
-    run_gate "sbom-${name}" "$dir" npx --yes @cyclonedx/cyclonedx-npm \
-      --output-file "$ARTIFACT_DIR/security/sbom-${name}.json"
+    run_gate "audit-npm-${name}" "$dir" bash "$ROOT/scripts/npm-audit-runtime.sh"
+    run_gate "sbom-${name}" "$dir" bash "$ROOT/scripts/generate-sbom.sh" \
+      "$ARTIFACT_DIR/security/sbom-${name}.json"
   done
 }
 
@@ -382,33 +384,30 @@ run_builds() {
 }
 
 run_e2e_gate() {
-  local ts log_path exit_code=0
-  ts="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
-  log_path="$ARTIFACT_DIR/e2e/e2e-availability.log"
-  {
-    echo "Playwright/Cypress scan in apps/web-banking"
-    if [[ -f "$WEB/playwright.config.ts" || -f "$WEB/playwright.config.js" ]]; then
-      echo "playwright=configured"
-    else
-      echo "playwright=not_configured"
-    fi
-    if [[ -f "$WEB/cypress.config.ts" || -f "$WEB/cypress.config.js" ]]; then
-      echo "cypress=configured"
-    else
-      echo "cypress=not_configured"
-    fi
-    if npm --prefix "$WEB" run 2>/dev/null | grep -qE '^\s+e2e'; then
-      echo "npm_script_e2e=present"
-    else
-      echo "npm_script_e2e=absent"
-      echo "RESULT: SKIP — E2E not configured in web-banking"
-    fi
-  } >"$log_path"
-  if ! npm --prefix "$WEB" run 2>/dev/null | grep -qE '^\s+e2e'; then
-    exit_code=0
-    echo "exit_policy=skip_not_failure" >>"$log_path"
+  if [[ ! -d "$E2E" ]]; then
+    local ts log_path
+    ts="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+    log_path="$ARTIFACT_DIR/e2e/e2e-missing.log"
+    echo "BLOCKER: quality/e2e-web ausente" >"$log_path"
+    record_gate "e2e-web-missing" "$ROOT" 1 "${log_path#$ROOT/}" "$ts"
+    PIPELINE_FAIL=1
+    return 0
   fi
-  record_gate "e2e-availability-check" "$WEB" "$exit_code" "${log_path#$ROOT/}" "$ts"
+  if [[ $INSTALLED_BFF -ne 1 || $INSTALLED_CORE -ne 1 ]]; then
+    local ts log_path
+    ts="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+    log_path="$ARTIFACT_DIR/e2e/e2e-skipped.log"
+    echo "BLOCKER: E2E skipped — core-bank ou web-bff install failed" >"$log_path"
+    record_gate "e2e-web-skipped" "$E2E" 1 "${log_path#$ROOT/}" "$ts"
+    PIPELINE_FAIL=1
+    return 0
+  fi
+  run_gate "e2e-install" "$E2E" npm install
+  if [[ $LAST_GATE_EXIT -ne 0 ]]; then
+    return 0
+  fi
+  run_gate "e2e-browsers" "$E2E" npx playwright install chromium
+  run_gate "e2e-playwright" "$E2E" env CI=1 npm run test:ci
 }
 
 install_packages() {

@@ -1,0 +1,247 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-bff
+  namespace: regenera-bank
+  labels:
+    app: web-bff
+    tier: bff
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: web-bff
+  template:
+    metadata:
+      labels:
+        app: web-bff
+        tier: bff
+    spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1001
+        runAsGroup: 1001
+        fsGroup: 1001
+      containers:
+        - name: web-bff
+          image: regenera/web-bff:latest
+          ports:
+            - name: http
+              containerPort: 3200
+          env:
+            - name: NODE_ENV
+              value: production
+            - name: PORT
+              value: "3200"
+            - name: CORE_API_BASE_URL
+              value: http://core-bank:3100/v1
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: regenera-database
+                  key: url
+            - name: JWT_SESSION_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: regenera-jwt
+                  key: session
+          livenessProbe:
+            httpGet:
+              path: /v1/health
+              port: http
+            initialDelaySeconds: 25
+            periodSeconds: 15
+          readinessProbe:
+            httpGet:
+              path: /v1/health/integrations
+              port: http
+            initialDelaySeconds: 15
+            periodSeconds: 10
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop: ["ALL"]
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-bff
+  namespace: regenera-bank
+spec:
+  selector:
+    app: web-bff
+  ports:
+    - port: 3200
+      targetPort: http
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mobile-bff
+  namespace: regenera-bank
+  labels:
+    app: mobile-bff
+    tier: bff
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: mobile-bff
+  template:
+    metadata:
+      labels:
+        app: mobile-bff
+    spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1001
+        runAsGroup: 1001
+      containers:
+        - name: mobile-bff
+          image: regenera/mobile-bff:latest
+          ports:
+            - name: http
+              containerPort: 3201
+          env:
+            - name: CORE_API_BASE_URL
+              value: http://core-bank:3100/v1
+          livenessProbe:
+            httpGet:
+              path: /health/live
+              port: http
+            initialDelaySeconds: 15
+            periodSeconds: 15
+          readinessProbe:
+            httpGet:
+              path: /health/ready
+              port: http
+            initialDelaySeconds: 10
+            periodSeconds: 10
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mobile-bff
+  namespace: regenera-bank
+spec:
+  selector:
+    app: mobile-bff
+  ports:
+    - port: 3201
+      targetPort: http
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: operations-bff
+  namespace: regenera-bank
+  labels:
+    app: operations-bff
+    tier: bff
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: operations-bff
+  template:
+    metadata:
+      labels:
+        app: operations-bff
+    spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1001
+        runAsGroup: 1001
+      containers:
+        - name: operations-bff
+          image: regenera/operations-bff:latest
+          ports:
+            - name: http
+              containerPort: 3202
+          env:
+            - name: CORE_API_BASE_URL
+              value: http://core-bank:3100/v1
+          livenessProbe:
+            httpGet:
+              path: /v1/health
+              port: http
+            initialDelaySeconds: 20
+            periodSeconds: 15
+          readinessProbe:
+            httpGet:
+              path: /v1/health/ready
+              port: http
+            initialDelaySeconds: 10
+            periodSeconds: 10
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: operations-bff
+  namespace: regenera-bank
+spec:
+  selector:
+    app: operations-bff
+  ports:
+    - port: 3202
+      targetPort: http
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: partner-api-facade
+  namespace: regenera-bank
+  labels:
+    app: partner-api-facade
+    tier: bff
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: partner-api-facade
+  template:
+    metadata:
+      labels:
+        app: partner-api-facade
+    spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1001
+        runAsGroup: 1001
+      containers:
+        - name: partner-api-facade
+          image: regenera/partner-api-facade:latest
+          ports:
+            - name: http
+              containerPort: 3300
+          env:
+            - name: REDIS_URL
+              valueFrom:
+                secretKeyRef:
+                  name: regenera-redis
+                  key: url
+          livenessProbe:
+            httpGet:
+              path: /v1/health
+              port: http
+            initialDelaySeconds: 20
+            periodSeconds: 15
+          readinessProbe:
+            httpGet:
+              path: /v1/health
+              port: http
+            initialDelaySeconds: 10
+            periodSeconds: 10
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: partner-api-facade
+  namespace: regenera-bank
+spec:
+  selector:
+    app: partner-api-facade
+  ports:
+    - port: 3300
+      targetPort: http

@@ -1,0 +1,13 @@
+{
+  "run_id": 2,
+  "artifact_dir": "artifacts/verification/full-ci/run2",
+  "stages": [
+    {"stage":"foundation","gates":10,"pass":10,"fail":0,"result":"PASS"},
+    {"stage":"backend","gates":6,"pass":6,"fail":0,"result":"PASS"},
+    {"stage":"web","gates":9,"pass":9,"fail":0,"result":"PASS"},
+    {"stage":"worker","gates":2,"pass":2,"fail":0,"result":"PASS"},
+    {"stage":"security","gates":18,"pass":17,"fail":1,"result":"FAIL"},
+    {"stage":"e2e","gates":3,"pass":3,"fail":0,"result":"PASS"}
+  ],
+  "pipeline_fail": 1
+}

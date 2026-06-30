@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: regenera-bank
+  labels:
+    app.kubernetes.io/part-of: regenera-bank
+    frente: "16-platform-engineering"

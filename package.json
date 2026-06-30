@@ -2,10 +2,19 @@
   "name": "regenera-bank",
   "version": "0.0.1",
   "private": true,
-  "description": "Monorepo Regenera Bank — use npm run dev:canal-web para subir tudo",
+  "description": "Monorepo Regenera Bank — foundation workspace (pnpm)",
+
+  "packageManager": "pnpm@9.15.0",
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=9.0.0"
+  },
   "scripts": {
     "dev:canal-web": "bash scripts/dev-canal-web.sh",
-    "pull-secrets": "npm run pull-secrets --prefix bff/web-bff",
-    "bootstrap-secrets": "npm run bootstrap-secrets --prefix bff/web-bff"
+    "pull-secrets": "pnpm --filter @regenera/web-bff pull-secrets",
+    "bootstrap-secrets": "pnpm --filter @regenera/web-bff bootstrap-secrets",
+    "validate:contracts": "bash scripts/validate-contracts.sh",
+    "test:contracts:partner": "pnpm --filter @regenera/contract-tests-partner test",
+    "test:partner-platform": "pnpm test:contracts:partner && pnpm --filter @regenera/partner-api-facade test && pnpm --filter @regenera/partner-developer-portal test"
   }
 }

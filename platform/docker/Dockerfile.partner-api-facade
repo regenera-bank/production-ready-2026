@@ -1,0 +1,31 @@
+# syntax=docker/dockerfile:1
+# Frente 16 — partner-api-facade (NestJS, non-root)
+# Build: docker build -f platform/docker/Dockerfile.partner-api-facade -t regenera/partner-api-facade:local .
+
+FROM node:20-alpine AS base
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+RUN corepack enable && corepack prepare pnpm@9.15.0 --activate
+
+FROM base AS builder
+WORKDIR /app
+COPY package.json pnpm-workspace.yaml pnpm-lock.yaml ./
+COPY bff/partner-api-facade/package.json bff/partner-api-facade/
+RUN pnpm install --frozen-lockfile --filter @regenera/partner-api-facade
+COPY bff/partner-api-facade bff/partner-api-facade
+RUN pnpm --filter @regenera/partner-api-facade build
+
+FROM base AS runner
+RUN apk add --no-cache wget
+RUN addgroup -g 1001 -S regenera && adduser -u 1001 -S regenera -G regenera
+WORKDIR /app
+ENV NODE_ENV=production
+ENV PORT=3300
+COPY --from=builder --chown=regenera:regenera /app/bff/partner-api-facade/package.json ./
+COPY --from=builder --chown=regenera:regenera /app/bff/partner-api-facade/dist ./dist
+COPY --from=builder --chown=regenera:regenera /app/bff/partner-api-facade/node_modules ./node_modules
+USER regenera
+EXPOSE 3300
+HEALTHCHECK --interval=15s --timeout=5s --start-period=20s --retries=3 \
+  CMD wget -qO- http://127.0.0.1:3300/v1/health || exit 1
+CMD ["node", "dist/main.js"]

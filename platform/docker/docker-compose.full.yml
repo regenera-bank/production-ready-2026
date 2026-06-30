@@ -1,0 +1,229 @@
+# Frente 16 — stack completa local (Postgres + Redis + todos os serviços)
+# Uso: docker compose -f platform/docker/docker-compose.full.yml up --build
+# Contexto de build: raiz do monorepo (../..)
+
+name: regenera-bank-full
+
+x-node-service: &node-service
+  restart: unless-stopped
+  networks:
+    - regenera-net
+  security_opt:
+    - no-new-privileges:true
+  read_only: true
+  tmpfs:
+    - /tmp
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: regenera-postgres
+    environment:
+      POSTGRES_DB: regenera
+      POSTGRES_USER: regenera
+      POSTGRES_PASSWORD: regenera_local_only
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ../../domains/core-bank/db/migrations:/docker-entrypoint-initdb.d:ro
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U regenera -d regenera"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+    networks:
+      - regenera-net
+
+  redis:
+    image: redis:7-alpine
+    container_name: regenera-redis
+    command: ["redis-server", "--appendonly", "yes", "--maxmemory", "256mb", "--maxmemory-policy", "allkeys-lru"]
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+    networks:
+      - regenera-net
+
+  core-bank:
+    <<: *node-service
+    build:
+      context: ../..
+      dockerfile: platform/docker/Dockerfile.core-bank
+    container_name: regenera-core-bank
+    environment:
+      NODE_ENV: production
+      PORT: "3100"
+      DATABASE_URL: postgresql://regenera:regenera_local_only@postgres:5432/regenera
+      CORE_BANK_STORAGE: postgres
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - "3100:3100"
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:3100/v1/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 25s
+
+  web-bff:
+    <<: *node-service
+    build:
+      context: ../..
+      dockerfile: platform/docker/Dockerfile.web-bff
+    container_name: regenera-web-bff
+    environment:
+      NODE_ENV: development
+      PORT: "3200"
+      DATABASE_URL: postgresql://regenera:regenera_local_only@postgres:5432/regenera
+      CORE_API_BASE_URL: http://core-bank:3100/v1
+      JWT_SESSION_SECRET: local-dev-only-change-in-prod
+      KYC_PROVIDER: homolog
+      ALLOW_HOMOLOG_KYC: "true"
+      HOMOLOG_STORE_PATH: /tmp/homolog
+    depends_on:
+      core-bank:
+        condition: service_healthy
+      postgres:
+        condition: service_healthy
+    ports:
+      - "3200:3200"
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:3200/v1/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 35s
+
+  mobile-bff:
+    <<: *node-service
+    build:
+      context: ../..
+      dockerfile: platform/docker/Dockerfile.mobile-bff
+    container_name: regenera-mobile-bff
+    environment:
+      NODE_ENV: production
+      PORT: "3201"
+      CORE_API_BASE_URL: http://core-bank:3100/v1
+    depends_on:
+      core-bank:
+        condition: service_healthy
+    ports:
+      - "3201:3201"
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:3201/health/live"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 15s
+
+  operations-bff:
+    <<: *node-service
+    build:
+      context: ../..
+      dockerfile: platform/docker/Dockerfile.operations-bff
+    container_name: regenera-operations-bff
+    environment:
+      NODE_ENV: production
+      PORT: "3202"
+      CORE_API_BASE_URL: http://core-bank:3100/v1
+    depends_on:
+      core-bank:
+        condition: service_healthy
+    ports:
+      - "3202:3202"
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:3202/v1/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
+
+  partner-api-facade:
+    <<: *node-service
+    build:
+      context: ../..
+      dockerfile: platform/docker/Dockerfile.partner-api-facade
+    container_name: regenera-partner-api-facade
+    environment:
+      NODE_ENV: production
+      PORT: "3300"
+      REDIS_URL: redis://redis:6379
+      PARTNER_SANDBOX_MODE: "true"
+    depends_on:
+      redis:
+        condition: service_healthy
+      core-bank:
+        condition: service_healthy
+    ports:
+      - "3300:3300"
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:3300/v1/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
+
+  outbox-relay:
+    <<: *node-service
+    build:
+      context: ../..
+      dockerfile: platform/docker/Dockerfile.outbox-relay
+    container_name: regenera-outbox-relay
+    environment:
+      NODE_ENV: production
+      DATABASE_URL: postgresql://regenera:regenera_local_only@postgres:5432/regenera
+      REDIS_URL: redis://redis:6379
+      OUTBOX_RELAY_HEALTH_PORT: "3109"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    ports:
+      - "3109:3109"
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:3109/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+
+  web-banking:
+    build:
+      context: ../..
+      dockerfile: platform/docker/Dockerfile.web-banking
+      args:
+        VITE_API_URL: http://localhost:3200/v1
+    container_name: regenera-web-banking
+    restart: unless-stopped
+    depends_on:
+      web-bff:
+        condition: service_healthy
+    ports:
+      - "8080:8080"
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:8080/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    networks:
+      - regenera-net
+
+networks:
+  regenera-net:
+    driver: bridge
+
+volumes:
+  postgres-data:
+  redis-data:

@@ -1,13 +1,14 @@
 import { randomUUID } from 'crypto';
 import { DEFAULT_HEALTH_PORT } from './constants';
 import { startHealthServer } from './health';
-import { InMemoryOutboxStore } from './in-memory-outbox-store';
 import { logError, logInfo } from './logger';
 import { OutboxProducer } from './outbox-producer';
 import { OutboxRelayWorker } from './outbox-worker';
+import { closePostgresPool } from './postgres-pool';
 import { createRedisConnection, getBullMQConnection } from './redis.config';
+import { resolveOutboxStore } from './resolve-outbox-store';
 
-/** Bootstrap do relay — produção deve injetar OutboxStore com Postgres */
+/** Bootstrap do relay — Postgres por padrão; memory só com CORE_BANK_STORAGE=memory */
 async function bootstrap(): Promise<void> {
   const correlationId = randomUUID();
   const healthPort = Number.parseInt(
@@ -17,7 +18,7 @@ async function bootstrap(): Promise<void> {
 
   const connection = getBullMQConnection();
   const redis = createRedisConnection();
-  const outboxStore = new InMemoryOutboxStore();
+  const { store: outboxStore, pool } = resolveOutboxStore();
   const worker = new OutboxRelayWorker({ outboxStore, connection });
   const producer = new OutboxProducer({ connection });
 
@@ -41,6 +42,9 @@ async function bootstrap(): Promise<void> {
       await worker.close();
       await producer.close();
       await redis.quit();
+      if (pool) {
+        await closePostgresPool();
+      }
       process.exit(0);
     } catch (error) {
       logError('falha no shutdown', { correlationId }, error);

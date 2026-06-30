@@ -1,0 +1,37 @@
+# Regenera Bank — ownership map (foundation monorepo)
+# Teams must exist in the Git host before enforcement.
+
+* @regenera/platform-engineering
+
+/package.json @regenera/developer-experience
+/pnpm-workspace.yaml @regenera/developer-experience
+/CODEOWNERS @regenera/platform-engineering
+
+/governance/ @regenera/platform-engineering
+/governance/error-catalog/ @regenera/core-banking
+/governance/feature-flags/ @regenera/product-platform
+
+/contracts/ @regenera/contracts
+/contracts/events/ @regenera/core-banking
+/contracts/openapi/ @regenera/contracts
+/contracts/asyncapi/ @regenera/contracts
+
+/domains/ @regenera/core-banking
+/domains/core-bank/ @regenera/core-banking
+
+/apps/ @regenera/channels
+/apps/web-banking/ @regenera/channels
+
+/bff/ @regenera/channels
+/bff/web-bff/ @regenera/channels
+
+/workers/ @regenera/platform-engineering
+/workers/outbox-relay/ @regenera/core-banking
+
+/platform/ @regenera/platform-engineering
+/quality/ @regenera/quality-engineering
+
+/scripts/ @regenera/developer-experience
+/scripts/validate-contracts.sh @regenera/contracts
+
+/.github/ @regenera/developer-experience

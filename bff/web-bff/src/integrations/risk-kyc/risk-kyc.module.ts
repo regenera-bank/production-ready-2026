@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { AddressModule } from '../../address/address.module';
 import { DataValidClient } from './datavalid.client';
+import { createTestVisionAdapter } from './test-vision.mock';
 import { GcpVisionAdapter } from './vision.adapter';
 import { pepProviderFactory } from './pep-provider.factory';
 import { PrometeoIdentityClient } from './prometeo-identity.client';
@@ -19,7 +20,10 @@ import { RiskKycOrchestrator } from './risk-kyc.orchestrator';
     pepProviderFactory,
     {
       provide: 'VISION_ADAPTER',
-      useClass: GcpVisionAdapter,
+      useFactory: () =>
+        process.env.E2E_VISION_STUB === 'true'
+          ? createTestVisionAdapter()
+          : new GcpVisionAdapter(),
     },
   ],
   exports: [RiskKycOrchestrator, KycEngineService, PrometeoIdentityClient],

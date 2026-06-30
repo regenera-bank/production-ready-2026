@@ -1,0 +1,119 @@
+{
+  "version": "1.0.0",
+  "catalog": "FEATURE-FLAGS",
+  "description": "Central feature flag registry for Regenera Bank foundation services.",
+  "defaults": {
+    "evaluationOrder": ["tenantOverride", "environment", "globalDefault"],
+    "safeMode": true
+  },
+  "flags": [
+    {
+      "key": "CORE_PERSISTENCE",
+      "description": "Persist ledger and outbox to PostgreSQL instead of in-memory adapters.",
+      "owner": "core-banking",
+      "type": "boolean",
+      "default": false,
+      "environments": {
+        "local": false,
+        "staging": false,
+        "production": false
+      }
+    },
+    {
+      "key": "CORE_PAYMENTS_ENABLED",
+      "description": "Enable payment orchestration endpoints in core-bank.",
+      "owner": "core-banking",
+      "type": "boolean",
+      "default": false,
+      "environments": {
+        "local": false,
+        "staging": false,
+        "production": false
+      }
+    },
+    {
+      "key": "PIX_ADAPTER",
+      "description": "Route PIX operations through the live adapter instead of stub.",
+      "owner": "core-banking",
+      "type": "boolean",
+      "default": false,
+      "environments": {
+        "local": false,
+        "staging": false,
+        "production": false
+      }
+    },
+    {
+      "key": "CORE_PIX_LIVE",
+      "description": "Allow settlement against BACEN PIX rail (requires PIX_ADAPTER).",
+      "owner": "core-banking",
+      "type": "boolean",
+      "default": false,
+      "environments": {
+        "local": false,
+        "staging": false,
+        "production": false
+      }
+    },
+    {
+      "key": "TRANSFERS_TED_LIVE",
+      "description": "Enable TED transfers via external rail.",
+      "owner": "core-banking",
+      "type": "boolean",
+      "default": false,
+      "environments": {
+        "local": false,
+        "staging": false,
+        "production": false
+      }
+    },
+    {
+      "key": "CRYPTO_ENABLED",
+      "description": "Expose crypto / virtual assets program in channels and BFF.",
+      "owner": "product-platform",
+      "type": "boolean",
+      "default": false,
+      "environments": {
+        "local": false,
+        "staging": false,
+        "production": false
+      }
+    },
+    {
+      "key": "CRYPTO_TRADING_LIVE",
+      "description": "Enable live crypto trading flows (requires CRYPTO_ENABLED and compliance gates).",
+      "owner": "product-platform",
+      "type": "boolean",
+      "default": false,
+      "environments": {
+        "local": false,
+        "staging": false,
+        "production": false
+      }
+    },
+    {
+      "key": "OUTBOX_RELAY_ENABLED",
+      "description": "Run outbox relay worker to publish domain events.",
+      "owner": "platform-engineering",
+      "type": "boolean",
+      "default": false,
+      "environments": {
+        "local": true,
+        "staging": false,
+        "production": false
+      }
+    },
+    {
+      "key": "WEB_BANKING_PIX_UI",
+      "description": "Show PIX module in web-banking channel.",
+      "owner": "channels",
+      "type": "boolean",
+      "default": true,
+      "environments": {
+        "local": true,
+        "staging": true,
+        "production": false
+      }
+    }
+  ]
+}

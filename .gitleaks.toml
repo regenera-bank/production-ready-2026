@@ -1,0 +1,13 @@
+title = "Regenera Bank — gitleaks"
+
+[allowlist]
+description = "Fixtures de teste e dados locais de homologação (.data/)"
+
+paths = [
+  '''(?:^|/)\.data(?:/|$)''',
+  '''pix-engine\.spec\.ts$''',
+]
+
+regexes = [
+  '''idempotencyKey:\s*['"]pix-''',
+]

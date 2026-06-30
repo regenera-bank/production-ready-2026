@@ -1,0 +1,12 @@
+{
+  "": {
+    "swift-dependencies": "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/RegeneraDesignPackageTests.build/primary.swiftdeps"
+  },
+  "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/RegeneraDesignPackageTests.derived/runner.swift": {
+    "dependencies": "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/RegeneraDesignPackageTests.build/runner.d",
+    "object": "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/RegeneraDesignPackageTests.build/runner.swift.o",
+    "swiftmodule": "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/RegeneraDesignPackageTests.build/runner~partial.swiftmodule",
+    "swift-dependencies": "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/RegeneraDesignPackageTests.build/runner.swiftdeps",
+    "diagnostics": "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/RegeneraDesignPackageTests.build/runner.dia"
+  }
+}

@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <RootNamespace>Regenera.Operations.Desktop</RootNamespace>
+    <AssemblyName>Regenera.Operations</AssemblyName>
+    <ApplicationIcon />
+    <StartupObject>Regenera.Operations.Desktop.App</StartupObject>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Regenera.Operations.Core\Regenera.Operations.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Include="..\..\..\..\design-system\windows\RegeneraTokens.xaml" Link="DesignSystem\RegeneraTokens.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\..\..\..\design-system\windows\RegeneraTheme.xaml" Link="DesignSystem\RegeneraTheme.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+</Project>

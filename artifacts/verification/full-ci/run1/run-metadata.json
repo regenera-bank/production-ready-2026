@@ -1,0 +1,14 @@
+{
+  "run_id": 1,
+  "clean_db": 1,
+  "result": "FAIL",
+  "started_at": "2026-06-30T21:29:53Z",
+  "finished_at": "2026-06-30T21:31:21Z",
+  "postgres_available": 1,
+  "redis_available": 1,
+  "database_url": "postgresql://localhost:5432/regenera_core_test",
+  "redis_url": "redis://localhost:6379",
+  "artifact_dir": "artifacts/verification/full-ci/run1",
+  "gates_executed": 48,
+  "pipeline_fail": 1
+}

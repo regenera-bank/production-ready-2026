@@ -1,0 +1,9 @@
+{
+  "name": "@regenera/contract-tests-partner",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test partner-contract.test.mjs"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "": {
+    "swift-dependencies": "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/RegeneraDesignTests.build/primary.swiftdeps"
+  },
+  "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/Tests/RegeneraDesignTests/ColorRegeneraTests.swift": {
+    "dependencies": "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/RegeneraDesignTests.build/ColorRegeneraTests.d",
+    "object": "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/RegeneraDesignTests.build/ColorRegeneraTests.swift.o",
+    "swiftmodule": "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/RegeneraDesignTests.build/ColorRegeneraTests~partial.swiftmodule",
+    "swift-dependencies": "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/RegeneraDesignTests.build/ColorRegeneraTests.swiftdeps",
+    "diagnostics": "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/RegeneraDesignTests.build/ColorRegeneraTests.dia"
+  }
+}

@@ -1,0 +1,112 @@
+client:
+  name: basic
+  file-system: device-agnostic
+tools: {}
+targets:
+  "PackageStructure": ["<PackageStructure>"]
+  "RegeneraDesign-arm64-apple-macosx-debug.module": ["<RegeneraDesign-arm64-apple-macosx-debug.module>"]
+  "RegeneraDesignPackageTests-arm64-apple-macosx-debug.module": ["<RegeneraDesignPackageTests-arm64-apple-macosx-debug.module>"]
+  "RegeneraDesignPackageTests-arm64-apple-macosx-debug.test": ["<RegeneraDesignPackageTests-arm64-apple-macosx-debug.test>"]
+  "RegeneraDesignTests-arm64-apple-macosx-debug.module": ["<RegeneraDesignTests-arm64-apple-macosx-debug.module>"]
+  "main": ["<RegeneraDesign-arm64-apple-macosx-debug.module>"]
+  "test": ["<RegeneraDesign-arm64-apple-macosx-debug.module>","<RegeneraDesignPackageTests-arm64-apple-macosx-debug.test>","<RegeneraDesignTests-arm64-apple-macosx-debug.module>"]
+default: "main"
+nodes:
+  "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/Sources/RegeneraDesign/":
+    is-directory-structure: true
+    content-exclusion-patterns: [".git",".build"]
+  "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/Tests/RegeneraDesignTests/":
+    is-directory-structure: true
+    content-exclusion-patterns: [".git",".build"]
+commands:
+  "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/RegeneraDesign.build/sources":
+    tool: write-auxiliary-file
+    inputs: ["<sources-file-list>","/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/Sources/RegeneraDesign/Color+Regenera.swift"]
+    outputs: ["/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/RegeneraDesign.build/sources"]
+    description: "Write auxiliary file /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/RegeneraDesign.build/sources"
+
+  "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/RegeneraDesignPackageTests.build/sources":
+    tool: write-auxiliary-file
+    inputs: ["<sources-file-list>","/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/RegeneraDesignPackageTests.derived/runner.swift"]
+    outputs: ["/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/RegeneraDesignPackageTests.build/sources"]
+    description: "Write auxiliary file /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/RegeneraDesignPackageTests.build/sources"
+
+  "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/RegeneraDesignPackageTests.derived/runner.swift":
+    tool: test-entry-point-tool
+    inputs: []
+    outputs: ["/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/RegeneraDesignPackageTests.derived/runner.swift"]
+
+  "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/RegeneraDesignPackageTests.product/Objects.LinkFileList":
+    tool: write-auxiliary-file
+    inputs: ["<link-file-list>","/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/RegeneraDesign.build/Color+Regenera.swift.o","/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/RegeneraDesignPackageTests.build/runner.swift.o","/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/RegeneraDesignTests.build/ColorRegeneraTests.swift.o"]
+    outputs: ["/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/RegeneraDesignPackageTests.product/Objects.LinkFileList"]
+    description: "Write auxiliary file /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/RegeneraDesignPackageTests.product/Objects.LinkFileList"
+
+  "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/RegeneraDesignTests.build/sources":
+    tool: write-auxiliary-file
+    inputs: ["<sources-file-list>","/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/Tests/RegeneraDesignTests/ColorRegeneraTests.swift"]
+    outputs: ["/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/RegeneraDesignTests.build/sources"]
+    description: "Write auxiliary file /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/RegeneraDesignTests.build/sources"
+
+  "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt":
+    tool: write-auxiliary-file
+    inputs: ["<swift-get-version>","/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"]
+    outputs: ["/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"]
+    always-out-of-date: "true"
+    description: "Write auxiliary file /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+
+  "<RegeneraDesign-arm64-apple-macosx-debug.module>":
+    tool: phony
+    inputs: ["/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/RegeneraDesign.build/Color+Regenera.swift.o","/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/Modules/RegeneraDesign.swiftmodule"]
+    outputs: ["<RegeneraDesign-arm64-apple-macosx-debug.module>"]
+
+  "<RegeneraDesignPackageTests-arm64-apple-macosx-debug.module>":
+    tool: phony
+    inputs: ["/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/RegeneraDesignPackageTests.build/runner.swift.o","/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/Modules/RegeneraDesignPackageTests.swiftmodule"]
+    outputs: ["<RegeneraDesignPackageTests-arm64-apple-macosx-debug.module>"]
+
+  "<RegeneraDesignPackageTests-arm64-apple-macosx-debug.test>":
+    tool: phony
+    inputs: ["/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/RegeneraDesignPackageTests.xctest/Contents/MacOS/RegeneraDesignPackageTests"]
+    outputs: ["<RegeneraDesignPackageTests-arm64-apple-macosx-debug.test>"]
+
+  "<RegeneraDesignTests-arm64-apple-macosx-debug.module>":
+    tool: phony
+    inputs: ["/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/RegeneraDesignTests.build/ColorRegeneraTests.swift.o","/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/Modules/RegeneraDesignTests.swiftmodule"]
+    outputs: ["<RegeneraDesignTests-arm64-apple-macosx-debug.module>"]
+
+  "C.RegeneraDesign-arm64-apple-macosx-debug.module":
+    tool: shell
+    inputs: ["/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/Sources/RegeneraDesign/Color+Regenera.swift","/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt","/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/RegeneraDesign.build/sources"]
+    outputs: ["/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/RegeneraDesign.build/Color+Regenera.swift.o","/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/Modules/RegeneraDesign.swiftmodule"]
+    description: "Compiling Swift Module 'RegeneraDesign' (1 sources)"
+    args: ["/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc","-module-name","RegeneraDesign","-emit-dependencies","-emit-module","-emit-module-path","/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/Modules/RegeneraDesign.swiftmodule","-output-file-map","/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/RegeneraDesign.build/output-file-map.json","-parse-as-library","-incremental","-c","@/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/RegeneraDesign.build/sources","-I","/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/Modules","-target","arm64-apple-macosx14.0","-incremental","-enable-batch-mode","-serialize-diagnostics","-index-store-path","/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/index/store","-Onone","-enable-testing","-j10","-DSWIFT_PACKAGE","-DDEBUG","-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE","-module-cache-path","/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/ModuleCache","-parseable-output","-parse-as-library","-emit-objc-header","-emit-objc-header-path","/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/RegeneraDesign.build/include/RegeneraDesign-Swift.h","-swift-version","5","-plugin-path","/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing","-sdk","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.5.sdk","-F","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-I","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib","-L","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib","-g","-Xcc","-isysroot","-Xcc","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.5.sdk","-Xcc","-F","-Xcc","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-Xcc","-fPIC","-Xcc","-g","-package-name","ios"]
+
+  "C.RegeneraDesignPackageTests-arm64-apple-macosx-debug.module":
+    tool: shell
+    inputs: ["/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/RegeneraDesignPackageTests.derived/runner.swift","/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt","/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/Modules/RegeneraDesignTests.swiftmodule","/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/RegeneraDesignPackageTests.build/sources"]
+    outputs: ["/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/RegeneraDesignPackageTests.build/runner.swift.o","/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/Modules/RegeneraDesignPackageTests.swiftmodule"]
+    description: "Compiling Swift Module 'RegeneraDesignPackageTests' (1 sources)"
+    args: ["/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc","-module-name","RegeneraDesignPackageTests","-emit-dependencies","-emit-module","-emit-module-path","/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/Modules/RegeneraDesignPackageTests.swiftmodule","-output-file-map","/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/RegeneraDesignPackageTests.build/output-file-map.json","-parse-as-library","-incremental","-c","@/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/RegeneraDesignPackageTests.build/sources","-I","/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/Modules","-target","arm64-apple-macosx14.0","-incremental","-enable-batch-mode","-serialize-diagnostics","-index-store-path","/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/index/store","-Onone","-enable-testing","-Xfrontend","-enable-cross-import-overlays","-j10","-DSWIFT_PACKAGE","-DDEBUG","-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE","-module-cache-path","/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/ModuleCache","-parseable-output","-parse-as-library","-emit-objc-header","-emit-objc-header-path","/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/RegeneraDesignPackageTests.build/include/RegeneraDesignPackageTests-Swift.h","-plugin-path","/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing","-sdk","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.5.sdk","-F","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-I","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib","-L","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib","-g","-Xcc","-isysroot","-Xcc","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.5.sdk","-Xcc","-F","-Xcc","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-Xcc","-fPIC","-Xcc","-g","-package-name","ios"]
+
+  "C.RegeneraDesignPackageTests-arm64-apple-macosx-debug.test":
+    tool: shell
+    inputs: ["/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/RegeneraDesign.build/Color+Regenera.swift.o","/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/RegeneraDesignPackageTests.build/runner.swift.o","/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/RegeneraDesignTests.build/ColorRegeneraTests.swift.o","/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/RegeneraDesignPackageTests.product/Objects.LinkFileList"]
+    outputs: ["/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/RegeneraDesignPackageTests.xctest/Contents/MacOS/RegeneraDesignPackageTests"]
+    description: "Linking ./.build/arm64-apple-macosx/debug/RegeneraDesignPackageTests.xctest/Contents/MacOS/RegeneraDesignPackageTests"
+    args: ["/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc","-L","/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug","-o","/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/RegeneraDesignPackageTests.xctest/Contents/MacOS/RegeneraDesignPackageTests","-module-name","RegeneraDesignPackageTests","-Xlinker","-no_warn_duplicate_libraries","-Xlinker","-bundle","-Xlinker","-rpath","-Xlinker","@loader_path/../../../","@/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/RegeneraDesignPackageTests.product/Objects.LinkFileList","-Xlinker","-rpath","-Xlinker","/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift-6.2/macosx","-target","arm64-apple-macosx14.0","-Xlinker","-add_ast_path","-Xlinker","/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/Modules/RegeneraDesign.swiftmodule","-Xlinker","-add_ast_path","-Xlinker","/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/Modules/RegeneraDesignPackageTests.swiftmodule","-Xlinker","-add_ast_path","-Xlinker","/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/Modules/RegeneraDesignTests.swiftmodule","-plugin-path","/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing","-sdk","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.5.sdk","-F","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-I","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib","-L","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib","-g"]
+
+  "C.RegeneraDesignTests-arm64-apple-macosx-debug.module":
+    tool: shell
+    inputs: ["/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/Tests/RegeneraDesignTests/ColorRegeneraTests.swift","/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt","/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/Modules/RegeneraDesign.swiftmodule","/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/RegeneraDesignTests.build/sources"]
+    outputs: ["/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/RegeneraDesignTests.build/ColorRegeneraTests.swift.o","/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/Modules/RegeneraDesignTests.swiftmodule"]
+    description: "Compiling Swift Module 'RegeneraDesignTests' (1 sources)"
+    args: ["/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc","-module-name","RegeneraDesignTests","-emit-dependencies","-emit-module","-emit-module-path","/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/Modules/RegeneraDesignTests.swiftmodule","-output-file-map","/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/RegeneraDesignTests.build/output-file-map.json","-parse-as-library","-incremental","-c","@/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/RegeneraDesignTests.build/sources","-I","/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/Modules","-target","arm64-apple-macosx14.0","-incremental","-enable-batch-mode","-serialize-diagnostics","-index-store-path","/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/index/store","-Onone","-enable-testing","-Xfrontend","-enable-cross-import-overlays","-j10","-DSWIFT_PACKAGE","-DDEBUG","-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE","-module-cache-path","/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/.build/arm64-apple-macosx/debug/ModuleCache","-parseable-output","-parse-as-library","-swift-version","5","-plugin-path","/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing","-sdk","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.5.sdk","-F","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-I","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib","-L","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib","-g","-Xcc","-isysroot","-Xcc","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.5.sdk","-Xcc","-F","-Xcc","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-Xcc","-fPIC","-Xcc","-g","-package-name","ios"]
+
+  "PackageStructure":
+    tool: package-structure-tool
+    inputs: ["/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/Sources/RegeneraDesign/","/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/Tests/RegeneraDesignTests/","/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/Package.swift","/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/design-system/ios/Package.resolved"]
+    outputs: ["<PackageStructure>"]
+    description: "Planning build"
+    allow-missing-inputs: true
+

@@ -1,0 +1,154 @@
+{
+  "version": "1.0.0",
+  "catalog": "CORE-ERRORS",
+  "description": "Stable error codes for Regenera Bank core, BFF, and channel surfaces.",
+  "errors": [
+    {
+      "code": "RBK-AUTH-001",
+      "httpStatus": 401,
+      "title": "Invalid credentials",
+      "message": "Document or password is incorrect.",
+      "retryable": false
+    },
+    {
+      "code": "RBK-AUTH-002",
+      "httpStatus": 401,
+      "title": "Session expired",
+      "message": "Session is no longer valid. Authenticate again.",
+      "retryable": false
+    },
+    {
+      "code": "RBK-AUTH-003",
+      "httpStatus": 403,
+      "title": "Forbidden",
+      "message": "Principal lacks permission for the requested resource.",
+      "retryable": false
+    },
+    {
+      "code": "RBK-VAL-001",
+      "httpStatus": 422,
+      "title": "Validation failed",
+      "message": "One or more fields failed validation.",
+      "retryable": false
+    },
+    {
+      "code": "RBK-VAL-002",
+      "httpStatus": 422,
+      "title": "Invalid monetary amount",
+      "message": "Amount must be a decimal string; float is not accepted.",
+      "retryable": false
+    },
+    {
+      "code": "RBK-ACC-001",
+      "httpStatus": 404,
+      "title": "Account not found",
+      "message": "No account matches the provided identifier.",
+      "retryable": false
+    },
+    {
+      "code": "RBK-ACC-002",
+      "httpStatus": 409,
+      "title": "Account blocked",
+      "message": "Account is blocked for outbound operations.",
+      "retryable": false
+    },
+    {
+      "code": "RBK-ACC-003",
+      "httpStatus": 422,
+      "title": "Insufficient funds",
+      "message": "Available balance is lower than the requested amount.",
+      "retryable": false
+    },
+    {
+      "code": "RBK-IDP-001",
+      "httpStatus": 409,
+      "title": "Idempotency conflict",
+      "message": "Idempotency key was reused with a different payload.",
+      "retryable": false
+    },
+    {
+      "code": "RBK-IDP-002",
+      "httpStatus": 409,
+      "title": "Operation in unknown state",
+      "message": "A previous attempt ended in UNKNOWN; reconcile before retrying.",
+      "retryable": false
+    },
+    {
+      "code": "RBK-PIX-001",
+      "httpStatus": 422,
+      "title": "Invalid PIX key",
+      "message": "PIX key format or ownership validation failed.",
+      "retryable": false
+    },
+    {
+      "code": "RBK-PIX-002",
+      "httpStatus": 503,
+      "title": "PIX rail unavailable",
+      "message": "PIX adapter did not respond in time; state may be UNKNOWN.",
+      "retryable": true
+    },
+    {
+      "code": "RBK-PIX-003",
+      "httpStatus": 404,
+      "title": "PIX payment not found",
+      "message": "No PIX payment matches the provided identifier.",
+      "retryable": false
+    },
+    {
+      "code": "RBK-TFR-001",
+      "httpStatus": 404,
+      "title": "Transfer not found",
+      "message": "No transfer matches the provided identifier.",
+      "retryable": false
+    },
+    {
+      "code": "RBK-TFR-002",
+      "httpStatus": 422,
+      "title": "Invalid transfer destination",
+      "message": "Destination account metadata failed validation.",
+      "retryable": false
+    },
+    {
+      "code": "RBK-TFR-003",
+      "httpStatus": 503,
+      "title": "Transfer rail unavailable",
+      "message": "Transfer adapter did not respond in time; state may be UNKNOWN.",
+      "retryable": true
+    },
+    {
+      "code": "RBK-LED-001",
+      "httpStatus": 409,
+      "title": "Ledger imbalance",
+      "message": "Debit and credit totals do not balance for the journal entry.",
+      "retryable": false
+    },
+    {
+      "code": "RBK-LED-002",
+      "httpStatus": 409,
+      "title": "Immutable ledger violation",
+      "message": "Attempted update or delete on a posted ledger record.",
+      "retryable": false
+    },
+    {
+      "code": "RBK-SYS-001",
+      "httpStatus": 500,
+      "title": "Internal error",
+      "message": "An unexpected error occurred.",
+      "retryable": true
+    },
+    {
+      "code": "RBK-SYS-002",
+      "httpStatus": 503,
+      "title": "Service unavailable",
+      "message": "Dependency is temporarily unavailable.",
+      "retryable": true
+    },
+    {
+      "code": "RBK-SYS-003",
+      "httpStatus": 429,
+      "title": "Rate limited",
+      "message": "Too many requests; retry after backoff.",
+      "retryable": true
+    }
+  ]
+}

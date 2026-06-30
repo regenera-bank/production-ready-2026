@@ -1,0 +1,23 @@
+{
+  "$schema": "https://design-tokens.github.io/community-group/format/",
+  "source": "desing-final-escolhido-geral-index.html :root",
+  "color": {
+    "primary": { "value": "#22d3ee", "comment": "Cyan 400 — CTA, orb, accent" },
+    "primary-dark": { "value": "#0891b2", "comment": "Cyan 600 — pressed states" },
+    "primary-light": { "value": "#67e8f9", "comment": "Cyan 300 — highlights" },
+    "primary-glow": { "value": "rgba(34, 211, 238, 0.4)" },
+    "bg-deep": { "value": "#020617", "comment": "Slate 950 — app background" },
+    "bg-mid": { "value": "#0f172a", "comment": "Slate 900 — surfaces" },
+    "bg-light": { "value": "#1e293b", "comment": "Slate 800 — elevated panels" },
+    "navy": { "value": "#1e3a8a", "comment": "Blue 900 — gradient start" },
+    "on-primary": { "value": "#020617" },
+    "on-background": { "value": "#f8fafc" },
+    "text-secondary": { "value": "#94a3b8" },
+    "success": { "value": "#10b981" },
+    "warning": { "value": "#f59e0b" },
+    "error": { "value": "#f43f5e" },
+    "unknown": { "value": "#d946ef", "comment": "Financial UNKNOWN state" },
+    "border": { "value": "rgba(34, 211, 238, 0.15)" },
+    "glass": { "value": "rgba(15, 23, 42, 0.6)" }
+  }
+}

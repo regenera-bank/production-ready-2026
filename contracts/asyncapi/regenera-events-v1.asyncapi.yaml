@@ -1,0 +1,236 @@
+asyncapi: 3.0.0
+info:
+  title: Regenera Bank Domain Events
+  version: 1.0.0
+  description: |
+    Canonical async contract for Regenera Bank domain events.
+    All messages MUST conform to contracts/events/event-envelope.schema.json.
+defaultContentType: application/json
+servers:
+  production:
+    host: kafka.regenerabank.example:9093
+    protocol: kafka
+    description: Production event bus
+  local:
+    host: localhost:9092
+    protocol: kafka
+    description: Local development
+channels:
+  regenera.accounts:
+    address: regenera.accounts.v1
+    messages:
+      accountOpened:
+        $ref: '#/components/messages/AccountOpened'
+      accountBlocked:
+        $ref: '#/components/messages/AccountBlocked'
+  regenera.pix:
+    address: regenera.pix.v1
+    messages:
+      pixPaymentSubmitted:
+        $ref: '#/components/messages/PixPaymentSubmitted'
+      pixPaymentSettled:
+        $ref: '#/components/messages/PixPaymentSettled'
+      pixPaymentFailed:
+        $ref: '#/components/messages/PixPaymentFailed'
+  regenera.transfers:
+    address: regenera.transfers.v1
+    messages:
+      transferSubmitted:
+        $ref: '#/components/messages/TransferSubmitted'
+      transferSettled:
+        $ref: '#/components/messages/TransferSettled'
+operations:
+  publishAccountOpened:
+    action: send
+    channel:
+      $ref: '#/channels/regenera.accounts'
+    messages:
+      - $ref: '#/channels/regenera.accounts/messages/accountOpened'
+  publishPixPaymentSettled:
+    action: send
+    channel:
+      $ref: '#/channels/regenera.pix'
+    messages:
+      - $ref: '#/channels/regenera.pix/messages/pixPaymentSettled'
+  publishTransferSettled:
+    action: send
+    channel:
+      $ref: '#/channels/regenera.transfers'
+    messages:
+      - $ref: '#/channels/regenera.transfers/messages/transferSettled'
+components:
+  messages:
+    EventEnvelope:
+      name: EventEnvelope
+      title: Regenera Event Envelope
+      contentType: application/json
+      payload:
+        $ref: '../events/event-envelope.schema.json'
+    AccountOpened:
+      name: AccountOpened
+      title: Account Opened
+      contentType: application/json
+      payload:
+        allOf:
+          - $ref: '#/components/messages/EventEnvelope/payload'
+          - type: object
+            properties:
+              eventType:
+                const: ACCOUNT_OPENED
+              eventVersion:
+                const: 1
+              payload:
+                type: object
+                required: [accountId, customerId, accountType]
+                properties:
+                  accountId:
+                    type: string
+                  customerId:
+                    type: string
+                  accountType:
+                    type: string
+                    enum: [CHECKING, SAVINGS, PAYMENT]
+    AccountBlocked:
+      name: AccountBlocked
+      title: Account Blocked
+      contentType: application/json
+      payload:
+        allOf:
+          - $ref: '#/components/messages/EventEnvelope/payload'
+          - type: object
+            properties:
+              eventType:
+                const: ACCOUNT_BLOCKED
+              eventVersion:
+                const: 1
+              payload:
+                type: object
+                required: [accountId, reasonCode]
+                properties:
+                  accountId:
+                    type: string
+                  reasonCode:
+                    type: string
+    PixPaymentSubmitted:
+      name: PixPaymentSubmitted
+      title: PIX Payment Submitted
+      contentType: application/json
+      payload:
+        allOf:
+          - $ref: '#/components/messages/EventEnvelope/payload'
+          - type: object
+            properties:
+              eventType:
+                const: PIX_PAYMENT_SUBMITTED
+              eventVersion:
+                const: 1
+              payload:
+                type: object
+                required: [paymentId, sourceAccountId, amount, pixKey]
+                properties:
+                  paymentId:
+                    type: string
+                    format: uuid
+                  sourceAccountId:
+                    type: string
+                  amount:
+                    type: string
+                  pixKey:
+                    type: string
+    PixPaymentSettled:
+      name: PixPaymentSettled
+      title: PIX Payment Settled
+      contentType: application/json
+      payload:
+        allOf:
+          - $ref: '#/components/messages/EventEnvelope/payload'
+          - type: object
+            properties:
+              eventType:
+                const: PIX_PAYMENT_SETTLED
+              eventVersion:
+                const: 1
+              payload:
+                type: object
+                required: [paymentId, endToEndId, settledAt]
+                properties:
+                  paymentId:
+                    type: string
+                    format: uuid
+                  endToEndId:
+                    type: string
+                  settledAt:
+                    type: string
+                    format: date-time
+    PixPaymentFailed:
+      name: PixPaymentFailed
+      title: PIX Payment Failed
+      contentType: application/json
+      payload:
+        allOf:
+          - $ref: '#/components/messages/EventEnvelope/payload'
+          - type: object
+            properties:
+              eventType:
+                const: PIX_PAYMENT_FAILED
+              eventVersion:
+                const: 1
+              payload:
+                type: object
+                required: [paymentId, failureCode]
+                properties:
+                  paymentId:
+                    type: string
+                    format: uuid
+                  failureCode:
+                    type: string
+    TransferSubmitted:
+      name: TransferSubmitted
+      title: Transfer Submitted
+      contentType: application/json
+      payload:
+        allOf:
+          - $ref: '#/components/messages/EventEnvelope/payload'
+          - type: object
+            properties:
+              eventType:
+                const: TRANSFER_SUBMITTED
+              eventVersion:
+                const: 1
+              payload:
+                type: object
+                required: [transferId, sourceAccountId, amount, rail]
+                properties:
+                  transferId:
+                    type: string
+                    format: uuid
+                  sourceAccountId:
+                    type: string
+                  amount:
+                    type: string
+                  rail:
+                    type: string
+                    enum: [INTERNAL, TED]
+    TransferSettled:
+      name: TransferSettled
+      title: Transfer Settled
+      contentType: application/json
+      payload:
+        allOf:
+          - $ref: '#/components/messages/EventEnvelope/payload'
+          - type: object
+            properties:
+              eventType:
+                const: TRANSFER_SETTLED
+              eventVersion:
+                const: 1
+              payload:
+                type: object
+                required: [transferId, settledAt]
+                properties:
+                  transferId:
+                    type: string
+                    format: uuid
+                  settledAt:
+                    type: string
+                    format: date-time

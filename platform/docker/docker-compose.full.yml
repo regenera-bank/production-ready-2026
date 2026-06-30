@@ -24,7 +24,8 @@ services:
       POSTGRES_PASSWORD: regenera_local_only
     volumes:
       - postgres-data:/var/lib/postgresql/data
-      - ../../domains/core-bank/db/migrations:/docker-entrypoint-initdb.d:ro
+      # Migrations executadas apenas pelo core-bank (PostgresBootstrapService) —
+      # evita dupla aplicação via initdb que quebra enum types já criados.
     ports:
       - "5432:5432"
     healthcheck:
@@ -72,8 +73,8 @@ services:
       test: ["CMD", "wget", "-qO-", "http://127.0.0.1:3100/v1/health"]
       interval: 15s
       timeout: 5s
-      retries: 3
-      start_period: 25s
+      retries: 5
+      start_period: 45s
 
   web-bff:
     <<: *node-service

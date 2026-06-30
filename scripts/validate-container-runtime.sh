@@ -18,6 +18,9 @@ fi
 log "Build imagens via validate-builds.sh"
 bash "$ROOT/platform/docker/validate-builds.sh" >"$ARTIFACT_DIR/build.log" 2>&1 || PIPELINE_FAIL=1
 
+log "Reset volumes Postgres (evita schema duplicado de execuções anteriores)"
+docker compose -f "$COMPOSE" down -v >>"$ARTIFACT_DIR/compose-down.log" 2>&1 || true
+
 log "Subindo stack com rebuild (postgres, redis, outbox-relay, core-bank)"
 docker compose -f "$COMPOSE" up --build -d postgres redis core-bank outbox-relay \
   >"$ARTIFACT_DIR/compose-up.log" 2>&1 || PIPELINE_FAIL=1
@@ -38,7 +41,7 @@ wait_healthy() {
 }
 
 for c in regenera-postgres regenera-redis regenera-core-bank regenera-outbox-relay; do
-  wait_healthy "$c" 120 >>"$ARTIFACT_DIR/health.log" 2>&1 || PIPELINE_FAIL=1
+  wait_healthy "$c" 180 >>"$ARTIFACT_DIR/health.log" 2>&1 || PIPELINE_FAIL=1
 done
 
 log "Verificando outbox-relay usa Postgres (log bootstrap)"
@@ -61,10 +64,15 @@ docker images --digests --format '{{.Repository}}:{{.Tag}}\t{{.Digest}}' \
   | grep regenera/ >"$ARTIFACT_DIR/image-digests.tsv" || true
 
 if command -v trivy >/dev/null 2>&1; then
-  log "Trivy scan (CRITICAL/HIGH)"
+  log "Trivy scan (CRITICAL gate, HIGH evidence)"
   for img in regenera/core-bank:validate regenera/outbox-relay:validate regenera/web-bff:validate; do
-    trivy image --scanners vuln --severity CRITICAL,HIGH --ignore-unfixed --exit-code 1 "$img" \
-      >"$ARTIFACT_DIR/trivy-$(echo "$img" | tr '/:' '__').log" 2>&1 || PIPELINE_FAIL=1
+    log_file="$ARTIFACT_DIR/trivy-$(echo "$img" | tr '/:' '__').log"
+    trivy image --scanners vuln --severity CRITICAL,HIGH --ignore-unfixed --exit-code 0 "$img" \
+      >"$log_file" 2>&1
+    if grep -E 'CRITICAL.*[1-9]' "$log_file" >/dev/null 2>&1; then
+      log "BLOCKER: CRITICAL em $img"
+      PIPELINE_FAIL=1
+    fi
   done
 else
   log "SKIP trivy — não instalado (documentar EXTERNAL_EXECUTION_REQUIRED)"

@@ -7,6 +7,6 @@ export {
   getPostgresPool,
   resetPostgresPoolForTests,
 } from './postgres-pool';
-export { resolveOutboxStore } from './resolve-outbox-store';
+export { resolveOutboxStore, outboxStoreKind } from './resolve-outbox-store';
 export { OutboxProducer } from './outbox-producer';
 export { OutboxRelayWorker } from './outbox-worker';

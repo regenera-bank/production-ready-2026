@@ -345,16 +345,41 @@ run_integration_tests() {
 }
 
 run_queue_tests() {
-  if [[ $REDIS_AVAILABLE -ne 1 || $INSTALLED_WORKER -ne 1 ]]; then
+  if [[ $INSTALLED_WORKER -ne 1 ]]; then
+    local ts log_path
+    ts="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+    log_path="$ARTIFACT_DIR/queue/worker-skipped.log"
+    echo "BLOCKER: outbox-relay install failed" >"$log_path"
+    record_gate "queue-test-redis" "$WORKER" 1 "${log_path#$ROOT/}" "$ts"
+    record_gate "queue-test-postgres-outbox" "$WORKER" 1 "${log_path#$ROOT/}" "$ts"
+    PIPELINE_FAIL=1
+    return 0
+  fi
+
+  run_gate "queue-test-outbox-store" "$WORKER" npx jest --runInBand --forceExit \
+    --testPathPattern=resolve-outbox-store.spec.ts
+
+  if [[ $REDIS_AVAILABLE -ne 1 ]]; then
     local ts log_path
     ts="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
     log_path="$ARTIFACT_DIR/queue/redis-queue-skipped.log"
     echo "BLOCKER: redis queue tests skipped" >"$log_path"
     record_gate "queue-test-redis" "$WORKER" 1 "${log_path#$ROOT/}" "$ts"
     PIPELINE_FAIL=1
-    return 0
+  else
+    run_gate "queue-test-redis" "$WORKER" npm run test:redis
   fi
-  run_gate "queue-test-redis" "$WORKER" npm run test:redis
+
+  if [[ $POSTGRES_AVAILABLE -ne 1 ]]; then
+    local ts log_path
+    ts="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+    log_path="$ARTIFACT_DIR/queue/postgres-outbox-skipped.log"
+    echo "BLOCKER: postgres outbox tests skipped" >"$log_path"
+    record_gate "queue-test-postgres-outbox" "$WORKER" 1 "${log_path#$ROOT/}" "$ts"
+    PIPELINE_FAIL=1
+  else
+    run_gate "queue-test-postgres-outbox" "$WORKER" env DATABASE_URL="$DATABASE_URL" npm run test:postgres
+  fi
 }
 
 run_security_tests() {

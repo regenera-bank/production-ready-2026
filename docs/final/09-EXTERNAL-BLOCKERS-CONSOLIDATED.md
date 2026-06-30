@@ -55,7 +55,7 @@ production → EXTERNAL_ACTIVATION_REQUIRED (ou REGULATORY para crypto)
 
 | Item | Status | Evidence |
 |------|--------|----------|
-| Outbox Postgres store em prod | **EXTERNAL_ACTIVATION_REQUIRED** | `InMemoryOutboxStore` em worker — audit B-06 |
+| Outbox Postgres store em prod | **PASS (código)** | `workers/outbox-relay/src/resolve-outbox-store.ts` — fail-closed sem `DATABASE_URL` |
 | Load test 50k/dia | **EXTERNAL_ACTIVATION_REQUIRED** | skipped em `TEST-RESULTS.txt` |
 
 ---

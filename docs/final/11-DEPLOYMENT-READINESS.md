@@ -16,11 +16,11 @@
 | 4 | BFF tests | **PASS** | 35 pass — `35-035-unit-test-web-bff.log` |
 | 5 | Web build | **PASS** | `44-044-build-web-banking.log` |
 | 6 | E2E jornadas críticas | **PASS** | 4 pass — `47-047-e2e-playwright.log` |
-| 7 | Security gates | **FAIL** | npm audit core-bank + web-bff exit 1 |
+| 7 | Security gates | **PASS** | runtime audit critical=0 high=0 — `artifacts/verification/full-ci/run2/security/` |
 | 8 | Secrets rotacionados | **EXTERNAL_ACTIVATION_REQUIRED** | `ROTATION_REQUIRED_BEFORE_DEPLOY` |
 | 9 | HSM/KMS | **EXTERNAL_ACTIVATION_REQUIRED** | EXTERNAL-BLOCKERS |
 | 10 | BACEN homologação | **REGULATORY_ACTIVATION_REQUIRED** | integrations-spi production |
-| 11 | Outbox Postgres worker | **EXTERNAL_ACTIVATION_REQUIRED** | InMemoryOutboxStore |
+| 11 | Outbox Postgres worker | **PASS** | `resolve-outbox-store.ts` — Postgres default; memory só com `CORE_BANK_STORAGE=memory` |
 | 12 | PACKAGE-CHECKSUMS GPG | **EXTERNAL_ACTIVATION_REQUIRED** | evidência local, não assinado deploy |
 | 13 | Deploy executado | **NÃO** | `docs/audit/18-DEPLOYMENT-HANDOFF-FINAL.md` |
 

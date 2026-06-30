@@ -9,6 +9,11 @@ export interface ResolvedOutboxStore {
   pool?: Pool;
 }
 
+/** Identificador operacional do store ativo — usado em logs e health */
+export function outboxStoreKind(store: OutboxStore): 'postgres' | 'memory' {
+  return store instanceof PostgresOutboxStore ? 'postgres' : 'memory';
+}
+
 /** Resolve store: memory apenas com CORE_BANK_STORAGE=memory; caso contrário exige DATABASE_URL */
 export function resolveOutboxStore(): ResolvedOutboxStore {
   const storageMode = (process.env.CORE_BANK_STORAGE ?? '').toLowerCase();

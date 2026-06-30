@@ -6,7 +6,7 @@ import { OutboxProducer } from './outbox-producer';
 import { OutboxRelayWorker } from './outbox-worker';
 import { closePostgresPool } from './postgres-pool';
 import { createRedisConnection, getBullMQConnection } from './redis.config';
-import { resolveOutboxStore } from './resolve-outbox-store';
+import { outboxStoreKind, resolveOutboxStore } from './resolve-outbox-store';
 
 /** Bootstrap do relay — Postgres por padrão; memory só com CORE_BANK_STORAGE=memory */
 async function bootstrap(): Promise<void> {
@@ -32,6 +32,8 @@ async function bootstrap(): Promise<void> {
   logInfo('outbox relay pronto', {
     correlationId,
     jobId: `health:${healthPort}`,
+    outboxStore: outboxStoreKind(outboxStore),
+    nodeEnv: process.env.NODE_ENV ?? 'development',
   });
 
   const shutdown = async (signal: string): Promise<void> => {

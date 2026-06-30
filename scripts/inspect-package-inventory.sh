@@ -12,16 +12,21 @@ if [[ ! -f "$ZIP" ]]; then
 fi
 
 mkdir -p "$(dirname "$OUT")"
+export LC_ALL=C
 unzip -l "$ZIP" | awk 'NR>3 && $4!="" {print $4}' | sort >"$OUT"
 
 TOTAL="$(wc -l <"$OUT" | tr -d ' ')"
 FORBIDDEN=0
-for pattern in node_modules .git '.env' credentials private; do
-  if grep -q "$pattern" "$OUT"; then
+for pattern in '/node_modules/' '/.git/' '.env' '/credentials/' '/private-keys/'; do
+  if grep -qF "$pattern" "$OUT"; then
     echo "BLOCKER: padrão proibido no pacote: $pattern" >&2
     FORBIDDEN=1
   fi
 done
+if grep -E '(^|/)\.env($|\.)' "$OUT" >/dev/null; then
+  echo "BLOCKER: arquivo .env no pacote" >&2
+  FORBIDDEN=1
+fi
 
 MANIFEST="$ROOT/artifacts/verification/package-inventory-summary.json"
 cat >"$MANIFEST" <<JSON

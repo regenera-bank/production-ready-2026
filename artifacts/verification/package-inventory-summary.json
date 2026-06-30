@@ -1,0 +1,14 @@
+{
+  "zip": "REGENERA-BANK-FULL-PLATFORM-CANDIDATE.zip",
+  "fileCount": 20222,
+  "inventoryTsv": "artifacts/verification/package-inventory.tsv",
+  "forbiddenPatternsFound": 0,
+  "samplePaths": [
+    "regenera-bank/",
+    "regenera-bank/.dockerignore",
+    "regenera-bank/.editorconfig",
+    "regenera-bank/.gitattributes",
+    "regenera-bank/.githooks/"
+  ],
+  "generatedAtUtc": "2026-06-30T23:32:34Z"
+}

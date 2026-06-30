@@ -31,8 +31,10 @@ rsync -a \
   --exclude '._*' \
   --exclude 'REGENERA-BANK-FULL-PLATFORM-CANDIDATE.zip' \
   --exclude '**/build/' \
+  --exclude '**/.build/' \
   --exclude '**/.gradle/' \
   --exclude 'apps/android/local.properties' \
+  --exclude 'apps/ios/.build/' \
   "$ROOT/" "$STAGING/regenera-bank/"
 
 log "Criando $ZIP_NAME"
@@ -47,7 +49,9 @@ shasum -a 256 "$ROOT/$ZIP_NAME" | awk '{print $1 "  " FILENAME}' >"$ROOT/$SHA_FI
 cat "$ROOT/$SHA_FILE"
 
 log "Validação extract-and-revalidate"
-EXTRACT="$(mktemp -d /tmp/regenera-extract.XXXXXX)"
+EXTRACT_ROOT="${REGENERA_EXTRACT_ROOT:-$ROOT/.package-extract}"
+mkdir -p "$EXTRACT_ROOT"
+EXTRACT="$(mktemp -d "$EXTRACT_ROOT/extract.XXXXXX")"
 trap 'rm -rf "$STAGING" "$EXTRACT"' EXIT
 unzip -q "$ROOT/$ZIP_NAME" -d "$EXTRACT"
 

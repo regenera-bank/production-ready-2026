@@ -1,5 +1,5 @@
 === GATE: unit-test-web-banking ===
-timestamp_utc: 2026-06-30T21:53:58Z
+timestamp_utc: 2026-06-30T22:06:02Z
 cwd: /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/apps/web-banking
 command: npm test
 node: v26.0.0
@@ -20,8 +20,8 @@ CI_RUN_ID: 2 CI_CLEAN_DB: 0
 
  Test Files  2 passed (2)
       Tests  8 passed (8)
-   Start at  18:53:58
-   Duration  508ms (transform 50ms, setup 87ms, collect 39ms, tests 11ms, environment 383ms, prepare 71ms)
+   Start at  19:06:03
+   Duration  362ms (transform 39ms, setup 47ms, collect 35ms, tests 11ms, environment 248ms, prepare 52ms)
 
 --- end ---
 exit_code: 0

@@ -17,21 +17,6 @@
     },
     {
       "type": "library",
-      "name": "@simplewebauthn/server",
-      "version": "11.0.0"
-    },
-    {
-      "type": "library",
-      "name": "@simplewebauthn/types",
-      "version": "11.0.0"
-    },
-    {
-      "type": "library",
-      "name": "@regenera/core-bank",
-      "version": "0.0.0"
-    },
-    {
-      "type": "library",
       "name": "@nestjs/common",
       "version": "11.1.27"
     },
@@ -47,8 +32,28 @@
     },
     {
       "type": "library",
+      "name": "@regenera/core-bank",
+      "version": "0.0.0"
+    },
+    {
+      "type": "library",
+      "name": "@simplewebauthn/server",
+      "version": "11.0.0"
+    },
+    {
+      "type": "library",
+      "name": "@simplewebauthn/types",
+      "version": "11.0.0"
+    },
+    {
+      "type": "library",
       "name": "firebase-admin",
       "version": "12.7.0"
+    },
+    {
+      "type": "library",
+      "name": "google-auth-library",
+      "version": "10.9.0"
     },
     {
       "type": "library",

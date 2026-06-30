@@ -14,6 +14,7 @@ COPY workers/outbox-relay/package.json workers/outbox-relay/
 RUN pnpm install --frozen-lockfile --filter @regenera/outbox-relay
 COPY workers/outbox-relay workers/outbox-relay
 RUN pnpm --filter @regenera/outbox-relay build
+RUN pnpm deploy --filter @regenera/outbox-relay --prod /prod/outbox-relay
 
 FROM base AS runner
 RUN apk add --no-cache wget
@@ -21,9 +22,9 @@ RUN addgroup -g 1001 -S regenera && adduser -u 1001 -S regenera -G regenera
 WORKDIR /app
 ENV NODE_ENV=production
 ENV OUTBOX_RELAY_HEALTH_PORT=3109
-COPY --from=builder --chown=regenera:regenera /app/workers/outbox-relay/package.json ./
-COPY --from=builder --chown=regenera:regenera /app/workers/outbox-relay/dist ./dist
-COPY --from=builder --chown=regenera:regenera /app/workers/outbox-relay/node_modules ./node_modules
+COPY --from=builder --chown=regenera:regenera /prod/outbox-relay/package.json ./
+COPY --from=builder --chown=regenera:regenera /prod/outbox-relay/dist ./dist
+COPY --from=builder --chown=regenera:regenera /prod/outbox-relay/node_modules ./node_modules
 USER regenera
 EXPOSE 3109
 HEALTHCHECK --interval=15s --timeout=5s --start-period=25s --retries=3 \

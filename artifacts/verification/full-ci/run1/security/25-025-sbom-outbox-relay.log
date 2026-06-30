@@ -1,5 +1,5 @@
 === GATE: sbom-outbox-relay ===
-timestamp_utc: 2026-06-30T21:52:05Z
+timestamp_utc: 2026-06-30T22:04:10Z
 cwd: /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/workers/outbox-relay
 command: bash /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/scripts/generate-sbom.sh /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/artifacts/verification/full-ci/run1/security/sbom-outbox-relay.json
 node: v26.0.0

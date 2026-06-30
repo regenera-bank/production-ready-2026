@@ -1,6 +1,6 @@
-timestamp_utc: 2026-06-30T21:50:58Z
-git_head: b512c709ad103b49994b97f26288f342cd900fba
-git_tree: 826501dc3d6c14dbcfa144582bfb6521b282d531
+timestamp_utc: 2026-06-30T22:03:25Z
+git_head: e15093f3641cebe90e038c75ba78ae76467a7505
+git_tree: 9d0d6784ff487fbd1d72c3a2b7e3f4fe239581bd
 implantable_manifest: artifacts/verification/full-ci/run1/hash/implantable-sources.sha256
-implantable_manifest_sha256: 9d44fcb4c2aaf97363acbeb7ad1b51aa0e475fccccfddbe4a0f18430d3ab4de8
-line_count: 227
+implantable_manifest_sha256: cefc3110b3845f790522ef679f60672875e06c8a6449bccf8075fafd18d113de
+line_count: 230

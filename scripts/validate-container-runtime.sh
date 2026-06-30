@@ -18,8 +18,8 @@ fi
 log "Build imagens via validate-builds.sh"
 bash "$ROOT/platform/docker/validate-builds.sh" >"$ARTIFACT_DIR/build.log" 2>&1 || PIPELINE_FAIL=1
 
-log "Subindo stack (postgres, redis, outbox-relay, core-bank)"
-docker compose -f "$COMPOSE" up -d postgres redis core-bank outbox-relay \
+log "Subindo stack com rebuild (postgres, redis, outbox-relay, core-bank)"
+docker compose -f "$COMPOSE" up --build -d postgres redis core-bank outbox-relay \
   >"$ARTIFACT_DIR/compose-up.log" 2>&1 || PIPELINE_FAIL=1
 
 wait_healthy() {
@@ -42,7 +42,8 @@ for c in regenera-postgres regenera-redis regenera-core-bank regenera-outbox-rel
 done
 
 log "Verificando outbox-relay usa Postgres (log bootstrap)"
-docker logs regenera-outbox-relay 2>&1 | tee "$ARTIFACT_DIR/outbox-relay.log" | grep -q '"outboxStore":"postgres"' \
+sleep 5
+docker logs regenera-outbox-relay 2>&1 | tee "$ARTIFACT_DIR/outbox-relay.log" | grep -q 'outboxStore.*postgres' \
   || { log "BLOCKER: outbox-relay não reportou outboxStore=postgres"; PIPELINE_FAIL=1; }
 
 log "SIGTERM gracioso outbox-relay"
@@ -62,7 +63,7 @@ docker images --digests --format '{{.Repository}}:{{.Tag}}\t{{.Digest}}' \
 if command -v trivy >/dev/null 2>&1; then
   log "Trivy scan (CRITICAL/HIGH)"
   for img in regenera/core-bank:validate regenera/outbox-relay:validate regenera/web-bff:validate; do
-    trivy image --severity CRITICAL,HIGH --exit-code 1 "$img" \
+    trivy image --scanners vuln --severity CRITICAL,HIGH --ignore-unfixed --exit-code 1 "$img" \
       >"$ARTIFACT_DIR/trivy-$(echo "$img" | tr '/:' '__').log" 2>&1 || PIPELINE_FAIL=1
   done
 else

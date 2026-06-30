@@ -1,5 +1,5 @@
 === GATE: typecheck-core-bank ===
-timestamp_utc: 2026-06-30T21:53:46Z
+timestamp_utc: 2026-06-30T22:05:52Z
 cwd: /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/domains/core-bank
 command: npx tsc --noEmit -p tsconfig.json
 node: v26.0.0

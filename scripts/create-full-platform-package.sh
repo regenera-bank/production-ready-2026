@@ -64,5 +64,9 @@ if [[ $BLOCKERS -ne 0 ]]; then
   exit 1
 fi
 
+log "Inventário do pacote"
+bash "$ROOT/scripts/inspect-package-inventory.sh" "$ROOT/$ZIP_NAME" \
+  || { log "package inventory FAIL"; exit 1; }
+
 log "package validation PASS — $(du -h "$ROOT/$ZIP_NAME" | awk '{print $1}')"
 exit 0

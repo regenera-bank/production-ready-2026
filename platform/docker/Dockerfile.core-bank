@@ -14,6 +14,7 @@ COPY domains/core-bank/package.json domains/core-bank/
 RUN pnpm install --frozen-lockfile --filter @regenera/core-bank
 COPY domains/core-bank domains/core-bank
 RUN pnpm --filter @regenera/core-bank build
+RUN pnpm deploy --filter @regenera/core-bank --prod /prod/core-bank
 
 FROM base AS runner
 RUN apk add --no-cache wget
@@ -21,9 +22,10 @@ RUN addgroup -g 1001 -S regenera && adduser -u 1001 -S regenera -G regenera
 WORKDIR /app
 ENV NODE_ENV=production
 ENV PORT=3100
-COPY --from=builder --chown=regenera:regenera /app/domains/core-bank/package.json ./
-COPY --from=builder --chown=regenera:regenera /app/domains/core-bank/dist ./dist
-COPY --from=builder --chown=regenera:regenera /app/domains/core-bank/node_modules ./node_modules
+COPY --from=builder --chown=regenera:regenera /prod/core-bank/package.json ./
+COPY --from=builder --chown=regenera:regenera /prod/core-bank/dist ./dist
+COPY --from=builder --chown=regenera:regenera /prod/core-bank/node_modules ./node_modules
+COPY --from=builder --chown=regenera:regenera /app/domains/core-bank/db ./db
 USER regenera
 EXPOSE 3100
 HEALTHCHECK --interval=15s --timeout=5s --start-period=20s --retries=3 \

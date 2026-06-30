@@ -1,5 +1,5 @@
 === GATE: migrations ===
-timestamp_utc: 2026-06-30T21:52:59Z
+timestamp_utc: 2026-06-30T22:05:08Z
 cwd: /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/domains/core-bank
 command: npx ts-node scripts/run-migrations-ci.ts
 node: v26.0.0

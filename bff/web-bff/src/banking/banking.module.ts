@@ -8,7 +8,7 @@ import { BankingService } from './banking.service';
 @Module({
   imports: [
     forwardRef(() => AuthModule),
-    CoreBankModule,
+    CoreBankModule.forRoot(),
     forwardRef(() => OnboardingModule),
   ],
   controllers: [BankingController],

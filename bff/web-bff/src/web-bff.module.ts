@@ -11,7 +11,7 @@ import { HealthController } from './health.controller';
 @Module({
   imports: [
     PersistenceModule,
-    CoreBankModule,
+    CoreBankModule.forRoot(),
     AuthModule,
     OnboardingModule,
     AddressModule,

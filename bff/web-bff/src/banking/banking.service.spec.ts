@@ -82,7 +82,7 @@ describe('BankingService (WEB-001)', () => {
     process.env.CORE_BANK_STORAGE = 'memory';
     delete process.env.DATABASE_URL;
     const moduleRef: TestingModule = await Test.createTestingModule({
-      imports: [RiskKycModule, CoreBankModule],
+      imports: [RiskKycModule, CoreBankModule.forRoot('memory')],
       providers: [
         HomologStoreService,
         AuthService,

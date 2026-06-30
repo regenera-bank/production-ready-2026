@@ -1,5 +1,5 @@
 === GATE: install-core-bank ===
-timestamp_utc: 2026-06-30T22:05:04Z
+timestamp_utc: 2026-06-30T23:29:11Z
 cwd: /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/domains/core-bank
 command: npm install
 node: v26.0.0
@@ -9,7 +9,7 @@ REDIS_URL: redis://localhost:6379
 CI_RUN_ID: 2 CI_CLEAN_DB: 0
 --- stdout/stderr ---
 
-up to date, audited 564 packages in 586ms
+up to date, audited 564 packages in 1s
 
 100 packages are looking for funding
   run `npm fund` for details

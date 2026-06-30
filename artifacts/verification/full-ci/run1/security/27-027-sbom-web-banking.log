@@ -1,5 +1,5 @@
 === GATE: sbom-web-banking ===
-timestamp_utc: 2026-06-30T22:04:12Z
+timestamp_utc: 2026-06-30T23:28:09Z
 cwd: /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/apps/web-banking
 command: bash /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/scripts/generate-sbom.sh /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/artifacts/verification/full-ci/run1/security/sbom-web-banking.json
 node: v26.0.0

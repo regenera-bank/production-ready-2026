@@ -1,5 +1,5 @@
 === GATE: integration-test-postgres ===
-timestamp_utc: 2026-06-30T22:06:03Z
+timestamp_utc: 2026-06-30T23:30:33Z
 cwd: /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/domains/core-bank
 command: env CORE_BANK_STORAGE=postgres npx jest --runInBand --forceExit src/integration/postgres.integration.spec.ts
 node: v26.0.0
@@ -11,24 +11,24 @@ CI_RUN_ID: 2 CI_CLEAN_DB: 0
 PASS src/integration/postgres.integration.spec.ts
   Postgres adapter integration
     ✓ applies V001 and V002 on empty database (14 ms)
-    ✓ safe reapply skips already applied migrations (12 ms)
+    ✓ safe reapply skips already applied migrations (13 ms)
     ✓ creates ledger accounts in Postgres (12 ms)
-    ✓ posts balanced journal entry via DRAFT → postings → POSTED (16 ms)
-    ✓ rolls back uncommitted transaction — no durable writes (10 ms)
+    ✓ posts balanced journal entry via DRAFT → postings → POSTED (15 ms)
+    ✓ rolls back uncommitted transaction — no durable writes (9 ms)
     ✓ replays idempotent payment create with same key (19 ms)
-    ✓ handles concurrent idempotency begins — single winner (15 ms)
+    ✓ handles concurrent idempotency begins — single winner (14 ms)
     ✓ rejects payment with insufficient available balance (11 ms)
-    ✓ persists outbox events and marks published (10 ms)
+    ✓ persists outbox events and marks published (9 ms)
     ✓ runs reconciliation flow for UNKNOWN payment (20 ms)
     ✓ simulates restart — data survives pool recycle (16 ms)
-    ✓ rejects imbalanced journal at DB trigger (constraint violation) (16 ms)
-    ✓ enforces referential integrity on ledger postings (7 ms)
+    ✓ rejects imbalanced journal at DB trigger (constraint violation) (13 ms)
+    ✓ enforces referential integrity on ledger postings (8 ms)
     ✓ manifest reports postgres persistence (8 ms)
 
 Test Suites: 1 passed, 1 total
 Tests:       14 passed, 14 total
 Snapshots:   0 total
-Time:        0.859 s, estimated 2 s
+Time:        0.866 s, estimated 2 s
 Ran all test suites matching /src\/integration\/postgres.integration.spec.ts/i.
 Force exiting Jest: Have you considered using `--detectOpenHandles` to detect async operations that kept running after all tests finished?
 --- end ---

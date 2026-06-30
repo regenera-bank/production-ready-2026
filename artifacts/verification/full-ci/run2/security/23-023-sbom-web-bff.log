@@ -1,5 +1,5 @@
 === GATE: sbom-web-bff ===
-timestamp_utc: 2026-06-30T22:05:44Z
+timestamp_utc: 2026-06-30T23:29:54Z
 cwd: /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/bff/web-bff
 command: bash /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/scripts/generate-sbom.sh /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/artifacts/verification/full-ci/run2/security/sbom-web-bff.json
 node: v26.0.0

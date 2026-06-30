@@ -1,5 +1,5 @@
 === GATE: install-web-banking ===
-timestamp_utc: 2026-06-30T22:03:30Z
+timestamp_utc: 2026-06-30T23:26:45Z
 cwd: /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/apps/web-banking
 command: npm install
 node: v26.0.0
@@ -9,7 +9,7 @@ REDIS_URL: redis://localhost:6379
 CI_RUN_ID: 1 CI_CLEAN_DB: 1
 --- stdout/stderr ---
 
-up to date, audited 334 packages in 522ms
+up to date, audited 334 packages in 846ms
 
 50 packages are looking for funding
   run `npm fund` for details

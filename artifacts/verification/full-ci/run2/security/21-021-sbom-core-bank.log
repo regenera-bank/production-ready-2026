@@ -1,5 +1,5 @@
 === GATE: sbom-core-bank ===
-timestamp_utc: 2026-06-30T21:37:50Z
+timestamp_utc: 2026-06-30T21:53:36Z
 cwd: /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/domains/core-bank
 command: bash /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/scripts/generate-sbom.sh /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/artifacts/verification/full-ci/run2/security/sbom-core-bank.json
 node: v26.0.0

@@ -40,6 +40,12 @@ if ! require_cmd java || ! java -version >/dev/null 2>&1; then
   exit 2
 fi
 
+ANDROID_SDK="${ANDROID_HOME:-/opt/homebrew/share/android-commandlinetools}"
+if [[ ! -f "$ROOT_DIR/local.properties" && -d "$ANDROID_SDK" ]]; then
+  printf 'sdk.dir=%s\n' "$ANDROID_SDK" >"$ROOT_DIR/local.properties"
+  log "Wrote local.properties from ANDROID_HOME=$ANDROID_SDK"
+fi
+
 GRADLE_CMD=()
 if [[ -x "$ROOT_DIR/gradlew" ]]; then
   GRADLE_CMD=("$ROOT_DIR/gradlew")

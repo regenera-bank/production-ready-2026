@@ -1,5 +1,5 @@
 === GATE: e2e-browsers ===
-timestamp_utc: 2026-06-30T21:38:33Z
+timestamp_utc: 2026-06-30T21:54:19Z
 cwd: /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/quality/e2e-web
 command: npx playwright install chromium
 node: v26.0.0

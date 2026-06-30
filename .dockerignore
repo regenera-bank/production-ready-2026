@@ -1,0 +1,30 @@
+# Docker build context — monorepo root (platform/docker/*)
+**/node_modules
+**/.git
+**/.env
+**/.env.*
+!**/.env.example
+**/dist
+**/coverage
+**/.turbo
+**/.cache
+**/evidence
+**/Versão atualizada Grok
+**/00-governance
+**/03-channels
+**/05-core-banking
+**/06-risk-control
+**/07-integrations
+**/09-data-platform
+**/10-platform
+**/11-security
+**/12-regulatory
+**/13-quality
+**/15-tools
+**/*.md
+!platform/disaster-recovery/*.md
+**/build
+**/.gradle
+apps/android/local.properties
+REGENERA-BANK-FULL-PLATFORM-CANDIDATE.zip
+artifacts/

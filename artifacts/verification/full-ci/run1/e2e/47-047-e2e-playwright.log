@@ -1,5 +1,5 @@
 === GATE: e2e-playwright ===
-timestamp_utc: 2026-06-30T21:37:05Z
+timestamp_utc: 2026-06-30T21:52:45Z
 cwd: /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/quality/e2e-web
 command: env CI=1 npm run test:ci
 node: v26.0.0
@@ -55,7 +55,7 @@ Artefatos compilados removidos de dist/ e src/
 Running 4 tests using 1 worker
 
 
-(node:75776) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(node:96191) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
 (Use `node --trace-warnings ...` to show where the warning was created)
 
 [1/4] tests/login.spec.ts:5:3 › BFF auth — login › cadastra e autentica via POST /auth/session

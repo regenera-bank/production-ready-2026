@@ -1,5 +1,5 @@
 === GATE: install-web-banking ===
-timestamp_utc: 2026-06-30T21:35:43Z
+timestamp_utc: 2026-06-30T21:51:13Z
 cwd: /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/apps/web-banking
 command: npm install
 node: v26.0.0
@@ -10,7 +10,7 @@ CI_RUN_ID: 1 CI_CLEAN_DB: 1
 --- stdout/stderr ---
 npm warn deprecated @simplewebauthn/types@11.0.0: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
 
-added 127 packages, and audited 334 packages in 761ms
+added 4 packages, changed 19 packages, and audited 334 packages in 1s
 
 50 packages are looking for funding
   run `npm fund` for details

@@ -1,5 +1,5 @@
 === GATE: security-test-core-bank ===
-timestamp_utc: 2026-06-30T21:38:21Z
+timestamp_utc: 2026-06-30T21:54:07Z
 cwd: /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/domains/core-bank
 command: npx jest --runInBand --testPathPattern=float-guard|money.value-object|ledger-invariants
 node: v26.0.0
@@ -14,7 +14,7 @@ PASS src/load/float-guard.spec.ts
 Test Suites: 2 passed, 2 total
 Tests:       17 passed, 17 total
 Snapshots:   0 total
-Time:        0.563 s, estimated 1 s
+Time:        0.6 s, estimated 1 s
 Ran all test suites matching /float-guard|money.value-object|ledger-invariants/i.
 --- end ---
 exit_code: 0

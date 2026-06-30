@@ -1,5 +1,5 @@
 === GATE: e2e-install ===
-timestamp_utc: 2026-06-30T21:38:32Z
+timestamp_utc: 2026-06-30T21:54:19Z
 cwd: /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/quality/e2e-web
 command: npm install
 node: v26.0.0
@@ -9,7 +9,7 @@ REDIS_URL: redis://localhost:6379
 CI_RUN_ID: 2 CI_CLEAN_DB: 0
 --- stdout/stderr ---
 
-changed 3 packages, and audited 7 packages in 96ms
+up to date, audited 7 packages in 105ms
 
 found 0 vulnerabilities
 --- end ---

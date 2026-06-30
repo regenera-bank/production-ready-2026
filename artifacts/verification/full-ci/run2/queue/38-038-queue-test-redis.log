@@ -1,5 +1,5 @@
 === GATE: queue-test-redis ===
-timestamp_utc: 2026-06-30T21:38:14Z
+timestamp_utc: 2026-06-30T21:54:00Z
 cwd: /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/workers/outbox-relay
 command: npm run test:redis
 node: v26.0.0
@@ -13,62 +13,62 @@ CI_RUN_ID: 2 CI_CLEAN_DB: 0
 > jest --runInBand --forceExit --testPathPattern=outbox-relay.integration.spec.ts
 
   console.log
-    {"level":"info","message":"outbox worker iniciado","correlationId":"worker-bootstrap","ts":"2026-06-30T21:38:15.891Z"}
+    {"level":"info","message":"outbox worker iniciado","correlationId":"worker-bootstrap","ts":"2026-06-30T21:54:01.997Z"}
 
       at logInfo (logger.ts:10:11)
 
   console.log
-    {"level":"info","message":"outbox job enfileirado","correlationId":"aa81957a-e990-47d3-829a-8b7ac49b92fe","outboxEventId":"dfcef0c6-8db0-4aa4-bd15-906c42db75e6","jobId":"dfcef0c6-8db0-4aa4-bd15-906c42db75e6","ts":"2026-06-30T21:38:15.905Z"}
+    {"level":"info","message":"outbox job enfileirado","correlationId":"8fb9b730-98e9-40a4-b30a-46ff71a446e9","outboxEventId":"7dc92827-433f-4c51-8f18-166a673a4ae5","jobId":"7dc92827-433f-4c51-8f18-166a673a4ae5","ts":"2026-06-30T21:54:02.013Z"}
 
       at logInfo (logger.ts:10:11)
 
   console.log
-    {"level":"info","message":"processando outbox job","correlationId":"aa81957a-e990-47d3-829a-8b7ac49b92fe","outboxEventId":"dfcef0c6-8db0-4aa4-bd15-906c42db75e6","jobId":"dfcef0c6-8db0-4aa4-bd15-906c42db75e6","attempt":1,"ts":"2026-06-30T21:38:15.907Z"}
+    {"level":"info","message":"processando outbox job","correlationId":"8fb9b730-98e9-40a4-b30a-46ff71a446e9","outboxEventId":"7dc92827-433f-4c51-8f18-166a673a4ae5","jobId":"7dc92827-433f-4c51-8f18-166a673a4ae5","attempt":1,"ts":"2026-06-30T21:54:02.014Z"}
 
       at logInfo (logger.ts:10:11)
 
   console.log
-    {"level":"info","message":"outbox event marcado como publicado","correlationId":"aa81957a-e990-47d3-829a-8b7ac49b92fe","outboxEventId":"dfcef0c6-8db0-4aa4-bd15-906c42db75e6","jobId":"dfcef0c6-8db0-4aa4-bd15-906c42db75e6","attempt":1,"ts":"2026-06-30T21:38:15.908Z"}
+    {"level":"info","message":"outbox event marcado como publicado","correlationId":"8fb9b730-98e9-40a4-b30a-46ff71a446e9","outboxEventId":"7dc92827-433f-4c51-8f18-166a673a4ae5","jobId":"7dc92827-433f-4c51-8f18-166a673a4ae5","attempt":1,"ts":"2026-06-30T21:54:02.015Z"}
 
       at logInfo (logger.ts:10:11)
 
   console.log
-    {"level":"info","message":"outbox worker encerrado","correlationId":"worker-shutdown","ts":"2026-06-30T21:38:16.109Z"}
+    {"level":"info","message":"outbox worker encerrado","correlationId":"worker-shutdown","ts":"2026-06-30T21:54:02.220Z"}
 
       at logInfo (logger.ts:10:11)
 
   console.log
-    {"level":"info","message":"outbox worker iniciado","correlationId":"worker-bootstrap","ts":"2026-06-30T21:38:16.113Z"}
+    {"level":"info","message":"outbox worker iniciado","correlationId":"worker-bootstrap","ts":"2026-06-30T21:54:02.229Z"}
 
       at logInfo (logger.ts:10:11)
 
   console.log
-    {"level":"info","message":"outbox job enfileirado","correlationId":"03eb31d1-0fdd-4d8d-938f-1bae4eaad5c1","outboxEventId":"7b57698e-4d17-44c6-ad43-3bdff9925ebd","jobId":"7b57698e-4d17-44c6-ad43-3bdff9925ebd","ts":"2026-06-30T21:38:16.116Z"}
+    {"level":"info","message":"outbox job enfileirado","correlationId":"3afc2734-702f-4f34-addd-15bfe114fac1","outboxEventId":"cc095096-b600-46e5-8f91-f17a7d2d14ab","jobId":"cc095096-b600-46e5-8f91-f17a7d2d14ab","ts":"2026-06-30T21:54:02.240Z"}
 
       at logInfo (logger.ts:10:11)
 
   console.log
-    {"level":"info","message":"processando outbox job","correlationId":"03eb31d1-0fdd-4d8d-938f-1bae4eaad5c1","outboxEventId":"7b57698e-4d17-44c6-ad43-3bdff9925ebd","jobId":"7b57698e-4d17-44c6-ad43-3bdff9925ebd","attempt":1,"ts":"2026-06-30T21:38:16.118Z"}
+    {"level":"info","message":"processando outbox job","correlationId":"3afc2734-702f-4f34-addd-15bfe114fac1","outboxEventId":"cc095096-b600-46e5-8f91-f17a7d2d14ab","jobId":"cc095096-b600-46e5-8f91-f17a7d2d14ab","attempt":1,"ts":"2026-06-30T21:54:02.241Z"}
 
       at logInfo (logger.ts:10:11)
 
   console.log
-    {"level":"info","message":"outbox event marcado como publicado","correlationId":"03eb31d1-0fdd-4d8d-938f-1bae4eaad5c1","outboxEventId":"7b57698e-4d17-44c6-ad43-3bdff9925ebd","jobId":"7b57698e-4d17-44c6-ad43-3bdff9925ebd","attempt":1,"ts":"2026-06-30T21:38:16.119Z"}
+    {"level":"info","message":"outbox event marcado como publicado","correlationId":"3afc2734-702f-4f34-addd-15bfe114fac1","outboxEventId":"cc095096-b600-46e5-8f91-f17a7d2d14ab","jobId":"cc095096-b600-46e5-8f91-f17a7d2d14ab","attempt":1,"ts":"2026-06-30T21:54:02.241Z"}
 
       at logInfo (logger.ts:10:11)
 
   console.log
-    {"level":"info","message":"outbox job enfileirado","correlationId":"03eb31d1-0fdd-4d8d-938f-1bae4eaad5c1","outboxEventId":"7b57698e-4d17-44c6-ad43-3bdff9925ebd","jobId":"7b57698e-4d17-44c6-ad43-3bdff9925ebd","ts":"2026-06-30T21:38:16.320Z"}
+    {"level":"info","message":"outbox job enfileirado","correlationId":"3afc2734-702f-4f34-addd-15bfe114fac1","outboxEventId":"cc095096-b600-46e5-8f91-f17a7d2d14ab","jobId":"cc095096-b600-46e5-8f91-f17a7d2d14ab","ts":"2026-06-30T21:54:02.446Z"}
 
       at logInfo (logger.ts:10:11)
 
   console.log
-    {"level":"info","message":"processando outbox job","correlationId":"03eb31d1-0fdd-4d8d-938f-1bae4eaad5c1","outboxEventId":"7b57698e-4d17-44c6-ad43-3bdff9925ebd","jobId":"7b57698e-4d17-44c6-ad43-3bdff9925ebd","attempt":1,"ts":"2026-06-30T21:38:16.321Z"}
+    {"level":"info","message":"processando outbox job","correlationId":"3afc2734-702f-4f34-addd-15bfe114fac1","outboxEventId":"cc095096-b600-46e5-8f91-f17a7d2d14ab","jobId":"cc095096-b600-46e5-8f91-f17a7d2d14ab","attempt":1,"ts":"2026-06-30T21:54:02.448Z"}
 
       at logInfo (logger.ts:10:11)
 
   console.warn
-    {"level":"warn","message":"evento já publicado — skip idempotente","correlationId":"03eb31d1-0fdd-4d8d-938f-1bae4eaad5c1","outboxEventId":"7b57698e-4d17-44c6-ad43-3bdff9925ebd","jobId":"7b57698e-4d17-44c6-ad43-3bdff9925ebd","attempt":1,"ts":"2026-06-30T21:38:16.322Z"}
+    {"level":"warn","message":"evento já publicado — skip idempotente","correlationId":"3afc2734-702f-4f34-addd-15bfe114fac1","outboxEventId":"cc095096-b600-46e5-8f91-f17a7d2d14ab","jobId":"cc095096-b600-46e5-8f91-f17a7d2d14ab","attempt":1,"ts":"2026-06-30T21:54:02.450Z"}
 
       19 |
       20 | export function logWarn(message: string, context: LogContext): void {
@@ -82,17 +82,17 @@ CI_RUN_ID: 2 CI_CLEAN_DB: 0
       at OutboxRelayWorker.processJob (outbox-worker.ts:116:14)
 
   console.log
-    {"level":"info","message":"outbox worker encerrado","correlationId":"worker-shutdown","ts":"2026-06-30T21:38:18.323Z"}
+    {"level":"info","message":"outbox worker encerrado","correlationId":"worker-shutdown","ts":"2026-06-30T21:54:04.452Z"}
 
       at logInfo (logger.ts:10:11)
 
   console.log
-    {"level":"info","message":"outbox worker iniciado","correlationId":"worker-bootstrap","ts":"2026-06-30T21:38:18.328Z"}
+    {"level":"info","message":"outbox worker iniciado","correlationId":"worker-bootstrap","ts":"2026-06-30T21:54:04.458Z"}
 
       at logInfo (logger.ts:10:11)
 
   console.error
-    {"level":"error","message":"outbox job falhou","error":{"name":"UnrecoverableError","message":"outboxEventId inválido (UUID esperado)","stack":"UnrecoverableError: outboxEventId inválido (UUID esperado)\n    at OutboxRelayWorker.processJob (/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/workers/outbox-relay/src/outbox-worker.ts:94:15)\n    at Worker.OutboxRelayWorker.worker.bullmq_1.Worker.connection [as processFn] (/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/workers/outbox-relay/src/outbox-worker.ts:60:27)\n    at Worker.callProcessJob (/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/workers/outbox-relay/node_modules/bullmq/dist/cjs/classes/worker.js:176:21)\n    at /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/workers/outbox-relay/node_modules/bullmq/dist/cjs/classes/worker.js:589:43\n    at trace (/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/workers/outbox-relay/node_modules/bullmq/dist/cjs/utils/index.js:282:16)\n    at Worker.trace (/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/workers/outbox-relay/node_modules/bullmq/dist/cjs/classes/queue-base.js:159:34)\n    at Worker.processJob (/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/workers/outbox-relay/node_modules/bullmq/dist/cjs/classes/worker.js:572:21)\n    at Worker.mainLoop (/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/workers/outbox-relay/node_modules/bullmq/dist/cjs/classes/worker.js:329:41)\n    at processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at Worker.run (/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/workers/outbox-relay/node_modules/bullmq/dist/cjs/classes/worker.js:262:13)"},"correlationId":"c5304fc1-297e-4514-84d6-c92a9b2b2ee4","outboxEventId":"not-a-uuid","jobId":"invalid-f10627cc-58d4-4438-afa9-ef4641f1c9d1","attempt":1,"ts":"2026-06-30T21:38:18.343Z"}
+    {"level":"error","message":"outbox job falhou","error":{"name":"UnrecoverableError","message":"outboxEventId inválido (UUID esperado)","stack":"UnrecoverableError: outboxEventId inválido (UUID esperado)\n    at OutboxRelayWorker.processJob (/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/workers/outbox-relay/src/outbox-worker.ts:94:15)\n    at Worker.OutboxRelayWorker.worker.bullmq_1.Worker.connection [as processFn] (/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/workers/outbox-relay/src/outbox-worker.ts:60:27)\n    at Worker.callProcessJob (/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/workers/outbox-relay/node_modules/bullmq/dist/cjs/classes/worker.js:176:21)\n    at /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/workers/outbox-relay/node_modules/bullmq/dist/cjs/classes/worker.js:589:43\n    at trace (/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/workers/outbox-relay/node_modules/bullmq/dist/cjs/utils/index.js:282:16)\n    at Worker.trace (/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/workers/outbox-relay/node_modules/bullmq/dist/cjs/classes/queue-base.js:159:34)\n    at Worker.processJob (/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/workers/outbox-relay/node_modules/bullmq/dist/cjs/classes/worker.js:572:21)\n    at Worker.mainLoop (/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/workers/outbox-relay/node_modules/bullmq/dist/cjs/classes/worker.js:329:41)\n    at processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at Worker.run (/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/workers/outbox-relay/node_modules/bullmq/dist/cjs/classes/worker.js:262:13)"},"correlationId":"5529633a-b6cb-4135-a1bd-ef9317c11619","outboxEventId":"not-a-uuid","jobId":"invalid-ec8071e4-66fe-4e24-ba31-e9941286e31a","attempt":1,"ts":"2026-06-30T21:54:04.481Z"}
 
       39 |       : error;
       40 |
@@ -112,7 +112,7 @@ CI_RUN_ID: 2 CI_CLEAN_DB: 0
       at ../node_modules/bullmq/dist/cjs/classes/worker.js:598:32
 
   console.warn
-    {"level":"warn","message":"falha permanente enviada para DLQ","correlationId":"c5304fc1-297e-4514-84d6-c92a9b2b2ee4","outboxEventId":"not-a-uuid","jobId":"invalid-f10627cc-58d4-4438-afa9-ef4641f1c9d1","attempt":1,"ts":"2026-06-30T21:38:18.354Z"}
+    {"level":"warn","message":"falha permanente enviada para DLQ","correlationId":"5529633a-b6cb-4135-a1bd-ef9317c11619","outboxEventId":"not-a-uuid","jobId":"invalid-ec8071e4-66fe-4e24-ba31-e9941286e31a","attempt":1,"ts":"2026-06-30T21:54:04.490Z"}
 
       19 |
       20 | export function logWarn(message: string, context: LogContext): void {
@@ -132,7 +132,7 @@ CI_RUN_ID: 2 CI_CLEAN_DB: 0
       at ../node_modules/bullmq/dist/cjs/classes/worker.js:598:32
 
   console.error
-    {"level":"error","message":"job movido para dead-letter queue","correlationId":"c5304fc1-297e-4514-84d6-c92a9b2b2ee4","outboxEventId":"not-a-uuid","jobId":"invalid-f10627cc-58d4-4438-afa9-ef4641f1c9d1","attempt":1,"ts":"2026-06-30T21:38:18.356Z"}
+    {"level":"error","message":"job movido para dead-letter queue","correlationId":"5529633a-b6cb-4135-a1bd-ef9317c11619","outboxEventId":"not-a-uuid","jobId":"invalid-ec8071e4-66fe-4e24-ba31-e9941286e31a","attempt":1,"ts":"2026-06-30T21:54:04.491Z"}
 
       39 |       : error;
       40 |
@@ -146,72 +146,72 @@ CI_RUN_ID: 2 CI_CLEAN_DB: 0
       at OutboxRelayWorker.handleFailedJob (outbox-worker.ts:211:13)
 
   console.log
-    {"level":"info","message":"outbox worker encerrado","correlationId":"worker-shutdown","ts":"2026-06-30T21:38:21.341Z"}
+    {"level":"info","message":"outbox worker encerrado","correlationId":"worker-shutdown","ts":"2026-06-30T21:54:07.476Z"}
 
       at logInfo (logger.ts:10:11)
 
   console.log
-    {"level":"info","message":"outbox worker iniciado","correlationId":"worker-bootstrap","ts":"2026-06-30T21:38:21.347Z"}
+    {"level":"info","message":"outbox worker iniciado","correlationId":"worker-bootstrap","ts":"2026-06-30T21:54:07.482Z"}
 
       at logInfo (logger.ts:10:11)
 
   console.log
-    {"level":"info","message":"outbox worker encerrado","correlationId":"worker-shutdown","ts":"2026-06-30T21:38:21.356Z"}
+    {"level":"info","message":"outbox worker encerrado","correlationId":"worker-shutdown","ts":"2026-06-30T21:54:07.495Z"}
 
       at logInfo (logger.ts:10:11)
 
   console.log
-    {"level":"info","message":"outbox worker iniciado","correlationId":"worker-bootstrap","ts":"2026-06-30T21:38:21.360Z"}
+    {"level":"info","message":"outbox worker iniciado","correlationId":"worker-bootstrap","ts":"2026-06-30T21:54:07.500Z"}
 
       at logInfo (logger.ts:10:11)
 
   console.log
-    {"level":"info","message":"outbox worker encerrado","correlationId":"worker-shutdown","ts":"2026-06-30T21:38:21.361Z"}
+    {"level":"info","message":"outbox worker encerrado","correlationId":"worker-shutdown","ts":"2026-06-30T21:54:07.501Z"}
 
       at logInfo (logger.ts:10:11)
 
   console.log
-    {"level":"info","message":"outbox worker iniciado","correlationId":"worker-bootstrap","ts":"2026-06-30T21:38:21.419Z"}
+    {"level":"info","message":"outbox worker iniciado","correlationId":"worker-bootstrap","ts":"2026-06-30T21:54:07.556Z"}
 
       at logInfo (logger.ts:10:11)
 
   console.log
-    {"level":"info","message":"outbox job enfileirado","correlationId":"f577dbf6-6143-4f43-96ed-93416590372d","outboxEventId":"6c6ed205-bb6b-4c62-93d1-fe33a7691b5c","jobId":"6c6ed205-bb6b-4c62-93d1-fe33a7691b5c","ts":"2026-06-30T21:38:21.424Z"}
+    {"level":"info","message":"outbox job enfileirado","correlationId":"23c0f90a-8c4b-4cda-834e-bdb4ba7762ff","outboxEventId":"e68b1937-f71d-4c65-a71b-d8e5b7d4924f","jobId":"e68b1937-f71d-4c65-a71b-d8e5b7d4924f","ts":"2026-06-30T21:54:07.561Z"}
 
       at logInfo (logger.ts:10:11)
 
   console.log
-    {"level":"info","message":"processando outbox job","correlationId":"f577dbf6-6143-4f43-96ed-93416590372d","outboxEventId":"6c6ed205-bb6b-4c62-93d1-fe33a7691b5c","jobId":"6c6ed205-bb6b-4c62-93d1-fe33a7691b5c","attempt":1,"ts":"2026-06-30T21:38:21.424Z"}
+    {"level":"info","message":"processando outbox job","correlationId":"23c0f90a-8c4b-4cda-834e-bdb4ba7762ff","outboxEventId":"e68b1937-f71d-4c65-a71b-d8e5b7d4924f","jobId":"e68b1937-f71d-4c65-a71b-d8e5b7d4924f","attempt":1,"ts":"2026-06-30T21:54:07.561Z"}
 
       at logInfo (logger.ts:10:11)
 
   console.log
-    {"level":"info","message":"outbox event marcado como publicado","correlationId":"f577dbf6-6143-4f43-96ed-93416590372d","outboxEventId":"6c6ed205-bb6b-4c62-93d1-fe33a7691b5c","jobId":"6c6ed205-bb6b-4c62-93d1-fe33a7691b5c","attempt":1,"ts":"2026-06-30T21:38:21.424Z"}
+    {"level":"info","message":"outbox event marcado como publicado","correlationId":"23c0f90a-8c4b-4cda-834e-bdb4ba7762ff","outboxEventId":"e68b1937-f71d-4c65-a71b-d8e5b7d4924f","jobId":"e68b1937-f71d-4c65-a71b-d8e5b7d4924f","attempt":1,"ts":"2026-06-30T21:54:07.562Z"}
 
       at logInfo (logger.ts:10:11)
 
   console.log
-    {"level":"info","message":"outbox worker encerrado","correlationId":"worker-shutdown","ts":"2026-06-30T21:38:21.625Z"}
+    {"level":"info","message":"outbox worker encerrado","correlationId":"worker-shutdown","ts":"2026-06-30T21:54:07.765Z"}
 
       at logInfo (logger.ts:10:11)
 
   console.log
-    {"level":"info","message":"outbox worker encerrado","correlationId":"worker-shutdown","ts":"2026-06-30T21:38:21.626Z"}
+    {"level":"info","message":"outbox worker encerrado","correlationId":"worker-shutdown","ts":"2026-06-30T21:54:07.766Z"}
 
       at logInfo (logger.ts:10:11)
 
-PASS src/outbox-relay.integration.spec.ts (6.289 s)
+PASS src/outbox-relay.integration.spec.ts (6.309 s)
   Outbox relay (BullMQ + Redis integration)
-    ✓ processa job e marca published_at no outbox (224 ms)
-    ✓ job idempotente — mesmo outboxEventId não duplica efeito (2215 ms)
-    ✓ rejeita payload inválido sem marcar published_at (3018 ms)
-    ✓ health check reporta redis e worker ok (13 ms)
-    ✓ integra com OutboxService do core-bank (269 ms)
+    ✓ processa job e marca published_at no outbox (232 ms)
+    ✓ job idempotente — mesmo outboxEventId não duplica efeito (2229 ms)
+    ✓ rejeita payload inválido sem marcar published_at (3024 ms)
+    ✓ health check reporta redis e worker ok (17 ms)
+    ✓ integra com OutboxService do core-bank (274 ms)
 
 Test Suites: 1 passed, 1 total
 Tests:       5 passed, 5 total
 Snapshots:   0 total
-Time:        6.398 s, estimated 7 s
+Time:        6.42 s, estimated 7 s
 Ran all test suites matching /outbox-relay.integration.spec.ts/i.
 Force exiting Jest: Have you considered using `--detectOpenHandles` to detect async operations that kept running after all tests finished?
 --- end ---

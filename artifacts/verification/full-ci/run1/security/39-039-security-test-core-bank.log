@@ -1,5 +1,5 @@
 === GATE: security-test-core-bank ===
-timestamp_utc: 2026-06-30T21:36:52Z
+timestamp_utc: 2026-06-30T21:52:33Z
 cwd: /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/domains/core-bank
 command: npx jest --runInBand --testPathPattern=float-guard|money.value-object|ledger-invariants
 node: v26.0.0

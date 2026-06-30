@@ -2,6 +2,7 @@ package com.regenera.bank.core.network
 
 import io.mockk.every
 import io.mockk.mockk
+import kotlinx.coroutines.test.runTest
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import org.junit.After
@@ -25,7 +26,7 @@ class MobileBffClientFactoryTest {
     }
 
     @Test
-    fun healthEndpointDeserializesMobileBffResponse() {
+    fun healthEndpointDeserializesMobileBffResponse() = runTest {
         server.enqueue(
             MockResponse()
                 .setBody("""{"status":"ok","layer":"mobile-bff","channel":"android"}""")
@@ -44,7 +45,7 @@ class MobileBffClientFactoryTest {
     }
 
     @Test
-    fun sessionCookieIsAttachedWhenProviderReturnsValue() {
+    fun sessionCookieIsAttachedWhenProviderReturnsValue() = runTest {
         server.enqueue(
             MockResponse()
                 .setBody("""{"status":"ok","layer":"mobile-bff"}""")

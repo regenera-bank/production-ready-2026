@@ -43,6 +43,9 @@ export async function registerUser(
       address: sampleAddress,
     },
   });
+  if (response.status() === 409) {
+    return loginUser(request, document);
+  }
   if (!response.ok()) {
     throw new Error(`register ${document} failed: ${response.status()} ${await response.text()}`);
   }

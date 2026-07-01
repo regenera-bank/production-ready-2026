@@ -1,8 +1,17 @@
+> **STATUS:** SUPERSEDED
+> **CANONICAL_SOURCE:** docs/final/23-FINAL-CLOSURE.md
+
+> **STATUS:** SUPERSEDED
+> **CANONICAL_SOURCE:** docs/final/23-FINAL-CLOSURE.md
+
+> **STATUS:** SUPERSEDED
+> **CANONICAL_SOURCE:** docs/final/23-FINAL-CLOSURE.md
+
 # 15 — Web Banking Reality Check (Dangerous Simulation Removal)
 
-**Agente:** A05 (web-banking channel)  
-**Baseline:** `/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank`  
-**Data:** 2026-06-30  
+**Agente:** A05 (web-banking channel)
+**Baseline:** `/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank`
+**Data:** 2026-06-30
 **Escopo:** `apps/web-banking/src/` (exclui protótipo HTML)
 
 ---

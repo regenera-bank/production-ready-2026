@@ -1,8 +1,17 @@
+> **STATUS:** SUPERSEDED
+> **CANONICAL_SOURCE:** docs/final/23-FINAL-CLOSURE.md
+
+> **STATUS:** SUPERSEDED
+> **CANONICAL_SOURCE:** docs/final/23-FINAL-CLOSURE.md
+
+> **STATUS:** SUPERSEDED
+> **CANONICAL_SOURCE:** docs/final/23-FINAL-CLOSURE.md
+
 # 17 — Riscos Residuais (Auditoria Independente Agent 8)
 
-**Agente:** A08 (adversarial auditor)  
-**Timestamp UTC:** 2026-06-30T20:45:00Z  
-**Baseline:** `/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank`  
+**Agente:** A08 (adversarial auditor)
+**Timestamp UTC:** 2026-06-30T20:45:00Z
+**Baseline:** `/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank`
 **Método:** Inspeção direta de código + reexecução independente de gates (sem confiar em relatórios anteriores)
 
 ---

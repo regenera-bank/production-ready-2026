@@ -1,6 +1,15 @@
+> **STATUS:** SUPERSEDED
+> **CANONICAL_SOURCE:** docs/final/23-FINAL-CLOSURE.md
+
+> **STATUS:** SUPERSEDED
+> **CANONICAL_SOURCE:** docs/final/23-FINAL-CLOSURE.md
+
+> **STATUS:** SUPERSEDED
+> **CANONICAL_SOURCE:** docs/final/23-FINAL-CLOSURE.md
+
 # 05 — Evidência de Execução de Testes
 
-**HEAD:** N/A (workspace sem git)  
+**HEAD:** N/A (workspace sem git)
 **Timestamp:** 2026-06-30 UTC
 
 ## Matriz

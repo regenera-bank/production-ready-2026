@@ -1,3 +1,12 @@
+> **STATUS:** SUPERSEDED
+> **CANONICAL_SOURCE:** docs/final/23-FINAL-CLOSURE.md
+
+> **STATUS:** SUPERSEDED
+> **CANONICAL_SOURCE:** docs/final/23-FINAL-CLOSURE.md
+
+> **STATUS:** SUPERSEDED
+> **CANONICAL_SOURCE:** docs/final/23-FINAL-CLOSURE.md
+
 # 02 — Reconstrução de Sessões
 
 **Fonte:** `~/.grok/sessions/%2FVolumes%2FPRINCIPAL%2FGrok/` + `HISTORICO-ORQUESTRACAO-10-AGENTES.md`

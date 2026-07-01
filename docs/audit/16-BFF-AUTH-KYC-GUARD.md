@@ -1,9 +1,18 @@
+> **STATUS:** SUPERSEDED
+> **CANONICAL_SOURCE:** docs/final/23-FINAL-CLOSURE.md
+
+> **STATUS:** SUPERSEDED
+> **CANONICAL_SOURCE:** docs/final/23-FINAL-CLOSURE.md
+
+> **STATUS:** SUPERSEDED
+> **CANONICAL_SOURCE:** docs/final/23-FINAL-CLOSURE.md
+
 # 16 — BFF Auth/KYC Production Guards
 
-**Agente:** A06 (BFF auth/KYC production guards)  
-**Escopo:** `bff/web-bff`  
-**Baseline:** `/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank`  
-**Data:** 2026-06-30  
+**Agente:** A06 (BFF auth/KYC production guards)
+**Escopo:** `bff/web-bff`
+**Baseline:** `/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank`
+**Data:** 2026-06-30
 **Referência cruzada:** Agentes 7/8 (CI e consolidação em `19-*`)
 
 ---
@@ -129,8 +138,8 @@ cd bff/web-bff && npm test -- --testPathPattern="auth.service|production-kyc-gua
 
 ### Health + PII
 
-- `health.controller.spec.ts` — 3 casos PASS  
-- `pii-redaction.spec.ts` — 3 casos PASS  
+- `health.controller.spec.ts` — 3 casos PASS
+- `pii-redaction.spec.ts` — 3 casos PASS
 
 **Log completo:** `artifacts/audit/bff-auth-kyc-test.log`
 

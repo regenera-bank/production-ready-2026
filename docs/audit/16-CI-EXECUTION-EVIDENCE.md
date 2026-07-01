@@ -1,11 +1,20 @@
+> **STATUS:** SUPERSEDED
+> **CANONICAL_SOURCE:** docs/final/23-FINAL-CLOSURE.md
+
+> **STATUS:** SUPERSEDED
+> **CANONICAL_SOURCE:** docs/final/23-FINAL-CLOSURE.md
+
+> **STATUS:** SUPERSEDED
+> **CANONICAL_SOURCE:** docs/final/23-FINAL-CLOSURE.md
+
 # 16 — CI Execution Evidence
 
-**Agente:** A07 (reproducible CI pipeline)  
-**Baseline:** `/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank`  
-**Script:** `scripts/run-pre-deploy-gates.sh`  
-**Migration helper:** `domains/core-bank/scripts/run-migrations-ci.ts`  
-**Data:** 2026-06-30 UTC  
-**Git HEAD:** `76237ded082352a8904e2d78b51174340c80b6c2`  
+**Agente:** A07 (reproducible CI pipeline)
+**Baseline:** `/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank`
+**Script:** `scripts/run-pre-deploy-gates.sh`
+**Migration helper:** `domains/core-bank/scripts/run-migrations-ci.ts`
+**Data:** 2026-06-30 UTC
+**Git HEAD:** `76237ded082352a8904e2d78b51174340c80b6c2`
 **Implantable manifest SHA-256:** `671b5bbe2021844e64b33b1cc7451224b2d78aae7cbdf2e6e3d577f802ec43d1`
 
 ---

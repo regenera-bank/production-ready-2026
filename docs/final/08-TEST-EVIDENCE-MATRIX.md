@@ -1,7 +1,7 @@
 # 08 — Test Evidence Matrix
 
-**HEAD:** `44efb4413583bbc7cb108892cd1f060034c2bc19`  
-**CI run:** `artifacts/verification/full-ci/run1/`  
+**HEAD:** `FINAL_COMMIT_PENDING`
+**CI run:** `artifacts/verification/full-ci/run1/`
 **Run metadata:** `started_at: 2026-06-30T21:22:51Z`, `gates_executed: 48`, `pipeline_fail: 1`
 
 ---
@@ -45,7 +45,7 @@
 
 ## Invariantes core-banking
 
-47 invariantes T01–T47 registrados em `domains/core-bank/src/integration/invariant-registry.ts`.  
+47 invariantes T01–T47 registrados em `domains/core-bank/src/integration/invariant-registry.ts`.
 Evidência histórica: `domains/core-bank/evidence/TEST-RESULTS.txt` — Gate G3/G4 SATISFEITO.
 
 ---

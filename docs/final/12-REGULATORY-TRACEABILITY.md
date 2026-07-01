@@ -1,7 +1,7 @@
 # 12 — Regulatory Traceability
 
-**HEAD:** `44efb4413583bbc7cb108892cd1f060034c2bc19`  
-**CSV canônico:** `domains/core-bank/governance/REGULATORY-TRACEABILITY.csv`  
+**HEAD:** `FINAL_COMMIT_PENDING`
+**CSV canônico:** `domains/core-bank/governance/REGULATORY-TRACEABILITY.csv`
 **Referência:** AGENTS.md §10
 
 ---

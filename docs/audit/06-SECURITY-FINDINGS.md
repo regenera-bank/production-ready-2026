@@ -1,6 +1,15 @@
+> **STATUS:** SUPERSEDED
+> **CANONICAL_SOURCE:** docs/final/23-FINAL-CLOSURE.md
+
+> **STATUS:** SUPERSEDED
+> **CANONICAL_SOURCE:** docs/final/23-FINAL-CLOSURE.md
+
+> **STATUS:** SUPERSEDED
+> **CANONICAL_SOURCE:** docs/final/23-FINAL-CLOSURE.md
+
 # 06 — Security Findings
 
-**Agente:** A09 (read-only scan)  
+**Agente:** A09 (read-only scan)
 **Valores de secrets:** NÃO registrados neste documento
 
 ## Crítico

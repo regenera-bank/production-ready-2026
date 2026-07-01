@@ -1,7 +1,7 @@
 # 11 — Deployment Readiness
 
-**HEAD:** `44efb4413583bbc7cb108892cd1f060034c2bc19`  
-**Decisão:** **NO-GO** para produção  
+**HEAD:** `FINAL_COMMIT_PENDING`
+**Decisão:** **NO-GO** para produção
 **Fonte auditoria:** `docs/audit/19-INDEPENDENT-FINAL-AUDIT.md`
 
 ---
@@ -10,7 +10,7 @@
 
 | # | Critério | Status | Evidence |
 |---|----------|--------|----------|
-| 1 | Git baseline limpo | **PASS** | HEAD `44efb441`, `hash/code-tested.log` |
+| 1 | Git baseline limpo | **PASS** | HEAD `FINAL_COMMIT_PENDING`, `hash/code-tested.log` |
 | 2 | Core-bank tests | **PASS** | 198 pass — `34-034-unit-test-core-bank.log` |
 | 3 | Postgres IT | **PASS** | 14 pass — `37-037-integration-test-postgres.log` |
 | 4 | BFF tests | **PASS** | 35 pass — `35-035-unit-test-web-bff.log` |
@@ -50,9 +50,9 @@
 
 ## O que falta para GO
 
-1. CI security 18/18 verde  
-2. Wire `PostgresOutboxRepository` no outbox-relay  
-3. Rotação efetiva de secrets  
-4. Homologação BACEN SPI (participante direto ou correspondente)  
-5. Pentest + SOC  
+1. CI security 18/18 verde
+2. Wire `PostgresOutboxRepository` no outbox-relay
+3. Rotação efetiva de secrets
+4. Homologação BACEN SPI (participante direto ou correspondente)
+5. Pentest + SOC
 6. Assinatura GPG institucional do pacote de release

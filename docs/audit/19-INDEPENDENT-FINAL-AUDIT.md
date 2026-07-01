@@ -1,7 +1,16 @@
+> **STATUS:** SUPERSEDED
+> **CANONICAL_SOURCE:** docs/final/23-FINAL-CLOSURE.md
+
+> **STATUS:** SUPERSEDED
+> **CANONICAL_SOURCE:** docs/final/23-FINAL-CLOSURE.md
+
+> **STATUS:** SUPERSEDED
+> **CANONICAL_SOURCE:** docs/final/23-FINAL-CLOSURE.md
+
 # 19 — Auditoria Independente Final (Agent 8 — Supervisor)
 
-**Timestamp UTC:** 2026-06-30T20:55:00Z  
-**Baseline:** `/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank`  
+**Timestamp UTC:** 2026-06-30T20:55:00Z
+**Baseline:** `/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank`
 **Método:** Inspeção direta de código + reexecução independente (não confiar em relatórios anteriores)
 
 ---
@@ -69,7 +78,7 @@ NO-GO
 | Build web bloqueador | `npm run build` exit 0 |
 | GO PARA HANDOFF | **Revogado** — substituído por **NO-GO** neste documento |
 
-Docs obsoletos para decisão: `09-DEPLOYMENT-HANDOFF.md`, `10-FINAL-INDEPENDENT-AUDIT.md`.  
+Docs obsoletos para decisão: `09-DEPLOYMENT-HANDOFF.md`, `10-FINAL-INDEPENDENT-AUDIT.md`.
 Fonte canônica: `17-RESIDUAL-RISKS.md`, `18-DEPLOYMENT-HANDOFF-FINAL.md`, este `19`.
 
 ---
@@ -81,5 +90,5 @@ Fonte canônica: `17-RESIDUAL-RISKS.md`, `18-DEPLOYMENT-HANDOFF-FINAL.md`, este 
 - `artifacts/verification/ci/run1/`, `run2/`
 - `artifacts/security/`, `artifacts/sbom/`
 
-**Deploy executado:** NÃO  
+**Deploy executado:** NÃO
 **Push remoto:** NÃO

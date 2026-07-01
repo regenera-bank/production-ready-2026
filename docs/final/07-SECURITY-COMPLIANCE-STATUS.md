@@ -1,6 +1,6 @@
 # 07 — Security & Compliance Status
 
-**HEAD:** `44efb4413583bbc7cb108892cd1f060034c2bc19`  
+**HEAD:** `FINAL_COMMIT_PENDING`
 **CI security stage:** `artifacts/verification/full-ci/run1/matrix-manifest.json` → **16 pass / 2 fail**
 
 ---

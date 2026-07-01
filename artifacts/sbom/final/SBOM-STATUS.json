@@ -1,0 +1,148 @@
+{
+  "generatedAtUtc": "2026-07-01T01:27:46Z",
+  "components": [
+    {
+      "component": "core-bank",
+      "status": "COMPLETE_TRANSITIVE",
+      "file": "sbom-core-bank.json",
+      "reason": "",
+      "directDependenciesCovered": [],
+      "transitiveDependenciesCovered": true,
+      "risk": "low",
+      "remediation": "none"
+    },
+    {
+      "component": "web-bff",
+      "status": "PARTIAL_DECLARED_DEPENDENCIES_ONLY",
+      "file": "sbom-web-bff.PARTIAL_DECLARED_DEPENDENCIES_ONLY.json",
+      "reason": "Command failed: /opt/homebrew/Cellar/node/26.0.0/bin/node -- /opt/homebrew/lib/node_modules/npm/bin/npm-cli.js ls --json --long --all",
+      "directDependenciesCovered": [
+        "@google/genai",
+        "@nestjs/common",
+        "@nestjs/core",
+        "@nestjs/platform-express",
+        "@regenera/core-bank",
+        "@regenera/cards",
+        "@regenera/investments",
+        "@simplewebauthn/server",
+        "@simplewebauthn/types",
+        "firebase-admin",
+        "google-auth-library",
+        "reflect-metadata",
+        "rxjs",
+        "@nestjs/cli",
+        "@nestjs/schematics",
+        "@nestjs/testing",
+        "@types/express",
+        "@types/jest",
+        "@types/node",
+        "jest"
+      ],
+      "transitiveDependenciesCovered": false,
+      "risk": "supply-chain visibility gap",
+      "remediation": "regenerate with cyclonedx-npm after lockfile reconcile"
+    },
+    {
+      "component": "outbox-relay",
+      "status": "COMPLETE_TRANSITIVE",
+      "file": "sbom-outbox-relay.json",
+      "reason": "",
+      "directDependenciesCovered": [],
+      "transitiveDependenciesCovered": true,
+      "risk": "low",
+      "remediation": "none"
+    },
+    {
+      "component": "web-banking",
+      "status": "COMPLETE_TRANSITIVE",
+      "file": "sbom-web-banking.json",
+      "reason": "",
+      "directDependenciesCovered": [],
+      "transitiveDependenciesCovered": true,
+      "risk": "low",
+      "remediation": "none"
+    },
+    {
+      "component": "mobile-bff",
+      "status": "COMPLETE_TRANSITIVE",
+      "file": "sbom-mobile-bff.json",
+      "reason": "",
+      "directDependenciesCovered": [],
+      "transitiveDependenciesCovered": true,
+      "risk": "low",
+      "remediation": "none"
+    },
+    {
+      "component": "operations-bff",
+      "status": "COMPLETE_TRANSITIVE",
+      "file": "sbom-operations-bff.json",
+      "reason": "",
+      "directDependenciesCovered": [],
+      "transitiveDependenciesCovered": true,
+      "risk": "low",
+      "remediation": "none"
+    },
+    {
+      "component": "partner-api-facade",
+      "status": "PARTIAL_DECLARED_DEPENDENCIES_ONLY",
+      "file": "sbom-partner-api-facade.PARTIAL_DECLARED_DEPENDENCIES_ONLY.json",
+      "reason": "Command failed: /opt/homebrew/Cellar/node/26.0.0/bin/node -- /opt/homebrew/lib/node_modules/npm/bin/npm-cli.js ls --json --long --all",
+      "directDependenciesCovered": [
+        "@nestjs/common",
+        "@nestjs/core",
+        "@nestjs/platform-express",
+        "jose",
+        "reflect-metadata",
+        "rxjs",
+        "zod",
+        "@nestjs/cli",
+        "@nestjs/schematics",
+        "@nestjs/testing",
+        "@types/express",
+        "@types/jest",
+        "@types/node",
+        "jest",
+        "ts-jest",
+        "ts-node",
+        "typescript"
+      ],
+      "transitiveDependenciesCovered": false,
+      "risk": "supply-chain visibility gap",
+      "remediation": "regenerate with cyclonedx-npm after lockfile reconcile"
+    },
+    {
+      "component": "partner-developer-portal",
+      "status": "COMPLETE_TRANSITIVE",
+      "file": "sbom-partner-developer-portal.json",
+      "reason": "",
+      "directDependenciesCovered": [],
+      "transitiveDependenciesCovered": true,
+      "risk": "low",
+      "remediation": "none"
+    },
+    {
+      "component": "design-web",
+      "status": "COMPLETE_TRANSITIVE",
+      "file": "sbom-design-web.json",
+      "reason": "",
+      "directDependenciesCovered": [],
+      "transitiveDependenciesCovered": true,
+      "risk": "low",
+      "remediation": "none"
+    },
+    {
+      "component": "e2e-web",
+      "status": "PARTIAL_DECLARED_DEPENDENCIES_ONLY",
+      "file": "sbom-e2e-web.PARTIAL_DECLARED_DEPENDENCIES_ONLY.json",
+      "reason": "Command failed: /opt/homebrew/Cellar/node/26.0.0/bin/node -- /opt/homebrew/lib/node_modules/npm/bin/npm-cli.js ls --json --long --all",
+      "directDependenciesCovered": [
+        "@playwright/test",
+        "@types/node",
+        "typescript"
+      ],
+      "transitiveDependenciesCovered": false,
+      "risk": "supply-chain visibility gap",
+      "remediation": "regenerate with cyclonedx-npm after lockfile reconcile"
+    }
+  ]
+}

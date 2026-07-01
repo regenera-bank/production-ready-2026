@@ -1,1 +1,74 @@
-{"images":[
+{
+  "images": [
+    {
+      "name": "core-bank",
+      "tag": "regenera/core-bank:final",
+      "readinessEndpoint": "/v1/health",
+      "startupExit": 0,
+      "healthExit": 0,
+      "sigtermExit": 0,
+      "outboxStore": null,
+      "runtimeLog": "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/artifacts/verification/containers/final/core-bank-runtime.log"
+    },
+    {
+      "name": "outbox-relay",
+      "tag": "regenera/outbox-relay:final",
+      "readinessEndpoint": "/health",
+      "startupExit": 0,
+      "healthExit": 0,
+      "sigtermExit": 0,
+      "outboxStore": "postgres",
+      "runtimeLog": "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/artifacts/verification/containers/final/outbox-relay-runtime.log"
+    },
+    {
+      "name": "web-bff",
+      "tag": "regenera/web-bff:final",
+      "readinessEndpoint": "/v1/health",
+      "startupExit": 0,
+      "healthExit": 0,
+      "sigtermExit": 0,
+      "outboxStore": null,
+      "runtimeLog": "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/artifacts/verification/containers/final/web-bff-runtime.log"
+    },
+    {
+      "name": "web-banking",
+      "tag": "regenera/web-banking:final",
+      "readinessEndpoint": "/health",
+      "startupExit": 0,
+      "healthExit": 0,
+      "sigtermExit": 0,
+      "outboxStore": null,
+      "runtimeLog": "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/artifacts/verification/containers/final/web-banking-runtime.log"
+    },
+    {
+      "name": "mobile-bff",
+      "tag": "regenera/mobile-bff:final",
+      "readinessEndpoint": "/health/live",
+      "startupExit": 0,
+      "healthExit": 0,
+      "sigtermExit": 0,
+      "outboxStore": null,
+      "runtimeLog": "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/artifacts/verification/containers/final/mobile-bff-runtime.log"
+    },
+    {
+      "name": "operations-bff",
+      "tag": "regenera/operations-bff:final",
+      "readinessEndpoint": "/v1/health",
+      "startupExit": 0,
+      "healthExit": 0,
+      "sigtermExit": 0,
+      "outboxStore": null,
+      "runtimeLog": "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/artifacts/verification/containers/final/operations-bff-runtime.log"
+    },
+    {
+      "name": "partner-api-facade",
+      "tag": "regenera/partner-api-facade:final",
+      "readinessEndpoint": "/v1/health",
+      "startupExit": 0,
+      "healthExit": 0,
+      "sigtermExit": 0,
+      "outboxStore": null,
+      "runtimeLog": "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/artifacts/verification/containers/final/partner-api-facade-runtime.log"
+    }
+  ]
+}

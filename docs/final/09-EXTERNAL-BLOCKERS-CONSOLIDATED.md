@@ -1,6 +1,6 @@
 # 09 — External Blockers Consolidated
 
-**HEAD:** `44efb4413583bbc7cb108892cd1f060034c2bc19`  
+**HEAD:** `FINAL_COMMIT_PENDING`
 **Template:** AGENTS.md §9
 
 ---
@@ -62,5 +62,5 @@ production → EXTERNAL_ACTIVATION_REQUIRED (ou REGULATORY para crypto)
 
 ## Distinção honesta
 
-- **Baseline:** implementado + verificado localmente (simulator/postgres test)  
+- **Baseline:** implementado + verificado localmente (simulator/postgres test)
 - **Produção:** exige itens desta lista — nunca declarar resolvido sem evidência no pacote

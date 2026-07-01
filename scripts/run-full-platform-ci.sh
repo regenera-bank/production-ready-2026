@@ -117,7 +117,7 @@ JSON
 
 run_full_ci() {
   local run_id="$1" clean_db="$2"
-  local artifact_dir="$ROOT/artifacts/verification/full-ci/run${run_id}"
+  local artifact_dir="${RELEASE_EVIDENCE_ROOT:-$ROOT/artifacts/verification/full-ci/run${run_id}}"
 
   export CI_RUN_ID="$run_id"
   export CI_CLEAN_DB="$clean_db"

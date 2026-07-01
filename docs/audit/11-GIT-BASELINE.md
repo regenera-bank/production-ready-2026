@@ -1,8 +1,17 @@
+> **STATUS:** SUPERSEDED
+> **CANONICAL_SOURCE:** docs/final/23-FINAL-CLOSURE.md
+
+> **STATUS:** SUPERSEDED
+> **CANONICAL_SOURCE:** docs/final/23-FINAL-CLOSURE.md
+
+> **STATUS:** SUPERSEDED
+> **CANONICAL_SOURCE:** docs/final/23-FINAL-CLOSURE.md
+
 # 11 — Git Baseline e Quarentena de Secrets
 
-**Agente:** A01 (Git baseline & secrets quarantine)  
-**Timestamp UTC:** 2026-06-30T20:34:30Z  
-**Repositório:** `/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank`  
+**Agente:** A01 (Git baseline & secrets quarantine)
+**Timestamp UTC:** 2026-06-30T20:34:30Z
+**Repositório:** `/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank`
 **Política:** `git init` + commit de preservação — **sem push, sem force, sem reset --hard**
 
 ---

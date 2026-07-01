@@ -1,8 +1,8 @@
 # 04 — 23 Modules Status
 
-**HEAD:** `44efb4413583bbc7cb108892cd1f060034c2bc19`  
-**Fonte visual:** `desing-final-escolhido-geral-index.html` (`view-*` screens)  
-**Implementação React:** `apps/web-banking/src/App.tsx`  
+**HEAD:** `FINAL_COMMIT_PENDING`
+**Fonte visual:** `desing-final-escolhido-geral-index.html` (`view-*` screens)
+**Implementação React:** `apps/web-banking/src/App.tsx`
 **Gerado:** 2026-06-30 UTC
 
 ## Legenda
@@ -60,7 +60,7 @@
 
 ## Navegação real vs protótipo
 
-AGENTS.md §13 confirma **7 módulos com nav real**: home, transactions, pix, transfer, cards, investments, profile.  
+AGENTS.md §13 confirma **7 módulos com nav real**: home, transactions, pix, transfer, cards, investments, profile.
 Destes, apenas **5** têm dados BFF reais (cards e investments permanecem mock).
 
 **E2E log:** `artifacts/verification/full-ci/run1/e2e/47-047-e2e-playwright.log` — 4 passed (login×2, pix×1, transfer×1).
@@ -69,6 +69,6 @@ Destes, apenas **5** têm dados BFF reais (cards e investments permanecem mock).
 
 ## Próximo trabalho (honesto)
 
-1. Drenar `INITIAL_MOCK_CARDS` quando `domains/cards` + BFF Onda C existirem  
-2. Conectar investments → `domains/investments` sandbox adapter  
+1. Drenar `INITIAL_MOCK_CARDS` quando `domains/cards` + BFF Onda C existirem
+2. Conectar investments → `domains/investments` sandbox adapter
 3. Adotar `MoneyDisplay` / `OperationStatusBadge` do `design-system/web/` no canal

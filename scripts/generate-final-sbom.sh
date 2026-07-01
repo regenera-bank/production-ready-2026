@@ -44,4 +44,5 @@ done
   cd "$OUT"
   shasum -a 256 sbom-*.json 2>/dev/null | LC_ALL=C sort >SBOM-MANIFEST.sha256
 )
+bash "$ROOT/scripts/generate-sbom-status.sh"
 echo "SBOM manifest: $OUT/SBOM-MANIFEST.sha256"

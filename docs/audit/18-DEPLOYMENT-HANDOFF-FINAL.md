@@ -1,10 +1,19 @@
+> **STATUS:** SUPERSEDED
+> **CANONICAL_SOURCE:** docs/final/23-FINAL-CLOSURE.md
+
+> **STATUS:** SUPERSEDED
+> **CANONICAL_SOURCE:** docs/final/23-FINAL-CLOSURE.md
+
+> **STATUS:** SUPERSEDED
+> **CANONICAL_SOURCE:** docs/final/23-FINAL-CLOSURE.md
+
 # 18 — Deployment Handoff Final
 
-**Agente:** A08 (adversarial auditor)  
-**Timestamp UTC:** 2026-06-30T20:45:00Z  
-**Deploy executado nesta fase:** **NÃO**  
-**Baseline:** `/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank`  
-**Artefato:** `REGENERA-PRE-DEPLOY-FINAL.zip` (+ `.sha256`)  
+**Agente:** A08 (adversarial auditor)
+**Timestamp UTC:** 2026-06-30T20:45:00Z
+**Deploy executado nesta fase:** **NÃO**
+**Baseline:** `/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank`
+**Artefato:** `REGENERA-PRE-DEPLOY-FINAL.zip` (+ `.sha256`)
 **Fonte canônica:** Este documento **substitui** `09-DEPLOYMENT-HANDOFF.md` para handoff de validação.
 
 ---
@@ -63,7 +72,7 @@ npm run test:redis   # Agent 8: 5/5 PASS (Redis local)
 node dist/main.js
 ```
 
-**Filas:** `core-bank.outbox.v1`, DLQ `core-bank.outbox.v1.dlq`  
+**Filas:** `core-bank.outbox.v1`, DLQ `core-bank.outbox.v1.dlq`
 **Graceful shutdown:** SIGTERM (implementado em `main.ts`)
 
 ### 2.3 Core-bank

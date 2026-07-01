@@ -1,8 +1,17 @@
+> **STATUS:** SUPERSEDED
+> **CANONICAL_SOURCE:** docs/final/23-FINAL-CLOSURE.md
+
+> **STATUS:** SUPERSEDED
+> **CANONICAL_SOURCE:** docs/final/23-FINAL-CLOSURE.md
+
+> **STATUS:** SUPERSEDED
+> **CANONICAL_SOURCE:** docs/final/23-FINAL-CLOSURE.md
+
 # 13 — BullMQ + Redis Audit (Gate G9)
 
-**Agente:** A03 (outbox relay worker)  
-**Baseline:** `/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank`  
-**Data:** 2026-06-30  
+**Agente:** A03 (outbox relay worker)
+**Baseline:** `/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank`
+**Data:** 2026-06-30
 **Gate:** G9 — Task queue BullMQ + outbox relay
 
 ---

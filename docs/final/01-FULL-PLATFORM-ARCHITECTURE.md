@@ -1,8 +1,8 @@
 # 01 — Full Platform Architecture
 
-**HEAD:** `44efb4413583bbc7cb108892cd1f060034c2bc19`  
-**Git tree:** `a9e3a8b8bb2b8e40d23c9947331fd0c47f171919`  
-**Timestamp:** 2026-06-30 UTC  
+**HEAD:** `FINAL_COMMIT_PENDING`
+**Git tree:** `FINAL_TREE_PENDING`
+**Timestamp:** 2026-06-30 UTC
 **Evidence root:** `artifacts/verification/full-ci/run1/`
 
 ---

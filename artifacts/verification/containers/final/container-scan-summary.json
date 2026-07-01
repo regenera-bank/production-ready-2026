@@ -1,5 +1,207 @@
-{"images":[
-{"name":"core-bank","tag":"regenera/core-bank:final","digest":"sha256:c011310d97bf70ee2e08773afc382c31ec82a00649caa901b8b1d88b4c1e2ba2","size":57224144,"user":"regenera","base":"
-unknown"},
-{"name":"outbox-relay","tag":"regenera/outbox-relay:final","digest":"sha256:5d0e2d7e4db7c2f3390a856794b12e90a62af9b1c22bba9d6c4b7f37005662e3","size":57206686,"user":"regenera","base":"
-unknown"}
+{
+  "images": [
+    {
+      "name": "core-bank",
+      "tag": "regenera/core-bank:final",
+      "imageId": "sha256:b86e47c20a55eb8430ced36f7877f571b7a213d51a5031f305d5ec3d516c7a04",
+      "repoDigest": "regenera/core-bank@sha256:b86e47c20a55eb8430ced36f7877f571b7a213d51a5031f305d5ec3d516c7a04",
+      "localDigest": "sha256:b86e47c20a55eb8430ced36f7877f571b7a213d51a5031f305d5ec3d516c7a04",
+      "sizeBytes": 57224325,
+      "baseImage": "linux/arm64",
+      "effectiveUser": "regenera",
+      "exposedPorts": {
+        "3100/tcp": {}
+      },
+      "healthCheck": {
+        "Test": [
+          "CMD-SHELL",
+          "wget -qO- http://127.0.0.1:3100/v1/health || exit 1"
+        ],
+        "Interval": 15000000000,
+        "Timeout": 5000000000,
+        "StartPeriod": 20000000000,
+        "Retries": 3
+      },
+      "scanTool": "trivy",
+      "critical": 0,
+      "high": 21,
+      "medium": 30,
+      "scanExit": 0,
+      "buildLog": "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/artifacts/verification/containers/final/core-bank.log"
+    },
+    {
+      "name": "outbox-relay",
+      "tag": "regenera/outbox-relay:final",
+      "imageId": "sha256:67d3c99731a181a7280c1d6b1ebe20c3cbdf5161467b9991e312b58815b09b92",
+      "repoDigest": "regenera/outbox-relay@sha256:67d3c99731a181a7280c1d6b1ebe20c3cbdf5161467b9991e312b58815b09b92",
+      "localDigest": "sha256:67d3c99731a181a7280c1d6b1ebe20c3cbdf5161467b9991e312b58815b09b92",
+      "sizeBytes": 57206785,
+      "baseImage": "linux/arm64",
+      "effectiveUser": "regenera",
+      "exposedPorts": {
+        "3109/tcp": {}
+      },
+      "healthCheck": {
+        "Test": [
+          "CMD-SHELL",
+          "wget -qO- http://127.0.0.1:3109/health || exit 1"
+        ],
+        "Interval": 15000000000,
+        "Timeout": 5000000000,
+        "StartPeriod": 25000000000,
+        "Retries": 3
+      },
+      "scanTool": "trivy",
+      "critical": 0,
+      "high": 20,
+      "medium": 28,
+      "scanExit": 0,
+      "buildLog": "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/artifacts/verification/containers/final/outbox-relay.log"
+    },
+    {
+      "name": "web-bff",
+      "tag": "regenera/web-bff:final",
+      "imageId": "sha256:e0b8a86fddb4e6f30058ad8a509d599a6690761d0b81634e295e1cf789091512",
+      "repoDigest": "regenera/web-bff@sha256:e0b8a86fddb4e6f30058ad8a509d599a6690761d0b81634e295e1cf789091512",
+      "localDigest": "sha256:e0b8a86fddb4e6f30058ad8a509d599a6690761d0b81634e295e1cf789091512",
+      "sizeBytes": 55032718,
+      "baseImage": "linux/arm64",
+      "effectiveUser": "regenera",
+      "exposedPorts": {
+        "3200/tcp": {}
+      },
+      "healthCheck": {
+        "Test": [
+          "CMD-SHELL",
+          "wget -qO- http://127.0.0.1:3200/v1/health || exit 1"
+        ],
+        "Interval": 15000000000,
+        "Timeout": 5000000000,
+        "StartPeriod": 30000000000,
+        "Retries": 3
+      },
+      "scanTool": "trivy",
+      "critical": 0,
+      "high": 20,
+      "medium": 28,
+      "scanExit": 0,
+      "buildLog": "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/artifacts/verification/containers/final/web-bff.log"
+    },
+    {
+      "name": "web-banking",
+      "tag": "regenera/web-banking:final",
+      "imageId": "sha256:2047e6a3b5d414ac94832b223eba8486462987f46968042903125c679f07b8ad",
+      "repoDigest": "regenera/web-banking@sha256:2047e6a3b5d414ac94832b223eba8486462987f46968042903125c679f07b8ad",
+      "localDigest": "sha256:2047e6a3b5d414ac94832b223eba8486462987f46968042903125c679f07b8ad",
+      "sizeBytes": 22004920,
+      "baseImage": "linux/arm64",
+      "effectiveUser": "101",
+      "exposedPorts": {
+        "8080/tcp": {}
+      },
+      "healthCheck": {
+        "Test": [
+          "CMD-SHELL",
+          "wget -qO- http://127.0.0.1:8080/health || exit 1"
+        ],
+        "Interval": 15000000000,
+        "Timeout": 5000000000,
+        "StartPeriod": 10000000000,
+        "Retries": 3
+      },
+      "scanTool": "trivy",
+      "critical": 2,
+      "high": 29,
+      "medium": 43,
+      "scanExit": 0,
+      "buildLog": "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/artifacts/verification/containers/final/web-banking.log"
+    },
+    {
+      "name": "mobile-bff",
+      "tag": "regenera/mobile-bff:final",
+      "imageId": "sha256:8864842848abe55a4ff72ab21cf1fad384e1ce8d84e75bcc50a92a621525a65b",
+      "repoDigest": "regenera/mobile-bff@sha256:8864842848abe55a4ff72ab21cf1fad384e1ce8d84e75bcc50a92a621525a65b",
+      "localDigest": "sha256:8864842848abe55a4ff72ab21cf1fad384e1ce8d84e75bcc50a92a621525a65b",
+      "sizeBytes": 54857579,
+      "baseImage": "linux/arm64",
+      "effectiveUser": "regenera",
+      "exposedPorts": {
+        "3201/tcp": {}
+      },
+      "healthCheck": {
+        "Test": [
+          "CMD-SHELL",
+          "wget -qO- http://127.0.0.1:3201/health/live || exit 1"
+        ],
+        "Interval": 15000000000,
+        "Timeout": 5000000000,
+        "StartPeriod": 15000000000,
+        "Retries": 3
+      },
+      "scanTool": "trivy",
+      "critical": 0,
+      "high": 20,
+      "medium": 28,
+      "scanExit": 0,
+      "buildLog": "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/artifacts/verification/containers/final/mobile-bff.log"
+    },
+    {
+      "name": "operations-bff",
+      "tag": "regenera/operations-bff:final",
+      "imageId": "sha256:322ee21f8968dcc3e8ae8b0551d68add4e7b993a24dd256d03466d0d1bf52de6",
+      "repoDigest": "regenera/operations-bff@sha256:322ee21f8968dcc3e8ae8b0551d68add4e7b993a24dd256d03466d0d1bf52de6",
+      "localDigest": "sha256:322ee21f8968dcc3e8ae8b0551d68add4e7b993a24dd256d03466d0d1bf52de6",
+      "sizeBytes": 54868947,
+      "baseImage": "linux/arm64",
+      "effectiveUser": "regenera",
+      "exposedPorts": {
+        "3202/tcp": {}
+      },
+      "healthCheck": {
+        "Test": [
+          "CMD-SHELL",
+          "wget -qO- http://127.0.0.1:3202/v1/health || exit 1"
+        ],
+        "Interval": 15000000000,
+        "Timeout": 5000000000,
+        "StartPeriod": 20000000000,
+        "Retries": 3
+      },
+      "scanTool": "trivy",
+      "critical": 0,
+      "high": 20,
+      "medium": 28,
+      "scanExit": 0,
+      "buildLog": "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/artifacts/verification/containers/final/operations-bff.log"
+    },
+    {
+      "name": "partner-api-facade",
+      "tag": "regenera/partner-api-facade:final",
+      "imageId": "sha256:2ceb3d640e42d7d0e1ea79295cd4b75dc4b8f65485e9d539db1c9cb2fbe2d467",
+      "repoDigest": "regenera/partner-api-facade@sha256:2ceb3d640e42d7d0e1ea79295cd4b75dc4b8f65485e9d539db1c9cb2fbe2d467",
+      "localDigest": "sha256:2ceb3d640e42d7d0e1ea79295cd4b75dc4b8f65485e9d539db1c9cb2fbe2d467",
+      "sizeBytes": 54860864,
+      "baseImage": "linux/arm64",
+      "effectiveUser": "regenera",
+      "exposedPorts": {
+        "3300/tcp": {}
+      },
+      "healthCheck": {
+        "Test": [
+          "CMD-SHELL",
+          "wget -qO- http://127.0.0.1:3300/v1/health || exit 1"
+        ],
+        "Interval": 15000000000,
+        "Timeout": 5000000000,
+        "StartPeriod": 20000000000,
+        "Retries": 3
+      },
+      "scanTool": "trivy",
+      "critical": 0,
+      "high": 20,
+      "medium": 28,
+      "scanExit": 0,
+      "buildLog": "/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/artifacts/verification/containers/final/partner-api-facade.log"
+    }
+  ]
+}

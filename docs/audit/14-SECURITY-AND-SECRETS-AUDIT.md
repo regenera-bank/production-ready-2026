@@ -1,8 +1,17 @@
+> **STATUS:** SUPERSEDED
+> **CANONICAL_SOURCE:** docs/final/23-FINAL-CLOSURE.md
+
+> **STATUS:** SUPERSEDED
+> **CANONICAL_SOURCE:** docs/final/23-FINAL-CLOSURE.md
+
+> **STATUS:** SUPERSEDED
+> **CANONICAL_SOURCE:** docs/final/23-FINAL-CLOSURE.md
+
 # 14 — Security and Secrets Audit
 
-**Agente:** A04 (security sanitization & scans)  
-**Baseline:** `/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank`  
-**Data:** 2026-06-30  
+**Agente:** A04 (security sanitization & scans)
+**Baseline:** `/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank`
+**Data:** 2026-06-30
 **Valores de secrets:** NÃO registrados neste documento (nomes e caminhos apenas)
 
 ---

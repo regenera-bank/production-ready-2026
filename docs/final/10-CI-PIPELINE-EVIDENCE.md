@@ -1,7 +1,7 @@
 # 10 — CI Pipeline Evidence
 
-**HEAD:** `44efb4413583bbc7cb108892cd1f060034c2bc19`  
-**Script:** `scripts/run-pre-deploy-gates.sh` (implícito pelo layout `full-ci/run1`)  
+**HEAD:** `FINAL_COMMIT_PENDING`
+**Script:** `scripts/run-pre-deploy-gates.sh` (implícito pelo layout `full-ci/run1`)
 **Resultado global:** **FAIL**
 
 ---
@@ -28,7 +28,7 @@
 ## Code hash (reprodutibilidade)
 
 ```
-git_head: 44efb4413583bbc7cb108892cd1f060034c2bc19
+git_head: FINAL_COMMIT_PENDING
 git_tree: a9e3a8b8bb2b8e40d23c9947331fd0c47f171919
 implantable_manifest_sha256: 4e4c3b07acd872c727564f9af6b6f8914e2ae82a307dff3c55901d73ae7fe496
 line_count: 221
@@ -77,6 +77,6 @@ line_count: 221
 
 ## Próximo gate verde
 
-1. Resolver npm audit em core-bank e web-bff  
-2. Reexecutar `full-ci/run2` com exit 0 em security  
+1. Resolver npm audit em core-bank e web-bff
+2. Reexecutar `full-ci/run2` com exit 0 em security
 3. Registrar novo HEAD em `hash/code-tested.log`

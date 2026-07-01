@@ -1,7 +1,16 @@
+> **STATUS:** SUPERSEDED
+> **CANONICAL_SOURCE:** docs/final/23-FINAL-CLOSURE.md
+
+> **STATUS:** SUPERSEDED
+> **CANONICAL_SOURCE:** docs/final/23-FINAL-CLOSURE.md
+
+> **STATUS:** SUPERSEDED
+> **CANONICAL_SOURCE:** docs/final/23-FINAL-CLOSURE.md
+
 # 12 — Postgres Adapter Audit
 
-**Agent:** Agent 2 (Regenera Bank / core-bank)  
-**Date:** 2026-06-30  
+**Agent:** Agent 2 (Regenera Bank / core-bank)
+**Date:** 2026-06-30
 **Scope:** Real Postgres persistence replacing in-memory as production default
 
 ## Summary

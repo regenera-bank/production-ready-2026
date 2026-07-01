@@ -1,7 +1,7 @@
 # 03 — Core Banking Status
 
-**HEAD:** `44efb4413583bbc7cb108892cd1f060034c2bc19`  
-**Pacote:** `domains/core-bank/`  
+**HEAD:** `FINAL_COMMIT_PENDING`
+**Pacote:** `domains/core-bank/`
 **Status:** **ACTIVE_INTERNAL** (Postgres + memory); produção **EXTERNAL_ACTIVATION_REQUIRED**
 
 ---
@@ -31,8 +31,8 @@ Test Suites: 20 passed, 20 total
 Tests:       1 skipped, 198 passed, 199 total
 ```
 
-**Log:** `artifacts/verification/full-ci/run1/unit/34-034-unit-test-core-bank.log`  
-**Evidence pack:** `domains/core-bank/evidence/TEST-RESULTS.txt` (184 pass baseline pré-IT expandido)  
+**Log:** `artifacts/verification/full-ci/run1/unit/34-034-unit-test-core-bank.log`
+**Evidence pack:** `domains/core-bank/evidence/TEST-RESULTS.txt` (184 pass baseline pré-IT expandido)
 **Gate release:** 47 invariantes T01–T47 (`domains/core-bank/src/integration/invariant-registry.ts`)
 
 ---
@@ -43,8 +43,8 @@ Tests:       1 skipped, 198 passed, 199 total
 Tests: 14 passed, 14 total
 ```
 
-**Log:** `artifacts/verification/full-ci/run1/integration/37-037-integration-test-postgres.log`  
-**DB:** `postgresql://localhost:5432/regenera_core_test`  
+**Log:** `artifacts/verification/full-ci/run1/integration/37-037-integration-test-postgres.log`
+**DB:** `postgresql://localhost:5432/regenera_core_test`
 **Migrations:** `artifacts/verification/full-ci/run1/integration/9-009-migrations.log` exit 0
 
 ---
@@ -74,4 +74,4 @@ Ver `domains/core-bank/docs/EXTERNAL-BLOCKERS.md` e `governance/REGULATORY-TRACE
 ## Commits de referência
 
 - Kotlin baseline auditado: `7336481c` (AGENTS.md §1)
-- HEAD atual testado: `44efb4413583bbc7cb108892cd1f060034c2bc19`
+- HEAD atual testado: `FINAL_COMMIT_PENDING`

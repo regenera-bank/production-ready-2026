@@ -1,7 +1,7 @@
 # 02 — Domain Coverage Matrix
 
-**HEAD:** `44efb4413583bbc7cb108892cd1f060034c2bc19`  
-**Fonte domínios:** `domains/SCAFFOLD-MANIFEST.json` (46) + `domains/core-bank/` (separado)  
+**HEAD:** `FINAL_COMMIT_PENDING`
+**Fonte domínios:** `domains/SCAFFOLD-MANIFEST.json` (46) + `domains/core-bank/` (separado)
 **Gerado:** 2026-06-30 UTC
 
 ## Legenda de status

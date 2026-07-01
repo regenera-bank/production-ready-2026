@@ -1,7 +1,16 @@
+> **STATUS:** SUPERSEDED
+> **CANONICAL_SOURCE:** docs/final/23-FINAL-CLOSURE.md
+
+> **STATUS:** SUPERSEDED
+> **CANONICAL_SOURCE:** docs/final/23-FINAL-CLOSURE.md
+
+> **STATUS:** SUPERSEDED
+> **CANONICAL_SOURCE:** docs/final/23-FINAL-CLOSURE.md
+
 # 01 — Baseline Forense
 
-**Supervisor:** Principal Software Engineer  
-**Timestamp UTC:** 2026-06-30T20:17:54Z  
+**Supervisor:** Principal Software Engineer
+**Timestamp UTC:** 2026-06-30T20:17:54Z
 **Baseline canônica:** `/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank`
 
 ## Decisão de baseline

@@ -1,6 +1,6 @@
 # 06 — Design System Status
 
-**HEAD:** `44efb4413583bbc7cb108892cd1f060034c2bc19`  
+**HEAD:** `FINAL_COMMIT_PENDING`
 **Protótipo fonte:** `desing-final-escolhido-geral-index.html` (~4251 linhas)
 
 ---

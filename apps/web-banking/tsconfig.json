@@ -18,7 +18,9 @@
     "types": ["vite/client", "vitest/globals"],
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["src/*"],
+      "@regenera/design-web": ["../../design-system/web/src/index.ts"],
+      "@regenera/design-web/*": ["../../design-system/web/src/*"]
     }
   },
   "include": ["src"]

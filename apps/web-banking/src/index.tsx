@@ -7,6 +7,7 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import ErrorBoundary from './components/UI/ErrorBoundary';
 import { initAnalytics } from './services/firebase';
+import '../../../design-system/web/src/tokens/regenera.css';
 import './index.css';
 
 void initAnalytics();

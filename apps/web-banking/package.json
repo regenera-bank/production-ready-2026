@@ -12,6 +12,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@regenera/design-web": "file:../../design-system/web",
     "@simplewebauthn/browser": "^11.0.0",
     "@simplewebauthn/types": "^11.0.0",
     "firebase": "^12.15.0",

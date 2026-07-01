@@ -14,6 +14,7 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': path.join(__dirname, 'src'),
+      '@regenera/design-web': path.join(__dirname, '../../design-system/web/src/index.ts'),
       react: dep('react'),
       'react-dom': dep('react-dom'),
       'react/jsx-dev-runtime': dep('react/jsx-dev-runtime.js'),

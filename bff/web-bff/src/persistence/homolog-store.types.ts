@@ -62,6 +62,17 @@ export interface HomologSnapshot {
   };
   prometeoPayments?: Record<string, MonitoredPaymentRecord>;
   prometeoProcessedEventIds?: Record<string, string>;
+  products?: {
+    audit: Array<{
+      id: string;
+      domain: 'cards' | 'investments';
+      userId: string;
+      action: string;
+      referenceId: string;
+      status: string;
+      at: string;
+    }>;
+  };
 }
 
 export const emptyHomologSnapshot = (): HomologSnapshot => ({

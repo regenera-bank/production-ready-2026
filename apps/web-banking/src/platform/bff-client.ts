@@ -545,6 +545,101 @@ export const reaisToCents = (value: string): string => {
   return parseMoneyInput(trimmed);
 };
 
+export interface CardDto {
+  id: string;
+  alias: string;
+  number: string;
+  holder: string;
+  expiry: string;
+  cvv: string;
+  limitCents: string;
+  usedCents: string;
+  brand: 'mastercard' | 'visa';
+  type: string;
+  status: 'active' | 'locked' | 'blocked';
+  virtual: boolean;
+}
+
+export interface InvestmentCatalogItemDto {
+  id: string;
+  name: string;
+  type: 'cdb' | 'lci' | 'fund';
+  minAmountCents: string;
+  expectedYieldPct: string;
+  risk: 'conservative' | 'moderate' | 'aggressive';
+}
+
+export interface InvestmentPositionDto {
+  productId: string;
+  productName: string;
+  amountCents: string;
+  yieldPct: string;
+}
+
+export interface InvestmentOrderDto {
+  id: string;
+  productId: string;
+  productName: string;
+  amountCents: string;
+  status: 'pending' | 'filled' | 'cancelled' | 'rejected';
+  createdAt: string;
+  updatedAt: string;
+}
+
+export const fetchCards = (token: string) =>
+  request<CardDto[]>('/products/cards', { method: 'GET' }, token);
+
+export const blockCard = (token: string, cardId: string, idempotencyKey: string) =>
+  request<CardDto>(
+    `/products/cards/${encodeURIComponent(cardId)}/block`,
+    { method: 'POST', headers: { 'Idempotency-Key': idempotencyKey } },
+    token,
+  );
+
+export const unblockCard = (token: string, cardId: string, idempotencyKey: string) =>
+  request<CardDto>(
+    `/products/cards/${encodeURIComponent(cardId)}/unblock`,
+    { method: 'POST', headers: { 'Idempotency-Key': idempotencyKey } },
+    token,
+  );
+
+export const updateCardLimit = (
+  token: string,
+  cardId: string,
+  limitCents: string,
+  idempotencyKey: string,
+) =>
+  request<CardDto>(
+    `/products/cards/${encodeURIComponent(cardId)}/limit`,
+    { method: 'POST', headers: { 'Idempotency-Key': idempotencyKey }, body: JSON.stringify({ limitCents }) },
+    token,
+  );
+
+export const fetchInvestmentCatalog = (token: string) =>
+  request<InvestmentCatalogItemDto[]>('/products/investments/catalog', { method: 'GET' }, token);
+
+export const fetchInvestmentPositions = (token: string) =>
+  request<InvestmentPositionDto[]>('/products/investments/positions', { method: 'GET' }, token);
+
+export const placeInvestmentOrder = (
+  token: string,
+  productId: string,
+  amountCents: string,
+  idempotencyKey: string,
+) =>
+  request<InvestmentOrderDto>(
+    '/products/investments/orders',
+    {
+      method: 'POST',
+      headers: { 'Idempotency-Key': idempotencyKey },
+      body: JSON.stringify({ productId, amountCents }),
+    },
+    token,
+  );
+
+export const fetchInvestmentOrders = (token: string) =>
+  request<InvestmentOrderDto[]>('/products/investments/orders', { method: 'GET' }, token);
+
 export const mapTransactionDto = (dto: TransactionDto) => ({
   id: dto.id,
   title: dto.title,

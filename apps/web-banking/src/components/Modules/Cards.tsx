@@ -3,9 +3,17 @@
  * @license
  * SPDX-License-Identifier: Apache-2.0
 */
-import React, { useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
+import { MoneyDisplay, OperationStatusBadge } from '@regenera/design-web';
 import { CardDetails, Transaction, UserProfile } from '../../types';
-import { buildAccountCards } from '../../platform/module-data';
+import {
+  blockCard,
+  centsToReais,
+  fetchCards,
+  unblockCard,
+  updateCardLimit,
+  type CardDto,
+} from '../../platform/bff-client';
 import {
   Lock, Eye, EyeOff, Copy, ShieldCheck, Zap, Smartphone,
   Nfc, Activity, CheckCircle, AlertTriangle, Unlock, DollarSign,
@@ -15,18 +23,31 @@ interface CardsModuleProps {
   highlightBlock?: boolean;
   user: UserProfile;
   transactions: Transaction[];
+  accessToken: string;
 }
+
+const mapCardDto = (dto: CardDto): CardDetails => ({
+  id: dto.id,
+  alias: dto.alias,
+  number: dto.number,
+  holder: dto.holder,
+  expiry: dto.expiry,
+  cvv: dto.cvv,
+  limit: centsToReais(dto.limitCents),
+  used: centsToReais(dto.usedCents),
+  brand: dto.brand,
+  type: dto.type === 'virtual' ? 'infinite' : (dto.type as CardDetails['type']),
+  status: dto.status === 'blocked' ? 'locked' : dto.status,
+});
 
 const CardsModule: React.FC<CardsModuleProps> = ({
   highlightBlock,
   user,
   transactions,
+  accessToken,
 }) => {
-  const initialCards = useMemo(
-    () => buildAccountCards(user, transactions),
-    [user, transactions],
-  );
-  const [cards, setCards] = useState<CardDetails[]>(initialCards);
+  const [cards, setCards] = useState<CardDetails[]>([]);
+  const [loading, setLoading] = useState(true);
   const [activeCardIndex, setActiveCardIndex] = useState(0);
   const [showDetails, setShowDetails] = useState(false);
   const [flipped, setFlipped] = useState(false);
@@ -35,30 +56,48 @@ const CardsModule: React.FC<CardsModuleProps> = ({
     type: 'success' | 'alert';
   } | null>(null);
 
-  React.useEffect(() => {
-    setCards(initialCards);
-  }, [initialCards]);
+  const loadCards = useCallback(async () => {
+    setLoading(true);
+    try {
+      const items = await fetchCards(accessToken);
+      setCards(items.map(mapCardDto));
+    } catch {
+      setCards([]);
+    } finally {
+      setLoading(false);
+    }
+  }, [accessToken]);
 
-  const activeCard = cards[activeCardIndex] ?? initialCards[0];
+  useEffect(() => {
+    void loadCards();
+  }, [loadCards]);
+
+  const activeCard = cards[activeCardIndex] ?? cards[0];
 
   const showNotification = (msg: string, type: 'success' | 'alert' = 'success') => {
     setNotification({ msg, type });
     setTimeout(() => setNotification(null), 3000);
   };
 
-  const toggleLock = (e?: React.MouseEvent) => {
+  const toggleLock = async (e?: React.MouseEvent) => {
     e?.stopPropagation();
-    const updated = [...cards];
+    if (!activeCard) return;
     const isLocked = activeCard.status === 'locked';
-    updated[activeCardIndex] = {
-      ...activeCard,
-      status: isLocked ? 'active' : 'locked',
-    };
-    setCards(updated);
-    showNotification(
-      isLocked ? 'Cartão desbloqueado' : 'Cartão bloqueado temporariamente',
-      isLocked ? 'success' : 'alert',
-    );
+    const key = `card-lock-${activeCard.id}-${Date.now()}`;
+    try {
+      const dto = isLocked
+        ? await unblockCard(accessToken, activeCard.id, key)
+        : await blockCard(accessToken, activeCard.id, key);
+      const updated = [...cards];
+      updated[activeCardIndex] = mapCardDto(dto);
+      setCards(updated);
+      showNotification(
+        isLocked ? 'Cartão desbloqueado' : 'Cartão bloqueado temporariamente',
+        isLocked ? 'success' : 'alert',
+      );
+    } catch {
+      showNotification('Falha ao alterar status do cartão', 'alert');
+    }
   };
 
   const handleCopy = (text: string) => {
@@ -70,22 +109,47 @@ const CardsModule: React.FC<CardsModuleProps> = ({
     showNotification('Número copiado', 'success');
   };
 
-  const handleLimitChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleLimitChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!activeCard) return;
     const newLimit = Number(e.target.value);
-    const updated = [...cards];
-    updated[activeCardIndex] = { ...activeCard, limit: newLimit };
-    setCards(updated);
+    const limitCents = String(Math.round(newLimit * 100));
+    try {
+      const dto = await updateCardLimit(
+        accessToken,
+        activeCard.id,
+        limitCents,
+        `card-limit-${activeCard.id}-${Date.now()}`,
+      );
+      const updated = [...cards];
+      updated[activeCardIndex] = mapCardDto(dto);
+      setCards(updated);
+    } catch {
+      showNotification('Limite não atualizado', 'alert');
+    }
   };
 
+  if (loading) {
+    return (
+      <div className="p-6 text-center text-gray-400 text-sm">Carregando cartões sandbox…</div>
+    );
+  }
+
   if (!activeCard) {
-    return null;
+    return (
+      <div className="p-6 text-center text-gray-400 text-sm">
+        Nenhum cartão disponível — ative conta no onboarding.
+      </div>
+    );
   }
 
   return (
     <div className="p-6 space-y-8 animate-in slide-in-from-bottom duration-700 pb-32">
-      <p className="text-[10px] text-gray-500 uppercase tracking-widest text-center">
-        Cartões vinculados à conta ativa · limites espelham saldo disponível no BFF
-      </p>
+      <div className="flex flex-col items-center gap-2">
+        <OperationStatusBadge status={activeCard.status === 'locked' ? 'BLOCKED' : 'SETTLED'} />
+        <p className="text-[10px] text-gray-500 uppercase tracking-widest text-center">
+          Cartões sandbox · BFF → cards domain · {transactions.length} lançamentos no extrato
+        </p>
+      </div>
 
       <div className="flex justify-center gap-3 mb-4">
         {cards.map((card, idx) => (
@@ -259,9 +323,11 @@ const CardsModule: React.FC<CardsModuleProps> = ({
             <label htmlFor="limit-slider" className="text-[10px] text-cyan-400 font-bold uppercase tracking-widest flex items-center gap-2">
               <DollarSign className="w-3 h-3" /> Teto de gasto
             </label>
-            <span className="text-white font-mono text-sm font-bold bg-white/10 px-2 py-1 rounded">
-              R$ {activeCard.limit.toLocaleString('pt-BR')}
-            </span>
+            <MoneyDisplay
+              amountCents={String(Math.round(activeCard.limit * 100))}
+              size="sm"
+              className="bg-white/10 px-2 py-1 rounded"
+            />
           </div>
           <input
             id="limit-slider"
@@ -278,15 +344,19 @@ const CardsModule: React.FC<CardsModuleProps> = ({
         <div className="flex justify-between text-sm text-white pt-4 border-t border-white/5">
           <div>
             <p className="text-[10px] text-gray-500 uppercase">Saídas (extrato)</p>
-            <span className="font-bold text-xl">
-              R$ {activeCard.used.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
-            </span>
+            <MoneyDisplay
+              amountCents={String(Math.round(activeCard.used * 100))}
+              size="lg"
+              variant="debit"
+            />
           </div>
           <div className="text-right">
             <p className="text-[10px] text-gray-500 uppercase">Disponível conta</p>
-            <span className="text-emerald-400 font-bold text-lg">
-              R$ {user.availableBalance.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
-            </span>
+            <MoneyDisplay
+              amountCents={user.availableBalanceCents ?? String(Math.round(user.availableBalance * 100))}
+              size="md"
+              variant="credit"
+            />
           </div>
         </div>
       </div>

@@ -1002,13 +1002,14 @@ const App: React.FC = () => {
               <TransferArea initialAction={moduleProps.initialAction} accessToken={accessToken ?? ''} availableBalanceCents={userProfile.availableBalanceCents ?? '0'} transactions={transactions} onOperationComplete={handleBankingMutation} />
           </div>
       )}
-      {activeModule === 'cards' && (
+      {activeModule === 'cards' && accessToken && (
           <div className="screen-transition module-view">
               {renderHeader('Carteira Digital', true)}
               <CardsModule
                 highlightBlock={moduleProps.highlightBlock}
                 user={userProfile}
                 transactions={transactions}
+                accessToken={accessToken}
               />
           </div>
       )}

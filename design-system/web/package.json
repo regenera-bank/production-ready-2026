@@ -4,6 +4,10 @@
   "private": true,
   "description": "Regenera Bank web design system — Storybook catalog with tokens from HTML prototype",
   "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./tokens/regenera.css": "./src/tokens/regenera.css"
+  },
   "scripts": {
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",

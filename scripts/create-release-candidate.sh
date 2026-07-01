@@ -22,7 +22,9 @@ BRANCH="$(git branch --show-current)"
 UTC="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
 
 # Empacota (reusa script existente com nome final)
-STAGING="$(mktemp -d)"
+STAGING_ROOT="${REGENERA_PACKAGE_STAGING:-/Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/.package-staging}"
+mkdir -p "$STAGING_ROOT"
+STAGING="$(mktemp -d "$STAGING_ROOT/release.XXXXXX")"
 trap 'rm -rf "$STAGING"' EXIT
 rsync -a \
   --exclude '.git' --exclude 'node_modules' --exclude 'dist' --exclude 'coverage' \
@@ -32,6 +34,8 @@ rsync -a \
   --exclude 'REGENERA-BANK-FULL-PLATFORM-*.zip' \
   --exclude '**/build/' --exclude '**/.build/' --exclude '**/.gradle/' \
   --exclude 'apps/android/local.properties' --exclude 'apps/ios/.build/' \
+  --exclude '00-governance/audit-evidence/' \
+  --exclude 'artifacts/verification/disaster-recovery/final/*.dump' \
   "$ROOT/" "$STAGING/regenera-bank/"
 (
   cd "$STAGING"

@@ -218,14 +218,17 @@ check_redis() {
 }
 
 prepare_test_database() {
-  local ts log_path exit_code db_name
+  local ts log_path exit_code db_name postgres_admin_url
   ts="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
   log_path="$ARTIFACT_DIR/infra/postgres-db-prep.log"
   db_name="${DATABASE_URL##*/}"
+  # Preserve credentials/host from DATABASE_URL (GHA service uses postgres:postgres).
+  postgres_admin_url="${POSTGRES_ADMIN_URL:-${DATABASE_URL%/*}/postgres}"
 
   {
     echo "CI_CLEAN_DB=$CI_CLEAN_DB"
     echo "target_database=$db_name"
+    echo "postgres_admin_url=$postgres_admin_url"
   } >"$log_path"
 
   if [[ $POSTGRES_AVAILABLE -ne 1 ]]; then
@@ -237,7 +240,7 @@ prepare_test_database() {
 
   set +e
   if [[ "$CI_CLEAN_DB" = "1" ]]; then
-    psql "postgresql://localhost:5432/postgres" -v ON_ERROR_STOP=1 >>"$log_path" 2>&1 <<SQL
+    psql "$postgres_admin_url" -v ON_ERROR_STOP=1 >>"$log_path" 2>&1 <<SQL
 SELECT pg_terminate_backend(pid)
 FROM pg_stat_activity
 WHERE datname = '${db_name}' AND pid <> pg_backend_pid();
@@ -247,7 +250,7 @@ SQL
     exit_code=$?
     echo "action=drop_recreate_database" >>"$log_path"
   else
-    psql "postgresql://localhost:5432/postgres" -v ON_ERROR_STOP=1 -c "SELECT 1 FROM pg_database WHERE datname='${db_name}'" >>"$log_path" 2>&1
+    psql "$postgres_admin_url" -v ON_ERROR_STOP=1 -c "SELECT 1 FROM pg_database WHERE datname='${db_name}'" >>"$log_path" 2>&1
     exit_code=$?
     echo "action=reuse_existing_database" >>"$log_path"
   fi

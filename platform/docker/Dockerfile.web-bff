@@ -11,11 +11,17 @@ FROM base AS builder
 WORKDIR /app
 COPY package.json pnpm-workspace.yaml pnpm-lock.yaml ./
 COPY domains/core-bank/package.json domains/core-bank/
+COPY domains/cards/package.json domains/cards/
+COPY domains/investments/package.json domains/investments/
 COPY bff/web-bff/package.json bff/web-bff/
 RUN pnpm install --frozen-lockfile --filter @regenera/web-bff...
 COPY domains/core-bank domains/core-bank
+COPY domains/cards domains/cards
+COPY domains/investments domains/investments
 COPY bff/web-bff bff/web-bff
 RUN pnpm --filter @regenera/core-bank build
+RUN pnpm --filter @regenera/cards build
+RUN pnpm --filter @regenera/investments build
 RUN pnpm --filter @regenera/web-bff build
 
 FROM base AS runner
@@ -28,6 +34,8 @@ COPY --from=builder --chown=regenera:regenera /app/bff/web-bff/package.json ./
 COPY --from=builder --chown=regenera:regenera /app/bff/web-bff/dist ./dist
 COPY --from=builder --chown=regenera:regenera /app/bff/web-bff/node_modules ./node_modules
 COPY --from=builder --chown=regenera:regenera /app/domains/core-bank/dist ./node_modules/@regenera/core-bank/dist
+COPY --from=builder --chown=regenera:regenera /app/domains/cards/dist ./node_modules/@regenera/cards/dist
+COPY --from=builder --chown=regenera:regenera /app/domains/investments/dist ./node_modules/@regenera/investments/dist
 USER regenera
 EXPOSE 3200
 HEALTHCHECK --interval=15s --timeout=5s --start-period=30s --retries=3 \

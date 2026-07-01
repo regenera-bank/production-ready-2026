@@ -4,6 +4,9 @@ set -uo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 CORE="$ROOT/domains/core-bank"
+CARDS="$ROOT/domains/cards"
+INVESTMENTS="$ROOT/domains/investments"
+DESIGN="$ROOT/design-system/web"
 BFF="$ROOT/bff/web-bff"
 WORKER="$ROOT/workers/outbox-relay"
 WEB="$ROOT/apps/web-banking"
@@ -308,7 +311,20 @@ run_audits_and_sbom() {
   done
 }
 
+build_workspace_deps() {
+  if [[ $INSTALLED_CORE -eq 1 ]]; then
+    run_gate "build-deps-core-bank" "$CORE" npm run build
+  fi
+  if [[ -d "$CARDS/node_modules" ]]; then
+    run_gate "build-deps-cards" "$CARDS" npm run build
+  fi
+  if [[ -d "$INVESTMENTS/node_modules" ]]; then
+    run_gate "build-deps-investments" "$INVESTMENTS" npm run build
+  fi
+}
+
 run_lint_and_typecheck() {
+  build_workspace_deps
   run_gate "lint-core-bank" "$CORE" npm run lint
   run_gate "lint-web-bff" "$BFF" npm run lint
   run_gate "lint-web-banking" "$WEB" npm run lint
@@ -432,12 +448,16 @@ run_e2e_gate() {
     return 0
   fi
   run_gate "e2e-browsers" "$E2E" npx playwright install chromium
-  run_gate "e2e-playwright" "$E2E" env CI=1 npm run test:ci
+  run_gate "e2e-playwright" "$E2E" env CI=1 npx playwright test --reporter=line
 }
 
 install_packages() {
   run_gate "install-core-bank" "$CORE" npm install
   if [[ $LAST_GATE_EXIT -eq 0 && -d "$CORE/node_modules" ]]; then INSTALLED_CORE=1; fi
+
+  run_gate "install-cards" "$CARDS" npm install
+  run_gate "install-investments" "$INVESTMENTS" npm install
+  run_gate "install-design-web" "$DESIGN" npm install
 
   run_gate "install-web-bff" "$BFF" npm install
   if [[ $LAST_GATE_EXIT -eq 0 && -d "$BFF/node_modules" ]]; then INSTALLED_BFF=1; fi

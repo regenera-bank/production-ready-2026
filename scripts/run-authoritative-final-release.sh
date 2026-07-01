@@ -55,6 +55,8 @@ done
 log "§6 final commit"
 find docs/final docs/audit -name '*.md' -exec sed -i '' 's/[[:space:]]*$//' {} + 2>/dev/null || true
 git add -A
+# Evidência CI vive fora do repo (RELEASE_ROOT/evidence) — não congelar logs locais antigos
+git reset HEAD artifacts/verification/full-ci/ artifacts/verification/ci/ 2>/dev/null || true
 git diff --cached --check || fail "whitespace errors in staged files"
 COMMIT_SIGNATURE_STATUS="OK"
 if git commit -S -m "release: freeze full platform deployment candidate" 2>"$RELEASE_ROOT/commit-sign.log"; then

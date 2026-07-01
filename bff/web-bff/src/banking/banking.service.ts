@@ -33,11 +33,12 @@ import {
   TransferResponse,
 } from './banking.dto';
 
-const isAccountRefConflict = (
-  error: unknown,
-): error is ConflictException & { code: 'ACCOUNT_EXTERNAL_REFERENCE_EXISTS' } =>
+const isAccountRefConflict = (error: unknown): error is ConflictException =>
   error instanceof ConflictException &&
   error.code === 'ACCOUNT_EXTERNAL_REFERENCE_EXISTS';
+
+const conflictCode = (error: unknown): string | undefined =>
+  error instanceof ConflictException ? error.code : undefined;
 
 interface PixDirectoryEntry {
   userId: string;
@@ -310,10 +311,7 @@ export class BankingService implements OnModuleInit {
   }
 
   private rethrowPaymentError(error: unknown): never {
-    if (
-      error instanceof ConflictException &&
-      error.code === 'PAYMENT_INSUFFICIENT_FUNDS'
-    ) {
+    if (conflictCode(error) === 'PAYMENT_INSUFFICIENT_FUNDS') {
       throw new HttpConflictException('Saldo insuficiente');
     }
     throw error;

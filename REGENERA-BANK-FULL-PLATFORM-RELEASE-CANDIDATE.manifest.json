@@ -1,0 +1,12 @@
+{
+  "package": "REGENERA-BANK-FULL-PLATFORM-RELEASE-CANDIDATE.zip",
+  "branch": "main",
+  "commit": "9b02406eb46868a37c24776038e092f3bd228737",
+  "treeHash": "f603a0bebb013487e63ece608b51d67a52f19661",
+  "sha256": "a38c74fb4ee47f62fc26572d653d8e140aa9af41d0c58e078c041d7268a6da3c",
+  "fileCount": 18555,
+  "bytes": 213713735,
+  "createdAtUtc": "2026-07-01T00:21:32Z",
+  "deployExecuted": false,
+  "secretsInPackage": false
+}

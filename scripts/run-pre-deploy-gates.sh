@@ -443,7 +443,7 @@ run_e2e_gate() {
     PIPELINE_FAIL=1
     return 0
   fi
-  run_gate "e2e-install" "$E2E" npm install
+  run_gate "e2e-install" "$E2E" npm install --include=dev
   if [[ $LAST_GATE_EXIT -ne 0 ]]; then
     return 0
   fi
@@ -452,20 +452,20 @@ run_e2e_gate() {
 }
 
 install_packages() {
-  run_gate "install-core-bank" "$CORE" npm install
+  run_gate "install-core-bank" "$CORE" npm install --include=dev
   if [[ $LAST_GATE_EXIT -eq 0 && -d "$CORE/node_modules" ]]; then INSTALLED_CORE=1; fi
 
-  run_gate "install-cards" "$CARDS" npm install
-  run_gate "install-investments" "$INVESTMENTS" npm install
-  run_gate "install-design-web" "$DESIGN" npm install
+  run_gate "install-cards" "$CARDS" npm install --include=dev
+  run_gate "install-investments" "$INVESTMENTS" npm install --include=dev
+  run_gate "install-design-web" "$DESIGN" npm install --include=dev
 
-  run_gate "install-web-bff" "$BFF" npm install
+  run_gate "install-web-bff" "$BFF" npm install --include=dev
   if [[ $LAST_GATE_EXIT -eq 0 && -d "$BFF/node_modules" ]]; then INSTALLED_BFF=1; fi
 
-  run_gate "install-outbox-relay" "$WORKER" npm install
+  run_gate "install-outbox-relay" "$WORKER" npm install --include=dev
   if [[ $LAST_GATE_EXIT -eq 0 && -d "$WORKER/node_modules" ]]; then INSTALLED_WORKER=1; fi
 
-  run_gate "install-web-banking" "$WEB" npm install
+  run_gate "install-web-banking" "$WEB" npm install --include=dev
   if [[ $LAST_GATE_EXIT -eq 0 && -d "$WEB/node_modules" ]]; then INSTALLED_WEB=1; fi
 }
 

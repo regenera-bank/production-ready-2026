@@ -1,6 +1,6 @@
-timestamp_utc: 2026-07-01T00:04:04Z
-git_head: ee5501f0fc4bc65b45fb7cca8554451c7458a07a
-git_tree: e4b6c52fa364d486870761f69b317f5d8b533db1
+timestamp_utc: 2026-07-01T00:10:48Z
+git_head: 7f4e6612d989500792fed050a7a91a8bb4f2b9e2
+git_tree: 80b1b973ea80684d819d4610afd20805646b570f
 implantable_manifest: artifacts/verification/full-ci/run1/hash/implantable-sources.sha256
 implantable_manifest_sha256: b7fef2e6ebead77309f7f9bc8bb7c2bb133c2f2699b03857449f719c887967ea
 line_count: 243

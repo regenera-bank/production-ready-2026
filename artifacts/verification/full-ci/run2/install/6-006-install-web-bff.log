@@ -1,5 +1,5 @@
 === GATE: install-web-bff ===
-timestamp_utc: 2026-07-01T00:05:54Z
+timestamp_utc: 2026-07-01T00:12:35Z
 cwd: /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/bff/web-bff
 command: npm install
 node: v26.0.0
@@ -9,7 +9,7 @@ REDIS_URL: redis://localhost:6379
 CI_RUN_ID: 2 CI_CLEAN_DB: 0
 --- stdout/stderr ---
 
-up to date, audited 721 packages in 889ms
+up to date, audited 721 packages in 890ms
 
 117 packages are looking for funding
   run `npm fund` for details

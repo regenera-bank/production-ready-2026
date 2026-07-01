@@ -1,0 +1,140 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.5",
+  "version": 1,
+  "metadata": {
+    "component": {
+      "type": "application",
+      "name": "@regenera/web-bff",
+      "version": "0.0.1"
+    }
+  },
+  "components": [
+    {
+      "type": "library",
+      "name": "@google/genai",
+      "version": "1.39.0"
+    },
+    {
+      "type": "library",
+      "name": "@nestjs/common",
+      "version": "11.1.27"
+    },
+    {
+      "type": "library",
+      "name": "@nestjs/core",
+      "version": "11.1.27"
+    },
+    {
+      "type": "library",
+      "name": "@nestjs/platform-express",
+      "version": "11.1.27"
+    },
+    {
+      "type": "library",
+      "name": "@regenera/core-bank",
+      "version": "0.0.0"
+    },
+    {
+      "type": "library",
+      "name": "@regenera/cards",
+      "version": "0.0.0"
+    },
+    {
+      "type": "library",
+      "name": "@regenera/investments",
+      "version": "0.0.0"
+    },
+    {
+      "type": "library",
+      "name": "@simplewebauthn/server",
+      "version": "11.0.0"
+    },
+    {
+      "type": "library",
+      "name": "@simplewebauthn/types",
+      "version": "11.0.0"
+    },
+    {
+      "type": "library",
+      "name": "firebase-admin",
+      "version": "12.7.0"
+    },
+    {
+      "type": "library",
+      "name": "google-auth-library",
+      "version": "10.9.0"
+    },
+    {
+      "type": "library",
+      "name": "reflect-metadata",
+      "version": "0.2.2"
+    },
+    {
+      "type": "library",
+      "name": "rxjs",
+      "version": "7.8.1"
+    },
+    {
+      "type": "library",
+      "name": "@nestjs/cli",
+      "version": "11.0.0"
+    },
+    {
+      "type": "library",
+      "name": "@nestjs/schematics",
+      "version": "11.0.0"
+    },
+    {
+      "type": "library",
+      "name": "@nestjs/testing",
+      "version": "11.1.27"
+    },
+    {
+      "type": "library",
+      "name": "@types/express",
+      "version": "4.17.21"
+    },
+    {
+      "type": "library",
+      "name": "@types/jest",
+      "version": "29.5.14"
+    },
+    {
+      "type": "library",
+      "name": "@types/node",
+      "version": "20.17.10"
+    },
+    {
+      "type": "library",
+      "name": "jest",
+      "version": "29.7.0"
+    },
+    {
+      "type": "library",
+      "name": "ts-jest",
+      "version": "29.2.5"
+    },
+    {
+      "type": "library",
+      "name": "ts-node",
+      "version": "10.9.2"
+    },
+    {
+      "type": "library",
+      "name": "tsconfig-paths",
+      "version": "4.2.0"
+    },
+    {
+      "type": "library",
+      "name": "typescript",
+      "version": "5.7.2"
+    }
+  ],
+  "properties": [
+    {
+      "name": "regenera:sbom:fallback",
+      "value": "package.json-manifest"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "throughputRps": 33.33,
+  "p50Ms": 0,
+  "p95Ms": 0,
+  "p99Ms": 0,
+  "errorRate": 0.0,
+  "requests": 40,
+  "ok": 1,
+  "errors": 0,
+  "soakSeconds": 15,
+  "environment": "local-controlled",
+  "declaredCapacity": "NOT_PRODUCTION_CAPACITY"
+}

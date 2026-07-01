@@ -1,0 +1,105 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.5",
+  "version": 1,
+  "metadata": {
+    "component": {
+      "type": "application",
+      "name": "@regenera/partner-api-facade",
+      "version": "1.0.0"
+    }
+  },
+  "components": [
+    {
+      "type": "library",
+      "name": "@nestjs/common",
+      "version": "10.4.15"
+    },
+    {
+      "type": "library",
+      "name": "@nestjs/core",
+      "version": "10.4.15"
+    },
+    {
+      "type": "library",
+      "name": "@nestjs/platform-express",
+      "version": "10.4.15"
+    },
+    {
+      "type": "library",
+      "name": "jose",
+      "version": "6.2.3"
+    },
+    {
+      "type": "library",
+      "name": "reflect-metadata",
+      "version": "0.2.2"
+    },
+    {
+      "type": "library",
+      "name": "rxjs",
+      "version": "7.8.1"
+    },
+    {
+      "type": "library",
+      "name": "zod",
+      "version": "3.24.2"
+    },
+    {
+      "type": "library",
+      "name": "@nestjs/cli",
+      "version": "10.4.9"
+    },
+    {
+      "type": "library",
+      "name": "@nestjs/schematics",
+      "version": "10.2.3"
+    },
+    {
+      "type": "library",
+      "name": "@nestjs/testing",
+      "version": "10.4.15"
+    },
+    {
+      "type": "library",
+      "name": "@types/express",
+      "version": "4.17.21"
+    },
+    {
+      "type": "library",
+      "name": "@types/jest",
+      "version": "29.5.14"
+    },
+    {
+      "type": "library",
+      "name": "@types/node",
+      "version": "20.17.10"
+    },
+    {
+      "type": "library",
+      "name": "jest",
+      "version": "29.7.0"
+    },
+    {
+      "type": "library",
+      "name": "ts-jest",
+      "version": "29.2.5"
+    },
+    {
+      "type": "library",
+      "name": "ts-node",
+      "version": "10.9.2"
+    },
+    {
+      "type": "library",
+      "name": "typescript",
+      "version": "5.7.2"
+    }
+  ],
+  "properties": [
+    {
+      "name": "regenera:sbom:fallback",
+      "value": "package.json-manifest"
+    }
+  ]
+}

@@ -1,0 +1,120 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.5",
+  "version": 1,
+  "metadata": {
+    "component": {
+      "type": "application",
+      "name": "@regenera/web-banking",
+      "version": "0.0.1"
+    }
+  },
+  "components": [
+    {
+      "type": "library",
+      "name": "@regenera/design-web",
+      "version": "0.0.0"
+    },
+    {
+      "type": "library",
+      "name": "@simplewebauthn/browser",
+      "version": "11.0.0"
+    },
+    {
+      "type": "library",
+      "name": "@simplewebauthn/types",
+      "version": "11.0.0"
+    },
+    {
+      "type": "library",
+      "name": "firebase",
+      "version": "12.15.0"
+    },
+    {
+      "type": "library",
+      "name": "lucide-react",
+      "version": "0.563.0"
+    },
+    {
+      "type": "library",
+      "name": "react",
+      "version": "19.2.4"
+    },
+    {
+      "type": "library",
+      "name": "react-dom",
+      "version": "19.2.4"
+    },
+    {
+      "type": "library",
+      "name": "@testing-library/jest-dom",
+      "version": "6.6.3"
+    },
+    {
+      "type": "library",
+      "name": "@testing-library/react",
+      "version": "16.1.0"
+    },
+    {
+      "type": "library",
+      "name": "@types/react",
+      "version": "19.2.14"
+    },
+    {
+      "type": "library",
+      "name": "@types/react-dom",
+      "version": "19.2.3"
+    },
+    {
+      "type": "library",
+      "name": "@vitejs/plugin-react",
+      "version": "4.3.4"
+    },
+    {
+      "type": "library",
+      "name": "autoprefixer",
+      "version": "10.4.20"
+    },
+    {
+      "type": "library",
+      "name": "jsdom",
+      "version": "25.0.1"
+    },
+    {
+      "type": "library",
+      "name": "postcss",
+      "version": "8.4.49"
+    },
+    {
+      "type": "library",
+      "name": "tailwindcss",
+      "version": "3.4.16"
+    },
+    {
+      "type": "library",
+      "name": "tailwindcss-animate",
+      "version": "1.0.7"
+    },
+    {
+      "type": "library",
+      "name": "typescript",
+      "version": "5.7.2"
+    },
+    {
+      "type": "library",
+      "name": "vite",
+      "version": "6.0.3"
+    },
+    {
+      "type": "library",
+      "name": "vitest",
+      "version": "3.2.6"
+    }
+  ],
+  "properties": [
+    {
+      "name": "regenera:sbom:fallback",
+      "value": "package.json-manifest"
+    }
+  ]
+}

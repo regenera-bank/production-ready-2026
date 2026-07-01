@@ -1,5 +1,5 @@
 === GATE: unit-test-web-bff ===
-timestamp_utc: 2026-07-01T00:05:04Z
+timestamp_utc: 2026-07-01T00:11:48Z
 cwd: /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/bff/web-bff
 command: npm test
 node: v26.0.0
@@ -37,9 +37,7 @@ Artefatos compilados removidos de dist/ e src/
 > @regenera/web-bff@0.0.1 test
 > jest --passWithNoTests
 
-ts-jest[ts-compiler] (WARN) Got a `.js` file to compile while `allowJs` option is not set to `true` (file: /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/domains/cards/dist/index.js). To fix this:
-  - if you want TypeScript to process JS files, set `allowJs` to `true` in your TypeScript config (usually tsconfig.json)
-  - if you do not want TypeScript to process your `.js` files, in your Jest config change the `transform` key which value is `ts-jest` so that it does not match `.js` files anymore
+PASS src/common/pii-redaction.spec.ts
 PASS src/config/production-kyc-guard.spec.ts
   ● Console
 
@@ -77,11 +75,14 @@ PASS src/config/production-kyc-guard.spec.ts
       at Object.throwingMatcher [as toThrow] (../node_modules/expect/build/index.js:320:21)
       at Object.<anonymous> (config/production-kyc-guard.spec.ts:31:49)
 
+PASS src/address/address.service.spec.ts
+PASS src/integrations/prometeo-payments/payment-monitoring.service.spec.ts
+ts-jest[ts-compiler] (WARN) Got a `.js` file to compile while `allowJs` option is not set to `true` (file: /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/domains/cards/dist/index.js). To fix this:
+  - if you want TypeScript to process JS files, set `allowJs` to `true` in your TypeScript config (usually tsconfig.json)
+  - if you do not want TypeScript to process your `.js` files, in your Jest config change the `transform` key which value is `ts-jest` so that it does not match `.js` files anymore
 ts-jest[ts-compiler] (WARN) Got a `.js` file to compile while `allowJs` option is not set to `true` (file: /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/domains/cards/dist/cards.module.js). To fix this:
   - if you want TypeScript to process JS files, set `allowJs` to `true` in your TypeScript config (usually tsconfig.json)
   - if you do not want TypeScript to process your `.js` files, in your Jest config change the `transform` key which value is `ts-jest` so that it does not match `.js` files anymore
-PASS src/common/pii-redaction.spec.ts
-PASS src/address/address.service.spec.ts
 PASS src/health.controller.spec.ts
 ts-jest[ts-compiler] (WARN) Got a `.js` file to compile while `allowJs` option is not set to `true` (file: /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/domains/cards/dist/adapters/production/cards-production.adapter.js). To fix this:
   - if you want TypeScript to process JS files, set `allowJs` to `true` in your TypeScript config (usually tsconfig.json)
@@ -95,24 +96,26 @@ ts-jest[ts-compiler] (WARN) Got a `.js` file to compile while `allowJs` option i
 ts-jest[ts-compiler] (WARN) Got a `.js` file to compile while `allowJs` option is not set to `true` (file: /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/domains/investments/dist/investments.module.js). To fix this:
   - if you want TypeScript to process JS files, set `allowJs` to `true` in your TypeScript config (usually tsconfig.json)
   - if you do not want TypeScript to process your `.js` files, in your Jest config change the `transform` key which value is `ts-jest` so that it does not match `.js` files anymore
-ts-jest[ts-compiler] (WARN) Got a `.js` file to compile while `allowJs` option is not set to `true` (file: /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/domains/investments/dist/adapters/production/investments-production.adapter.js). To fix this:
-  - if you want TypeScript to process JS files, set `allowJs` to `true` in your TypeScript config (usually tsconfig.json)
-  - if you do not want TypeScript to process your `.js` files, in your Jest config change the `transform` key which value is `ts-jest` so that it does not match `.js` files anymore
-ts-jest[ts-compiler] (WARN) Got a `.js` file to compile while `allowJs` option is not set to `true` (file: /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/domains/investments/dist/investments.service.js). To fix this:
-  - if you want TypeScript to process JS files, set `allowJs` to `true` in your TypeScript config (usually tsconfig.json)
-  - if you do not want TypeScript to process your `.js` files, in your Jest config change the `transform` key which value is `ts-jest` so that it does not match `.js` files anymore
 ts-jest[ts-compiler] (WARN) Got a `.js` file to compile while `allowJs` option is not set to `true` (file: /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/domains/core-bank/dist/public-api.js). To fix this:
   - if you want TypeScript to process JS files, set `allowJs` to `true` in your TypeScript config (usually tsconfig.json)
   - if you do not want TypeScript to process your `.js` files, in your Jest config change the `transform` key which value is `ts-jest` so that it does not match `.js` files anymore
 ts-jest[ts-compiler] (WARN) Got a `.js` file to compile while `allowJs` option is not set to `true` (file: /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/domains/core-bank/dist/accounts/account.entity.js). To fix this:
   - if you want TypeScript to process JS files, set `allowJs` to `true` in your TypeScript config (usually tsconfig.json)
   - if you do not want TypeScript to process your `.js` files, in your Jest config change the `transform` key which value is `ts-jest` so that it does not match `.js` files anymore
+ts-jest[ts-compiler] (WARN) Got a `.js` file to compile while `allowJs` option is not set to `true` (file: /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/domains/investments/dist/adapters/production/investments-production.adapter.js). To fix this:
+  - if you want TypeScript to process JS files, set `allowJs` to `true` in your TypeScript config (usually tsconfig.json)
+  - if you do not want TypeScript to process your `.js` files, in your Jest config change the `transform` key which value is `ts-jest` so that it does not match `.js` files anymore
+ts-jest[ts-compiler] (WARN) Got a `.js` file to compile while `allowJs` option is not set to `true` (file: /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/domains/investments/dist/investments.service.js). To fix this:
+  - if you want TypeScript to process JS files, set `allowJs` to `true` in your TypeScript config (usually tsconfig.json)
+  - if you do not want TypeScript to process your `.js` files, in your Jest config change the `transform` key which value is `ts-jest` so that it does not match `.js` files anymore
 PASS src/products/products.service.spec.ts
-PASS src/integrations/prometeo-payments/payment-monitoring.service.spec.ts
 ts-jest[ts-compiler] (WARN) Got a `.js` file to compile while `allowJs` option is not set to `true` (file: /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/domains/core-bank/dist/core-bank.module.js). To fix this:
   - if you want TypeScript to process JS files, set `allowJs` to `true` in your TypeScript config (usually tsconfig.json)
   - if you do not want TypeScript to process your `.js` files, in your Jest config change the `transform` key which value is `ts-jest` so that it does not match `.js` files anymore
 ts-jest[ts-compiler] (WARN) Got a `.js` file to compile while `allowJs` option is not set to `true` (file: /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/domains/core-bank/dist/accounts/account-registry.service.js). To fix this:
+  - if you want TypeScript to process JS files, set `allowJs` to `true` in your TypeScript config (usually tsconfig.json)
+  - if you do not want TypeScript to process your `.js` files, in your Jest config change the `transform` key which value is `ts-jest` so that it does not match `.js` files anymore
+ts-jest[ts-compiler] (WARN) Got a `.js` file to compile while `allowJs` option is not set to `true` (file: /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/domains/core-bank/dist/audit/audit-chain.service.js). To fix this:
   - if you want TypeScript to process JS files, set `allowJs` to `true` in your TypeScript config (usually tsconfig.json)
   - if you do not want TypeScript to process your `.js` files, in your Jest config change the `transform` key which value is `ts-jest` so that it does not match `.js` files anymore
 ts-jest[ts-compiler] (WARN) Got a `.js` file to compile while `allowJs` option is not set to `true` (file: /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/domains/core-bank/dist/audit/audit-chain.service.js). To fix this:
@@ -127,7 +130,16 @@ ts-jest[ts-compiler] (WARN) Got a `.js` file to compile while `allowJs` option i
 ts-jest[ts-compiler] (WARN) Got a `.js` file to compile while `allowJs` option is not set to `true` (file: /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/domains/core-bank/dist/idempotency/idempotency.service.js). To fix this:
   - if you want TypeScript to process JS files, set `allowJs` to `true` in your TypeScript config (usually tsconfig.json)
   - if you do not want TypeScript to process your `.js` files, in your Jest config change the `transform` key which value is `ts-jest` so that it does not match `.js` files anymore
+ts-jest[ts-compiler] (WARN) Got a `.js` file to compile while `allowJs` option is not set to `true` (file: /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/domains/core-bank/dist/idempotency/idempotency.service.js). To fix this:
+  - if you want TypeScript to process JS files, set `allowJs` to `true` in your TypeScript config (usually tsconfig.json)
+  - if you do not want TypeScript to process your `.js` files, in your Jest config change the `transform` key which value is `ts-jest` so that it does not match `.js` files anymore
 ts-jest[ts-compiler] (WARN) Got a `.js` file to compile while `allowJs` option is not set to `true` (file: /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/domains/core-bank/dist/ledger/ledger.service.js). To fix this:
+  - if you want TypeScript to process JS files, set `allowJs` to `true` in your TypeScript config (usually tsconfig.json)
+  - if you do not want TypeScript to process your `.js` files, in your Jest config change the `transform` key which value is `ts-jest` so that it does not match `.js` files anymore
+ts-jest[ts-compiler] (WARN) Got a `.js` file to compile while `allowJs` option is not set to `true` (file: /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/domains/core-bank/dist/ledger/ledger.service.js). To fix this:
+  - if you want TypeScript to process JS files, set `allowJs` to `true` in your TypeScript config (usually tsconfig.json)
+  - if you do not want TypeScript to process your `.js` files, in your Jest config change the `transform` key which value is `ts-jest` so that it does not match `.js` files anymore
+ts-jest[ts-compiler] (WARN) Got a `.js` file to compile while `allowJs` option is not set to `true` (file: /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/domains/core-bank/dist/outbox/outbox.service.js). To fix this:
   - if you want TypeScript to process JS files, set `allowJs` to `true` in your TypeScript config (usually tsconfig.json)
   - if you do not want TypeScript to process your `.js` files, in your Jest config change the `transform` key which value is `ts-jest` so that it does not match `.js` files anymore
 ts-jest[ts-compiler] (WARN) Got a `.js` file to compile while `allowJs` option is not set to `true` (file: /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/domains/core-bank/dist/outbox/outbox.service.js). To fix this:
@@ -136,13 +148,25 @@ ts-jest[ts-compiler] (WARN) Got a `.js` file to compile while `allowJs` option i
 ts-jest[ts-compiler] (WARN) Got a `.js` file to compile while `allowJs` option is not set to `true` (file: /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/domains/core-bank/dist/payments/payment-engine.service.js). To fix this:
   - if you want TypeScript to process JS files, set `allowJs` to `true` in your TypeScript config (usually tsconfig.json)
   - if you do not want TypeScript to process your `.js` files, in your Jest config change the `transform` key which value is `ts-jest` so that it does not match `.js` files anymore
+ts-jest[ts-compiler] (WARN) Got a `.js` file to compile while `allowJs` option is not set to `true` (file: /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/domains/core-bank/dist/payments/payment-engine.service.js). To fix this:
+  - if you want TypeScript to process JS files, set `allowJs` to `true` in your TypeScript config (usually tsconfig.json)
+  - if you do not want TypeScript to process your `.js` files, in your Jest config change the `transform` key which value is `ts-jest` so that it does not match `.js` files anymore
+ts-jest[ts-compiler] (WARN) Got a `.js` file to compile while `allowJs` option is not set to `true` (file: /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/domains/core-bank/dist/payments/payment.entity.js). To fix this:
+  - if you want TypeScript to process JS files, set `allowJs` to `true` in your TypeScript config (usually tsconfig.json)
+  - if you do not want TypeScript to process your `.js` files, in your Jest config change the `transform` key which value is `ts-jest` so that it does not match `.js` files anymore
 ts-jest[ts-compiler] (WARN) Got a `.js` file to compile while `allowJs` option is not set to `true` (file: /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/domains/core-bank/dist/payments/payment.entity.js). To fix this:
   - if you want TypeScript to process JS files, set `allowJs` to `true` in your TypeScript config (usually tsconfig.json)
   - if you do not want TypeScript to process your `.js` files, in your Jest config change the `transform` key which value is `ts-jest` so that it does not match `.js` files anymore
 ts-jest[ts-compiler] (WARN) Got a `.js` file to compile while `allowJs` option is not set to `true` (file: /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/domains/core-bank/dist/reconciliation/reconciliation.service.js). To fix this:
   - if you want TypeScript to process JS files, set `allowJs` to `true` in your TypeScript config (usually tsconfig.json)
   - if you do not want TypeScript to process your `.js` files, in your Jest config change the `transform` key which value is `ts-jest` so that it does not match `.js` files anymore
+ts-jest[ts-compiler] (WARN) Got a `.js` file to compile while `allowJs` option is not set to `true` (file: /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/domains/core-bank/dist/reconciliation/reconciliation.service.js). To fix this:
+  - if you want TypeScript to process JS files, set `allowJs` to `true` in your TypeScript config (usually tsconfig.json)
+  - if you do not want TypeScript to process your `.js` files, in your Jest config change the `transform` key which value is `ts-jest` so that it does not match `.js` files anymore
 ts-jest[ts-compiler] (WARN) Got a `.js` file to compile while `allowJs` option is not set to `true` (file: /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/domains/core-bank/dist/pix/pix-engine.service.js). To fix this:
+  - if you want TypeScript to process JS files, set `allowJs` to `true` in your TypeScript config (usually tsconfig.json)
+  - if you do not want TypeScript to process your `.js` files, in your Jest config change the `transform` key which value is `ts-jest` so that it does not match `.js` files anymore
+ts-jest[ts-compiler] (WARN) Got a `.js` file to compile while `allowJs` option is not set to `true` (file: /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/domains/core-bank/dist/db/postgres-bootstrap.service.js). To fix this:
   - if you want TypeScript to process JS files, set `allowJs` to `true` in your TypeScript config (usually tsconfig.json)
   - if you do not want TypeScript to process your `.js` files, in your Jest config change the `transform` key which value is `ts-jest` so that it does not match `.js` files anymore
 ts-jest[ts-compiler] (WARN) Got a `.js` file to compile while `allowJs` option is not set to `true` (file: /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/domains/core-bank/dist/db/postgres-bootstrap.service.js). To fix this:
@@ -178,17 +202,23 @@ ts-jest[ts-compiler] (WARN) Got a `.js` file to compile while `allowJs` option i
 ts-jest[ts-compiler] (WARN) Got a `.js` file to compile while `allowJs` option is not set to `true` (file: /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/domains/core-bank/dist/db/postgres/postgres-reconciliation.repository.js). To fix this:
   - if you want TypeScript to process JS files, set `allowJs` to `true` in your TypeScript config (usually tsconfig.json)
   - if you do not want TypeScript to process your `.js` files, in your Jest config change the `transform` key which value is `ts-jest` so that it does not match `.js` files anymore
+ts-jest[ts-compiler] (WARN) Got a `.js` file to compile while `allowJs` option is not set to `true` (file: /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/domains/core-bank/dist/db/postgres/postgres-reconciliation.repository.js). To fix this:
+  - if you want TypeScript to process JS files, set `allowJs` to `true` in your TypeScript config (usually tsconfig.json)
+  - if you do not want TypeScript to process your `.js` files, in your Jest config change the `transform` key which value is `ts-jest` so that it does not match `.js` files anymore
+ts-jest[ts-compiler] (WARN) Got a `.js` file to compile while `allowJs` option is not set to `true` (file: /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/domains/core-bank/dist/holds/ledger-signed-balance.provider.js). To fix this:
+  - if you want TypeScript to process JS files, set `allowJs` to `true` in your TypeScript config (usually tsconfig.json)
+  - if you do not want TypeScript to process your `.js` files, in your Jest config change the `transform` key which value is `ts-jest` so that it does not match `.js` files anymore
 ts-jest[ts-compiler] (WARN) Got a `.js` file to compile while `allowJs` option is not set to `true` (file: /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/domains/core-bank/dist/holds/ledger-signed-balance.provider.js). To fix this:
   - if you want TypeScript to process JS files, set `allowJs` to `true` in your TypeScript config (usually tsconfig.json)
   - if you do not want TypeScript to process your `.js` files, in your Jest config change the `transform` key which value is `ts-jest` so that it does not match `.js` files anymore
 PASS src/auth/auth.service.spec.ts
-PASS src/banking/banking.service.spec.ts
 PASS src/onboarding/onboarding.service.spec.ts
+PASS src/banking/banking.service.spec.ts
 
 Test Suites: 9 passed, 9 total
 Tests:       37 passed, 37 total
 Snapshots:   0 total
-Time:        2.835 s, estimated 3 s
+Time:        2.667 s, estimated 3 s
 Ran all test suites.
 --- end ---
 exit_code: 0

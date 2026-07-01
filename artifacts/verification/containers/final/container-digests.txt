@@ -1,0 +1,2 @@
+core-bank	regenera/core-bank:final	sha256:c011310d97bf70ee2e08773afc382c31ec82a00649caa901b8b1d88b4c1e2ba2	57224144
+outbox-relay	regenera/outbox-relay:final	sha256:5d0e2d7e4db7c2f3390a856794b12e90a62af9b1c22bba9d6c4b7f37005662e3	57206686

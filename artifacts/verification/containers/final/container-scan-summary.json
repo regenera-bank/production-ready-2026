@@ -1,0 +1,5 @@
+{"images":[
+{"name":"core-bank","tag":"regenera/core-bank:final","digest":"sha256:c011310d97bf70ee2e08773afc382c31ec82a00649caa901b8b1d88b4c1e2ba2","size":57224144,"user":"regenera","base":"
+unknown"},
+{"name":"outbox-relay","tag":"regenera/outbox-relay:final","digest":"sha256:5d0e2d7e4db7c2f3390a856794b12e90a62af9b1c22bba9d6c4b7f37005662e3","size":57206686,"user":"regenera","base":"
+unknown"}

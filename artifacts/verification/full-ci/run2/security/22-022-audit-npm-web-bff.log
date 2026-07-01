@@ -1,5 +1,5 @@
 === GATE: audit-npm-web-bff ===
-timestamp_utc: 2026-07-01T00:06:33Z
+timestamp_utc: 2026-07-01T00:13:16Z
 cwd: /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/bff/web-bff
 command: bash /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/scripts/npm-audit-runtime.sh
 node: v26.0.0

@@ -1,0 +1,7 @@
+{
+  "rtoObservedSeconds": 6,
+  "rpoObservedSeconds": 0,
+  "backupBytes": 41105,
+  "executedAtUtc": "2026-07-01T00:14:33Z",
+  "result": "PASS"
+}

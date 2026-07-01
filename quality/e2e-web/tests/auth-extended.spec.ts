@@ -1,10 +1,11 @@
 import { expect, test } from '@playwright/test';
-import { authHeaders, loginUser, registerUser } from './helpers/bff-api';
+import { authHeaders, completeKycAndOpenAccount, registerUser } from './helpers/bff-api';
 
 test.describe('BFF auth — extended', () => {
   test('sessão válida acessa rota protegida', async ({ request }) => {
-    const document = '60746948030';
+    const document = '33211229091';
     const session = await registerUser(request, document, 'E2E Protected');
+    await completeKycAndOpenAccount(request, session.accessToken);
     const dash = await request.get('banking/dashboard', {
       headers: authHeaders(session.accessToken),
     });
@@ -48,13 +49,19 @@ test.describe('BFF auth — extended', () => {
   });
 
   test('rate limit de password reset não vaza existência', async ({ request }) => {
-    const responses = [];
-    for (let i = 0; i < 6; i++) {
+    const document = '87702044000';
+    await registerUser(request, document, 'E2E Rate');
+    for (let i = 0; i < 5; i++) {
       const res = await request.post('auth/password-reset/request', {
-        data: { document: '99999999999' },
+        data: { document },
       });
-      responses.push(res.status());
+      expect(res.ok()).toBeTruthy();
+      const body = (await res.json()) as { acknowledged: boolean };
+      expect(body.acknowledged).toBe(true);
     }
-    expect(responses.every((s) => s === 200 || s === 429)).toBeTruthy();
+    const blocked = await request.post('auth/password-reset/request', {
+      data: { document },
+    });
+    expect(blocked.status()).toBe(429);
   });
 });

@@ -1,14 +1,14 @@
 {
   "run_id": 2,
   "clean_db": 0,
-  "result": "PASS",
-  "started_at": "2026-06-30T23:29:09Z",
-  "finished_at": "2026-06-30T23:31:05Z",
+  "result": "FAIL",
+  "started_at": "2026-07-01T00:05:50Z",
+  "finished_at": "2026-07-01T00:07:34Z",
   "postgres_available": 1,
   "redis_available": 1,
   "database_url": "postgresql://localhost:5432/regenera_core_test",
   "redis_url": "redis://localhost:6379",
   "artifact_dir": "artifacts/verification/full-ci/run2",
   "gates_executed": 50,
-  "pipeline_fail": 0
+  "pipeline_fail": 1
 }

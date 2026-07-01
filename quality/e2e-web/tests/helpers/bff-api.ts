@@ -71,9 +71,17 @@ export async function completeKycAndOpenAccount(
   token: string,
 ): Promise<void> {
   const headers = authHeaders(token);
-  const submit = await request.post('onboarding/kyc/submit', { headers });
-  if (!submit.ok()) {
-    throw new Error(`kyc/submit failed: ${submit.status()} ${await submit.text()}`);
+  for (let attempt = 0; attempt < 3; attempt++) {
+    const submit = await request.post('onboarding/kyc/submit', { headers });
+    if (!submit.ok()) {
+      throw new Error(`kyc/submit failed: ${submit.status()} ${await submit.text()}`);
+    }
+    const status = await request.get('onboarding/status', { headers });
+    const body = (await status.json()) as { kycStep?: string };
+    if (body.kycStep === 'document' || body.kycStep === 'selfie' || body.kycStep === 'done') {
+      break;
+    }
+    await new Promise((r) => setTimeout(r, 200));
   }
 
   const document = await request.post('onboarding/kyc/document', {

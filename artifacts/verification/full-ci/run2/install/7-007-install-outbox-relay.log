@@ -1,5 +1,5 @@
 === GATE: install-outbox-relay ===
-timestamp_utc: 2026-06-30T23:29:14Z
+timestamp_utc: 2026-07-01T00:05:55Z
 cwd: /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/workers/outbox-relay
 command: npm install
 node: v26.0.0
@@ -9,7 +9,7 @@ REDIS_URL: redis://localhost:6379
 CI_RUN_ID: 2 CI_CLEAN_DB: 0
 --- stdout/stderr ---
 
-up to date, audited 317 packages in 806ms
+up to date, audited 317 packages in 695ms
 
 36 packages are looking for funding
   run `npm fund` for details

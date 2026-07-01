@@ -1,5 +1,5 @@
 === GATE: sbom-web-banking ===
-timestamp_utc: 2026-06-30T23:30:18Z
+timestamp_utc: 2026-07-01T00:06:39Z
 cwd: /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/apps/web-banking
 command: bash /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/scripts/generate-sbom.sh /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/artifacts/verification/full-ci/run2/security/sbom-web-banking.json
 node: v26.0.0
@@ -8,5 +8,6 @@ DATABASE_URL: postgresql://localhost:5432/regenera_core_test
 REDIS_URL: redis://localhost:6379
 CI_RUN_ID: 2 CI_CLEAN_DB: 0
 --- stdout/stderr ---
+SBOM fallback manifest: 20 components
 --- end ---
 exit_code: 0

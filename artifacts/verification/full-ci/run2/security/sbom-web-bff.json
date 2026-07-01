@@ -37,6 +37,16 @@
     },
     {
       "type": "library",
+      "name": "@regenera/cards",
+      "version": "0.0.0"
+    },
+    {
+      "type": "library",
+      "name": "@regenera/investments",
+      "version": "0.0.0"
+    },
+    {
+      "type": "library",
       "name": "@simplewebauthn/server",
       "version": "11.0.0"
     },

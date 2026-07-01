@@ -1,5 +1,5 @@
 === GATE: unit-test-web-banking ===
-timestamp_utc: 2026-06-30T23:28:34Z
+timestamp_utc: 2026-07-01T00:05:10Z
 cwd: /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/apps/web-banking
 command: npm test
 node: v26.0.0
@@ -16,12 +16,12 @@ CI_RUN_ID: 1 CI_CLEAN_DB: 1
  RUN  v3.2.6 /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/apps/web-banking
 
  ✓ src/platform/money.spec.ts (5 tests) 2ms
- ✓ src/platform/bff-client.money.spec.ts (3 tests) 9ms
+ ✓ src/platform/bff-client.money.spec.ts (3 tests) 8ms
 
  Test Files  2 passed (2)
       Tests  8 passed (8)
-   Start at  20:28:35
-   Duration  469ms (transform 45ms, setup 82ms, collect 35ms, tests 11ms, environment 418ms, prepare 71ms)
+   Start at  21:05:10
+   Duration  468ms (transform 55ms, setup 87ms, collect 37ms, tests 10ms, environment 389ms, prepare 69ms)
 
 --- end ---
 exit_code: 0

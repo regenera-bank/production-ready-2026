@@ -1,5 +1,5 @@
 === GATE: audit-npm-core-bank ===
-timestamp_utc: 2026-06-30T23:27:57Z
+timestamp_utc: 2026-07-01T00:04:44Z
 cwd: /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/domains/core-bank
 command: bash /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/scripts/npm-audit-runtime.sh
 node: v26.0.0

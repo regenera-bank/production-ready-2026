@@ -4,4 +4,4 @@ run	stage	gates	pass	fail	result
 1	web	9	9	0	PASS
 1	worker	4	4	0	PASS
 1	security	18	18	0	PASS
-1	e2e	3	3	0	PASS
+1	e2e	3	2	1	FAIL

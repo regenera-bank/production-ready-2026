@@ -49,12 +49,13 @@ test.describe('BFF password reset', () => {
     await registerUser(request, document, 'E2E Reuse');
     const req = await request.post('auth/password-reset/request', { data: { document } });
     const { devToken } = (await req.json()) as { devToken?: string };
+    expect(devToken).toBeTruthy();
     const first = await request.post('auth/password-reset/confirm', {
-      data: { token: devToken, newPassword: 'reuse-1' },
+      data: { token: devToken, newPassword: 'reuse-01' },
     });
     expect(first.ok()).toBeTruthy();
     const second = await request.post('auth/password-reset/confirm', {
-      data: { token: devToken, newPassword: 'reuse-2' },
+      data: { token: devToken, newPassword: 'reuse-02' },
     });
     expect(second.status()).toBeGreaterThanOrEqual(400);
   });

@@ -1,5 +1,5 @@
 === GATE: unit-test-core-bank ===
-timestamp_utc: 2026-06-30T23:30:25Z
+timestamp_utc: 2026-07-01T00:06:46Z
 cwd: /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/domains/core-bank
 command: npm test
 node: v26.0.0
@@ -12,32 +12,32 @@ CI_RUN_ID: 2 CI_CLEAN_DB: 0
 > @regenera/core-bank@0.0.1 test
 > jest --passWithNoTests
 
-PASS src/audit/audit-chain.spec.ts
-PASS src/reconciliation/reconciliation.spec.ts
-PASS src/money/money.value-object.spec.ts
 PASS src/ledger/ledger.spec.ts
-PASS src/accounts/account.spec.ts
-PASS src/errors/core-banking.errors.spec.ts
-PASS src/payments/payment-engine.spec.ts
-PASS src/idempotency/idempotency.spec.ts
-PASS src/outbox/outbox.spec.ts
-PASS src/pix/pix-engine.spec.ts
-PASS src/load/release-gate.spec.ts
-PASS src/core-bank.module.spec.ts
-PASS src/db/v001-foundation.migration.spec.ts
+PASS src/money/money.value-object.spec.ts
+PASS src/reconciliation/reconciliation.spec.ts
 PASS src/holds/hold-book.spec.ts
-PASS src/db/v002-operational-views.migration.spec.ts
+PASS src/pix/pix-engine.spec.ts
+PASS src/audit/audit-chain.spec.ts
+PASS src/accounts/account.spec.ts
+PASS src/idempotency/idempotency.spec.ts
+PASS src/payments/payment-engine.spec.ts
+PASS src/outbox/outbox.spec.ts
+PASS src/errors/core-banking.errors.spec.ts
+PASS src/load/release-gate.spec.ts
 PASS src/load/canary-router.spec.ts
+PASS src/db/v002-operational-views.migration.spec.ts
+PASS src/db/v001-foundation.migration.spec.ts
 PASS src/load/float-guard.spec.ts
-PASS src/load/daily-load.spec.ts
+PASS src/core-bank.module.spec.ts
 PASS src/integration/core-banking-invariants.integration.spec.ts
+PASS src/load/daily-load.spec.ts
 PASS src/integration/postgres.integration.spec.ts
 A worker process has failed to exit gracefully and has been force exited. This is likely caused by tests leaking due to improper teardown. Try running with --detectOpenHandles to find leaks. Active timers can also cause this, ensure that .unref() was called on them.
 
 Test Suites: 20 passed, 20 total
 Tests:       1 skipped, 198 passed, 199 total
 Snapshots:   0 total
-Time:        2.857 s, estimated 6 s
+Time:        2.68 s
 Ran all test suites.
 --- end ---
 exit_code: 0

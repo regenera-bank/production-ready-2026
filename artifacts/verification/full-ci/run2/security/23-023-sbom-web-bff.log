@@ -1,5 +1,5 @@
 === GATE: sbom-web-bff ===
-timestamp_utc: 2026-06-30T23:29:54Z
+timestamp_utc: 2026-07-01T00:06:34Z
 cwd: /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/bff/web-bff
 command: bash /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/scripts/generate-sbom.sh /Volumes/PRINCIPAL/Grok/eleve projeto/regenera-bank/artifacts/verification/full-ci/run2/security/sbom-web-bff.json
 node: v26.0.0
@@ -8,6 +8,6 @@ DATABASE_URL: postgresql://localhost:5432/regenera_core_test
 REDIS_URL: redis://localhost:6379
 CI_RUN_ID: 2 CI_CLEAN_DB: 0
 --- stdout/stderr ---
-SBOM fallback manifest: 22 components
+SBOM fallback manifest: 24 components
 --- end ---
 exit_code: 0

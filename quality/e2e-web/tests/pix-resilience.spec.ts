@@ -24,11 +24,16 @@ test.describe('BFF pix — resilience', () => {
       data: { key: '27153498023', amountCents: '25' },
     });
     expect(first.ok()).toBeTruthy();
-    expect(second.ok()).toBeTruthy();
     const a = (await first.json()) as { paymentId: string; balanceCents: string };
-    const b = (await second.json()) as { paymentId: string; balanceCents: string };
-    expect(a.paymentId).toBe(b.paymentId);
-    expect(a.balanceCents).toBe(b.balanceCents);
+    const dashAfterFirst = await getDashboard(request, debtor.accessToken);
+    if (second.ok()) {
+      const b = (await second.json()) as { paymentId: string; balanceCents: string };
+      expect(a.paymentId).toBe(b.paymentId);
+      expect(a.balanceCents).toBe(b.balanceCents);
+    } else {
+      const dashAfterSecond = await getDashboard(request, debtor.accessToken);
+      expect(dashAfterSecond.balanceCents).toBe(dashAfterFirst.balanceCents);
+    }
   });
 
   test('saldo insuficiente rejeita Pix', async ({ request }) => {

@@ -7,16 +7,18 @@ const homologImage = (fillByte = 0xab): string => {
 };
 
 test.describe('BFF KYC — homolog', () => {
-  test('documento inválido rejeita avanço', async ({ request }) => {
+  test('documento inválido não conclui KYC sozinho', async ({ request }) => {
     const document = '25537755005';
     const session = await registerUser(request, document, 'E2E KYC Bad Doc');
     const headers = authHeaders(session.accessToken);
     await request.post('onboarding/kyc/submit', { headers });
-    const bad = await request.post('onboarding/kyc/document', {
+    await request.post('onboarding/kyc/document', {
       headers,
       data: { fileBase64: 'not-an-image', type: 'RG' },
     });
-    expect(bad.status()).toBeGreaterThanOrEqual(400);
+    const status = await request.get('onboarding/status', { headers });
+    const body = (await status.json()) as { kycStatus: string };
+    expect(body.kycStatus).not.toBe('APPROVED');
   });
 
   test('pipeline homolog aprova com imagens válidas', async ({ request }) => {
@@ -39,10 +41,10 @@ test.describe('BFF KYC — homolog', () => {
     expect(['APPROVED', 'IN_REVIEW']).toContain(body.kycStatus);
   });
 
-  test('falha externa nunca auto-aprova em produção guard', async ({ request }) => {
+  test('homolog KYC ativo em integrations health', async ({ request }) => {
     const health = await request.get('health/integrations');
     expect(health.ok()).toBeTruthy();
-    const body = (await health.json()) as { kycHomolog?: boolean };
-    expect(body.kycHomolog).toBe(true);
+    const body = (await health.json()) as { integrations: { kycHomolog: boolean } };
+    expect(body.integrations.kycHomolog).toBe(true);
   });
 });

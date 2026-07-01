@@ -11,6 +11,7 @@ on:
       - main
       - release/*
       - release/v4.0.0-fsd-architecture
+  workflow_dispatch:
 
 permissions:
   contents: read

@@ -12,25 +12,22 @@ on:
       - release/*
       - release/v4.0.0-fsd-architecture
 
-
 permissions:
   contents: read
-  id-token: write
-  packages: write
-  attestations: write
 
 jobs:
-  devsecops-pipeline:
-    name: Production Hardening DevSecOps
+  platform-ci:
+    name: Full Platform Pre-Deploy Gates
     runs-on: ubuntu-latest
 
     env:
-      JWT_NEURAL_SECRET: "ci-mock-secret-for-tests"
-      PROMETEO_API_KEY: "ci-mock-key"
-      GEMINI_API_KEY:***REDACTED_GEMINI_API_KEY***"ci-mock-key"
-      FIREBASE_PROJECT_ID: "ci-mock-project"
-      FIREBASE_API_KEY:***REDACTED_FIREBASE_API_KEY***"ci-mock-key"
-      GCP_PROJECT_ID: "ci-mock-project"
+      NPM_CONFIG_IGNORE_SCRIPTS: true
+      DATABASE_URL: postgresql://postgres:postgres@localhost:5432/regenera_core_test
+      REDIS_URL: redis://localhost:6379
+      NODE_ENV: test
+      FULL_CI_RUNS: 1
+      CI_RUN_ID: 1
+      CI_ARTIFACT_DIR: artifacts/verification/full-ci/run1
 
     services:
       postgres:
@@ -38,11 +35,20 @@ jobs:
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: regenera_test
+          POSTGRES_DB: regenera_core_test
         ports:
           - 5432:5432
         options: >-
-          --health-cmd "pg_isready -U postgres -d regenera_test"
+          --health-cmd "pg_isready -U postgres -d regenera_core_test"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+      redis:
+        image: redis:7
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd "redis-cli ping"
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
@@ -57,95 +63,25 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "20"
-          cache: npm
-          cache-dependency-path: |
-            01-banking-core-engine/package-lock.json
-            03-enterprise-web-platform/package-lock.json
 
-      - name: Install Backend Dependencies
-        working-directory: ./01-banking-core-engine
-        run: npm ci
-
-      - name: Backend Lint
-        working-directory: ./01-banking-core-engine
-        run: npm run lint
-
-      - name: Backend Typecheck
-        working-directory: ./01-banking-core-engine
-        run: npm run typecheck
-
-      - name: Backend Unit Tests & Coverage
-        working-directory: ./01-banking-core-engine
-        run: npm run test:cov
-
-      - name: Backend E2E Tests
-        working-directory: ./01-banking-core-engine
-        run: npm run test:e2e
-
-      - name: Backend Ledger Invariants Tests
-        working-directory: ./01-banking-core-engine
-        run: npm run test:ledger:invariants
-
-      - name: Backend Build
-        working-directory: ./01-banking-core-engine
-        run: npm run build
-
-      - name: Backend Migration Dry-Run
-        working-directory: ./01-banking-core-engine
-        env:
-          NODE_ENV: test
-          DATABASE_URL: ***REDACTED_DATABASE_URL***
+      - name: Install gitleaks
         run: |
-          npm run migration:run
-          npm run migration:revert
+          curl -sSfL https://raw.githubusercontent.com/gitleaks/gitleaks/master/scripts/install.sh | sh -s -- -b /usr/local/bin v8.24.2
+          gitleaks version
 
-      - name: Dependency Security Audit
-        working-directory: ./01-banking-core-engine
-        run: npm audit --audit-level=critical
+      - name: Install Playwright browser deps
+        working-directory: quality/e2e-web
+        run: |
+          npm install --include=dev
+          npx playwright install --with-deps chromium
 
-      - name: Gitleaks Secret Scanner
-        uses: gitleaks/gitleaks-action@v2
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Run full platform CI
+        run: bash scripts/run-full-platform-ci.sh
 
-      - name: Trivy Vulnerability Scanner
-        uses: aquasecurity/trivy-action@master
+      - name: Upload CI evidence
+        if: always()
+        uses: actions/upload-artifact@v4
         with:
-          scan-type: fs
-          scan-ref: .
-          format: table
-          exit-code: "1"
-          ignore-unfixed: true
-          severity: CRITICAL,HIGH
-
-      - name: Semgrep SAST
-        uses: semgrep/semgrep-action@v1
-        with:
-          config: p/default
-
-        continue-on-error: false # Hardened by policy
-      - name: Install Frontend Dependencies
-        working-directory: ./03-enterprise-web-platform
-        run: npm ci
-
-      - name: Frontend Lint
-        working-directory: ./03-enterprise-web-platform
-        run: npm run lint
-
-      - name: Frontend Tests & Coverage
-        working-directory: ./03-enterprise-web-platform
-        run: npm run test:cov
-
-      - name: Frontend Build
-        working-directory: ./03-enterprise-web-platform
-        run: npm run build
-
-      - name: Generate SBOM (CycloneDX & SPDX)
-        uses: anchore/sbom-action@v0
-        with:
-          format: cyclonedx-json
-          file: sbom.cyclonedx.json
-
-      - name: Sign Release with Cosign
-        if: startsWith(github.ref, 'refs/tags/v')
-        uses: sigstore/cosign-installer@v3
+          name: full-ci-run1
+          path: artifacts/verification/full-ci/run1
+          if-no-files-found: warn

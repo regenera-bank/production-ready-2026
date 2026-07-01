@@ -4,56 +4,40 @@ on:
   push:
     branches: [ "main" ]
     paths:
-      - '03-channels/regenera-channel-web-banking/**'
-      - '03-channels/regenera-channel-partner-portal/**'
+      - 'apps/web-banking/**'
+      - 'design-system/web/**'
+      - 'bff/web-bff/**'
   pull_request:
     branches: [ "main" ]
-
+    paths:
+      - 'apps/web-banking/**'
+      - 'design-system/web/**'
+      - 'bff/web-bff/**'
 
 permissions:
   contents: read
-  id-token: write
-  packages: write
-  attestations: write
 
 jobs:
-  build:
+  web-banking:
+    name: web-banking build
     runs-on: ubuntu-latest
-    
+    env:
+      NPM_CONFIG_IGNORE_SCRIPTS: true
     steps:
-    - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
-    - name: Use Node.js 18.x
-      uses: actions/setup-node@v3
-      with:
-        node-version: '18.x'
-        cache: 'npm'
-        cache-dependency-path: '03-channels/regenera-channel-web-banking/package-lock.json'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
 
-    - name: Install dependencies and Build
-      run: |
-        cd 03-channels/regenera-channel-web-banking
-        if [ -f "package.json" ]; then
-          npm ci
-          npm run build
-        else
-          echo "No package.json found."
-        fi
+      - name: Install design-system
+        working-directory: design-system/web
+        run: npm install --include=dev
 
-    - name: Run Linting and Tests
-      run: |
-        cd 03-channels/regenera-channel-web-banking
-        if [ -f "package.json" ]; then
+      - name: Install and build web-banking
+        working-directory: apps/web-banking
+        run: |
+          npm install --include=dev
           npm run lint
           npm test
-        fi
-
-      - name: Generate SBOM (CycloneDX & SPDX)
-        uses: anchore/sbom-action@v0
-        with:
-          format: cyclonedx-json
-          file: sbom.cyclonedx.json
-
-      - name: Sign Release with Cosign
-        if: startsWith(github.ref, 'refs/tags/v')
-        uses: sigstore/cosign-installer@v3
+          npm run build

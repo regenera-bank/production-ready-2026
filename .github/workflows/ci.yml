@@ -74,6 +74,8 @@ jobs:
 
       - name: Install Playwright browser deps
         working-directory: quality/e2e-web
+        env:
+          NPM_CONFIG_IGNORE_SCRIPTS: false
         run: |
           npm install --include=dev
           npx playwright install --with-deps chromium

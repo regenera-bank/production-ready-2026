@@ -132,11 +132,11 @@ const App: React.FC = () => {
   const [showMapWidget, setShowMapWidget] = useState(false);
   const [currentMapLocations, setCurrentMapLocations] = useState<MapLocation[]>([]);
 
-  const [isAssistantThinking, setIsAiThinking] = useState(false);
+  const [isAssistantThinking, setIsAssistantThinking] = useState(false);
   const [thinkingModel, setThinkingModel] = useState<string | null>(null);
-  const [isAssistantSpeaking, setIsAiSpeaking] = useState(false);
+  const [isAssistantSpeaking, setIsAssistantSpeaking] = useState(false);
   const [showAssistantChat, setShowAssistantChat] = useState(false);
-  const [lastAiMessage, setLastAiMessage] = useState<string | null>(null);
+  const [lastAssistantMessage, setLastAiMessage] = useState<string | null>(null);
   
   // Refs de áudio
   const audioContextRef = useRef<AudioContext | null>(null);
@@ -380,14 +380,14 @@ const App: React.FC = () => {
         source.buffer = audioBuffer;
         source.connect(audioCtx.destination);
         
-        source.onended = () => setIsAiSpeaking(false);
+        source.onended = () => setIsAssistantSpeaking(false);
         audioSourceRef.current = source;
         
-        setIsAiSpeaking(true);
+        setIsAssistantSpeaking(true);
         source.start(0);
     } catch (e) {
         console.error("Audio Playback Error:", e);
-        setIsAiSpeaking(false);
+        setIsAssistantSpeaking(false);
     }
   };
 
@@ -399,7 +399,7 @@ const App: React.FC = () => {
     }
 
     setChatMessages(prev => [...prev, { id: Date.now().toString(), role: 'user', text: text, timestamp: Date.now() }]);
-    setIsAiThinking(true);
+    setIsAssistantThinking(true);
     
     const msg = text.toLowerCase();
     if (msg.length > 50 || msg.includes('analise') || msg.includes('investir') || msg.includes('sugestão') || msg.includes('planejamento') || msg.includes('futuro') || msg.includes('sonho')) {
@@ -434,7 +434,7 @@ const App: React.FC = () => {
 
     const response: AssistantReply = await chatWithRaphaela(text, context, assistantSettings, accessToken);
 
-    setIsAiThinking(false);
+    setIsAssistantThinking(false);
     setThinkingModel(null);
     
     setChatMessages(prev => [...prev, { id: Date.now().toString(), role: 'assistant', text: response.text, timestamp: Date.now() }]);
@@ -841,13 +841,13 @@ const App: React.FC = () => {
       )}
       {renderSidebar()}
       {renderAiChat()}
-      {lastAiMessage && !showAssistantChat && (
+      {lastAssistantMessage && !showAssistantChat && (
           <div className="absolute bottom-32 left-1/2 -translate-x-1/2 z-[60] w-[80%] max-w-sm animate-in fade-in slide-in-from-bottom-4 duration-500 pointer-events-none">
               <div className="bg-bg-deep/40 backdrop-blur-md border border-white/5 p-4 rounded-2xl shadow-2xl relative overflow-hidden">
                   <div className="absolute top-0 left-0 w-1 h-full bg-cyan-500"></div>
                   <p className="text-xs text-gray-300 leading-relaxed font-medium italic">
                       <span className="text-cyan-400 font-bold not-italic mr-2">RAPHAELA:</span>
-                      {lastAiMessage}
+                      {lastAssistantMessage}
                   </p>
               </div>
           </div>

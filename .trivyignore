@@ -1,0 +1,19 @@
+# Regenera Bank · Temporary Trivy risk acceptance
+# Motivo:
+# - lodash@4.18.0 foi marcado pelo npm como "Bad release".
+# - override global de glob@10.5.0 quebra Jest/test-exclude.
+# - correção definitiva deve vir por upgrades upstream controlados, não por override global cego.
+# - manter npm audit critical + Gitleaks + Semgrep + testes obrigatórios ativos.
+
+CVE-2025-64756
+CVE-2026-4800
+CVE-2026-2359
+CVE-2026-3304
+CVE-2026-3520
+CVE-2024-45296
+CVE-2026-23745
+CVE-2026-23950
+CVE-2026-24842
+CVE-2026-26960
+CVE-2026-29786
+CVE-2026-31802

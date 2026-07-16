@@ -1,0 +1,28 @@
+# Cloud Build — enviar só o necessário para imagens Docker
+.git/
+.grok/
+.tmp/
+.tools/
+artifacts/
+**/node_modules/
+**/dist/
+**/.next/
+**/coverage/
+**/*.log
+apps/android/
+apps/ios/
+05-core-banking/
+00-governance/
+06-risk-control/
+07-integrations/
+08-iso20022/
+09-data-platform/
+10-platform/
+11-security/
+12-regulatory/
+13-quality/
+14-operations/
+15-tools/
+Versão atualizada Grok/
+**/*.zip
+**/*.sha256

@@ -1,0 +1,68 @@
+openapi: 3.1.0
+info:
+  title: Regenera Web BFF
+  version: 0.0.1
+  description: BFF do Web Banking — compõe respostas, não expõe ledger ao navegador.
+servers:
+  - url: http://localhost:3200/v1
+paths:
+  /auth/session:
+    post:
+      summary: Cria sessão homolog
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [document, password]
+              properties:
+                document:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '200':
+          description: Sessão criada
+  /banking/dashboard:
+    get:
+      summary: Dashboard do cliente
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Saldo derivado do core-bank via BFF
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - accountId
+                  - maskedAccount
+                  - balanceCents
+                  - availableCents
+                  - currency
+                  - correlationId
+                properties:
+                  accountId:
+                    type: string
+                  maskedAccount:
+                    type: string
+                  balanceCents:
+                    type: string
+                    description: BigInt serializado como string
+                  availableCents:
+                    type: string
+                  currency:
+                    type: string
+                    enum: [BRL]
+                  correlationId:
+                    type: string
+                  recentTransactions:
+                    type: array
+                    items: {}
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer

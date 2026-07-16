@@ -1,0 +1,43 @@
+name: Channels Web CI
+
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - 'apps/web-banking/**'
+      - 'design-system/web/**'
+      - 'bff/web-bff/**'
+  pull_request:
+    branches: [ "main" ]
+    paths:
+      - 'apps/web-banking/**'
+      - 'design-system/web/**'
+      - 'bff/web-bff/**'
+
+permissions:
+  contents: read
+
+jobs:
+  web-banking:
+    name: web-banking build
+    runs-on: ubuntu-latest
+    env:
+      NPM_CONFIG_IGNORE_SCRIPTS: true
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install design-system
+        working-directory: design-system/web
+        run: npm install --include=dev
+
+      - name: Install and build web-banking
+        working-directory: apps/web-banking
+        run: |
+          npm install --include=dev
+          npm run lint
+          npm test
+          npm run build

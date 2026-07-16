@@ -1,0 +1,809 @@
+openapi: 3.1.0
+info:
+  title: Regenera Partner API
+  version: 1.0.0
+  description: |
+    Partner-facing API facade for Regenera Bank.
+    Monetary values travel as decimal strings — never float.
+    Errors follow RFC 7807 Problem Details with codes from `governance/error-catalog/CORE-ERRORS.json`.
+    Outbound webhooks are defined in `contracts/asyncapi/partner-webhooks-v1.asyncapi.yaml`.
+  contact:
+    name: Regenera Partner Platform
+    url: https://developers.regenerabank.example
+servers:
+  - url: https://api.regenerabank.example/v1
+    description: Production (mTLS required)
+  - url: https://sandbox.api.regenerabank.example/v1
+    description: Sandbox (mTLS optional)
+security:
+  - oauth2ClientCredentials: []
+tags:
+  - name: OAuth
+    description: Client credentials token issuance
+  - name: Accounts
+    description: Account discovery and balances
+  - name: PIX
+    description: PIX payment initiation and status
+  - name: Webhooks
+    description: Partner webhook subscription management
+  - name: Sandbox
+    description: Sandbox-only developer utilities
+paths:
+  /oauth/token:
+    post:
+      tags: [OAuth]
+      operationId: issuePartnerToken
+      summary: Issue access token (client credentials)
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required: [grant_type, client_id, client_secret]
+              properties:
+                grant_type:
+                  type: string
+                  enum: [client_credentials]
+                client_id:
+                  type: string
+                client_secret:
+                  type: string
+                scope:
+                  type: string
+                  description: Space-delimited scopes (see x-partner-scopes)
+      responses:
+        '200':
+          description: Token issued
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+  /accounts:
+    get:
+      tags: [Accounts]
+      operationId: listPartnerAccounts
+      summary: List accounts visible to the partner client
+      parameters:
+        - $ref: '#/components/parameters/CorrelationId'
+      x-required-scopes: [accounts:read]
+      responses:
+        '200':
+          description: Accounts
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Account'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+  /accounts/{accountId}/balance:
+    get:
+      tags: [Accounts]
+      operationId: getPartnerAccountBalance
+      summary: Current balance for an account
+      parameters:
+        - $ref: '#/components/parameters/AccountId'
+        - $ref: '#/components/parameters/CorrelationId'
+      x-required-scopes: [balances:read]
+      responses:
+        '200':
+          description: Balance snapshot
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Balance'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/AccountNotFound'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+  /accounts/{accountId}/transactions:
+    get:
+      tags: [Accounts]
+      operationId: listPartnerAccountTransactions
+      summary: Paginated transaction history
+      parameters:
+        - $ref: '#/components/parameters/AccountId'
+        - $ref: '#/components/parameters/CorrelationId'
+        - name: cursor
+          in: query
+          schema:
+            type: string
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 30
+      x-required-scopes: [transactions:read]
+      responses:
+        '200':
+          description: Transaction page
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionPage'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+  /pix/payments:
+    post:
+      tags: [PIX]
+      operationId: createPartnerPixPayment
+      summary: Initiate a PIX payment
+      parameters:
+        - $ref: '#/components/parameters/IdempotencyKey'
+        - $ref: '#/components/parameters/CorrelationId'
+      x-required-scopes: [pix:write]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePixPayment'
+      responses:
+        '202':
+          description: Payment accepted for processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PixPayment'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '409':
+          $ref: '#/components/responses/IdempotencyConflict'
+        '422':
+          $ref: '#/components/responses/ValidationFailed'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+  /pix/payments/{paymentId}:
+    get:
+      tags: [PIX]
+      operationId: getPartnerPixPayment
+      summary: PIX payment status
+      parameters:
+        - $ref: '#/components/parameters/PaymentId'
+        - $ref: '#/components/parameters/CorrelationId'
+      x-required-scopes: [pix:read]
+      responses:
+        '200':
+          description: Payment state
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PixPayment'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/PixPaymentNotFound'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+  /webhooks/subscriptions:
+    get:
+      tags: [Webhooks]
+      operationId: listWebhookSubscriptions
+      summary: List webhook subscriptions for the partner client
+      parameters:
+        - $ref: '#/components/parameters/CorrelationId'
+      x-required-scopes: [webhooks:read]
+      responses:
+        '200':
+          description: Subscriptions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/WebhookSubscription'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+    post:
+      tags: [Webhooks]
+      operationId: registerWebhookSubscription
+      summary: Register a webhook endpoint
+      parameters:
+        - $ref: '#/components/parameters/CorrelationId'
+      x-required-scopes: [webhooks:write]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterWebhook'
+      responses:
+        '201':
+          description: Subscription created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebhookSubscription'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '422':
+          $ref: '#/components/responses/ValidationFailed'
+  /webhooks/subscriptions/{subscriptionId}:
+    delete:
+      tags: [Webhooks]
+      operationId: deleteWebhookSubscription
+      summary: Remove a webhook subscription
+      parameters:
+        - $ref: '#/components/parameters/SubscriptionId'
+        - $ref: '#/components/parameters/CorrelationId'
+      x-required-scopes: [webhooks:write]
+      responses:
+        '204':
+          description: Subscription removed
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          description: Subscription not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /sandbox/keys:
+    get:
+      tags: [Sandbox]
+      operationId: listSandboxKeys
+      summary: List sandbox API credentials
+      x-required-scopes: [sandbox:admin]
+      responses:
+        '200':
+          description: Sandbox keys (secrets masked)
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SandboxKey'
+    post:
+      tags: [Sandbox]
+      operationId: createSandboxKey
+      summary: Create a new sandbox client credential
+      x-required-scopes: [sandbox:admin]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateSandboxKey'
+      responses:
+        '201':
+          description: Key created (secret shown once)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SandboxKeyCreated'
+  /sandbox/webhooks/test:
+    post:
+      tags: [Sandbox]
+      operationId: testSandboxWebhook
+      summary: Emit a test webhook event to a registered endpoint
+      x-required-scopes: [sandbox:admin]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TestWebhookRequest'
+      responses:
+        '202':
+          description: Test delivery queued
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebhookDeliveryResult'
+  /health:
+    get:
+      tags: [Sandbox]
+      operationId: getPartnerHealth
+      summary: Facade health probe
+      security: []
+      responses:
+        '200':
+          description: Healthy
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [status, layer]
+                properties:
+                  status:
+                    type: string
+                    enum: [ok]
+                  layer:
+                    type: string
+                    const: partner-api-facade
+components:
+  securitySchemes:
+    oauth2ClientCredentials:
+      type: oauth2
+      description: OAuth2 client credentials with optional mTLS certificate binding
+      flows:
+        clientCredentials:
+          tokenUrl: /v1/oauth/token
+          scopes:
+            accounts:read: Read partner-visible accounts
+            balances:read: Read account balances
+            transactions:read: Read account transactions
+            pix:read: Read PIX payment status
+            pix:write: Initiate PIX payments
+            webhooks:read: List webhook subscriptions
+            webhooks:write: Manage webhook subscriptions
+            sandbox:admin: Sandbox key and webhook testing utilities
+  x-partner-scopes:
+    - accounts:read
+    - balances:read
+    - transactions:read
+    - pix:read
+    - pix:write
+    - webhooks:read
+    - webhooks:write
+    - sandbox:admin
+  x-error-catalog:
+    $ref: ../../../governance/error-catalog/CORE-ERRORS.json
+  x-webhook-contract:
+    $ref: ../asyncapi/partner-webhooks-v1.asyncapi.yaml
+  parameters:
+    AccountId:
+      name: accountId
+      in: path
+      required: true
+      schema:
+        type: string
+        minLength: 8
+        maxLength: 80
+    PaymentId:
+      name: paymentId
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    SubscriptionId:
+      name: subscriptionId
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    IdempotencyKey:
+      name: Idempotency-Key
+      in: header
+      required: true
+      schema:
+        type: string
+        format: uuid
+    CorrelationId:
+      name: X-Correlation-ID
+      in: header
+      required: false
+      schema:
+        type: string
+        format: uuid
+  schemas:
+    Money:
+      type: object
+      additionalProperties: false
+      required: [currency, value]
+      properties:
+        currency:
+          type: string
+          enum: [BRL]
+        value:
+          type: string
+          pattern: '^-?\d{1,17}\.\d{2}$'
+          examples: ['1250.00']
+    TokenResponse:
+      type: object
+      additionalProperties: false
+      required: [access_token, token_type, expires_in, scope]
+      properties:
+        access_token:
+          type: string
+        token_type:
+          type: string
+          enum: [Bearer]
+        expires_in:
+          type: integer
+        scope:
+          type: string
+    Account:
+      type: object
+      additionalProperties: false
+      required: [id, displayName, type, currency, status]
+      properties:
+        id:
+          type: string
+        displayName:
+          type: string
+        type:
+          type: string
+          enum: [CHECKING, PAYMENT, INVESTMENT]
+        currency:
+          type: string
+          enum: [BRL]
+        status:
+          type: string
+          enum: [ACTIVE, RESTRICTED, BLOCKED, CLOSING, CLOSED]
+    Balance:
+      type: object
+      additionalProperties: false
+      required: [accountId, book, available, blocked, asOf]
+      properties:
+        accountId:
+          type: string
+        book:
+          $ref: '#/components/schemas/Money'
+        available:
+          $ref: '#/components/schemas/Money'
+        blocked:
+          $ref: '#/components/schemas/Money'
+        asOf:
+          type: string
+          format: date-time
+    Transaction:
+      type: object
+      additionalProperties: false
+      required: [id, accountId, type, direction, amount, status, occurredAt, description]
+      properties:
+        id:
+          type: string
+        accountId:
+          type: string
+        type:
+          type: string
+        direction:
+          type: string
+          enum: [DEBIT, CREDIT]
+        amount:
+          $ref: '#/components/schemas/Money'
+        status:
+          $ref: '#/components/schemas/TransactionStatus'
+        occurredAt:
+          type: string
+          format: date-time
+        description:
+          type: string
+    TransactionPage:
+      type: object
+      additionalProperties: false
+      required: [items]
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Transaction'
+        nextCursor:
+          type: [string, 'null']
+    PixDestination:
+      type: object
+      additionalProperties: false
+      required: [keyType, key]
+      properties:
+        keyType:
+          type: string
+          enum: [CPF, CNPJ, EMAIL, PHONE, EVP]
+        key:
+          type: string
+          minLength: 1
+          maxLength: 140
+    CreatePixPayment:
+      type: object
+      additionalProperties: false
+      required: [sourceAccountId, destination, amount]
+      properties:
+        sourceAccountId:
+          type: string
+        destination:
+          $ref: '#/components/schemas/PixDestination'
+        amount:
+          $ref: '#/components/schemas/Money'
+        description:
+          type: string
+          maxLength: 140
+    PixPayment:
+      type: object
+      additionalProperties: false
+      required: [id, status, amount, createdAt]
+      properties:
+        id:
+          type: string
+          format: uuid
+        status:
+          $ref: '#/components/schemas/TransactionStatus'
+        amount:
+          $ref: '#/components/schemas/Money'
+        createdAt:
+          type: string
+          format: date-time
+        settledAt:
+          type: [string, 'null']
+          format: date-time
+        failureCode:
+          type: [string, 'null']
+    TransactionStatus:
+      type: string
+      enum:
+        - CREATED
+        - VALIDATING
+        - RISK_REVIEW
+        - AUTHORIZED
+        - FUNDS_RESERVED
+        - SENT
+        - ACCEPTED
+        - SETTLED
+        - RECONCILED
+        - REJECTED
+        - FAILED
+        - UNKNOWN
+        - REVERSED
+        - CANCELLED
+        - MANUAL_REVIEW
+    RegisterWebhook:
+      type: object
+      additionalProperties: false
+      required: [url, events]
+      properties:
+        url:
+          type: string
+          format: uri
+        events:
+          type: array
+          minItems: 1
+          items:
+            type: string
+            enum:
+              - PIX_PAYMENT_STATUS_CHANGED
+              - PIX_PAYMENT_SETTLED
+              - PIX_PAYMENT_FAILED
+              - ACCOUNT_STATUS_CHANGED
+        secret:
+          type: string
+          minLength: 16
+          maxLength: 128
+          description: HMAC signing secret; generated if omitted
+    WebhookSubscription:
+      type: object
+      additionalProperties: false
+      required: [id, url, events, status, createdAt]
+      properties:
+        id:
+          type: string
+          format: uuid
+        url:
+          type: string
+          format: uri
+        events:
+          type: array
+          items:
+            type: string
+        status:
+          type: string
+          enum: [ACTIVE, DISABLED]
+        createdAt:
+          type: string
+          format: date-time
+    CreateSandboxKey:
+      type: object
+      additionalProperties: false
+      required: [name, scopes]
+      properties:
+        name:
+          type: string
+          minLength: 3
+          maxLength: 64
+        scopes:
+          type: array
+          minItems: 1
+          items:
+            type: string
+    SandboxKey:
+      type: object
+      additionalProperties: false
+      required: [id, name, clientId, scopes, createdAt]
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        clientId:
+          type: string
+        scopes:
+          type: array
+          items:
+            type: string
+        createdAt:
+          type: string
+          format: date-time
+    SandboxKeyCreated:
+      allOf:
+        - $ref: '#/components/schemas/SandboxKey'
+        - type: object
+          required: [clientSecret]
+          properties:
+            clientSecret:
+              type: string
+              description: Shown once at creation
+    TestWebhookRequest:
+      type: object
+      additionalProperties: false
+      required: [subscriptionId, eventType]
+      properties:
+        subscriptionId:
+          type: string
+          format: uuid
+        eventType:
+          type: string
+          enum:
+            - PIX_PAYMENT_STATUS_CHANGED
+            - PIX_PAYMENT_SETTLED
+            - PIX_PAYMENT_FAILED
+        payload:
+          type: object
+          additionalProperties: true
+    WebhookDeliveryResult:
+      type: object
+      additionalProperties: false
+      required: [deliveryId, status, attemptedAt]
+      properties:
+        deliveryId:
+          type: string
+          format: uuid
+        status:
+          type: string
+          enum: [QUEUED, DELIVERED, FAILED]
+        attemptedAt:
+          type: string
+          format: date-time
+        httpStatus:
+          type: [integer, 'null']
+        error:
+          type: [string, 'null']
+    Problem:
+      type: object
+      additionalProperties: true
+      required: [type, title, status, code, correlationId]
+      properties:
+        type:
+          type: string
+          format: uri
+        title:
+          type: string
+        status:
+          type: integer
+        code:
+          type: string
+          description: Stable code from CORE-ERRORS catalog
+        detail:
+          type: string
+        correlationId:
+          type: string
+  responses:
+    Unauthorized:
+      description: Authentication failed
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+          examples:
+            invalidToken:
+              value:
+                type: https://api.regenerabank.example/problems/unauthorized
+                title: Invalid credentials
+                status: 401
+                code: RBK-AUTH-001
+                correlationId: 00000000-0000-4000-8000-000000000001
+    Forbidden:
+      description: Insufficient scope or mTLS binding failure
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+          examples:
+            insufficientScope:
+              value:
+                type: https://api.regenerabank.example/problems/forbidden
+                title: Forbidden
+                status: 403
+                code: RBK-AUTH-003
+                correlationId: 00000000-0000-4000-8000-000000000002
+    RateLimited:
+      description: Rate limit exceeded
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+          examples:
+            rateLimited:
+              value:
+                type: https://api.regenerabank.example/problems/rate-limited
+                title: Rate limited
+                status: 429
+                code: RBK-SYS-003
+                correlationId: 00000000-0000-4000-8000-000000000003
+    IdempotencyConflict:
+      description: Idempotency key reused with different payload
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+          examples:
+            conflict:
+              value:
+                type: https://api.regenerabank.example/problems/idempotency-conflict
+                title: Idempotency conflict
+                status: 409
+                code: RBK-IDP-001
+                correlationId: 00000000-0000-4000-8000-000000000004
+    ValidationFailed:
+      description: Request validation failed
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+          examples:
+            validation:
+              value:
+                type: https://api.regenerabank.example/problems/validation-failed
+                title: Validation failed
+                status: 422
+                code: RBK-VAL-001
+                correlationId: 00000000-0000-4000-8000-000000000005
+    AccountNotFound:
+      description: Account not found
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+          examples:
+            notFound:
+              value:
+                type: https://api.regenerabank.example/problems/account-not-found
+                title: Account not found
+                status: 404
+                code: RBK-ACC-001
+                correlationId: 00000000-0000-4000-8000-000000000006
+    PixPaymentNotFound:
+      description: PIX payment not found
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+          examples:
+            notFound:
+              value:
+                type: https://api.regenerabank.example/problems/pix-not-found
+                title: PIX payment not found
+                status: 404
+                code: RBK-PIX-003
+                correlationId: 00000000-0000-4000-8000-000000000007

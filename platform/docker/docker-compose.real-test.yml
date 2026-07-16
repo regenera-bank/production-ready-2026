@@ -1,0 +1,31 @@
+# Override para testes REAIS — Postgres + ledger + channel_experience (sem stubs de memória).
+# Porta 5433 evita colisão com PostgreSQL nativo do macOS em :5432.
+#
+# Uso:
+#   docker compose -f platform/docker/docker-compose.full.yml \
+#     -f platform/docker/docker-compose.real-test.yml up -d postgres redis core-bank outbox-relay web-bff mobile-bff
+
+services:
+  postgres:
+    ports:
+      - "5433:5432"
+
+  web-bff:
+    environment:
+      NODE_ENV: development
+      DATABASE_URL: postgresql://regenera:regenera_local_only@postgres:5432/regenera
+      CORE_BANK_STORAGE: postgres
+      CHANNEL_PERSISTENCE: postgres
+      HOMOLOG_STORE_MEMORY: "false"
+      HOMOLOG_BASELINE_MODE: "true"
+      BASELINE_OPERATOR_TOKEN: local-baseline-operator
+      ALLOW_HOMOLOG_KYC: "false"
+      KYC_PROVIDER: firebase
+      E2E_VISION_STUB: ""
+    volumes:
+      - homolog-store-data:/data/homolog
+
+  mobile-bff:
+    environment:
+      WEB_BFF_BASE_URL: http://web-bff:3200/v1
+      CORE_API_BASE_URL: http://core-bank:3100/v1

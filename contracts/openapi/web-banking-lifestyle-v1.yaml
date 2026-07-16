@@ -1,0 +1,38 @@
+openapi: 3.0.3
+info:
+  title: Regenera Web Banking — Lifestyle BFF
+  version: 1.0.0
+paths:
+  /lifestyle/modules:
+    get:
+      summary: Lista 13 módulos lifestyle sandbox
+      responses:
+        '200':
+          description: OK
+  /lifestyle/{moduleId}/catalog:
+    get:
+      summary: Catálogo sandbox do módulo
+      parameters:
+        - name: moduleId
+          in: path
+          required: true
+          schema:
+            type: string
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+  /lifestyle/{moduleId}/activation:
+    get:
+      summary: Status de ativação externa
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: EXTERNAL_ACTIVATION_REQUIRED em produção
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer

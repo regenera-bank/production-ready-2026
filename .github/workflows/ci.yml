@@ -1,0 +1,93 @@
+name: Regenera Enterprise CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+      - release/*
+      - release/v4.0.0-fsd-architecture
+  pull_request:
+    branches:
+      - main
+      - release/*
+      - release/v4.0.0-fsd-architecture
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  platform-ci:
+    name: Full Platform Pre-Deploy Gates
+    runs-on: ubuntu-latest
+
+    env:
+      NPM_CONFIG_IGNORE_SCRIPTS: true
+      DATABASE_URL: postgresql://postgres:postgres@localhost:5432/regenera_core_test
+      REDIS_URL: redis://localhost:6379
+      NODE_ENV: test
+      FULL_CI_RUNS: 1
+      CI_RUN_ID: 1
+      CI_ARTIFACT_DIR: artifacts/verification/full-ci/run1
+
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: regenera_core_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres -d regenera_core_test"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+      redis:
+        image: redis:7
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install gitleaks
+        run: |
+          curl -sSfL -o /tmp/gitleaks.tgz \
+            https://github.com/gitleaks/gitleaks/releases/download/v8.24.2/gitleaks_8.24.2_linux_x64.tar.gz
+          tar -xzf /tmp/gitleaks.tgz -C /usr/local/bin gitleaks
+          chmod +x /usr/local/bin/gitleaks
+          gitleaks version
+
+      - name: Install Playwright browser deps
+        working-directory: quality/e2e-web
+        env:
+          NPM_CONFIG_IGNORE_SCRIPTS: false
+        run: |
+          npm install --include=dev
+          npx playwright install --with-deps chromium
+
+      - name: Run full platform CI
+        run: bash scripts/run-full-platform-ci.sh
+
+      - name: Upload CI evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: full-ci-run1
+          path: artifacts/verification/full-ci/run1
+          if-no-files-found: warn

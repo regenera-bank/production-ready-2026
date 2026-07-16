@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-banking
+  namespace: regenera-bank
+  labels:
+    app: web-banking
+    tier: channel
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: web-banking
+  template:
+    metadata:
+      labels:
+        app: web-banking
+    spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 101
+        runAsGroup: 101
+        fsGroup: 101
+      containers:
+        - name: web-banking
+          image: regenera/web-banking:latest
+          ports:
+            - name: http
+              containerPort: 8080
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: http
+            initialDelaySeconds: 10
+            periodSeconds: 15
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: http
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop: ["ALL"]
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-banking
+  namespace: regenera-bank
+spec:
+  selector:
+    app: web-banking
+  ports:
+    - port: 80
+      targetPort: http
+  type: ClusterIP

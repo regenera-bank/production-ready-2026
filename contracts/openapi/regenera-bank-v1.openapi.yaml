@@ -1,0 +1,452 @@
+openapi: 3.1.0
+info:
+  title: Regenera Bank Core API
+  version: 1.0.0
+  description: |
+    Canonical HTTP contract for Regenera Bank foundation services.
+    Monetary amounts are serialized as decimal strings (never IEEE float).
+servers:
+  - url: https://api.regenerabank.example/v1
+    description: Production
+  - url: http://localhost:3100/v1
+    description: Local core-bank
+security:
+  - bearerAuth: []
+tags:
+  - name: auth
+    description: Session and token lifecycle
+  - name: accounts
+    description: Account discovery and balances
+  - name: pix
+    description: PIX payment orders
+  - name: transfers
+    description: Internal and TED transfers
+paths:
+  /auth/session:
+    post:
+      tags: [auth]
+      operationId: createSession
+      summary: Create authenticated session
+      security: []
+      parameters:
+        - $ref: '#/components/parameters/CorrelationId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateSessionRequest'
+      responses:
+        '200':
+          description: Session established
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Session'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+  /auth/session/me:
+    get:
+      tags: [auth]
+      operationId: getCurrentSession
+      summary: Return current session claims
+      parameters:
+        - $ref: '#/components/parameters/CorrelationId'
+      responses:
+        '200':
+          description: Active session
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Session'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /accounts:
+    get:
+      tags: [accounts]
+      operationId: listAccounts
+      summary: List customer accounts
+      parameters:
+        - $ref: '#/components/parameters/CorrelationId'
+      responses:
+        '200':
+          description: Accounts visible to the authenticated principal
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Account'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /accounts/{accountId}/balance:
+    get:
+      tags: [accounts]
+      operationId: getAccountBalance
+      summary: Current balance for an account
+      parameters:
+        - $ref: '#/components/parameters/AccountId'
+        - $ref: '#/components/parameters/CorrelationId'
+      responses:
+        '200':
+          description: Balance at query time
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Balance'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /pix/payments:
+    post:
+      tags: [pix]
+      operationId: createPixPayment
+      summary: Submit PIX payment order
+      parameters:
+        - $ref: '#/components/parameters/IdempotencyKey'
+        - $ref: '#/components/parameters/CorrelationId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePixPaymentRequest'
+      responses:
+        '202':
+          description: Order accepted for processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PixPayment'
+        '409':
+          $ref: '#/components/responses/IdempotencyConflict'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+    get:
+      tags: [pix]
+      operationId: listPixPayments
+      summary: List PIX payments for the authenticated customer
+      parameters:
+        - $ref: '#/components/parameters/CorrelationId'
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum: [PENDING, SETTLED, FAILED, UNKNOWN]
+        - name: cursor
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Paginated PIX payments
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PixPaymentPage'
+  /pix/payments/{paymentId}:
+    get:
+      tags: [pix]
+      operationId: getPixPayment
+      summary: Get PIX payment by id
+      parameters:
+        - name: paymentId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - $ref: '#/components/parameters/CorrelationId'
+      responses:
+        '200':
+          description: Payment state
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PixPayment'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /transfers:
+    post:
+      tags: [transfers]
+      operationId: createTransfer
+      summary: Create internal or TED transfer
+      parameters:
+        - $ref: '#/components/parameters/IdempotencyKey'
+        - $ref: '#/components/parameters/CorrelationId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTransferRequest'
+      responses:
+        '202':
+          description: Transfer accepted for processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transfer'
+        '409':
+          $ref: '#/components/responses/IdempotencyConflict'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+  /transfers/{transferId}:
+    get:
+      tags: [transfers]
+      operationId: getTransfer
+      summary: Get transfer by id
+      parameters:
+        - name: transferId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - $ref: '#/components/parameters/CorrelationId'
+      responses:
+        '200':
+          description: Transfer state
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transfer'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  parameters:
+    AccountId:
+      name: accountId
+      in: path
+      required: true
+      schema:
+        type: string
+        minLength: 8
+        maxLength: 80
+    CorrelationId:
+      name: X-Correlation-ID
+      in: header
+      required: true
+      schema:
+        type: string
+        format: uuid
+    IdempotencyKey:
+      name: Idempotency-Key
+      in: header
+      required: true
+      schema:
+        type: string
+        format: uuid
+  schemas:
+    Money:
+      type: object
+      additionalProperties: false
+      required: [amount, currency]
+      properties:
+        amount:
+          type: string
+          pattern: '^-?\d+(\.\d{1,8})?$'
+          description: Decimal string; never IEEE float
+        currency:
+          type: string
+          enum: [BRL]
+    CreateSessionRequest:
+      type: object
+      additionalProperties: false
+      required: [document, password]
+      properties:
+        document:
+          type: string
+          description: CPF or CNPJ normalized digits
+        password:
+          type: string
+          format: password
+    Session:
+      type: object
+      additionalProperties: false
+      required: [sessionId, customerId, expiresAt, correlationId]
+      properties:
+        sessionId:
+          type: string
+          format: uuid
+        customerId:
+          type: string
+        expiresAt:
+          type: string
+          format: date-time
+        correlationId:
+          type: string
+          format: uuid
+    Account:
+      type: object
+      additionalProperties: false
+      required: [accountId, maskedNumber, type, status]
+      properties:
+        accountId:
+          type: string
+        maskedNumber:
+          type: string
+        type:
+          type: string
+          enum: [CHECKING, SAVINGS, PAYMENT]
+        status:
+          type: string
+          enum: [ACTIVE, BLOCKED, CLOSED]
+    Balance:
+      type: object
+      additionalProperties: false
+      required: [accountId, available, ledger, asOf, correlationId]
+      properties:
+        accountId:
+          type: string
+        available:
+          $ref: '#/components/schemas/Money'
+        ledger:
+          $ref: '#/components/schemas/Money'
+        asOf:
+          type: string
+          format: date-time
+        correlationId:
+          type: string
+          format: uuid
+    CreatePixPaymentRequest:
+      type: object
+      additionalProperties: false
+      required: [sourceAccountId, pixKey, amount]
+      properties:
+        sourceAccountId:
+          type: string
+        pixKey:
+          type: string
+        amount:
+          $ref: '#/components/schemas/Money'
+        description:
+          type: string
+          maxLength: 140
+    PixPayment:
+      type: object
+      additionalProperties: false
+      required: [paymentId, status, amount, correlationId]
+      properties:
+        paymentId:
+          type: string
+          format: uuid
+        status:
+          type: string
+          enum: [PENDING, SETTLED, FAILED, UNKNOWN]
+        amount:
+          $ref: '#/components/schemas/Money'
+        correlationId:
+          type: string
+          format: uuid
+    PixPaymentPage:
+      type: object
+      additionalProperties: false
+      required: [items]
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/PixPayment'
+        nextCursor:
+          type: string
+    CreateTransferRequest:
+      type: object
+      additionalProperties: false
+      required: [sourceAccountId, destination, amount, rail]
+      properties:
+        sourceAccountId:
+          type: string
+        destination:
+          type: object
+          additionalProperties: false
+          required: [accountNumber, branch, bankCode, document]
+          properties:
+            accountNumber:
+              type: string
+            branch:
+              type: string
+            bankCode:
+              type: string
+            document:
+              type: string
+        amount:
+          $ref: '#/components/schemas/Money'
+        rail:
+          type: string
+          enum: [INTERNAL, TED]
+        description:
+          type: string
+          maxLength: 140
+    Transfer:
+      type: object
+      additionalProperties: false
+      required: [transferId, status, amount, rail, correlationId]
+      properties:
+        transferId:
+          type: string
+          format: uuid
+        status:
+          type: string
+          enum: [PENDING, SETTLED, FAILED, UNKNOWN]
+        amount:
+          $ref: '#/components/schemas/Money'
+        rail:
+          type: string
+          enum: [INTERNAL, TED]
+        correlationId:
+          type: string
+          format: uuid
+    Problem:
+      type: object
+      additionalProperties: false
+      required: [type, title, status, code, correlationId]
+      properties:
+        type:
+          type: string
+          format: uri
+        title:
+          type: string
+        status:
+          type: integer
+        code:
+          type: string
+          description: Stable code from governance/error-catalog/CORE-ERRORS.json
+        detail:
+          type: string
+        correlationId:
+          type: string
+          format: uuid
+  responses:
+    Unauthorized:
+      description: Missing or invalid credentials
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+    NotFound:
+      description: Resource not found
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+    ValidationError:
+      description: Request failed validation
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+    IdempotencyConflict:
+      description: Idempotency key reused with different payload
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Problem'

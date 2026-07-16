@@ -1,0 +1,21 @@
+{
+  "name": "regenera-bank",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Monorepo Regenera Bank — foundation workspace (pnpm)",
+  "packageManager": "pnpm@9.15.0",
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=9.0.0"
+  },
+  "scripts": {
+    "dev:canal-web": "bash scripts/dev-canal-web.sh",
+    "deploy:homolog:provision-do": "node scripts/deploy/homolog-vps/provision-digitalocean.mjs",
+    "deploy:homolog:gcp": "bash scripts/deploy/homolog-gcp/deploy-cloud-run.sh",
+    "deploy:homolog:gcp:domains": "bash scripts/deploy/homolog-gcp/map-domains.sh",
+    "deploy:homolog:gcp:secrets": "bash scripts/deploy/homolog-gcp/push-secrets.sh",
+    "pull-secrets": "pnpm --filter @regenera/web-bff pull-secrets",
+    "bootstrap-secrets": "pnpm --filter @regenera/web-bff bootstrap-secrets",
+    "validate:contracts": "bash scripts/validate-contracts.sh"
+  }
+}

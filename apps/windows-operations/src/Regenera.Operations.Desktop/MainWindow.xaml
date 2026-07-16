@@ -1,0 +1,73 @@
+<Window x:Class="Regenera.Operations.Desktop.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Regenera Operations"
+        Height="720"
+        Width="1280"
+        MinHeight="600"
+        MinWidth="1024"
+        Style="{StaticResource Regenera.Window}">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="260"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.Column="0"
+                Background="{StaticResource Regenera.BackgroundSurface.Brush}"
+                BorderBrush="{StaticResource Regenera.Border.Brush}"
+                BorderThickness="0,0,1,0"
+                Padding="16">
+            <DockPanel LastChildFill="True">
+                <StackPanel DockPanel.Dock="Top" Margin="0,0,0,16">
+                    <TextBlock Text="Regenera" Style="{StaticResource Regenera.Text.Headline}" FontSize="22"/>
+                    <TextBlock Text="Operations Console" Style="{StaticResource Regenera.Text.Caption}"/>
+                    <TextBlock Margin="0,12,0,0"
+                               Text="{Binding RoleLabel}"
+                               Foreground="{StaticResource Regenera.Primary.Brush}"
+                               FontWeight="SemiBold"/>
+                </StackPanel>
+
+                <ListBox Grid.Column="0"
+                         Style="{StaticResource Regenera.Nav.List}"
+                         ItemsSource="{Binding Modules}"
+                         DisplayMemberPath="Title"
+                         SelectedItem="{Binding SelectedModule, Mode=TwoWay}"/>
+            </DockPanel>
+        </Border>
+
+        <Grid Grid.Column="1" Margin="24">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="0" Margin="0,0,0,16">
+                <TextBlock Text="{Binding SelectedModule.Title, FallbackValue=Select a module}"
+                           Style="{StaticResource Regenera.Text.Title}"/>
+                <TextBlock Text="{Binding SelectedModule.Description}"
+                           Style="{StaticResource Regenera.Text.Caption}"
+                           TextWrapping="Wrap"/>
+                <StackPanel Orientation="Horizontal" Margin="0,12,0,0">
+                    <Border Style="{StaticResource Regenera.Badge.Success}" Margin="0,0,8,0"
+                            Visibility="{Binding ReadOnlyBadgeVisible}">
+                        <TextBlock Text="READ-ONLY" Foreground="{StaticResource Regenera.Success.Brush}" FontSize="11"/>
+                    </Border>
+                    <Border Style="{StaticResource Regenera.Badge.Warning}"
+                            Visibility="{Binding FourEyesBadgeVisible}">
+                        <TextBlock Text="FOUR-EYES" Foreground="{StaticResource Regenera.Warning.Brush}" FontSize="11"/>
+                    </Border>
+                </StackPanel>
+            </StackPanel>
+
+            <Border Grid.Row="1" Style="{StaticResource Regenera.Panel.Surface}">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <TextBlock Text="{Binding ModuleBody}"
+                               TextWrapping="Wrap"
+                               LineHeight="22"
+                               Foreground="{StaticResource Regenera.TextPrimary.Brush}"/>
+                </ScrollViewer>
+            </Border>
+        </Grid>
+    </Grid>
+</Window>

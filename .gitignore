@@ -1,0 +1,136 @@
+# Dependency directories
+node_modules/
+**/node_modules/
+
+# Build outputs
+dist/
+**/dist/
+build/
+**/build/
+.next/
+.nuxt/
+.expo/
+.turbo/
+.cache/
+
+# Testing coverage
+coverage/
+**/coverage/
+htmlcov/
+.coverage
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Environment configurations
+.env
+.env.*
+!.env.example
+.local-credentials/
+credentials/
+*.pem
+*.key
+.data/
+data/document-vault/**
+!data/document-vault/.gitkeep
+
+# Logs
+*.log
+.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# OS and Editor metadata
+.DS_Store
+**/.DS_Store
+__MACOSX/
+._*
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/settings.json
+
+# Python cache
+pycache/
+*.py[cod]
+*.pyo
+
+# Databases
+*.sqlite
+**/*.sqlite
+coverage/
+3. FrontEnd/coverage/
+
+# Large release packages and presentations
+*.zip
+*.pdf
+
+# Local JDK / toolchains — never commit (GitHub 100MB limit)
+.tools/
+.build/
+**/.build/
+apps/ios/.build/
+design-system/ios/.build/
+.tmp/
+source-material/
+**/source-material/
+00-governance/audit-evidence/
+
+# Gradle / Android intermediates
+**/.gradle/
+**/intermediates/
+
+# Audit / dump residue (must not re-enter the monorepo)
+**/regenera-docs-source-material/
+**/FULL_INVENTORY*.txt
+**/CHANGELOG-REVISAO.md
+**/VALIDATION-EVIDENCE.md
+**/DADOS-DO-ARQUIVO.md
+
+# Agent / audit theater (do not re-add)
+**/.regenera-agent/
+docs/audit/
+docs/final/
+docs/agents/
+**/SCAFFOLD-MANIFEST.json
+*FINALIZATION-AGENTS*
+scripts/agents/
+scripts/finalization/
+docs/launch/evidence/
+
+# Local / theater (do not re-add)
+artifacts/
+audit/
+.tools/
+REGENERA-*-CANDIDATE*
+REGENERA-*-RELEASE*
+REGENERA-PRE-DEPLOY*
+**/OWNERS.yaml
+**/catalog-info.yaml
+**/service.yaml
+quality/**/test-results/
+quality/**/test-results.json
+**/STYLE.pt-BR.md
+.DS_Store
+
+# Scaffold / theater layers (do not re-add)
+00-governance/
+01-design-system/
+02-contracts/
+03-channels/
+04-bffs/
+05-core-banking/
+06-risk-control/
+07-integrations/
+08-iso20022/
+09-data-platform/
+10-platform/
+11-security/
+12-regulatory/
+13-quality/
+14-operations/
+15-tools/
+16-documentation/
+**/STYLE.pt-BR.md
+**/scaffold*

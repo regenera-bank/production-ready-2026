@@ -1,0 +1,11 @@
+{
+  "$schema": "https://design-tokens.github.io/community-group/format/",
+  "radius": {
+    "sm": { "value": "0.5rem" },
+    "md": { "value": "0.75rem" },
+    "lg": { "value": "1rem" },
+    "xl": { "value": "1.25rem" },
+    "2xl": { "value": "1.5rem" },
+    "full": { "value": "9999px" }
+  }
+}

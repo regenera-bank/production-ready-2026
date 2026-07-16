@@ -1,0 +1,9 @@
+packages:
+  - "domains/*"
+  - "apps/*"
+  - "bff/*"
+  - "workers/*"
+  - "platform/*"
+  - "quality/*"
+  - "contracts/*"
+  - "design-system/web"

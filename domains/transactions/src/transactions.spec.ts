@@ -1,0 +1,33 @@
+import { Test } from '@nestjs/testing';
+import { TransactionsModule } from './transactions.module';
+import { TransactionsService } from './transactions.service';
+
+describe('TransactionsService (simulator)', () => {
+  let service: TransactionsService;
+
+  beforeEach(async () => {
+    const moduleRef = await Test.createTestingModule({
+      imports: [TransactionsModule.register({ adapter: 'simulator' })],
+    }).compile();
+    service = moduleRef.get(TransactionsService);
+  });
+
+  it('reports healthy simulator adapter', async () => {
+    const health = await service.health();
+    expect(health.ok).toBe(true);
+    expect(health.adapter).toBe('simulator');
+    expect(health.domain).toBe('transactions');
+  });
+
+  it('executes idempotent commands', async () => {
+    const command = {
+      idempotencyKey: 'key-1',
+      principalId: 'principal-1',
+      payload: { action: 'probe' },
+    };
+    const first = await service.execute(command);
+    const second = await service.execute(command);
+    expect(first.referenceId).toBe(second.referenceId);
+    expect(first.status).toBe('ACCEPTED');
+  });
+});

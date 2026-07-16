@@ -1,0 +1,46 @@
+name: Core Banking CI
+
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - '05-core-banking/**'
+      - '06-risk-control/**'
+      - 'domains/core-bank/**'
+  pull_request:
+    branches: [ "main" ]
+    paths:
+      - '05-core-banking/**'
+      - '06-risk-control/**'
+      - 'domains/core-bank/**'
+
+permissions:
+  contents: read
+
+jobs:
+  nest-core-bank:
+    name: NestJS core-bank
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: domains/core-bank
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - run: npm install --include=dev
+      - run: npm run lint
+      - run: npm test
+      - run: npm run build
+
+  contract-testing:
+    name: OpenAPI contract lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Validate OpenAPI/AsyncAPI contracts
+        run: npx --yes @stoplight/spectral-cli lint "02-contracts/**/*.yaml"

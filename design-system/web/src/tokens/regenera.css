@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+  /* Extracted from desing-final-escolhido-geral-index.html */
+  --regenera-primary: #22d3ee;
+  --regenera-primary-dark: #0891b2;
+  --regenera-primary-light: #67e8f9;
+  --regenera-primary-glow: rgba(34, 211, 238, 0.4);
+  --regenera-bg-deep: #020617;
+  --regenera-bg-mid: #0f172a;
+  --regenera-bg-light: #1e293b;
+  --regenera-navy: #1e3a8a;
+  --regenera-on-primary: #020617;
+  --regenera-on-background: #f8fafc;
+  --regenera-text-secondary: #94a3b8;
+  --regenera-success: #10b981;
+  --regenera-warning: #f59e0b;
+  --regenera-error: #f43f5e;
+  --regenera-unknown: #d946ef;
+  --regenera-border: rgba(34, 211, 238, 0.15);
+  --regenera-glass: rgba(15, 23, 42, 0.6);
+  --regenera-font-sans: 'Manrope', system-ui, sans-serif;
+  --regenera-radius-lg: 1rem;
+  --regenera-radius-2xl: 1.5rem;
+  --regenera-transition: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body {
+  font-family: var(--regenera-font-sans);
+  background-color: var(--regenera-bg-deep);
+  color: var(--regenera-on-background);
+  margin: 0;
+}

@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://contracts.regenerabank.example/events/event-envelope.schema.json",
+  "title": "RegeneraEventEnvelope",
+  "description": "Canonical envelope for domain and integration events published by Regenera Bank.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "eventId",
+    "eventType",
+    "eventVersion",
+    "occurredAt",
+    "correlationId",
+    "causationId",
+    "aggregateId",
+    "tenantId",
+    "payload"
+  ],
+  "properties": {
+    "eventId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique identifier for this event occurrence."
+    },
+    "eventType": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 128,
+      "pattern": "^[A-Z][A-Z0-9_]*$",
+      "description": "Stable event name in SCREAMING_SNAKE_CASE (e.g. PIX_PAYMENT_SETTLED)."
+    },
+    "eventVersion": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Schema version for the given eventType."
+    },
+    "occurredAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "UTC timestamp when the business fact occurred."
+    },
+    "correlationId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "End-to-end trace identifier across HTTP and async flows."
+    },
+    "causationId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Identifier of the command or event that directly caused this event."
+    },
+    "aggregateId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "description": "Identifier of the domain aggregate (account, payment, transfer, etc.)."
+    },
+    "tenantId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64,
+      "description": "Tenant or institution scope for multi-tenant isolation."
+    },
+    "payload": {
+      "type": "object",
+      "description": "Event-specific body; validated by a separate payload schema per eventType/eventVersion."
+    }
+  }
+}

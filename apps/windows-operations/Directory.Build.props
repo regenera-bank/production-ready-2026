@@ -1,0 +1,11 @@
+<Project>
+  <PropertyGroup>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <Company>Regenera Bank</Company>
+    <Product>Regenera Operations</Product>
+    <Copyright>Copyright © Regenera Bank</Copyright>
+  </PropertyGroup>
+</Project>

@@ -1,0 +1,203 @@
+asyncapi: 3.0.0
+info:
+  title: Regenera Partner Webhooks
+  version: 1.0.0
+  description: |
+    Outbound webhook contract delivered by the Partner API facade to partner endpoints.
+    Signatures use HMAC-SHA256 over `{timestamp}.{body}` (base64url).
+    Delivery headers: `X-Regenera-Signature`, `X-Regenera-Timestamp`, `X-Correlation-ID`.
+defaultContentType: application/json
+servers:
+  partnerEndpoint:
+    host: '{partnerWebhookHost}'
+    protocol: https
+    description: Partner-owned HTTPS endpoint registered via Partner API
+    variables:
+      partnerWebhookHost:
+        default: hooks.partner.example
+channels:
+  pixPaymentStatus:
+    address: partners/{partnerId}/pix-payment-status
+    parameters:
+      partnerId:
+        description: Partner client identifier
+    messages:
+      pixPaymentStatusChanged:
+        $ref: '#/components/messages/PixPaymentStatusChanged'
+  pixPaymentSettled:
+    address: partners/{partnerId}/pix-payment-settled
+    parameters:
+      partnerId:
+        description: Partner client identifier
+    messages:
+      pixPaymentSettled:
+        $ref: '#/components/messages/PixPaymentSettled'
+  pixPaymentFailed:
+    address: partners/{partnerId}/pix-payment-failed
+    parameters:
+      partnerId:
+        description: Partner client identifier
+    messages:
+      pixPaymentFailed:
+        $ref: '#/components/messages/PixPaymentFailed'
+  accountStatus:
+    address: partners/{partnerId}/account-status
+    parameters:
+      partnerId:
+        description: Partner client identifier
+    messages:
+      accountStatusChanged:
+        $ref: '#/components/messages/AccountStatusChanged'
+operations:
+  sendPixPaymentStatusChanged:
+    action: send
+    channel:
+      $ref: '#/channels/pixPaymentStatus'
+    messages:
+      - $ref: '#/channels/pixPaymentStatus/messages/pixPaymentStatusChanged'
+  sendPixPaymentSettled:
+    action: send
+    channel:
+      $ref: '#/channels/pixPaymentSettled'
+    messages:
+      - $ref: '#/channels/pixPaymentSettled/messages/pixPaymentSettled'
+  sendPixPaymentFailed:
+    action: send
+    channel:
+      $ref: '#/channels/pixPaymentFailed'
+    messages:
+      - $ref: '#/channels/pixPaymentFailed/messages/pixPaymentFailed'
+  sendAccountStatusChanged:
+    action: send
+    channel:
+      $ref: '#/channels/accountStatus'
+    messages:
+      - $ref: '#/channels/accountStatus/messages/accountStatusChanged'
+components:
+  messages:
+    PixPaymentStatusChanged:
+      name: PixPaymentStatusChanged
+      title: PIX payment status changed
+      headers:
+        type: object
+        required: [X-Regenera-Signature, X-Regenera-Timestamp, X-Correlation-ID]
+        properties:
+          X-Regenera-Signature:
+            type: string
+          X-Regenera-Timestamp:
+            type: integer
+          X-Correlation-ID:
+            type: string
+            format: uuid
+      payload:
+        $ref: '#/components/schemas/PixPaymentStatusPayload'
+    PixPaymentSettled:
+      name: PixPaymentSettled
+      title: PIX payment settled
+      payload:
+        $ref: '#/components/schemas/PixPaymentSettledPayload'
+    PixPaymentFailed:
+      name: PixPaymentFailed
+      title: PIX payment failed
+      payload:
+        $ref: '#/components/schemas/PixPaymentFailedPayload'
+    AccountStatusChanged:
+      name: AccountStatusChanged
+      title: Account status changed
+      payload:
+        $ref: '#/components/schemas/AccountStatusPayload'
+  schemas:
+    WebhookEnvelope:
+      type: object
+      additionalProperties: false
+      required: [eventId, eventType, eventVersion, occurredAt, correlationId]
+      properties:
+        eventId:
+          type: string
+          format: uuid
+        eventType:
+          type: string
+        eventVersion:
+          type: integer
+          const: 1
+        occurredAt:
+          type: string
+          format: date-time
+        correlationId:
+          type: string
+          format: uuid
+    Money:
+      type: object
+      additionalProperties: false
+      required: [currency, value]
+      properties:
+        currency:
+          type: string
+          enum: [BRL]
+        value:
+          type: string
+          pattern: '^-?\d{1,17}\.\d{2}$'
+    PixPaymentStatusPayload:
+      allOf:
+        - $ref: '#/components/schemas/WebhookEnvelope'
+        - type: object
+          required: [paymentId, status]
+          properties:
+            eventType:
+              const: PIX_PAYMENT_STATUS_CHANGED
+            paymentId:
+              type: string
+              format: uuid
+            status:
+              type: string
+              enum:
+                - CREATED
+                - VALIDATING
+                - AUTHORIZED
+                - SENT
+                - SETTLED
+                - FAILED
+                - UNKNOWN
+    PixPaymentSettledPayload:
+      allOf:
+        - $ref: '#/components/schemas/WebhookEnvelope'
+        - type: object
+          required: [paymentId, amount, settledAt]
+          properties:
+            eventType:
+              const: PIX_PAYMENT_SETTLED
+            paymentId:
+              type: string
+              format: uuid
+            amount:
+              $ref: '#/components/schemas/Money'
+            settledAt:
+              type: string
+              format: date-time
+    PixPaymentFailedPayload:
+      allOf:
+        - $ref: '#/components/schemas/WebhookEnvelope'
+        - type: object
+          required: [paymentId, failureCode]
+          properties:
+            eventType:
+              const: PIX_PAYMENT_FAILED
+            paymentId:
+              type: string
+              format: uuid
+            failureCode:
+              type: string
+              description: Stable code from CORE-ERRORS catalog
+    AccountStatusPayload:
+      allOf:
+        - $ref: '#/components/schemas/WebhookEnvelope'
+        - type: object
+          required: [accountId, status]
+          properties:
+            eventType:
+              const: ACCOUNT_STATUS_CHANGED
+            accountId:
+              type: string
+            status:
+              type: string
+              enum: [ACTIVE, RESTRICTED, BLOCKED, CLOSING, CLOSED]

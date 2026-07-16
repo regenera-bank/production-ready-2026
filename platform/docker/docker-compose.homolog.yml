@@ -1,0 +1,77 @@
+# Homolog VPS — web-bff + web-banking + Caddy (HTTPS)
+# Na VPS (Ubuntu 24.04, Docker instalado):
+#   cd /opt/regenera-bank
+#   cp platform/docker/.env.homolog.example platform/docker/.env.homolog
+#   # edite secrets (Didit, Firebase, JWT…)
+#   docker compose -f platform/docker/docker-compose.homolog.yml up -d --build
+
+name: regenera-homolog
+
+services:
+  web-bff:
+    build:
+      context: ../..
+      dockerfile: platform/docker/Dockerfile.web-bff
+    container_name: regenera-web-bff-homolog
+    restart: unless-stopped
+    env_file:
+      - .env.homolog
+    environment:
+      NODE_ENV: production
+      PORT: "3200"
+      WEB_ORIGIN: https://app.regenerabank.com
+      WEBAUTHN_RP_ID: app.regenerabank.com
+      KYC_PROVIDER: didit
+      DIDIT_SESSION_CALLBACK_URL: https://app.regenerabank.com/?didit=callback
+      DIDIT_WEBHOOK_PUBLIC_URL: https://api.regenerabank.com/v1/webhooks/didit
+    networks:
+      - homolog-net
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:3200/v1/health"]
+      interval: 20s
+      timeout: 5s
+      retries: 5
+      start_period: 45s
+
+  web-banking:
+    build:
+      context: ../..
+      dockerfile: platform/docker/Dockerfile.web-banking
+      args:
+        VITE_API_URL: https://api.regenerabank.com/v1
+    container_name: regenera-web-banking-homolog
+    restart: unless-stopped
+    depends_on:
+      web-bff:
+        condition: service_healthy
+    networks:
+      - homolog-net
+
+  caddy:
+    image: caddy:2-alpine
+    container_name: regenera-caddy-homolog
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      ACME_EMAIL: ${ACME_EMAIL:-cto@regenerabank.com}
+    volumes:
+      - ./Caddyfile.homolog:/etc/caddy/Caddyfile:ro
+      - caddy-data:/data
+      - caddy-config:/config
+    depends_on:
+      web-bff:
+        condition: service_healthy
+      web-banking:
+        condition: service_started
+    networks:
+      - homolog-net
+
+networks:
+  homolog-net:
+    driver: bridge
+
+volumes:
+  caddy-data:
+  caddy-config:

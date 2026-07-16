@@ -1,0 +1,10 @@
+{
+  "$schema": "https://design-tokens.github.io/community-group/format/",
+  "elevation": {
+    "none": { "value": "none" },
+    "sm": { "value": "0 4px 12px rgba(0, 0, 0, 0.25)" },
+    "md": { "value": "0 8px 24px rgba(0, 0, 0, 0.35)" },
+    "lg": { "value": "0 0 50px rgba(0, 0, 0, 0.8)" },
+    "glow-cyan": { "value": "0 0 10px rgba(34, 211, 238, 0.4)" }
+  }
+}

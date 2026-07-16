@@ -1,0 +1,17 @@
+graph TD
+  Web[apps/web-banking] --> WebBFF[bff/web-bff :3200]
+  Android[apps/android] --> MobileBFF[bff/mobile-bff :3201]
+  iOS[apps/ios] --> MobileBFF
+  Desktop[apps/windows-operations] --> OpsBFF[bff/operations-bff :3202]
+  MobileBFF --> WebBFF
+  WebBFF --> CoreBank[domains/core-bank]
+  WebBFF --> ChannelPG[domains/channel-persistence]
+  WebBFF --> RiskKYC[integrations/risk-kyc]
+  ChannelPG --> Postgres[(PostgreSQL channel_experience)]
+  CoreBank --> PostgresCore[(PostgreSQL core_bank)]
+  WorkerProjector[workers/transaction-projector] --> Postgres
+  WorkerProjector --> CoreBank
+  CoreBank --> Outbox[outbox relay]
+  Outbox --> WorkerProjector
+  RiskKYC --> ObjectVault[DocumentObjectStore vault]
+  ObjectVault --> Postgres

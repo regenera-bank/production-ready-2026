@@ -1,0 +1,51 @@
+# Canal web local com Didit KYC — sem postgres (memória)
+# Uso:
+#   docker compose -f platform/docker/docker-compose.canal-didit.yml up --build -d
+#   open http://localhost:8080  (web) + http://localhost:3200/v1/health (bff)
+
+name: regenera-canal-didit
+
+services:
+  web-bff:
+    build:
+      context: ../..
+      dockerfile: platform/docker/Dockerfile.web-bff
+    container_name: regenera-canal-bff
+    env_file:
+      - ../../bff/web-bff/.env
+      - ../../bff/web-bff/.env.local
+    environment:
+      NODE_ENV: production
+      PORT: "3200"
+      CORE_BANK_STORAGE: memory
+      CHANNEL_PERSISTENCE: memory
+      KYC_PROVIDER: didit
+      WEB_ORIGIN: http://localhost:8080
+      DIDIT_SESSION_CALLBACK_URL: http://localhost:8080/?didit=callback
+    ports:
+      - "3200:3200"
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:3200/v1/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 40s
+
+  web-banking:
+    build:
+      context: ../..
+      dockerfile: platform/docker/Dockerfile.web-banking
+      args:
+        VITE_API_URL: http://localhost:3200/v1
+    container_name: regenera-canal-web
+    depends_on:
+      web-bff:
+        condition: service_healthy
+    ports:
+      - "8080:8080"
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:8080/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 15s

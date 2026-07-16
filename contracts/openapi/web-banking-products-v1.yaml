@@ -1,0 +1,427 @@
+openapi: 3.1.0
+info:
+  title: Regenera Web BFF — Products (Cards & Investments)
+  version: 1.0.0
+  description: |
+    BFF de produtos wealth — compõe respostas do domínio cards/investments.
+    Valores monetários em centavos (string BigInt). Produção externa exige adapters production.
+servers:
+  - url: http://localhost:3200/v1
+paths:
+  /products/cards:
+    get:
+      summary: Lista cartões do titular (sandbox)
+      operationId: listCards
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Cartões
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Card'
+  /products/cards/issue:
+    post:
+      summary: Emite cartão físico sandbox
+      operationId: issueCard
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/IdempotencyKey'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                alias:
+                  type: string
+                limitCents:
+                  type: string
+                  pattern: '^\\d{1,19}$'
+      responses:
+        '201':
+          description: Cartão emitido
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Card'
+  /products/cards/virtual:
+    post:
+      summary: Cria cartão virtual
+      operationId: createVirtualCard
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/IdempotencyKey'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                limitCents:
+                  type: string
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Card'
+  /products/cards/{cardId}/block:
+    post:
+      summary: Bloqueia cartão
+      operationId: blockCard
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/CardId'
+        - $ref: '#/components/parameters/IdempotencyKey'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Card'
+  /products/cards/{cardId}/unblock:
+    post:
+      summary: Desbloqueia cartão
+      operationId: unblockCard
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/CardId'
+        - $ref: '#/components/parameters/IdempotencyKey'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Card'
+  /products/cards/{cardId}/limit:
+    post:
+      summary: Atualiza limite
+      operationId: updateCardLimit
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/CardId'
+        - $ref: '#/components/parameters/IdempotencyKey'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [limitCents]
+              properties:
+                limitCents:
+                  type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Card'
+  /products/cards/{cardId}/invoice:
+    get:
+      summary: Fatura do cartão
+      operationId: getCardInvoice
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/CardId'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CardInvoice'
+  /products/cards/{cardId}/transactions:
+    get:
+      summary: Transações do cartão
+      operationId: listCardTransactions
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/CardId'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CardTransaction'
+  /products/cards/{cardId}/authorize:
+    post:
+      summary: Autoriza compra (pré-captura)
+      operationId: authorizePurchase
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/CardId'
+        - $ref: '#/components/parameters/IdempotencyKey'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [amountCents, merchant]
+              properties:
+                amountCents:
+                  type: string
+                merchant:
+                  type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CardAuthorization'
+  /products/cards/{cardId}/capture/{authId}:
+    post:
+      summary: Captura autorização
+      operationId: capturePurchase
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/CardId'
+        - name: authId
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/IdempotencyKey'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CardTransaction'
+  /products/cards/{cardId}/reverse/{authId}:
+    post:
+      summary: Estorna captura
+      operationId: reversePurchase
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/CardId'
+        - name: authId
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/IdempotencyKey'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CardTransaction'
+  /products/cards/activation:
+    get:
+      summary: Status de ativação do processador
+      operationId: cardsActivation
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActivationStatus'
+  /products/investments/suitability:
+    get:
+      summary: Perfil de suitability
+      operationId: getSuitability
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Suitability'
+  /products/investments/catalog:
+    get:
+      summary: Catálogo de produtos
+      operationId: getInvestmentCatalog
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InvestmentCatalogItem'
+  /products/investments/positions:
+    get:
+      summary: Posições
+      operationId: getInvestmentPositions
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InvestmentPosition'
+  /products/investments/orders:
+    get:
+      summary: Histórico de ordens
+      operationId: listInvestmentOrders
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InvestmentOrder'
+    post:
+      summary: Coloca ordem
+      operationId: placeInvestmentOrder
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/IdempotencyKey'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [productId, amountCents]
+              properties:
+                productId:
+                  type: string
+                amountCents:
+                  type: string
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvestmentOrder'
+  /products/investments/activation:
+    get:
+      summary: Status broker/custodiante
+      operationId: investmentsActivation
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActivationStatus'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+  parameters:
+    CardId:
+      name: cardId
+      in: path
+      required: true
+      schema:
+        type: string
+    IdempotencyKey:
+      name: Idempotency-Key
+      in: header
+      required: true
+      schema:
+        type: string
+  schemas:
+    Card:
+      type: object
+      required: [id, alias, number, holder, expiry, limitCents, usedCents, brand, type, status, virtual]
+      properties:
+        id: { type: string }
+        alias: { type: string }
+        number: { type: string }
+        holder: { type: string }
+        expiry: { type: string }
+        cvv: { type: string }
+        limitCents: { type: string }
+        usedCents: { type: string }
+        brand: { type: string, enum: [mastercard, visa] }
+        type: { type: string }
+        status: { type: string, enum: [active, locked, blocked] }
+        virtual: { type: boolean }
+    CardInvoice:
+      type: object
+      properties:
+        cardId: { type: string }
+        period: { type: string }
+        dueDate: { type: string }
+        totalCents: { type: string }
+        minimumCents: { type: string }
+        status: { type: string, enum: [open, paid] }
+    CardTransaction:
+      type: object
+      properties:
+        id: { type: string }
+        cardId: { type: string }
+        title: { type: string }
+        amountCents: { type: string }
+        date: { type: string }
+        category: { type: string }
+    CardAuthorization:
+      type: object
+      properties:
+        authId: { type: string }
+        cardId: { type: string }
+        amountCents: { type: string }
+        merchant: { type: string }
+        status: { type: string, enum: [authorized, captured, reversed] }
+    Suitability:
+      type: object
+      properties:
+        suitability: { type: string, enum: [conservative, moderate, aggressive] }
+        score: { type: integer }
+    InvestmentCatalogItem:
+      type: object
+      properties:
+        id: { type: string }
+        name: { type: string }
+        type: { type: string, enum: [cdb, lci, fund] }
+        minAmountCents: { type: string }
+        expectedYieldPct: { type: string }
+        risk: { type: string }
+    InvestmentPosition:
+      type: object
+      properties:
+        productId: { type: string }
+        productName: { type: string }
+        amountCents: { type: string }
+        yieldPct: { type: string }
+    InvestmentOrder:
+      type: object
+      properties:
+        id: { type: string }
+        productId: { type: string }
+        productName: { type: string }
+        amountCents: { type: string }
+        status: { type: string }
+        createdAt: { type: string }
+        updatedAt: { type: string }
+    ActivationStatus:
+      type: object
+      properties:
+        externalProviderActive: { type: boolean }
+        message: { type: string }
+        sandbox: { type: boolean }

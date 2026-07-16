@@ -1,0 +1,14 @@
+# Homolog Regenera — TLS automático (Let's Encrypt)
+# Requer DNS: api + app → IP da VPS antes de subir o stack.
+
+{
+	email {$ACME_EMAIL}
+}
+
+api.regenerabank.com {
+	reverse_proxy web-bff:3200
+}
+
+app.regenerabank.com {
+	reverse_proxy web-banking:8080
+}

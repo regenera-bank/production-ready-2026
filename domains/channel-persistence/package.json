@@ -1,0 +1,42 @@
+{
+  "name": "@regenera/channel-persistence",
+  "version": "0.0.1",
+  "private": true,
+  "license": "UNLICENSED",
+  "main": "dist/public-api.js",
+  "types": "dist/public-api.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/public-api.d.ts",
+      "default": "./dist/public-api.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "prebuild": "node -e \"const fs=require('fs');['dist'].forEach(d=>{if(fs.existsSync(d))fs.rmSync(d,{recursive:true})})\"",
+    "build": "nest build",
+    "postbuild": "node -e \"const fs=require('fs');if(!fs.existsSync('dist/public-api.js')){console.error('missing dist/public-api.js');process.exit(1)}\"",
+    "lint": "tsc --noEmit",
+    "test": "jest --passWithNoTests"
+  },
+  "dependencies": {
+    "@nestjs/common": "^11.1.27",
+    "@nestjs/core": "^11.1.27",
+    "pg": "^8.13.1",
+    "reflect-metadata": "^0.2.2",
+    "rxjs": "^7.8.1"
+  },
+  "devDependencies": {
+    "@nestjs/cli": "^11.0.0",
+    "@nestjs/schematics": "^11.0.0",
+    "@nestjs/testing": "^11.1.27",
+    "@types/jest": "^29.5.14",
+    "@types/node": "^20.17.10",
+    "@types/pg": "^8.11.10",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.2.5",
+    "typescript": "^5.7.2"
+  }
+}

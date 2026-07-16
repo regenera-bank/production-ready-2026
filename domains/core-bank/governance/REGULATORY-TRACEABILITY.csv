@@ -1,0 +1,9 @@
+obligation_id,regulation,resolution,article,domain,status,evidence,notes
+REG-001,IP Modalidade Pagamento,Res. BACEN 80/2021,Art. 6,Core Banking,PENDENTE_LICENCA,,SPI exige autorização
+REG-002,Sigilo bancário,LC 105/2001,Art. 1,Core Banking + Security,IMPLEMENTADO,POL-CORE-003.md,
+REG-003,SCD,Res. BACEN 4.656/2018,Art. 2,Core Banking,PENDENTE_LICENCA,,Crédito direto exige autorização
+REG-004,Pix Participante Direto,Manual Pix BACEN,Cap. 2,Pix + ISO 20022,PENDENTE_HOMOLOGACAO,,ISPB + DICT + SPI
+REG-005,LGPD,Lei 13.709/2018,Art. 7,Data Platform + Core Banking,IMPLEMENTADO_PARCIAL,,PIA pendente
+REG-006,PCI-DSS v4.0,PCI SSC,Req. 3,Core Banking + Security,PENDENTE,,Tokenização de cartão
+REG-007,AML,Res. BACEN 4.753/2019,Art. 2,Risk Control,IMPLEMENTADO,docs/risk/AML-POLICY.md,
+REG-008,Cybersecurity,Res. BACEN 4.658/2018,Art. 4,Security + Platform,IMPLEMENTADO_PARCIAL,,POCSEG pendente

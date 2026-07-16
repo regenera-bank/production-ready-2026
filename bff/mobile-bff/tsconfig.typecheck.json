@@ -1,0 +1,14 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "allowImportingTsExtensions": true
+  },
+  "include": [
+    "src/server.ts",
+    "src/proxy-routes.ts",
+    "src/contracts/mobile-api.ts",
+    "src/home-modules.ts",
+    "src/web-bff-client.ts"
+  ]
+}

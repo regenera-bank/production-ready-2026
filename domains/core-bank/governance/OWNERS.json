@@ -1,0 +1,23 @@
+{
+  "domain": "core-bank",
+  "owners": [
+    {
+      "role": "cto",
+      "name": "Don Paulo Ricardo de Leão",
+      "email": "finance@regenerabank.world",
+      "gpg_fingerprint": "730834AB4126C341A70F6B969826A3AC0BF6A90C"
+    }
+  ],
+  "modules": {
+    "money": { "owner": "core-bank", "reviewers": ["security", "Audit"] },
+    "ledger": { "owner": "core-bank", "reviewers": ["Audit", "security"] },
+    "payments": { "owner": "core-bank", "reviewers": ["Audit", "risk"] },
+    "pix": { "owner": "core-bank", "reviewers": ["Audit", "compliance"] },
+    "idempotency": { "owner": "core-bank", "reviewers": ["platform"] },
+    "reconciliation": { "owner": "core-bank", "reviewers": ["operations", "Audit"] }
+  },
+  "maker_checker": {
+    "reconcile_unknown": ["operations-maker", "operations-checker"],
+    "privileged_account_ops": ["ops-maker", "ops-checker"]
+  }
+}

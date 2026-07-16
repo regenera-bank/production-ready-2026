@@ -1,0 +1,30 @@
+{
+  "$schema": "https://design-tokens.github.io/community-group/format/",
+  "source": "desing-final-escolhido-geral-index.html — Google Fonts Manrope",
+  "fontFamily": {
+    "sans": { "value": "Manrope, system-ui, sans-serif" },
+    "display": { "value": "Playfair Display, serif" }
+  },
+  "fontWeight": {
+    "light": { "value": 300 },
+    "regular": { "value": 400 },
+    "medium": { "value": 500 },
+    "semibold": { "value": 600 },
+    "bold": { "value": 700 },
+    "extrabold": { "value": 800 }
+  },
+  "fontSize": {
+    "xs": { "value": "0.625rem" },
+    "sm": { "value": "0.75rem" },
+    "base": { "value": "0.875rem" },
+    "lg": { "value": "1rem" },
+    "xl": { "value": "1.25rem" },
+    "2xl": { "value": "1.5rem" },
+    "3xl": { "value": "2rem" }
+  },
+  "lineHeight": {
+    "tight": { "value": 1.2 },
+    "normal": { "value": 1.5 },
+    "relaxed": { "value": 1.75 }
+  }
+}

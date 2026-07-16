@@ -1,0 +1,1 @@
+// Vitest globals (expect, describe, it) are enabled via vite.config.ts test.globals if needed.

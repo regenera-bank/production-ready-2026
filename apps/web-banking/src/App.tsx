@@ -136,7 +136,7 @@ const App: React.FC = () => {
   const [thinkingModel, setThinkingModel] = useState<string | null>(null);
   const [isAssistantSpeaking, setIsAssistantSpeaking] = useState(false);
   const [showAssistantChat, setShowAssistantChat] = useState(false);
-  const [lastAssistantMessage, setLastAiMessage] = useState<string | null>(null);
+  const [lastAssistantMessage, setLastAssistantMessage] = useState<string | null>(null);
   
   // Refs de áudio
   const audioContextRef = useRef<AudioContext | null>(null);
@@ -438,8 +438,8 @@ const App: React.FC = () => {
     setThinkingModel(null);
     
     setChatMessages(prev => [...prev, { id: Date.now().toString(), role: 'assistant', text: response.text, timestamp: Date.now() }]);
-    setLastAiMessage(response.text);
-    setTimeout(() => setLastAiMessage(null), 8000);
+    setLastAssistantMessage(response.text);
+    setTimeout(() => setLastAssistantMessage(null), 8000);
 
     if (response.searchResults && response.searchResults.length > 0) {
         setCurrentSearchResults(response.searchResults);
@@ -583,7 +583,7 @@ const App: React.FC = () => {
       setAssistantSettings(prev => ({ ...prev, orbTheme: themes[nextIndex] }));
   };
 
-  const renderAiChat = () => (
+  const renderAssistantChat = () => (
     <div className={`absolute inset-0 z-[70] transition-all duration-500 ${showAssistantChat ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
         <div className="absolute inset-0 bg-black/60 backdrop-blur-md" onClick={() => setShowAssistantChat(false)}></div>
         <div className={`absolute bottom-0 left-0 right-0 h-[70vh] bg-bg-deep border-t border-white/10 rounded-t-[3rem] transform transition-transform duration-500 ${showAssistantChat ? 'translate-y-0' : 'translate-y-full'} flex flex-col shadow-[0_-20px_50px_rgba(0,0,0,0.5)]`}>
@@ -840,7 +840,7 @@ const App: React.FC = () => {
           <MapWidget locations={currentMapLocations} onClose={() => setShowMapWidget(false)} />
       )}
       {renderSidebar()}
-      {renderAiChat()}
+      {renderAssistantChat()}
       {lastAssistantMessage && !showAssistantChat && (
           <div className="absolute bottom-32 left-1/2 -translate-x-1/2 z-[60] w-[80%] max-w-sm animate-in fade-in slide-in-from-bottom-4 duration-500 pointer-events-none">
               <div className="bg-bg-deep/40 backdrop-blur-md border border-white/5 p-4 rounded-2xl shadow-2xl relative overflow-hidden">
